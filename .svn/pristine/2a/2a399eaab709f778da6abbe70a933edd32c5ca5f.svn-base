@@ -1,0 +1,380 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - 배송관리</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ] -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="css/nifty.min.css" rel="stylesheet">
+
+    
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Table [ OPTIONAL ]-->
+    <link href="plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+
+    <!--X-editable [ OPTIONAL ]-->
+    <link href="plugins/x-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="plugins/pace/pace.min.js"></script>
+</head>
+<body>
+	<div id="container" class="effect mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">Ticket Finder</h1>
+
+					<!--Searchbox-->
+					<div class="searchbox">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..">
+							<span class="input-group-btn">
+								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					
+					
+					
+					<!--Custom Toolbar-->
+					<!--===================================================-->
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">배송관리</h3>
+						</div>
+						<div class="panel-body">
+							<!-- 송장입력 버튼 누르면 배송상태 자동 변경 -->
+							<button id="delete-row" class="btn btn-pink">송장입력</button>
+							<!-- 
+							<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+								   data-url="data/bs-table-order.json"
+								   data-toolbar="#demo-delete-row"
+								   data-search="true"
+								   data-show-refresh="true"
+								   data-show-toggle="true"
+								   data-show-columns="true"
+								   data-sort-name="id"
+								   data-page-list="[5, 10, 20]"
+								   data-page-size="10"
+								   data-pagination="true" data-show-pagination-switch="true">
+								<thead>
+									<tr>
+										<th data-field="state" data-checkbox="true">ID</th>
+										<th data-field="orderNo" data-sortable="true" data-formatter="invoiceFormatter">주문번호</th>
+										<th data-field="name" data-sortable="true">주문자</th>
+										<th data-field="userId" data-sortable="true" data-formatter="invoiceFormatter">아이디</th>
+										<th data-field="phone" data-sortable="true">전화번호</th>
+										<th data-field="date" data-sortable="true" data-formatter="dateFormatter">관람날짜</th>
+										<th data-field="seat" data-sortable="true">선택좌석</th>
+										<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">주문금액</th>
+										<th data-field="payment" data-sortable="true">결제방법</th>
+										<th data-field="orderDate" data-sortable="true" data-formatter="dateFormatter">주문날짜</th>
+										<th data-field="shippingNo" data-sortable="true" id="shippingNo" data-editable="select">송장번호</th>
+										<th data-field="ship" data-align="center" data-sortable="true" data-formatter="statusFormatter">배송상태</th>
+									</tr>
+								</thead>
+							</table>
+							 -->
+							<table id="editable" class="add-niftycheck"
+								   data-search="true"
+								   data-show-refresh="true"
+								   data-show-toggle="true"
+								   data-show-columns="true"
+								   data-sort-name="id"
+								   data-page-list="[5, 10, 20]"
+								   data-page-size="10"
+								   data-pagination="true" data-show-pagination-switch="true"
+								   data-toolbar="#delete-row">
+								   <thead>
+									<tr>
+										<th data-field="id" data-checkbox="true">ID</th>
+										<th data-field="orderNo" data-sortable="true" data-formatter="invoiceFormatter">주문번호</th>
+										<th data-field="name" data-sortable="true">주문자</th>
+										<th data-field="userId" data-sortable="true" data-formatter="invoiceFormatter">아이디</th>
+										<th data-field="phone" data-sortable="true">전화번호</th>
+										<th data-field="date" data-sortable="true" data-formatter="dateFormatter">관람날짜</th>
+										<th data-field="seat" data-sortable="true">선택좌석</th>
+										<th data-field="price" data-align="center" data-sortable="true" data-formatter="priceSorter">주문금액</th>
+										<th data-field="payment" data-sortable="true">결제방법</th>
+										<th data-field="orderDate" data-sortable="true" data-formatter="dateFormatter">주문날짜</th>
+										<th data-field="shippingNo" data-sortable="true" id="shippingNo" data-editable="text">송장번호</th>
+										<th data-field="ship" data-align="center" data-sortable="true" data-formatter="statusFormatter">배송상태</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<!--===================================================-->
+					
+
+					
+					
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+
+
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+		</div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2015 Your Company</p>
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+	<!-- SETTINGS - DEMO PURPOSE ONLY 삭제 -->
+	<!--===================================================-->
+	<!--===================================================-->
+	<!-- END SETTINGS -->
+
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="js/bootstrap.min.js"></script>
+
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="plugins/fast-click/fastclick.min.js"></script>
+
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="js/nifty.min.js"></script>
+
+
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+	<!--X-editable [ OPTIONAL ]-->
+	<script src="plugins/x-editable/js/bootstrap-editable.min.js"></script>
+
+
+	<!--Bootstrap Table [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+
+	<!--Bootstrap Table Extension [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#editable').bootstrapTable({
+			idField: 'id',
+			url: 'data/bs-table-order.json',
+			columns: [{
+				checkbox: 'true',
+				field: 'id'
+			}, {
+				field: 'orderNo',
+				title: '주문번호',
+				formatter:'invoiceFormatter'
+			}, {
+				field: 'name',
+				title: '주문자'
+			}, {
+				field: 'userId',
+				title: '주문자아이디',
+				formatter:'invoiceFormatter'
+			}, {
+				field: 'phone',
+				title: '전화번호'
+			}, {
+				field: 'date',
+				title: '관람날짜',
+				formatter:'dateFormatter'
+			}, {
+				field: 'seat',
+				title: '선택좌석'
+			}, {
+				field: 'price',
+				align: 'center',
+				title: '주문금액',
+				formatter:'priceSorter'
+			}, {
+				field: 'payment',
+				title: '결제방법'
+			}, {
+				field: 'orderDate',
+				title: '주문날짜',
+				formatter:'dateFormatter'
+			}, {
+				field: 'shippingNo',
+				title: '송장번호',
+				editable: {
+					type: 'text'
+				}
+			}, {
+				field: 'ship',
+				align: 'center',
+				title: '배송상태',
+				formatter:'statusFormatter'
+			}]
+		});
+		
+		$.fn.editableform.buttons =
+		'<button type="submit" class="btn btn-primary editable-submit">'+
+			'<i class="fa fa-fw fa-check"></i>'+
+		'</button>'+
+		'<button type="button" class="btn btn-default editable-cancel">'+
+			'<i class="fa fa-fw fa-times"></i>'+
+		'</button>';
+		
+		
+		$(".add-niftycheck").on('post-body.bs.table', function () {
+			$(this).find('input:checkbox').not('.form-checkbox input:checkbox').wrap('<label class="form-checkbox form-icon"></label>');
+			$(this).find('.form-checkbox').niftyCheck();
+		});
+		
+		var $table = $('#editable'),	$remove = $('#delete-row');
+
+		$table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+			$remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+		});
+
+		$remove.click(function () {
+			var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+				return row.id
+			});
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: ids
+			});
+			$remove.prop('disabled', true);
+		});
+	});
+	
+	function invoiceFormatter(value, row) {
+		return '<a href="#" class="btn-link" > Order #' + value + '</a>';
+	}
+	
+	function statusFormatter(value, row) {
+		var labelColor;
+		if (value == "Paid") {
+			labelColor = "success";
+		}else if(value == "Unpaid"){
+			labelColor = "warning";
+		}else if(value == "Shipped"){
+			labelColor = "info";
+		}else if(value == "Refunded"){
+			labelColor = "danger";
+		}
+		var icon = row.id % 2 === 0 ? 'fa-star' : 'fa-user';
+		return '<div class="label label-table label-'+ labelColor+'"> ' + value + '</div>';
+	}
+	</script>	
+</body>
+</html>
+

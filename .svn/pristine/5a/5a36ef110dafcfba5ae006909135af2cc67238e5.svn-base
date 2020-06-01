@@ -1,0 +1,14 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+
+import ticket.finder.dto.Cs;
+
+public interface CsMapper {
+	int insertCs(Cs cs);
+	int deleteCs(int csNum);
+	int updateCs(Cs cs);
+	Cs selectCs(int csNum);
+	List<Cs> selectCategoryCs(String csCategory);
+	List<Cs> selectCsList();
+}

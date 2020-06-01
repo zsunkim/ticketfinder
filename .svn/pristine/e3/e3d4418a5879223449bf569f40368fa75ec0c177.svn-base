@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+
+
+
+
+
+	<!-- 공연상세정보 출력 -->
+	<select id="selectShowDetail" resultType="ShowDetail">
+		select s.s_name, s.s_s_date, s.s_e_date, sd.show_cast, s.s_runtime, s.s_age, s.s_price, s.s_poster, sd.show_daytime, sd.show_detail1, sd.show_detail2, 
+		sd.show_detail3, sd.show_detail4 from tf_show s join show_detail sd on s.s_code=sd.show_code and sd.show_num=#{showNum}
+	</select>
+
+	<!-- what's hot 검색 -->
+	<select id="selectShowHot" resultType="ShowDetail">
+		select * from show s join show_detail sd on s.s_code=sd.show_code where s_s_date between sysdate and sysdate+7 order by s_s_date desc
+	</select>
+	
+	<!-- 장르별, 일간주간월간 별 예매율 순위 출력 -->
+	<select id="selectRank" resultType="ShowDetail">
+		select * from ( select rownum rn, rank.* from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code where s_genre=#{sGenre} 
+		and s_s_date between sysdate and #{choiceDate} order by show_rate desc) rank) where rn between #{rankOne} and #{rankTwo}
+	</select>
+	
+	<!-- 지역별 신상품순 검색 -->
+	<select id="selectAreaNew" resultType="ShowDetail">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code order by s.s_e_date desc) where show_area=#{showArea}
+	</select>
+	
+	<!-- 지역별 종료임박순 검색 -->
+	<select id="selectAreaEnd" resultType="ShowDetail">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code order by s.s_e_date acs) where show_area=#{showArea}
+	</select>
+	
+	<!-- 지역별 상품명순 검색 -->
+	<select id="selectAreaName" resultType="ShowDetail">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code order by show_name) where show_area=#{showArea}
+	</select>
+	
+	<!-- 검색한 단어가 들어가는 지역, 카테고리, 제목, 출연배우명의 공연 출력 -->
+	<select id="selectSearch" resultType="ShowDetail">
+		select * from show_detail where show_region like '%#{search}%' or show_code like '%#{search}%' or show_name like '%#{search}%' or show_cast like '%#{search}%';
+	</select>
+	
+</mapper>

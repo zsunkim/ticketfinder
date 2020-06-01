@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.CsMapper">
+	<insert id="insertCs">
+		<selectKey resultType="int" keyProperty="cs_num" order="BEFORE">
+			select cs_seq.nextval from dual
+		</selectKey>
+		insert into cs values(#{cs_num},#{cs_title}, #{cs_contents}, #{cs_category}, #{cs_count}, sysdate)
+	</insert>
+	
+	<delete id="deleteCs">
+		delete from cs where cs_num=#{num}
+	</delete>
+	
+	<update id="updateCs">
+		update cs set cs_title=#{cs_title}, cs_contents=#{cs_contents}, cs_date=sysdate where cs_num=#{cs_num}
+	</update>
+	
+	<select id="selectCs">
+		select * from cs where cs_num=#{cs_num}
+	</select>
+	
+	<select id="selectCategoryCs">
+		select * from cs where cs_category=#{cs_category} order by cs_num desc
+	</select>
+	
+	<select id="selectCsList">
+		select * from cs order by cs_num desc
+	</select>
+</mapper>

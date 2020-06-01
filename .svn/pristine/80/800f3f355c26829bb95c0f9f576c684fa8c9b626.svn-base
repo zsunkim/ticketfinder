@@ -1,0 +1,11 @@
+package ticket.finder.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import ticket.finder.dto.DateCount;
+
+public interface DateCountDAO {
+	List<DateCount> selectOrderCount(@Param("param1") String param1, @Param("param2") String param2, @Param("period") int period);
+}

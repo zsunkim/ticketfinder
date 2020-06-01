@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.DateCountMapper">
+	<select id="selectOrderCount" resultType="DateCount">
+		select to_char(trunc(order_date), 'mm-dd') o_date
+		<if test="param1=='count' and param1!='' and param1!=null">
+			,count(*) count
+		</if>
+		<if test="param1=='sum' and param1!='' and param1!=null">
+			,sum(order_price) count
+		</if>
+		from tf_order where order_date between to_char(sysdate
+		<if test="period!=0 and period!='' and period!=null">
+			-${period}
+		</if>
+		, 'yyyymmdd') and sysdate 
+		<if test="param2!='' and param2!=null">
+			and order_dp_state=#{param2}
+		</if>
+		group by trunc(order_date) order by trunc(order_date) asc
+	</select>
+	
+	<select id="selectSalesDay" resultType="DateCount">
+		select to_char(order_date
+		<if test="param1=='day' and param1!='' and param1!=null">
+			,'mm-dd'
+		</if> 
+		<if test="param1=='dow' and param1!='' and param1!=null">
+			,'yyyymmdd day'
+		</if> 
+		<if test="param1=='mon' and param1!='' and param1!=null">
+			,'mm'
+		</if> 
+		) o_date, sum(order_price/1000) count from tf_order 
+		<if test="param1=='day' and param1!='' and param1!=null">
+			where order_date between to_char(sysdate-10, 'yyyy/mm/dd') and sysdate
+			group by to_char(order_date, 'mm-dd') order by to_char(order_date, 'mm-dd') asc
+		</if> 
+		<if test="param1=='dow' and param1!='' and param1!=null">
+			where order_date between to_char(sysdate-7, 'yyyy/mm/dd') and sysdate
+			group by to_char(order_date, 'yyyymmdd day') order by to_char(order_date, 'yyyymmdd day') asc
+		</if> 
+		<if test="param1=='mon' and param1!='' and param1!=null">
+			where order_date between '2020/01/01' and sysdate
+			group by to_char(order_date, 'mm') order by to_char(order_date, 'mm') asc
+		</if>
+	</select>
+	
+	<select id="selectGenreSum" resultType="DateCount">
+		select s.s_genre o_date, sum(tod.order_price/1000) count from tf_order tod
+		join show_detail sd on tod.order_show_num=sd.show_num
+		join tf_show s on sd.show_code=s.s_code
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			where tod.order_date between 
+			to_date(#{startDate}||'00:00', 'yyyy/mm/dd hh24:mi') and to_date(#{endDate}||'23:59', 'yyyy/mm/dd hh24:mi')
+		</if>
+		group by s.s_genre
+	</select>
+	
+	<select id="selectFcltySum" resultType="DateCount">
+		select f.fc_name o_date, sum(tod.order_price/1000) count from tf_order tod
+		join show_detail sd on tod.order_show_num=sd.show_num
+		join fclty f on sd.show_fc_code=f.fc_code
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			where tod.order_date between 
+			#{startDate} and to_date(#{endDate})+1
+		</if>
+		group by f.fc_name order by f.fc_name asc
+	</select>
+</mapper>

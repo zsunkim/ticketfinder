@@ -1,0 +1,304 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="cs">
+    <div id="section01">
+        <p class="csTitle">고객 센터</p>
+    </div>
+    <div id="section02">
+        <div class="csTab">
+            <div class="csTab1"><a class="on">공지사항</a></div>
+            <div class="csTab2"><a>이용안내</a></div>
+            <div class="csTab3"><a>FAQ</a></div>
+            <div class="csTab4"><a>1:1 문의</a></div>
+        </div>
+        <script type="text/javascript">
+			$('.csTab1').click(function(){
+			   $('.csTab').find('a').removeClass('on');
+			   $('.csTab1').children('a').addClass('on');
+		   });
+		   $('.csTab2').click(function(){
+				$('.csTab').find('a').removeClass('on');
+			   $('.csTab2').children('a').addClass('on');
+		   });
+		   $('.csTab3').click(function(){
+				$('.csTab').find('a').removeClass('on');
+			   $('.csTab3').children('a').addClass('on');
+		   });
+		   $('.csTab4').click(function(){
+				$('.csTab').find('a').removeClass('on');
+			   $('.csTab4').children('a').addClass('on');
+		   });
+		   </script>
+    </div>
+    <div id="section03">
+        <div class="notice on">
+            <div class="select">
+                <select>
+                    <option selected>전체</option>
+                    <option>서버 점검</option>
+                    <option>서비스 안내</option>
+                    <option>서비스 소식</option>
+                </select>
+            </div>
+            <div class="noticeListCont">
+                <div class="noticeListPart">
+                    <span>NO</span>
+                    <span>분류</span>
+                    <span>제목</span>
+                    <span>등록일</span>
+                </div>
+                <div class="noticeListWrap">
+                <%-- <c:forEach var="cs" items="${csList}">
+                <a href="${pageContext.request.contextPath}/csInfo">
+                    <div class="noticeList">
+                        <div class="noticeNo">${cs.csNum }</div>
+                        <div class="noticeGroup">${cs.csCategory }</div>
+                        <div class="noticeTitle">${cs.csTitle }</div>
+                        <div class="noticeDate">${cs.csDate }</div>
+                    </div>
+                </a>
+                </c:forEach> --%>
+                </div>
+                <div class="noticePageNum">
+                    <div class="noticePagecont">
+                        <div class="noticePageBtnBox">
+                         <!--  <a href="#" class="firstBtn">&lt;&lt;</a>
+                          <a href="#" class="prevBtn">&lt;</a>
+                          <a href="#" class="selected">1</a>
+                          <a href="#">2</a>
+                          <a href="#" class="nextBtn">&gt;</a>
+                          <a href="#" class="endBtn">&gt;&gt;</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+		var page=1;
+		boardDisplay(page);
+		
+		//게시글 목록을 요청하여 출력하는 함수
+		function boardDisplay(pageNum) {
+			page=pageNum;
+			$.ajax({
+				type: "GET",
+				url: "cs_list?pageNum="+pageNum,
+				dataType: "json",
+				success: function(json) {
+					for(var i=0; i<5; i++) {
+						var html="";
+						html+="<a href='${pageContext.request.contextPath}/csInfo/"+json.csBoardList[i].csNum+"'>";
+						html+="<div class='noticeList'>";
+						html+="<div class='noticeNo'>"+json.csBoardList[i].rn+"</div>";
+						html+="<div class='noticeGroup'>"+json.csBoardList[i].csCategory+"</div>";
+						html+="<div class='noticeTitle'>"+json.csBoardList[i].csTitle+"</div>";
+						html+="<div class='noticeDate'>"+json.csBoardList[i].csDate+"</div>";
+						html+="</div>";
+						html+="</a>";
+						
+						$(".noticeListWrap").append(html);
+					}
+					pageDisplay(json.pager);
+				},
+				error: function(xhr) {
+					alert("에러코드 = "+xhr.status)
+				}
+			});
+		}
+		
+		//페이지 번호를 출력하기 위한 함수
+		function pageDisplay(pager) {
+			var html="";
+			if(pager.startPage>pager.blockSize) {
+				html+="<a href='javascript:clickFn(1);' class='firstBtn'>&lt;&lt;</a>";
+				html+="<a href='javascript:clickFn("+pager.prevPage+");' class='prevBtn'>&lt;</a>";
+			} else {
+				html+="<a href='#' class='firstBtn'>&lt;&lt;</a><a href='#' class='prevBtn'>&lt;</a>";
+			}
+			
+			for(var i=pager.startPage;i<=pager.endPage;i++) {
+				if(pager.pageNum!=i) {
+					html+="<a href='#' onclick='clickFn(this)' id='"+i+"'>"+i+"</a>";
+				} else {
+					html+=i;
+				}
+			}
+			
+			if(pager.endPage!=pager.totalPage) {
+				html+="<a href='javascript:boardDisplay("+pager.nextPage+");' class='nextBtn'>&gt;</a>";
+				html+="<a href='javascript:boardDisplay("+pager.totalPage+");' class='endBtn'>&gt;&gt;</a>";
+			} else {
+				html+="<a href='#' class='nextBtn'>&gt;</a><a href=''#' class='endBtn'>&gt;&gt;</a>";
+			}
+			
+			$(".noticePageBtnBox").html(html);
+		}
+		
+		function clickFn(obj) {
+    		$(".noticeListWrap>a").remove();
+    		var type=$(obj).attr('id');
+    		boardDisplay(type);
+    	    return false;
+		}
+		</script>
+        <div class="how">
+            <div class="howTab">
+                <div class="how1 on">예매방법</div>|
+                <div class="how2">취소/환불</div>|
+                <div class="how3">발권/배송</div>
+            </div>
+            <div class="howCont">
+                <div class="how1Img on"><img src="${pageContext.request.contextPath}/images/cs/how1.png"></div>
+                <div class="how2Img"><img src="${pageContext.request.contextPath}/images/cs/how2.png"></div>
+                <div class="how3Img"><img src="${pageContext.request.contextPath}/images/cs/how3.png"></div>
+            </div>
+        </div>
+        <div class="faq">
+            <div class="faqSearch">
+                <input type="text">
+                <a><img src="${pageContext.request.contextPath}/images/cs/searchBtn.png"></a>
+            </div>
+            <div class="faqTab">
+                <div class="faqTab1">전체</div>|
+                <div class="faqTab2">티켓예매</div>|
+                <div class="faqTab3">취소/환불</div>|
+                <div class="faqTab4">회원</div>
+            </div>
+            <div class="faqCont">
+                <div class="faqList">
+                    <ul class="faq">
+                    <c:forEach var="faq" items="${faqList }">
+                        <a>
+                            <li class="faqItem">
+                                <div class="faqNo">${faq.faqNum }</div>
+                                <div class="faqGroup">${faq.faqCategory }</div>
+                                <div class="faqTitle">${faq.faqTitle }</div>
+                                <div class="faqAnswer">
+                                    <div>${faq.faqContents }</div>
+                                </div>
+                            </li>
+                        </a>
+                    </c:forEach>                        
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    $('.faqItem').click(function(){
+                    $(this).toggleClass('on');
+                    $(this).children('.faqAnswer').toggleClass('on');
+                    });
+                </script>
+                <div class="faqPageNum">
+                    <div class="faqPagecont">
+                        <div class="faqPageBtnBox">
+                          <a href="#" class="firstBtn">&lt;&lt;</a>
+                          <a href="#" class="prevBtn">&lt;</a>
+                          <a href="#" class="selected">1</a>
+                          <a href="#">2</a>
+                          <a href="#" class="nextBtn">&gt;</a>
+                          <a href="#" class="endBtn">&gt;&gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qna">
+            <div class="qnaCont">
+                <div class="qnaBtn">
+                    <a href="qna.html"><div class="qnaWriteBtn">1:1문의 등록하기</div></a>
+                </div>
+                <div class="qnaListPart">
+                    <span>NO</span>
+                    <span>처리상태</span>
+                    <span>제목</span>
+                    <span>등록일</span>
+                </div>
+                <div class="qnaNone" style="display: none;">
+                    등록한 문의가 없습니다. 버튼을 눌러 문의해주세요.
+                </div>
+                <a>
+                    <div class="qnaList" id="qna3">
+                        <div class="qnaListItem">
+                            <div class="qnaNo">3</div>
+                            <div class="qnaGroup">처리 전</div>
+                            <div class="qnaTitle">배송지 변경이 가능한가요?3</div>
+                            <div class="qnaDate">2020.04.07</div>
+                        </div>
+                        <div class="qnaAnswer">
+                            <div>답변입니다.히히3</div>
+                        </div>
+                    </div>
+                </a>
+                <a>
+                    <div class="qnaList" id="qna2">
+                        <div class="qnaListItem">
+                            <div class="qnaNo">2</div>
+                            <div class="qnaGroup">처리 완료</div>
+                            <div class="qnaTitle">배송지 변경이 가능한가요?3</div>
+                            <div class="qnaDate">2020.04.07</div>
+                        </div>
+                        <div class="qnaAnswer">
+                            <div>답변입니다.히히2</div>
+                        </div>
+                    </div>
+                </a>
+                <a>
+                    <div class="qnaList" id="qna1">
+                        <div class="qnaListItem">
+                            <div class="qnaNo">1</div>
+                            <div class="qnaGroup">처리 전</div>
+                            <div class="qnaTitle">배송지 변경이 가능한가요?3</div>
+                            <div class="qnaDate">2020.04.07</div>
+                        </div>
+                        <div class="qnaAnswer">
+                            <div>답변입니다.히히1</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+     $('.csTab1').click(function(){
+        $('#section03').children('div.on').removeClass('on');
+        $('.notice').addClass('on');
+    });
+    $('.csTab2').click(function(){
+        $('#section03').children('div.on').removeClass( 'on' );
+        $('.how').addClass('on');
+    });
+    $('.csTab3').click(function(){
+        $('#section03').children('div.on').removeClass( 'on' );
+        $('.faq').addClass('on');
+    });
+    $('.csTab4').click(function(){
+        $('#section03').children('div.on').removeClass( 'on' );
+        $('.qna').addClass('on');
+    });
+    $('.how1').click(function(){
+        $('.howCont').children('div.on').removeClass( 'on' );
+        $('.howTab').children('div.on').removeClass( 'on' );
+        $('.how1').addClass('on');
+        $('.how1Img').addClass('on');
+    });
+    $('.how2').click(function(){
+        $('.howCont').children('div.on').removeClass( 'on' );
+        $('.howTab').children('div.on').removeClass( 'on' );
+        $('.how2').addClass('on');
+        $('.how2Img').addClass('on');
+    });
+    $('.how3').click(function(){
+        $('.howCont').children('div.on').removeClass( 'on' );
+        $('.howTab').children('div.on').removeClass( 'on' );
+        $('.how3').addClass('on');
+        $('.how3Img').addClass('on');
+    });
+    </script>
+    <script type="text/javascript">
+        $('.qnaList').click(function(){
+        $(this).toggleClass('on');
+        $(this).children('.qnaAnswer').toggleClass('on');
+        $(this).children('.qnaListItem').toggleClass('on');
+        });
+    </script>
+</div>

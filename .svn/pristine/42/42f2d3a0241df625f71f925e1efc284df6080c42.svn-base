@@ -1,0 +1,99 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ticket.finder.dto.TfOrder;
+import ticket.finder.mapper.TfOrderMapper;
+
+@Repository
+public class TfOrderDAOImpl implements TfOrderDAO {
+	
+	@Autowired
+	private SqlSession sqlSession;
+
+	@Override
+	public int insertOrder(TfOrder order) {
+		return sqlSession.getMapper(TfOrderMapper.class).insertOrder(order);
+	}
+
+	@Override
+	public int updateDpOrder(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).updateDpOrder(code);
+	}
+
+	@Override
+	public int updateShOrder(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).updateShOrder(code);
+	}
+
+	@Override
+	public int ticketing(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).ticketing(code);
+	}
+
+	@Override
+	public int updateStateRefund(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).updateStateRefund(code);
+	}
+
+	@Override
+	public int deleteUnpaidOrder(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).deleteUnpaidOrder(code);
+	}
+
+	@Override
+	public TfOrder selectOrder(String code) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectOrder(code);
+	}
+
+	@Override
+	public List<TfOrder> selectUserOrderAll(Map<String, Object> map) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectUserOrderAll(map);
+	}
+
+	@Override
+	public TfOrder selectMyOrder(String id) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectMyOrder(id);
+	}
+
+	@Override
+	public List<TfOrder> selectRankOrder(Map<String, Object> map) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectRankOrder(map);
+	}
+
+	@Override
+	public List<TfOrder> selectOrderList(Map<String, Object> map) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectOrderList(map);
+	}
+
+	@Override
+	public List<TfOrder> selectUnpaidOrderList() {
+		return sqlSession.getMapper(TfOrderMapper.class).selectUnpaidOrderList();
+	}
+
+	@Override
+	public List<TfOrder> selectShOrderList() {
+		return sqlSession.getMapper(TfOrderMapper.class).selectShOrderList();
+	}
+
+	@Override
+	public List<TfOrder> selectTicketingList() {
+		return sqlSession.getMapper(TfOrderMapper.class).selectTicketingList();
+	}
+
+	@Override
+	public List<TfOrder> selectCancelOrderList() {
+		return sqlSession.getMapper(TfOrderMapper.class).selectCancelOrderList();
+	}
+
+	@Override
+	public int selectOrderCount(String id) {
+		return sqlSession.getMapper(TfOrderMapper.class).selectOrderCount(id);
+	}
+
+}

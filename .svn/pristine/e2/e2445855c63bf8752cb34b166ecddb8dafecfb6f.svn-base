@@ -1,0 +1,499 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - Admin</title>
+
+
+	<!--STYLESHEET-->
+	<!--=================================================-->
+
+	<!--Open Sans Font [ OPTIONAL ] -->
+ 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+	<!--Bootstrap Stylesheet [ REQUIRED ]-->
+	<link href="${pageContext.request.contextPath }/a_css/bootstrap.min.css" rel="stylesheet">
+
+
+	<!--Nifty Stylesheet [ REQUIRED ]-->
+	<link href="${pageContext.request.contextPath }/a_css/nifty.min.css" rel="stylesheet">
+
+
+	<!--Font Awesome [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--Bootstrap Table [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+    <!--X-editable [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/x-editable/css/bootstrap-editable.css" rel="stylesheet">	
+    
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> -->
+	
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/a_css/slick.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/a_css/slick-theme.css">
+
+	<!--SCRIPT-->
+	<!--=================================================-->
+
+	<!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath }/a_plugins/pace/pace.min.js"></script>
+    <style type="text/css">
+    a.m-ho:hover>div {
+	    background-color: #d8d8d8;
+	    transition: all .5s;
+	}
+    
+    a.m-ho>div {
+	    transition: all .5s;
+	}
+    </style>
+</head>
+<body>
+	<div id="container" class="effect aside-float aside-bright mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">Dashboard</h1>
+
+					<!--Searchbox-->
+					<div class="searchbox">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..">
+							<span class="input-group-btn">
+								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+
+				<!--Breadcrumb-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<ol class="breadcrumb">
+					<li><a href="${pageContext.request.contextPath }/main.admin">Home</a></li>
+					<li class="active">Main</li>
+				</ol>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End breadcrumb-->
+
+
+		
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title" style="font-size: 20px;">종료 임박 공연</h3>
+								</div>
+								<div class="panel-body">
+									<div class="multiple-item">
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="${pageContext.request.contextPath }/a_images/thumbs/tile2.jpg" width="200"></h3></div>
+									  <div><h3><img alt="" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF163035_200407_135629.gif" width="200"></h3></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6 col-lg-3">
+							<!--Registered User-->
+							<a href="#" class="m-ho">
+								<div class="panel media pad-all">
+									<div class="media-left">
+										<span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+										<i class="fa fa-user fa-2x"></i>
+										</span>
+									</div>
+									<div class="media-body">
+										<p class="text-2x mar-no text-thin">241</p>
+										<p class="text-muted mar-no" style="font-size: 15px;">주문</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<!--New Order-->
+							<a href="#" class="m-ho">
+								<div class="panel media pad-all">
+									<div class="media-left">
+										<span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+										<i class="fa fa-shopping-cart fa-2x"></i>
+										</span>
+									</div>
+						
+									<div class="media-body">
+										<p class="text-2x mar-no text-thin">543</p>
+										<p class="text-muted mar-no" style="font-size: 15px;">미입금</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<!--Comments-->
+							<a href="#" class="m-ho">
+								<div class="panel media pad-all">
+									<div class="media-left">
+										<span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+										<i class="fa fa-comment fa-2x"></i>
+										</span>
+									</div>
+						
+									<div class="media-body">
+										<p class="text-2x mar-no text-thin">34</p>
+										<p class="text-muted mar-no" style="font-size: 15px;">티켓 발권</p>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 col-lg-3">
+							<!--Sales-->
+							<a href="#" class="m-ho">
+								<div class="panel media pad-all">
+									<div class="media-left">
+										<span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+										<i class="fa fa-dollar fa-2x"></i>
+										</span>
+									</div>
+						
+									<div class="media-body">
+										<p class="text-2x mar-no text-thin">654</p>
+										<p class="text-muted mar-no" style="font-size: 15px;">티켓 발송</p>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 col-md-4" style="width: 20%;">
+							<div class="panel panel-info panel-colorful">
+								<div class="panel-body text-center">
+									<p class="text-uppercase mar-btm text-sm" style="font-size: 18px;">취소</p>
+									<i class="fa fa-dollar fa-5x"></i>
+									<hr>
+									<p class="h2 text-thin">7,428</p>
+									<small><span class="text-semibold"><i class="fa fa-dollar fa-fw"></i> 22,675</span> Total Earning</small>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-4" style="width: 20%;">
+							<div class="panel panel-primary panel-colorful">
+								<div class="panel-body text-center">
+									<p class="text-uppercase mar-btm text-sm" style="font-size: 18px;">환불</p>
+									<i class="fa fa-shopping-cart fa-5x"></i>
+									<hr>
+									<p class="h2 text-thin">2,423</p>
+									<small><span class="text-semibold"><i class="fa fa-shopping-cart fa-fw"></i> 954</span> Sales in this month</small>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-4" style="width: 20%;">
+							<div class="panel panel-dark panel-colorful">
+								<div class="panel-body text-center">
+									<p class="text-uppercase mar-btm text-sm" style="font-size: 18px;">매출</p>
+									<i class="fa fa-users fa-5x"></i>
+									<hr>
+									<p class="h2 text-thin">254,487</p>
+									<small><span class="text-semibold">7%</span> Higher than yesterday</small>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-4" style="width: 20%;">
+							<div class="panel panel-dark panel-colorful">
+								<div class="panel-body text-center">
+									<p class="text-uppercase mar-btm text-sm" style="font-size: 18px;">방문자</p>
+									<i class="fa fa-users fa-5x"></i>
+									<hr>
+									<p class="h2 text-thin">254,487</p>
+									<small><span class="text-semibold">7%</span> Higher than yesterday</small>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-4" style="width: 20%;">
+							<div class="panel panel-dark panel-colorful">
+								<div class="panel-body text-center">
+									<p class="text-uppercase mar-btm text-sm" style="font-size: 18px;">가입자</p>
+									<i class="fa fa-users fa-5x"></i>
+									<hr>
+									<p class="h2 text-thin">254,487</p>
+									<small><span class="text-semibold">7%</span> Higher than yesterday</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title" style="font-size: 20px;">장르별 주문</h3>
+								</div>
+								<div class="panel-body">
+					
+									<!--Flot Donut Chart placeholder -->
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+									<div id="flot-donut" style="height:212px"></div>
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+					
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="panel">
+								<div class="panel-heading">
+									<h2 class="panel-title" style="font-size: 20px;">장르별 주문</h2>
+								</div>
+								<div class="panel-body">
+					
+									<!--Flot Donut Chart placeholder -->
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+									<div id="flot-donut2" style="height:212px"></div>
+									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title" style="font-size: 20px;">1:1 문의</h3>
+								</div>
+								<div class="panel-body">
+									<table data-toggle="table"
+										   data-url="data/bs-table.json"
+										   data-search="true"
+										   data-show-refresh="true"
+										   data-show-toggle="true"
+										   data-show-columns="true"
+										   data-sort-name="id"
+										   data-page-list="[5, 10, 20]"
+										   data-page-size="5"
+										   data-pagination="true" data-show-pagination-switch="true">
+										<thead>
+											<tr>
+												<th data-field="id" data-sortable="true" data-formatter="invoiceFormatter">ID</th>
+												<th data-field="name" data-sortable="true">Name</th>
+												<th data-field="date" data-sortable="true" data-formatter="dateFormatter">Order date</th>
+												<th data-field="amount" data-align="center" data-sortable="true" data-sorter="priceSorter">Balance</th>
+												<th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">Status</th>
+												<th data-field="track" data-align="center" data-sortable="true" data-formatter="trackFormatter">Tracking Number</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제함-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+
+		</div>
+
+		
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v1.0.0</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 TicketFinder</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+
+	
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+	<!--jQuery [ REQUIRED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/bootstrap.min.js"></script>
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fast-click/fastclick.min.js"></script>
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty.min.js"></script>
+	
+	<!--Sparkline [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/sparkline/jquery.sparkline.min.js"></script>
+	
+	<!--Flot Chart [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/flot-charts/jquery.flot.min.js"></script>
+	<script src="${pageContext.request.contextPath }/a_plugins/flot-charts/jquery.flot.resize.min.js"></script>
+
+	<!--Flot Pie Chart [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/flot-charts/jquery.flot.pie.min.js"></script>
+	
+	<!--X-editable [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/x-editable/js/bootstrap-editable.min.js"></script>
+
+	<!--Bootstrap Table [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+	<!--Bootstrap Table Extension [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	
+	<script type="text/javascript">
+		var dataSet = [
+			{ label: "콘서트", data: 13, color: "#650c88" },
+			{ label: "뮤지컬", data: 17, color: "#177bbb" },
+			{ label: "연극", data: 40, color: "#a6c600" },
+			{ label: "클래식", data: 9, color: "#8669CC" },
+			{ label: "전시", data: 21, color: "#f84f9a" }
+		];
+	
+		$.plot('#flot-donut', dataSet, {
+			series: {
+				pie: {
+					show: true,
+					combine: {
+					color: '#999',
+					threshold: 0.1
+					}
+				}
+			},
+			legend: {
+			show: false
+			}
+		});
+		
+		$.plot('#flot-donut2', dataSet, {
+			series: {
+				pie: {
+					show: true,
+					combine: {
+					color: '#999',
+					threshold: 0.1
+					}
+				}
+			},
+			legend: {
+			show: false
+			}
+		});
+		
+		$('.multiple-item').slick({
+			  infinite: true,
+			  slidesToShow: 2,
+			  slidesToScroll: 2,
+			  arrows: true,
+			  variableWidth: true,
+			  adaptiveHeight: true,
+			  dots: true,
+			  autoplay: true,
+			  autoplaySpeed: 3000
+		});
+	</script>
+	
+	
+</body>
+</html>

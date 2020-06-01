@@ -1,0 +1,447 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - FAQ</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ] -->
+     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/nifty.min.css" rel="stylesheet">
+
+    
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/switchery/switchery.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="${pageContext.request.contextPath }/a_css/nifty-demo.min.css" rel="stylesheet">
+
+
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath }/a_plugins/pace/pace.min.js"></script>
+</head>
+<body>
+	<div id="container" class="effect mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">FAQ 관리</h1>
+
+					<!--Searchbox-->
+					<div class="searchbox">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..">
+							<span class="input-group-btn">
+								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel">
+								<div class="panel-body">
+									<button class="btn btn-pink" id="insertfaq">FAQ 등록</button>
+								
+					
+									<!-- GENERAL -->
+									<!--===================================================-->
+									<h3 class="pad-all bord-btm text-thin">자주 묻는 질문</h3>
+									<div id="demo-gen-faq" class="panel-group accordion">
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-gen-faq1" data-toggle="collapse" data-parent="#demo-gen-faq">티켓 취소를 하려면 어떻게 해야 되나요?</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-gen-faq1" class="collapse in">
+												<div class="pad-all">
+														마이티켓>예매확인/취소 메뉴를 통해 취소를 진행하실 수 있습니다. <br>
+														콜센터를 통해 예매를 진행하신 경우, 콜센터(1899-0042)로 문의하시면 상담원을 통해 취소하실 수 있습니다.
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-gen-faq2" data-toggle="collapse" data-parent="#demo-gen-faq">공연이 취소되었는데 이후 처리는 어떻게 되나요?</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-gen-faq2" class="collapse in">
+												<div class="pad-all">
+													주최측의 사유로 공연이 취소될 경우, 결제하신 전체 금액을 환불해드리게 됩니다.
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-gen-faq3" data-toggle="collapse" data-parent="#demo-gen-faq">배송 티켓을 수령한 후, 어떻게 취소할 수 있나요?</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-gen-faq3" class="collapse">
+												<div class="pad-all">
+													티켓을 배송받은 후 취소를 원하시는 경우, 상품의 취소마감시간 전까지 멜론티켓 고객센터로 반송해주셔야 합니다.<br>
+													티켓 반송 시 참고하셔야 하는 사항은 아래와 같습니다.<br><br>
+													- 해당 공연의 취소마감일시를 확인 후 아래 주소로 반송처리해 주세요<br>
+													  [고객센터(반송) 주소]
+													  서울특별시 중구 후암로 110 서울시티타워빌딩 2층 트랜스코스모스코리아 멜론티켓고객센터 앞<br><br>
+													  
+													- 티켓반송 시 반송 비용은 고객님께서 부담하셔야 하며, 티켓이 정확하게 도착되도록 등기우편을 이용해 주시기 바랍니다.<br> 
+
+													- 공연 전날이 휴일인 경우 공연 2일전 평일 오후5시, 토요일 11시까지 받으신 티켓을 보내주셔야 합니다.<br> 
+													
+													- 부분취소를 원하실 경우 취소하실 티켓만 보내주시면 됩니다.<br>
+													  (단, 특정 가격에 따라 부분취소가 불가능하오니 고객센터를 통해 부분취소 여부를 문의해 주시기 바랍니다.)<br><br>
+													
+													- 무통장입금으로 결제하신 경우, 반송하는 우편물 안에 예매자 본인 명의 계좌번호를 동봉하여 보내주시기 바랍니다.<br>
+													  (본인 명의 계좌번호를 보내주시지 않을 경우 환불이 지연될 수 있습니다.)<br><br>
+													
+													- 취소 시 예매수수료와 취소수수료는 부담하셔야 하며, 배송비는 환불되지 않습니다.<br> 
+													  취소수수료는 멜론티켓 고객센터에 도착된 일자 기준으로 부과됩니다. <br><br>
+													
+													- 멜론티켓에 티켓이 도착 후 취소된 후 문자가 발송됩니다. <br>
+													  2-3일이내 문자를 받지 못하시면 멜론티켓으로 문의해주시기 바랍니다.<br><br>
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-gen-faq4" data-toggle="collapse" data-parent="#demo-gen-faq">예매 후 결제수단 변경이 가능한가요?</a>
+											</div>
+					
+					
+											<!-- Answer -->
+											<div id="demo-gen-faq4" class="collapse">
+												<div class="pad-all">
+													무통장미입금 예매 건에 한해 신용카드로 변경이 가능합니다.<br>
+													단, 그 외에결제수단이나 할부 개월을 변경하시려면 예매 건을 취소하고,원하는 결제방법으로 재예매하셔야 합니다.<br>
+													(해당 공연의 취소마감시간이 남아 있는 경우에만 가능합니다.)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--===================================================-->
+					
+									<hr class="bord-no pad-all">
+					
+									<!-- ACCOUNT -->
+									<!--===================================================-->
+									<h3 class="pad-all bord-btm text-thin">계정 관련 문의</h3>
+									<div id="demo-acc-faq" class="panel-group accordion">
+										<div class="panel panel-trans pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-acc-faq1" data-toggle="collapse" data-parent="#demo-acc-faq">제 명의의 휴대폰이 아니라도 휴대폰 인증이 가능한가요?</a>
+											</div>
+					
+					
+											<!-- Answer -->
+											<div id="demo-acc-faq1" class="collapse in">
+												<div class="pad-all">
+													네, 가능합니다. 회원정보의 휴대폰 번호는 연락처의 개념으로 결제와 관련된 것이 아니기 때문에 명의자 본인에 대한 정보입력 없이 인증번호 입력만으로 휴대폰번호 등록이 가능합니다.
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-trans pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-acc-faq2" data-toggle="collapse" data-parent="#demo-acc-faq">비밀번호를 잊어버렸어요. 어떻게 확인할 수 있나요?</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-acc-faq2" class="collapse">
+												<div class="pad-all">
+													티켓파인더 비밀번호 찾기를 통해 본인임이 확인되면 비밀번호를 즉시 변경하실 수 있습니다.<br>
+													1. 회원정보에 등록된 정보(휴대폰번호, 이메일)로 찾기<br><br>
+													
+													① 아이디/이름/회원정보에 등록된 정보(휴대폰번호 또는 이메일)를 입력 후 인증번호를 요청해주세요.<br>
+													
+													   회원정보에 등록된 정보와 다를 경우, 본인확인이 완료되지 않았기 때문에 인증번호를 받을 수 없습니다.<br><br>
+													
+													②입력하신 인증번호가 정확할 경우, 비밀번호를 변경할 수 있습니다.<br><br><br>
+													
+													2. 본인확인(본인명의 휴대폰인증) 정보로 찾기<br><br>
+													
+													① 본인확인(실명인증)이 완료된 아이디는 본인명의 휴대폰인증을 통해 찾을 수 있습니다.<br>
+													
+													   해당 인증방법은 본인확인이 완료된 아이디에 한하여 제공됩니다.<br><br>
+													
+													② 본인확인 정보와 동일한 정보가 있을 경우, 비밀번호 재설정을 진행할 수 있습니다.<br><br><br>
+													
+													* 회원정보가 정확하지 않거나 본인확인 정보가 없는 아이디는 멜론 아이디/비밀번호 찾기를 진행할 수 없습니다.<br>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-trans pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-acc-faq3" data-toggle="collapse" data-parent="#demo-acc-faq">로그인 오류 횟수 5회 초과했다고 나와요.</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-acc-faq3" class="collapse">
+												<div class="pad-all">
+													티켓파인더에서는 회원님의 정보보호를 위해 비밀번호 오류 허용 횟수를 5회로 제한하고 있습니다.<br>
+
+													비밀번호 오류는 PC, 플레이어, 모바일 등 멜론/멜론티켓/ 멜론아지톡 의 오류 횟수를 통합하여 적용하고 있습니다.<br>
+													
+													오류 횟수 5회 초과 시에는 비밀번호 찾기를 통해 본인임을 확인 후 비밀번호 재설정을 진행해야 합니다.<br>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--===================================================-->
+					
+									<hr class="bord-no pad-all">
+					
+									<!-- PAYMENT -->
+									<!--===================================================-->
+									<h3 class="pad-all bord-btm text-thin">결제 관련 문의</h3>
+									<div id="demo-pym-faq" class="panel-group accordion">
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-pym-faq1" data-toggle="collapse" data-parent="#demo-pym-faq">카카오페이 결제 제한 시간이 있나요?</a>
+											</div>
+					
+					
+											<!-- Answer -->
+											<div id="demo-pym-faq1" class="collapse in">
+												<div class="pad-all">
+													티켓파인더는 좌석선점 시간이 5분이므로 5분 이내에 예매/결제를 완료해야 합니다. 카카오페이로 결제 시에도 좌석 선점 후부터 5분 이내에 결제를 완료해 주세요.
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-pym-faq2" data-toggle="collapse" data-parent="#demo-pym-faq">카카오페이에서 카드로 결제하고 싶은데 얼마까지 결제할 수 있나요?</a>
+											</div>
+					
+											<!-- Answer -->
+											<div id="demo-pym-faq2" class="collapse in">
+												<div class="pad-all">
+													카카오페이 카드의 1회 최대 결제 한도는 30만원입니다. 예매 시 최종 결제 금액이 30만원이 넘을 경우에는 다른 결제 수단을 이용해 주세요.
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-pym-faq3" data-toggle="collapse" data-parent="#demo-pym-faq">카카오페이 결제 시에 사용할 수 없는 카드가 있나요?</a>
+											</div>
+					
+					
+											<!-- Answer -->
+											<div id="demo-pym-faq3" class="collapse in">
+												<div class="pad-all">
+													일부 미지원 카드가 있으며 자세한 사항은 카카오페이에 문의해 주세요. (http://www.kakao.com/kakaopay/ 혹은 1644-7405)
+												</div>
+											</div>
+										</div>
+										<div class="bord-no pad-top">
+					
+											<!-- Question -->
+											<div class="text-semibold pad-hor text-lg">
+												<a href="#demo-pym-faq4" data-toggle="collapse" data-parent="#demo-pym-faq">카카오페이가 무엇인가요?</a>
+											</div>
+					
+					
+											<!-- Answer -->
+											<div id="demo-pym-faq4" class="collapse in">
+												<div class="pad-all">
+													카카오페이는 카카오톡 이용자면 누구나 사용할 수 있는 간편 결제이며 멜론티켓에서는 카드결제와 카카오머니 결제 중 선택하여 사용할 수 있습니다.
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--===================================================-->
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+
+
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+		</div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2015 Your Company</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+	<!--===================================================-->
+	<!-- END SETTINGS -->
+
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/bootstrap.min.js"></script>
+
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fast-click/fastclick.min.js"></script>
+
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty.min.js"></script>
+
+
+	<!--Switchery [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/switchery/switchery.min.js"></script>
+
+
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+	<!--Demo script [ DEMONSTRATION ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty-demo.min.js"></script>
+	
+	<script type="text/javascript">
+	$(window).on('load', function() {
+		$('#mainnav-menu').children().eq(7).addClass('active-sub').children().eq(1).addClass('in').children().eq(2).addClass('active-link');
+		
+		$('#insertfaq').click(function() {
+			location.href="adm_faq_add.jsp";
+		});
+	});
+	</script>
+</body>
+</html>
+

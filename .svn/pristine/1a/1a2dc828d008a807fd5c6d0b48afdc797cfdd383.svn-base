@@ -1,0 +1,15 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+
+import ticket.finder.dto.TfUser;
+
+public interface TfUserMapper {
+	int insertUser(TfUser user);
+	int updateUser(TfUser user);
+	int dormantUser(String id);
+	String selectFindIdUser(String name, String email);
+	TfUser selectUser(String id);
+	List<TfUser> selectUserList();
+	List<TfUser> dormantUserList();
+}

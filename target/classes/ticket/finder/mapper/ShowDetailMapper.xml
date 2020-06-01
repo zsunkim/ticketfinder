@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.ShowDetailMapper">
+	<insert id="insertShowDetail">
+		<selectKey resultType="int" keyColumn="show_num" order="BEFORE">
+			select show_detail_seq.nextval from dual
+		</selectKey>
+		insert into show_detail values(#{showNum},#{showCode},#{showFcCode},#{showHallName},#{showName},#{showCast},
+		#{showState},to_date(#{showDaytime}, 'yyyy/mm/dd hh24:mi'),#{showSeat},#{showDatail1},#{showDatail2},#{showDatail3},
+		#{showDatail4},#{showCasting},#{showArea},#{showRate})
+	</insert>
+	
+	<update id="updateShowDetail">
+		update show_detail
+		<set>
+			<if test="showCode!=null and showCode!=''">
+				show_code=#{showCode},
+			</if>
+			<if test="showFcCode!=null and showFcCode!='showFcCode'">
+				show_fc_code=#{showFcCode},
+			</if>
+			<if test="showHallName!=null and showHallName!=''">
+				show_hall_name=#{showHallName},
+			</if>
+			<if test="showName!=null and showName!=''">
+				show_name=#{showName},
+			</if>
+			<if test="showCast!=null and showCast!=''">
+				show_cast=#{showCast},
+			</if>
+			<if test="showState!=null and showState!=''">
+				show_state=#{showState},
+			</if>
+			<!-- 
+			<if test="showDaytime!=null and showDaytime!=''">
+				show_daytime=to_date(#{showDaytime}, 'yyyy/mm/dd hh24:mi'),
+			</if>
+			 -->
+			<if test="showSeat!=null and showSeat!=''">
+				show_seat=#{showSeat}, 
+			</if>
+			<if test="showDetail1!=null and showDetail1!=''">
+				show_detail1=#{showDetail1},
+			</if>
+			<if test="showDetail2!=null and showDetail2!=''">
+				show_detail2=#{showDetail2},
+			</if>
+			<if test="showDetail3!=null and showDetail3!=''">
+				show_detail3=#{showDetail3},
+			</if>
+			<if test="showDetail4!=null and showDetail4!=''">
+				show_detail4=#{showDetail4},
+			</if>
+			<if test="showArea!=null and showArea!=''">
+				show_area=#{showArea}, 
+			</if>
+			<if test="showRate!=null and showRate!=''">
+				show_rate=#{showRate}
+			</if>
+		</set>
+		where show_num=#{showNum}
+	</update>
+	
+	<update id="updateStateShowDetail">
+		update show_detail
+		<set>
+			<choose>
+				<when test="date=='yesterday'">
+					<![CDATA[
+					 show_state='공연완료'
+					where show_daytime <= to_char(sysdate, 'yyyymmdd')
+					and show_state!='공연완료'
+					]]>
+				</when>
+				<otherwise>
+					<![CDATA[
+					show_state='공연중'
+					where show_daytime between to_char(sysdate,'yyyymmdd') and sysdate
+					and show_state!='공연중'
+					]]>
+				</otherwise>
+			</choose>
+		</set>
+	</update>
+</mapper>

@@ -1,0 +1,26 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.TfOrder;
+
+public interface TfOrderDAO {
+	int insertOrder(TfOrder order);
+	int updateOrder(TfOrder order);
+	int updateStateRefund(String code);
+	int deleteUnpaidOrder(String code);
+	TfOrder selectOrder(String code);
+	TfOrder selectMyOrder(String id);
+	List<TfOrder> selectUserOrderAll(Map<String, Object> map);
+	List<TfOrder> selectDateOrder(String startDate, String endDate);
+	List<TfOrder> selectRankOrder(Map<String, Object> map);
+	List<TfOrder> selectOrderList();
+	List<TfOrder> selectUnpaidOrderList();
+	List<TfOrder> selectShOrderList();
+	List<TfOrder> selectTicketingList();
+	List<TfOrder> selectCancelOrderList();
+	int selectOrderCount(String id);
+	OrderQShow selectOrderQshow(String code);
+}

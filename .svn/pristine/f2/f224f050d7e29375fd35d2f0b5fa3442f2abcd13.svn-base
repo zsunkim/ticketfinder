@@ -1,0 +1,17 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.Review;
+
+public interface ReviewMapper {
+	int insertReview(Review review);
+	int updateStateReview(int reviewNum);
+	Review selectReview(int reviewNum);
+	List<Review> selectIdReview(String reviewUserId);
+	List<Review> selectReviewList();
+	int selectReviewCount(String reviewUserId);
+	List<Review> selectUserReviewList(Map<String, Object> map);
+	List<Review> selectShowReviewList(String reviewShowCode);
+}

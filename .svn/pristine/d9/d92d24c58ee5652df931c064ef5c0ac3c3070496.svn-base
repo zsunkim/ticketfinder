@@ -1,0 +1,19 @@
+package ticket.finder.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.DateCountDAO;
+import ticket.finder.dto.DateCount;
+
+@Service
+public class DateCountServiceImpl implements DateCountService {
+	@Autowired
+	private DateCountDAO dateCountDAO;
+	
+	@Override
+	public DateCount getOrderCount(String param1, String param2, int period) {
+		return dateCountDAO.selectOrderCount(param1, param2, period);
+	}
+
+}

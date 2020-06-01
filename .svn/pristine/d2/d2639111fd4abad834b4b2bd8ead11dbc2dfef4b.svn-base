@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<title>Ticket-Finder</title>
+</head>
+<body id="login">
+<div id="section">
+    <div id="header">
+        <div id="headerArea">
+            <img src="../images/login_logo.jpg">
+        </div>
+    </div>
+    <div class="cont">
+    <form action="" method="post">
+        <div class="loginForm">
+            <div>
+                <div class="login_input">
+                    <div class="login_insert">
+                        <input type="text" id="id" class="id" placeholder="아이디">
+                        <input type="password" id="passwd" class="passwd" placeholder="비밀번호">
+                        <div class="save">
+                            <!--
+                            <div class="check">
+                                <input type="checkbox" id="saveId">
+                                <label for="saveId" class="label">
+                                <span class="icon"></span>
+                                아이디 저장
+                                </label>
+                            </div>
+                            -->
+                            <div class="login_info">
+                                <a href="" class="lnk">아이디 찾기</a>
+                                <span class="bar">|</span>
+                                <a href="">비밀번호 찾기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wrap_btn">
+                <button type="button" class="login_btn">로그인</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<script src="plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+
+</body>
+</html>

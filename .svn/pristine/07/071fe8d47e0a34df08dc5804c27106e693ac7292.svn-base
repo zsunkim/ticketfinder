@@ -1,0 +1,197 @@
+/*----------------------------------------------
+          reviewMore - common style
+----------------------------------------------*/
+#reviewMore .cont{
+  width: 1100px;
+}
+
+/*----------------------------------------------
+          reviewMore - section01 style
+----------------------------------------------*/
+#reviewMore #section01{
+  margin-top: 50px;
+}
+
+#reviewMore #section01 .monthWrapper{
+  width: 100%;
+  float:left;
+  margin-bottom: 20px;
+}
+
+#reviewMore #section01 .monthWrapper .monthBtn{
+  float:right;
+}
+
+#reviewMore #section01 .monthWrapper .monthBtn li{
+  float:left;
+}
+
+#reviewMore #section01 .monthWrapper .monthBtn li a{
+  display: inline-block;
+  width: 70px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #dadada;
+  color: #555;
+}
+
+#reviewMore #section01 .monthWrapper .monthBtn li.on a{
+  background: #666;
+  color:#fff;
+}
+
+/*----------------------------------------------
+          reviewMore - section02 style
+----------------------------------------------*/
+#reviewMore #section02 .reviewBox table{
+  border-top: 1px solid #e9e9e9;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#reviewMore #section02 .reviewBox table tr td:first-child,
+#reviewMore #section02 .reviewBox table tr td:nth-child(4){
+  width: 5%;
+  text-align: center;
+}
+
+#reviewMore #section02 .reviewBox table tr td:nth-child(2){
+  width: 40%;
+}
+
+#reviewMore #section02 .reviewBox table tr td:nth-child(3){
+  width: 50%;
+}
+
+#reviewMore #section02 .reviewBox table tr{
+  border-bottom: 1px solid #e9e9e9;
+}
+
+#reviewMore #section02 .reviewBox table thead td{
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  line-height: 50px;
+}
+
+#reviewMore #section02 .reviewBox table tbody td{
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewNo{
+  font-size: 16px;
+  color:#999;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewShow img{
+  width: 120px;
+  float:left;
+  margin-right: 30PX;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewShow p{
+  float: left;
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewShow .showTit{
+  margin-top: 15px;
+  margin-bottom: 75px;
+  font-size: 18px;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewShow .showDate,
+#reviewMore #section02 .reviewBox table td.reviewShow .showPlace{
+  color:#999;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewContent p{
+  max-width: 520px;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #666;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewState p{
+  font-size: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #666;
+}
+
+#reviewMore #section02 .reviewBox table td.reviewState a{
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  color: #666;
+  height: 18px;
+  padding: 8px 12px 8px;
+}
+
+#reviewMore #section02 .noReviewBox{
+  border:1px solid #e9e9e9;
+}
+
+#reviewMore #section02 .noReviewBox p{
+  line-height: 250px;
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+
+/*----------------------------------------------
+          reviewMore - section04 style
+----------------------------------------------*/
+#reviewMore #section03 {
+  margin: 25px 0;
+}
+
+#reviewMore #section03 .pageBtnBox{
+  display: inline-block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+#reviewMore #section03 .pageBtnBox a,
+#reviewMore #section03 .pageBtnBox span{
+  font-size: 16px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+#reviewMore #section03 .pageBtnBox span.selected{
+  color:#ec7d2c;
+  font-weight: bold;
+}
+
+#reviewMore #section03 .pageBtnBox a[class*="Btn"],
+#reviewMore #section03 .pageBtnBox span[class*="Btn"]{
+  width: 32px;
+  font-size: 13px;
+  letter-spacing: -1px;
+  text-align: center;
+  color:#888;
+  margin: 0;
+  border-radius: 15px;
+  border:1px solid #ccc;
+}
+
+#reviewMore #section03 .pageBtnBox a[class*="Btn"]:hover{
+  color: #000;
+  border: 1px solid #000;
+}

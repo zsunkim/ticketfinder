@@ -1,0 +1,128 @@
+package ticket.finder.service;
+
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ticket.finder.dao.TfUserDAO;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.LoginAuthFailException;
+import ticket.finder.exception.UserIdExistsException;
+import ticket.finder.exception.UserNotFoundException;
+import ticket.finder.exception.WrongJoinException;
+
+@Service
+public class TfUserServiceImpl implements TfUserService {
+	
+	@Autowired
+	private TfUserDAO tfUserDAO;
+
+	@Transactional
+	@Override
+	public void addUser(TfUser user) throws UserIdExistsException, WrongJoinException {
+		//아이디 중복 유무 검사
+		if(tfUserDAO.selectUser(user.getUserId())!=null) {
+			throw new UserIdExistsException(user, "이미 사용중인 아이디입니다.");
+		}
+		
+		user.setUserPw(BCrypt.hashpw(user.getUserPw(), BCrypt.gensalt(10)));
+		user.setUserState("활동");
+		
+		tfUserDAO.insertUser(user);
+	}
+
+	@Transactional
+	@Override
+	public void modifyUser(TfUser user) throws UserNotFoundException {
+		//회원 정보 검색
+		if(tfUserDAO.selectUser(user.getUserId())==null) {
+			throw new UserNotFoundException("해당 회원이 존재하지 않습니다.");
+		}
+		
+		String pw=user.getUserPw();
+		
+		if(pw!=null || !pw.equals("")) {
+			user.setUserPw(BCrypt.hashpw(user.getUserPw(), BCrypt.gensalt(10)));
+		}
+		
+		tfUserDAO.updateUser(user);
+	}
+
+	@Transactional
+	@Override
+	public void modifyUserToDormant(String id) throws UserNotFoundException {
+		if(tfUserDAO.selectUser(id)==null) {
+			throw new UserNotFoundException("해당 회원이 존재하지 않습니다.");
+		}
+		
+		tfUserDAO.dormantUser(id);
+	}
+	
+	@Transactional
+	@Override
+	public void modifyUserLastLogin(String id) throws UserNotFoundException {
+		if(tfUserDAO.selectUser(id)==null) {
+			throw new UserNotFoundException("해당 회원이 존재하지 않습니다.");
+		}
+		
+		tfUserDAO.updateLastDate(id);
+	}
+
+	@Override
+	public String getUserId(String name, String email) throws UserNotFoundException {
+		if(tfUserDAO.selectFindIdUser(name, email)==null || tfUserDAO.selectFindIdUser(name, email).equals("")) {
+			throw new UserNotFoundException("해당 회원이 존재하지 않습니다.");
+		}
+		
+		return tfUserDAO.selectFindIdUser(name, email);
+	}
+
+	@Override
+	public TfUser getUser(String id) throws UserNotFoundException {
+		if(tfUserDAO.selectUser(id)==null) {
+			throw new UserNotFoundException("해당 아이디의 회원이 존재하지 않습니다.");
+		}
+		return tfUserDAO.selectUser(id);
+	}
+
+	@Override
+	public List<TfUser> getUserList() {
+		return tfUserDAO.selectUserList();
+	}
+
+	@Override
+	public List<TfUser> getDormantUserList() {
+		return tfUserDAO.dormantUserList();
+	}
+
+	@Override
+	public List<TfUser> getDormantedUserList() {
+		return tfUserDAO.dormantedUserList();
+	}
+
+	//인증처리 메소드 : 예외가 발생되면 인증실패, 예외가 발생하지 않으면 인증 성공
+	@Override
+	public void loginAuth(TfUser tfUser) throws LoginAuthFailException {
+		TfUser authUserinfo=tfUserDAO.selectUser(tfUser.getUserId());
+		//아이디 검사
+		if(authUserinfo==null) {
+			throw new LoginAuthFailException(tfUser.getUserId(), "아이디의 회원정보가 존재하지 않습니다.");
+		}
+		
+		//비밀번호 검사
+		if(!BCrypt.checkpw(tfUser.getUserPw(), authUserinfo.getUserPw())) {
+			throw new LoginAuthFailException(tfUser.getUserId(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
+		}
+
+	}
+
+	@Override
+	public int getIdCheck(String userId) {
+		return tfUserDAO.selectIdCheck(userId);
+	}
+
+
+}

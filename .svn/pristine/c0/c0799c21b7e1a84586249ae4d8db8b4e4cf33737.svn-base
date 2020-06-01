@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="modifyPw">
+	<div id="section">
+	    <div id="header">
+	        <div id="headerArea">
+	            <h1>
+	                <img src="images/common/logo2.png">
+	                <div class="moditit">
+	                    <span>비밀번호 변경</span>
+	                </div>
+	            </h1>
+	        </div>
+	    </div>
+	    <div class="cont">
+	    <form action="" method="post">
+	        <div class="findPwForm">
+	            <div>
+	                <div class="info_input">
+	                    <div class="info_Box">
+	                        <div>
+	                            <input type="password" id="passwd" class="passwd" placeholder="새 비밀번호">
+	                        </div>
+	                        <div>
+	                            <input type="password" id="repasswd" class="repasswd" placeholder="새 비밀번호 확인">
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            <div class="wrap_btn"><button type="submit" class="modify_btn">변경</button>
+	            </div>
+	        </div>
+	    </form>
+	    </div>
+	</div>
+</div>

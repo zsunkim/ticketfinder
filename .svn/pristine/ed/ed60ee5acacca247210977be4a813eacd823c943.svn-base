@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+div#section01 {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+p.csTitle {
+	height: 100px;
+	text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 100px;
+}
+
+div#section02 {
+    width: 1200px;
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+
+div.csTab {
+    display: flex;
+    padding: 0 250px;
+}
+
+div.csTab>div {
+    width: 175px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+div.csTab>div>a {
+	display: inline-block;
+    color: #888;
+    cursor: pointer;
+}
+
+div.csTab>div>a.on {
+    display: inline-block;
+    color: #333;
+    font-weight: bold;
+    margin: 0 -5px;
+}
+
+div.csTab>div>a.on::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #ec7d2c;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3;
+}
+
+div.csTab>div>a.on::before {
+    width: 90px;
+    margin: 0 40px;
+    /* width: 100% */
+}
+
+div.csTab>div>a.on::after {
+    content: "↓";
+    display: inline;
+    color: #333;
+    margin-left: 3px;
+}
+
+div.csTab>div::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 15px;
+    background: #ddd;
+    position: absolute;
+    right: 0;
+    top: 22px;
+}
+
+div.csTab>div:nth-child(4)::after {
+    display: none;
+}
+
+div#section03 {
+    width: 1200px;
+    margin: 0 auto;
+}
+div.notice {
+    width: 100%;
+}
+
+div.noticeListCont {
+    width: 100%;
+}
+
+div.noticeListCont>div.noticeListPart {
+    text-align: center;
+    margin: 55px 30px 0 30px;
+    line-height: 39px;
+    border-bottom: 1px solid #ddd;
+    border-top: 2px solid #ddd;
+    font-weight: bold;
+}
+
+div.noticeListCont>div.noticeListPart>span {
+    display: inline-block;
+}
+
+div.noticeListCont>div.noticeListPart>span:nth-child(-n+2) {
+    width: 200px;
+}
+
+div.noticeListCont>div.noticeListPart>span:nth-child(3) {
+    width: 500px;
+}
+
+div.noticeListCont>div.noticeListPart>span:last-child {
+    width: 200px;
+}
+
+div.noticeListCont>div.noticeList {
+    height: 40px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    margin: 0 30px;
+}
+
+
+
+div.noticeListCont div.noticeNo,div.noticeGroup,div.noticeDate {
+    width: 200px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+}
+
+div.noticeListCont div.noticeTitle {
+    line-height: 35px;
+    width: 500px;
+    display: inline-block;
+}
+
+div.noticeListCont>div.noticeInfo {
+    box-sizing: border-box;
+    margin: 0 30px;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 40px;
+    font-size: 14px;
+    text-align: justify;
+    line-height: 26px;
+}
+
+div.noticeListCont>div.noticeListPrev,div.noticeListNext {
+    height: 40px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    margin: 0 30px;
+}
+
+div.noticeListCont>div.noticeListBtn {
+    height: 50px;
+    margin: 10px 0;
+}
+
+div.noticeListCont>div.noticeListBtn>a {
+    cursor: pointer;
+}
+
+div.noticeListCont>div.noticeListBtn span {
+    display: inline-block;
+    height: 40px;
+    width: 100px;
+    border: 1px solid #ddd;
+    text-align: center;
+    line-height: 38px;
+    margin: 20px 550px;
+}
+
+
+
+
+
+
+
+

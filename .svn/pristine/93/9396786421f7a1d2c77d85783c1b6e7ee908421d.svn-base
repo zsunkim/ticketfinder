@@ -1,0 +1,25 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.TfOrder;
+
+public interface OrderMapper {
+	int insertOrder(TfOrder order);
+	int updateDpOrder(String code);
+	int updateShOrder(String code);
+	int ticketing(String code);
+	int updateStateRefund(String code);
+	int deleteUnpaidOrder(String code);
+	TfOrder selectOrder(String code);
+	List<TfOrder> selectUserOrderAll(Map<String, Object> map);
+	TfOrder selectMyOrder(String id);
+	List<TfOrder> selectRankOrder(Map<String, Object> map);
+	List<TfOrder> selectOrderList(Map<String, Object> map);
+	List<TfOrder> selectUnpaidOrderList();
+	List<TfOrder> selectShOrderList();
+	List<TfOrder> selectTicketingList();
+	List<TfOrder> selectCancelOrderList();
+	int selectOrderCount(String id);
+}

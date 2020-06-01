@@ -1,0 +1,41 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import ticket.finder.dto.Dual;
+import ticket.finder.dto.OrderDFclty;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.TfOrder;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.SameOrderCodeException;
+
+public interface TfOrderService {
+	void addOrder(TfOrder order) throws SameOrderCodeException;
+	void modifyOrder(TfOrder order) throws OrderNotFoundException;
+	void modifyStateRefund(String code) throws OrderNotFoundException;
+	void removeUnpaidOrder(String code) throws OrderNotFoundException;
+	TfOrder getOrder(String code) throws OrderNotFoundException;
+	TfOrder getMyOrder(String id) throws OrderNotFoundException;
+	List<TfOrder> getUserOrderList(Map<String, String> map) throws OrderNotFoundException;
+	List<TfOrder> getDateOrder(String startDate, String endDate);
+	List<TfOrder> getRankOrder(Map<String, Object> map);
+	List<TfOrder> getOrderList();
+	List<TfOrder> getUnpaidOrderList();
+	List<TfOrder> getLongUnpaidOrderList();
+	List<TfOrder> getShOrderList();
+	List<TfOrder> getTicketingList();
+	void modifyDpState(String orderCode);
+	void modifyShState(String orderCode);
+	void modifyTicketing(String orderCode);
+	int getOrderCount(String id);
+	OrderQShow getOrderQshow(String code) throws OrderNotFoundException;
+	List<OrderDShow> getRankGenre(Map<String, String> map);
+	Dual getOrderCountAdmin();
+	List<Map<String, Object>> getCountGenre(int period);
+	List<OrderDShow> getTicketing(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDFclty> getOrderFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+}

@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+#userInfo #section {width:100%}
+
+#userInfo .cont {
+	background-color: #fff;
+    font-weight: 500;
+    width: 980px;
+    margin: 0 auto;
+}
+
+#userInfo .error {
+    color: red;
+    font-size: 12px;
+}
+
+#userInfo .infoWrap {
+    margin-top: 30px;
+    position: relative;
+}
+  
+#userInfo .infoWrap h2 {
+    padding-left: 10px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    font-weight: 300;
+    border-bottom: 2px solid #000;
+}
+
+#userInfo .infoWrap .tableBox table {
+    width: 100%;
+    position: relative;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+}
+
+#userInfo .infoWrap .tableBox table th,
+#userInfo .infoWrap .tableBox table td {
+  text-align: left;
+  line-height: 1.4;
+  border-bottom: 1px solid #dfe5ed;
+  word-break: break-word;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#userInfo .infoWrap .tableBox table th {
+  padding: 20px 20px;
+  vertical-align: top;
+  background: #f4f6f9;
+  font-weight: 500;
+}
+
+#userInfo .infoWrap .tableBox table td {
+  vertical-align: middle;
+  padding: 10px 20px;
+  position: relative;
+}
+
+#userInfo .infoWrap .tableBox .postBtn {
+    display: inline-block;
+    padding: 0 15px 5px 15px;
+    line-height: 33px;
+    font-weight: 300;
+    background: #333;
+    color: #fff;
+    border-radius: 2px;
+    vertical-align: middle;
+    height: 26px;
+}
+
+#userInfo .infoWrap .tableBox .pwModigyBtn {
+    display: inline-block;
+    padding: 0 15px;
+    line-height: 33px;
+    font-weight: 300;
+    background: #333;
+    color: #fff;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+#userInfo .infoWrap .tableBox .modiBtn {
+    display: inline-block;
+    padding: 0 15px;
+    line-height: 33px;
+    font-weight: 300;
+    background: #333;
+    color: #fff;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+#userInfo input {
+    height: 25px;
+    padding-left: 10px;
+}
+
+#userInfo .infoWrap .postWrap span {
+    float: left;
+    width: 63px;
+  }
+  
+#userInfo  .infoWrap .postWrap .postCont {
+    float: left;
+  }
+  
+#userInfo  .infoWrap .postWrap .postCont .zipcodeBox .iText {
+  width: 80px;
+  margin-bottom: 4px;
+}
+
+#userInfo  .infoWrap .postWrap .postCont .zipcodeBox {
+  margin-bottom: 10px;
+}
+  
+#userInfo  .infoWrap .postWrap .postCont .addressBox .iText {
+  width: 250px;
+}
+
+#userInfo .infoWrap .tableBox .alertMessage {
+  color: #ef3f43;
+  font-size: 12px;
+  margin-left: 5px;
+  font-weight: 300;
+}
+
+#userInfo .infoWrap .birthWrap {
+    display: inline-block;
+}
+  
+#userInfo .infoWrap .birthWrap .birthYear,
+#userInfo .infoWrap .birthWrap .birthMonth,
+#userInfo .infoWrap .birthWrap .birthDate {
+  width: 80px;
+}
+
+#userInfo .infoWrap .birthWrap .birthYear select {
+  width: 70px;
+}
+
+
+#userInfo .infoWrap .birthWrap .birthMonth select,
+#userInfo .infoWrap .birthWrap .birthDate select {
+  width: 50px;
+}
+  
+#userInfo .infoWrap .birthWrap span {
+  margin: 0 7px 0 4px;
+}
+
+#userInfo .infoWrap .select {
+  position: relative;
+  z-index: 4;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#userInfo .infoWrap .tableBox table td .birthWrap select {
+  line-height: 33px;
+  border: 1px solid #dfe5ed;
+  height: 30px;
+  width: 75px;
+}
+
+#userInfo .radioGroup input {
+  vertical-align: middle;
+}
+
+
+#userInfo .infoWrap .modifyButton {
+  text-align: center;
+  margin: 50px 0;
+}
+
+#userInfo .infoWrap .modifyButton .modify_btn {
+  background: #414ea9;
+  color: #fff;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 72px;
+  cursor: pointer;
+  border: none;
+}
+
+
+#userInfo .phoneNumber input {
+  width: 65px;
+}
+
+#userInfo .infoWrap .tableBox table td .mailArea {
+  margin-bottom: 5px;
+}
+
+#userInfo .infoWrap .tableBox table td .mailArea input {
+  width: 100px;
+}
+
+#userInfo .infoWrap .tableBox table td .mailArea .mailSelect {
+  width: 168px;
+}
+
+#userInfo .infoWrap .tableBox table td .mailArea select {
+    height: 28px;
+    line-height: 33px;
+    width: 105px;
+    border: 1px solid #dfe5ed;
+  }
+  
+#userInfo .infoWrap .tableBox table td .phoneNumber select {
+   height: 28px;
+   line-height: 33px;
+   width: 75px;
+   border: 1px solid #dfe5ed;
+}
+
+
+

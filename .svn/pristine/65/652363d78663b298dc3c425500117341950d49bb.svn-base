@@ -1,0 +1,18 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.ShowDetail;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.exception.ShowNumNotFoundException;
+
+public interface ShowXShowService {
+	List<ShowDetail> addSearch(String search);
+	ShowXShow addShowDetail(int showNum) throws ShowNumNotFoundException;
+	List<ShowXShow> addShowHot();
+	List<ShowXShow> addRank(Map<String, Object> map);
+	List<ShowXShow> addAreaNew(ShowXShow showxshow);
+	List<ShowXShow> addAreaEnd(ShowXShow showxshow);
+	List<ShowXShow> addAreaName(ShowXShow showxshow);
+}

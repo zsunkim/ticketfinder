@@ -1,0 +1,8 @@
+package ticket.finder.dao;
+
+import ticket.finder.dto.ShowDetail;
+
+public interface ShowDetailDAO {
+	int insertShowDetail(ShowDetail showDetail);
+	int updateShowDetail(ShowDetail showDetail);
+}

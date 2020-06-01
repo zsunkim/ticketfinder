@@ -1,0 +1,31 @@
+package ticket.finder.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.ShowDetailDAO;
+import ticket.finder.dto.ShowDetail;
+
+@Service
+public class ShowDetailServiceImpl implements ShowDetailService {
+	@Autowired
+	private ShowDetailDAO showDetailDAO;
+
+	@Override
+	public void addShowDetail(ShowDetail showDetail) {
+		showDetailDAO.insertShowDetail(showDetail);
+	}
+
+	@Override
+	public void modifyShowDetail(int showNum) {
+		showDetailDAO.updateShowDetail(showNum);
+	}
+
+	@Override
+	public List<ShowDetail> getSearch(String search) {
+		return showDetailDAO.selectSearch(search);
+	}
+
+}

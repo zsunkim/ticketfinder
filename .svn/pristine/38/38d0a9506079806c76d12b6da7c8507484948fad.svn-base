@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.TfOrderMapper">
+	<resultMap type="TfOrder" id="OrderMap">
+		<id column="order_code" property="orderCode"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="order_price" property="orderPrice"/>
+		<result column="order_seat" property="orderSeat"/>
+		<result column="order_show_num" property="orderShowNum"/>
+		<result column="order_grade" property="orderGrade"/>
+		<result column="order_fees" property="orderFees"/>
+		<result column="order_shipfees" property="orderShipfees"/>
+		<result column="order_receipt" property="orderReceipt"/>
+		<result column="order_user_id" property="orderUserId"/>
+		<result column="order_user_name" property="orderUserName"/>
+		<result column="order_payment" property="orderPayment"/>
+		<result column="order_qty" property="orderQty"/>
+		<result column="order_dp_state" property="orderDpState"/>
+		<result column="order_sh_state" property="orderShState"/>
+		<result column="order_shipping_num" property="orderShippingNum"/>
+		<result column="order_ticketing" property="orderTicketing"/>
+	</resultMap>
+	
+	<resultMap type="ShowDetail" id="ShowDetailMap">
+		<id column="show_num" property="showNum"/>
+		<result column="show_code" property="showCode"/>
+		<result column="show_fc_code" property="showFcCode"/>
+		<result column="show_hall_name" property="showHallName"/>
+		<result column="show_name" property="showName"/>
+		<result column="show_cast" property="showCast"/>
+		<result column="show_state" property="showState"/>
+		<result column="show_daytime" property="showDaytime"/>
+		<result column="show_seat" property="showSeat"/>
+		<result column="show_detail1" property="showDetail1"/>
+		<result column="show_detail2" property="showDetail2"/>
+		<result column="show_detail3" property="showDetail3"/>
+		<result column="show_detail4" property="showDetail4"/>
+		<result column="show_area" property="showArea"/>
+		<result column="show_rate" property="showRate"/>
+	</resultMap>
+	
+	<resultMap type="TfShow" id="TfShowMap">
+		<id column="s_code" property="sCode"/>
+		<result column="s_name" property="sName"/>
+		<result column="s_s_date" property="sSDate"/>
+		<result column="s_e_date" property="sEDate"/>
+		<result column="s_runtime" property="sRuntime"/>
+		<result column="s_price" property="sPrice"/>
+		<result column="s_age" property="sAge"/>
+		<result column="s_poster" property="sPoster"/>
+		<result column="s_genre" property="sGenre"/>
+	</resultMap>
+	
+	<resultMap type="Refund" id="RefundMap">
+		<id column="refund_num" property="refundNum"/>
+		<result column="refund_order_code" property="refundOrderCode"/>
+		<result column="refund_date" property="refundDate"/>
+		<result column="refund_penalty" property="refundPenalty"/>
+		<result column="refund_pay" property="refundPay"/>
+		<result column="refund_state" property="refundState"/>
+		<result column="refund_user_id" property="refundUserId"/>
+	</resultMap>
+	
+	<resultMap type="Fclty" id="FcltyMap">
+		<id column="fc_code" property="fcCode"/>
+		<result column="fc_name" property="fcName"/>
+		<result column="fc_addr" property="fcAddr"/>
+		<result column="fc_seat_cnt" property="fcSeatCnt"/>
+		<result column="fc_hall_cnt" property="fcHallCnt"/>
+		<result column="fc_la" property="fcLa"/>
+		<result column="fc_lo" property="fcLo"/>
+		<result column="fc_tel" property="fcTel"/>
+		<result column="fc_url" property="fcUrl"/>
+		<result column="fc_img" property="fcImg"/>
+	</resultMap>
+	
+	<resultMap type="FcltyHall" id="FcltyHallMap">
+		<id column="hall_code" property="hallCode"/>
+		<result column="hall_fc_name" property="hallFcName"/>
+		<result column="hall_name" property="hallName"/>
+		<result column="hall_seat_cnt" property="hallSeatCnt"/>
+	</resultMap>
+	
+	<resultMap type="OrderDShow" id="orderDshowResultMap">
+		<association property="tfOrder" javaType="TfOrder" resultMap="OrderMap"/>
+		<association property="showDetail" javaType="ShowDetail" resultMap="ShowDetailMap"/>
+		<association property="tfShow" javaType="TfShow" resultMap="TfShowMap"/>
+	</resultMap>
+	
+	<resultMap type="OrderQShow" id="orderQshowResultMap">
+		<association property="tfOrder" javaType="TfOrder" resultMap="OrderMap"/>
+		<association property="showDetail" javaType="ShowDetail" resultMap="ShowDetailMap"/>
+		<association property="tfShow" javaType="TfShow" resultMap="TfShowMap"/>
+	</resultMap>
+	
+	<resultMap type="OrderRefund" id="orderRefundResultMap">
+		<association property="tfOrder" javaType="TfOrder" resultMap="OrderMap"/>
+		<association property="refund" javaType="Refund" resultMap="RefundMap"/>
+	</resultMap>
+	
+	<resultMap type="OrderDetailFcltyHallRefund" id="orderDetailFcltyHallRefundResultMap">
+		<association property="tfOrder" javaType="TfOrder" resultMap="OrderMap"/>
+		<association property="showDetail" javaType="ShowDetail" resultMap="ShowDetailMap"/>
+		<association property="fclty" javaType="Fclty" resultMap="FcltyMap"/>
+		<association property="fcltyHall" javaType="FcltyHall" resultMap="FcltyHallMap"/>
+		<association property="refund" javaType="Refund" resultMap="RefundMap"/>
+	</resultMap>
+	
+	<insert id="insertOrder">
+		insert into tf_order values(#{orderCode}, sysdate, #{orderShowNum}, #{orderPrice}, #{orderSeat}, #{orderGrade}
+		#{orderFees}, #{orderShipfees}, #{orderReceipt}, #{orderUserId}, #{orderUserName}, #{orderPayment}, #{orderQty}, 
+		#{orderDpState}, #{orderShState}, #{orderShippingNum}, #{orderTicketing})
+	</insert>
+	
+	<update id="updateOrder">
+		update tf_order
+		<set>
+			<if test="order_view_date!=null and order_view_date!=''">
+				order_view_date=#{orderViewDate}
+			</if> 
+			<if test="order_epi!=null and order_epi!=''">
+				order_epi=#{orderEpi}
+			</if> 
+			<if test="order_price!=null and order_price!=''">
+				order_price=#{orderPrice}
+			</if> 
+			<if test="order_seat!=null and order_seat!=''">
+				order_seat=#{orderSeat}
+			</if> 
+			<if test="order_show_code!=null and order_show_code!=''">
+				order_show_code=#{orderShowCode}
+			</if> 
+			<if test="order_fc_code!=null and order_fc_code!=''">
+				order_fc_code=#{orderFcCode}
+			</if> 
+			<if test="order_hall_code!=null and order_hall_code!=''">
+				order_hall_code=#{orderHallCode}
+			</if> 
+			<if test="order_grade!=null and order_grade!=''">
+				order_grade=#{orderGrade}
+			</if> 
+			<if test="order_fees!=null and order_fees!=''">
+				order_fees=#{orderFees}
+			</if> 
+			<if test="order_shipfees!=null and order_shipfees!=''">
+				order_shipfees=#{orderShipfees}
+			</if> 
+			<if test="order_receipt!=null and order_receipt!=''">
+				order_receipt=#{orderReceipt}
+			</if> 
+			<if test="order_user_id!=null and order_user_id!=''">
+				order_user_id=#{orderUserId}
+			</if> 
+			<if test="order_user_name!=null and order_user_name!=''">
+				order_user_name=#{orderUserName}
+			</if> 
+			<if test="order_payment!=null and order_payment!=''">
+				order_payment=#{orderPayment}
+			</if> 
+			<if test="order_qty!=null and order_qty!=''">
+				order_qty=#{orderQty}
+			</if> 
+			<if test="order_dp_state!=null and order_dp_state!=''">
+				order_dp_state=#{orderDpState}
+			</if> 
+			<if test="order_sh_state!=null and order_sh_state!=''">
+				order_sh_state=#{orderShState}
+			</if> 
+			<if test="order_shipping_num!=null and order_shipping_num!=''">
+				order_shipping_num=#{orderShippingNum}
+			</if> 
+			<if test="order_show_name!=null and order_show_name!=''">
+				order_show_name=#{orderShowName}
+			</if> 
+		</set>
+		where order_code=#{orderCode}
+	</update>
+	
+	<!-- 취소신청 → 취소완료(미입금주문일시 바로 취소상태로 변경) 환불신청 → 환불완료 -->
+	<update id="updateStateRefund">
+		update tf_order set order_dp_state='환불' where order_code=#{orderCode}
+	</update>
+
+	<!-- 미입금 주문 취소 -->
+	<delete id="deleteUnpaidOrder">
+		delete from tf_order where order_code=#{orderCode}
+	</delete>
+	
+	<!-- 주문 조회 -->
+	<select id="selectOrder" resultType="TfOrder">
+		select * from tf_order where order_code=#{orderCode}
+	</select>
+	
+	<!-- 내 주문내역 조회(단일행) -->
+	<select id="selectMyOrder" resultType="TfOrder">
+		select * from tf_order where order_code = #{orderCode} and order_user_id = #{userId}
+	</select>
+	
+	<!-- 내 주문내역 조회 - 동적SQL로 검색날짜 유무에 따라 where절 다르게 
+	<select id="selectUserOrderList" resultType="TfOrder">
+		<if test="startRn!=null and startRn!=''">
+			select * from (select rownum rn, user_order.* (
+		</if> 
+		
+		select * from tf_order where order_user_id = #{userId}
+		
+		<if test="period!=null and period!=''">
+			and order_dp_state={#state}
+		</if>
+		
+		<if test="period!=null and period!=''">
+			and order_date between to_char(sysdate-{#period},'yyyymmdd') and sysdate
+		</if>
+		
+		order by order_date desc
+		
+		<if test="startRn!=null and startRn!=''">
+			) user_order) where rn between #{startRn} and #{endRn}
+		</if>
+	</select> -->
+	
+	<!-- 내 주문내역 조회(환불내역도 같이 검색됨) - 동적SQL로 검색날짜 유무에 따라 where절 다르게 -->
+	<select id="selectUserOrderList" resultType="OrderRefund" resultMap="orderRefundResultMap">
+		<if test="startRn!=null and startRn!=''">
+			select * from (select rownum rn, user_order.* from (
+		</if> 
+		
+		select * from tf_order o left join refund r on r.refund_order_code=o.order_code where order_user_id = #{userId}
+		
+		<if test="state!=null and state!=''">
+			and order_dp_state=#{state}
+		</if>
+		
+		<if test="period!=null and period!=''">
+			and order_date between to_char(sysdate-#{period},'yyyymmdd') and sysdate
+		</if>
+		
+		order by order_date desc
+		
+		<if test="startRn!=null and startRn!=''">
+			) user_order) where rn between #{startRn} and #{endRn}
+		</if>
+	</select>
+	
+	<!-- 날짜 범위 주문 조회 -->
+	<select id="selectDateOrder" resultType="TfOrder">
+		select * from tf_order where order_date between #{startDate} and TO_DATE(#{endDate})+1 order by order_date
+	</select>
+	
+	<!-- 예매건수 20위 랭킹 -->
+	<select id="selectRankOrder" resultType="TfOrder">
+		<![CDATA[
+			select * from (select rownum rn, osc.* from (select order_show_num, count(*) from tf_order where order_date 
+			between to_date(#{startDate}, 'yyyy/mm/dd') and to_date(#{endDate}, 'yyyy/mm/dd') 
+			group by order_show_num order by count(*) desc) 
+			osc) where rn<=20
+		]]>
+	</select>
+	
+	<!-- 모든 주문 조회 -->
+	<select id="selectOrderList" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order o join show_detail sd on o.order_show_num=sd.show_num 
+			order by o.order_date desc
+	</select>
+	
+	<!-- 미입금 주문 조회 -->
+	<select id="selectUnpaidOrderList" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order o join show_detail sd on o.order_show_num=sd.show_num
+			where o.order_dp_state='미입금' order by o.order_date desc
+	</select>
+		
+	<!-- 2주 이상 미입금 주문 조회 -->
+	<select id="selectLongUnpaidOrderList" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order o join show_detail sd on o.order_show_num=sd.show_num
+			where o.order_dp_state='미입금' and order_date between to_date(sysdate)-9999 and to_date(sysdate)-14
+            order by o.order_date desc
+	</select>
+	
+	<!-- 미발송 주문 조회 -->
+	<select id="selectShOrderList" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order o join show_detail sd on o.order_show_num=sd.show_num
+		where o.order_sh_state='미발송' and o.order_dp_state='입금' and o.order_ticketing='발권' order by order_date desc
+	</select>
+	
+	<!-- 미발권 주문 조회 -->
+	<select id="selectTicketingList" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order o join show_detail sd on o.order_show_num=sd.show_num
+ 		where o.order_ticketing='미발권' and o.order_dp_state='입금' order by order_date desc
+	</select>
+	
+	<!-- 입금확인처리 -->
+	<update id="updateDpState">
+		update tf_order set order_dp_state='입금' where order_code=#{order_code}
+	</update>
+
+	<!-- 티켓 발권 처리 -->
+	<update id="updateTicketing">
+		update tf_order set order_ticketing='발권' where order_code=#{order_code}
+	</update>
+	
+	<!-- 티켓 발송 처리 -->
+	<update id="updateShState">
+		update tf_order set order_sh_state='발송완료', order_shipping_num=(SELECT ROUND(DBMS_RANDOM.VALUE(100000000, 999999999),0) FROM DUAL) 
+		where order_code=#{order_code}
+	</update>
+	
+	<!-- 예매 건수 검색 -->
+	<select id="selectOrderCount" resultType="int">
+		select count(*) from tf_order where order_user_id = #{userId}
+	</select>
+	
+	<!-- 1:1 문의 에서 공연 검색시 예매했던 내용 출력(userid; 다중행) 및 문의 등록시 선택했던 예매공연(code;단일행) 내용 출력 -->
+	<select id="selectOrderQshow" resultType="OrderQShow" resultMap="orderQshowResultMap">
+		select o.order_code, o.order_date, o.order_dp_state, o.order_ticketing, s.s_name, s.s_poster, 
+		sd.show_daytime from tf_order o join show_detail sd on sd.show_num=o.order_show_num 
+		<if test="code != null and code != ''">
+			and o.order_code=#{code} 
+		</if>
+		<if test="userid != null and userid != ''">
+			and o.order_user_id =#{userid} 
+		</if>
+		join tf_show s on s.s_code=sd.show_code
+	</select>
+	
+	<!-- 랭킹 출력 -->
+	<select id="selectRankGenre" resultType="OrderRate">
+		select s_name, count(*) cnt from (select * from tf_order) o join (select * from tf_show s join show_detail sd on s.s_code=sd.show_code 
+		order by s.s_name) sxs on order_show_num=show_num where o.order_date between to_char(sysdate-#{date},'yyyymmdd') and sysdate 
+		<if test="sGenre!=null and sGenre!=''">
+			and s_genre=#{sGenre}
+		</if>
+		group by s_name order by cnt desc
+	</select>
+	
+	<!-- 관리자 메인화면 주문, 미입금, 티켓발권필요, 티켓발송, 가입자 카운트 -->
+	<select id="selectOrderCountAdmin" resultType="Dual">
+		select * from dual
+		join (select count(*) as m_order from tf_order where order_date between to_char(sysdate, 'yyyymmdd') and sysdate) on 1=1
+		join (select count(*) as m_ndps from tf_order where order_date between to_char(sysdate, 'yyyymmdd') and sysdate and order_dp_state='미입금') on 1=1
+		join (select count(*) as m_dps from tf_order where order_date between to_char(sysdate, 'yyyymmdd') and sysdate and order_dp_state='입금' and order_ticketing='미발권') on 1=1
+		join (select count(*) as m_tkt from tf_order where order_date between to_char(sysdate, 'yyyymmdd') and sysdate and order_ticketing='발권' and order_sh_state='배송') on 1=1
+		join (select count(*) as m_join from tf_user where user_join_date between to_char(sysdate, 'yyyymmdd') and sysdate) on 1=1
+	</select>
+	
+	<!-- 관리자 메인화면 장르별 주문 통계 -->
+	<select id="selectCountGenre" resultType="map">
+		select s.s_genre genre,
+		<if test="period==0">
+			count(*) count
+		</if>
+		<if test="period!=0">
+			sum(tod.order_price) order_price
+		</if>
+		from tf_order tod
+		join show_detail sd on tod.order_show_num=sd.show_num
+		join tf_show s on sd.show_code=s.s_code
+		where tod.order_date between to_char(sysdate
+		<if test="period!=0">
+			-${period}
+		</if>
+		, 'yyyy/mm/dd') and sysdate
+		group by s.s_genre
+	</select>
+	
+	<!-- 관리자 통계및매출 티켓발권현황 -->
+	<select id="selectTicketing" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select * from tf_order tod 
+		join show_detail sd on tod.order_show_num=sd.show_num 
+		join tf_show s on sd.show_code=s.s_code
+		where tod.order_ticketing='발권'
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			and tod.order_date between 
+			to_date(#{startDate}||'00:00', 'yyyy/mm/dd hh24:mi') and to_date(#{endDate}||'23:59', 'yyyy/mm/dd hh24:mi')
+		</if>
+	</select>
+	
+	
+	<!-- 관리자 통계및매출 극장통계 -->
+	<select id="selectOrderFclty" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select tf_order.*, fclty.fc_name from tf_order 
+		join show_detail on order_show_num=show_num
+		join fclty on show_fc_code=fc_code
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			where order_date between 
+			to_date(#{startDate}||'00:00', 'yyyy/mm/dd hh24:mi') and to_date(#{endDate}||'23:59', 'yyyy/mm/dd hh24:mi')
+		</if>
+	</select>
+	
+	<!-- 관리자 통계및매출 극장통계 줄 선택시 -->
+	<select id="selectOrderFcltyChoice" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select * from tf_order
+		join show_detail on order_show_num=show_num
+		join fclty_hall on show_hall_name=hall_name
+		where order_code=#{orderCode}
+	</select>
+	
+	<select id="selectRefundFclty" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select refund.*, fclty.fc_name from refund
+		join tf_order on refund_order_code=order_code
+		join show_detail on order_show_num=show_num
+		join fclty on show_fc_code=fc_code
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			where order_date between 
+			to_date(#{startDate}||'00:00', 'yyyy/mm/dd hh24:mi') and to_date(#{endDate}||'23:59', 'yyyy/mm/dd hh24:mi')
+		</if>
+	</select>
+	
+	<select id="selectRefundFcltyChoice" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select * from refund
+		join tf_order on refund_order_code=order_code
+		join show_detail on order_show_num=show_num
+		join fclty_hall on show_hall_name=hall_name
+		where refund_num=#{refundNum}
+	</select>
+	
+	<select id="selectShowOrder" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select show_name, show_daytime, order_grade, hall_seat_cnt, 
+		show_seat, show_rate, order_qty, order_price from tf_order 
+		join show_detail on order_show_num=show_num
+		join fclty_hall on show_hall_name=hall_name
+		<if test="startDate!='' and startDate!=null and endDate!='' and endDate!=null">
+			where order_date between 
+			to_date(#{startDate}||'00:00', 'yyyy/mm/dd hh24:mi') and to_date(#{endDate}||'23:59', 'yyyy/mm/dd hh24:mi')
+		</if>
+		order by show_name
+	</select>
+	
+	<select id="selectShowOrderChoice" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select order_user_id, order_code, order_qty, order_price, order_payment from show_detail
+		join tf_order on show_num=order_show_num
+		where show_name=#{showName}
+	</select>
+
+	<select id="selectShowSelectOne" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select distinct s_code, s_name from tf_show
+		join show_detail on s_code=show_code
+		where show_state!='공연완료'
+	</select>
+	
+	<select id="selectShowSelectTwo" resultType="OrderDShow" resultMap="orderDshowResultMap">
+		select show_num, show_daytime from show_detail 
+		where show_code=#{showCode} order by show_daytime
+	</select>
+	
+	<select id="selectShowSeat" resultType="OrderDetailFcltyHallRefund" resultMap="orderDetailFcltyHallRefundResultMap">
+		select * from show_detail
+		join fclty_hall on show_hall_name=hall_name
+		where show_code=#{showCode} and show_num=#{showNum}
+	</select>
+</mapper>

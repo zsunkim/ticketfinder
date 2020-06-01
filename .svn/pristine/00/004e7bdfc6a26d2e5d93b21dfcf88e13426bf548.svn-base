@@ -1,0 +1,15 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.ShowXShow;
+
+public interface ShowXShowDAO {
+	ShowXShow selectShowDetail(int showNum);
+	List<ShowXShow> selectShowHot();
+	List<ShowXShow> selectRank(Map<String, Object> map);
+	List<ShowXShow> selectAreaNew(ShowXShow showxshow);
+	List<ShowXShow> selectAreaEnd(ShowXShow showxshow);
+	List<ShowXShow> selectAreaName(ShowXShow showxshow);
+}

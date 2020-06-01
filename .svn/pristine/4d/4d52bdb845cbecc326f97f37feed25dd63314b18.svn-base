@@ -1,0 +1,168 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="mypage">
+	<div id="section01">
+      <div class="cont">
+        <div class="personWrapper">
+          <div class="personInfo">
+            <img src="images/mypage/thumb.png" alt="thumb nail">
+            <div class="infoBox">
+              <p>
+                <i class="fas fa-ticket-alt"></i>
+                "사용자 이름"님의 Ticket Box
+              </p>
+              <a href="#" class="btn">회원정보변경</a>
+              <a href="#" class="btn">비밀번호변경</a>
+            </div>
+          </div>
+
+          <div class="personState">
+            <ul>
+              <li>
+                <a href="#">0</a>
+                <p>예매내역</p>
+              </li>
+
+              <li>
+                <a href="#">0</a>
+                <p>후기내역</p>
+              </li>
+
+              <li>
+                <a href="#">0</a>
+                <p>문의내역</p>
+              </li>
+            </ul>
+          </div>
+        </div><!-- personWrapper End -->
+      </div>
+    </div><!-- section01 End -->
+
+    <div id="section02">
+      <div class="cont">
+        <div class="titBox">
+          <span>최근 예매/취소</span>
+          <a href="#">더보기 +</a>
+        </div>
+        <div class="ticketBox">
+          <table>
+            <thead>
+              <tr>
+                <td>예매일</td>
+                <td>공연정보</td>
+                <td>예매정보</td>
+                <td>상태</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bookDate">2020.02.01</td>
+                <td class="bookShow">
+                  <img src="images/main/main_rank_musical01.jpg" alt="booking">
+                  <p class="showTit">뮤지컬 &lt;미드나잇&gt;</p>
+                  <p class="showDate">2020.02.11 ~ 2020.05.03</p>
+                  <p class="showPlace">대학로 아트원씨어터 2관</p>
+                </td>
+                <td class="bookDetail">
+                  <dl>
+                    <dt>예매번호</dt>
+                    <dd>M1112223</dd>
+                    <dt>관람일</dt>
+                    <dd>2020.02.11(화) 17:00</dd>
+                    <dt>매수</dt>
+                    <dd>1매</dd>
+                    <dt>취소일</dt>
+                    <dd>2020.02.12(수) 17:00</dd>
+                  </dl>
+                </td>
+                <td class="bookState">
+                  <p>예매상태(결제방식)</p>
+                  <a href="#" class="btn">예매상세 +</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- ticketBox End -->
+        <div class="noTicketBox">
+          <p>예매 확인 / 취소 내역이 없습니다.</p>
+        </div>
+      </div>
+    </div><!-- section02 End -->
+
+    <div id="section03">
+      <div class="cont">
+        <div class="review">
+          <div class="titBox">
+            <span>최근 작성 후기</span>
+            <a href="#">더보기 +</a>
+          </div>
+          <div class="box">
+            <ul>
+              <li>
+                <a href="#">
+                  <span class="reviewShow">관람공연 제목이당당당당당당당</span>
+                  <span class="reviewTit">후기내용내용내용뇽뇽뇽뇽뇽뇽뇽개잼잼잼잼잼잼잼잼ㅈ맺맺매잼재매재매잼잼ㅈ</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+
+              <li>
+                <a href="#">
+                  <span class="reviewShow">관람공연 제목이당당당당당당당</span>
+                  <span class="reviewTit">후기내용내용내용뇽뇽뇽뇽뇽뇽뇽개잼잼잼잼잼잼잼잼ㅈ맺맺매잼재매재매잼잼ㅈ</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+
+              <li>
+                <a href="#">
+                  <span class="reviewShow">관람공연 제목이당당당당당당당</span>
+                  <span class="reviewTit">후기내용내용내용뇽뇽뇽뇽뇽뇽뇽개잼잼잼잼잼잼잼잼ㅈ맺맺매잼재매재매잼잼ㅈ</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+            </ul>
+            <p class="noReview">후기 내역이 없습니다.</p>
+          </div>
+        </div><!-- review End -->
+
+        <div class="inquiry">
+          <div class="titBox">
+            <span>최근 1:1문의</span>
+            <a href="#">더보기 +</a>
+          </div>
+          <div class="box">
+            <ul>
+              <li>
+                <a href="#">
+                  <span class="qTit">문의 제목 제목 제목문의 제목 제목 제목문의 제목 제목 제목문의 제목 제목 제목문의 제목 제목 제목문의 제목 제목 제목</span>
+                  <span class="qState">답변상태</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+
+              <li>
+                <a href="#">
+                  <span class="qTit">문의 제목 제목 제목문의 제목</span>
+                  <span class="qState">답변상태</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+
+              <li>
+                <a href="#">
+                  <span class="qTit">문의 제목 제목 제목문의 제목</span>
+                  <span class="qState">답변상태</span>
+                </a>
+                <span class="qDate">2020.04.05</span>
+              </li>
+            </ul>
+            <p class="noQna">
+              문의 내역이 없습니다. <br>
+              <a href="#" class="btn">1:1문의 가기</a>
+            </p>
+          </div>
+        </div><!-- inquiry End -->
+      </div>
+    </div><!-- section03 End -->
+</div>

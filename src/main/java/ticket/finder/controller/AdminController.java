@@ -1,0 +1,448 @@
+package ticket.finder.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+
+import ticket.finder.dto.Faq;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderDetailFcltyHallRefund;
+import ticket.finder.dto.Question;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.LoginAuthFailException;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.QuestionNotFoundException;
+import ticket.finder.exception.RefundNotFoundException;
+import ticket.finder.exception.ReviewNotFoundExcpetion;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.exception.UserNotFoundException;
+import ticket.finder.service.CsService;
+import ticket.finder.service.DateCountService;
+import ticket.finder.service.FaqService;
+import ticket.finder.service.FcltyXService;
+import ticket.finder.service.QuestionService;
+import ticket.finder.service.RefundService;
+import ticket.finder.service.ReviewService;
+import ticket.finder.service.ShowDetailService;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfShowService;
+import ticket.finder.service.TfUserService;
+import ticket.finder.util.Tf_utility;
+
+@Controller
+public class AdminController implements ApplicationContextAware {
+	@Autowired
+	private CsService csService;
+	
+	@Autowired
+	private FaqService faqService;
+	
+	@Autowired
+	private FcltyXService fcltyXService;
+	
+	@Autowired
+	private QuestionService questionService;
+	
+	@Autowired
+	private RefundService refundService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@Autowired
+	private TfShowService tfShowService;
+	
+	@Autowired
+	private DateCountService dateCountService;
+	
+	@Autowired
+	private ShowDetailService showDetailService;
+	
+	@Autowired
+	private WebApplicationContext context;
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		context=(WebApplicationContext)applicationContext;
+	}
+	
+	@RequestMapping(value = "/login.admin", method = RequestMethod.GET)
+	public String login(HttpSession session) {
+		session.invalidate();
+		return "admin/adm_login";
+	}
+	
+	@RequestMapping(value = "/login.admin", method = RequestMethod.POST)
+	public String login(@ModelAttribute TfUser tfUser, HttpSession session) 
+			throws LoginAuthFailException, UserNotFoundException {
+		tfUserService.loginAuth(tfUser);
+		session.setAttribute("loginUserInfo", tfUserService.getUser(tfUser.getUserId()));
+		//showDetailService.modifyStateShowDetail("yesterday");
+		//showDetailService.modifyStateShowDetail("today");
+		return "redirect:/main.admin";
+	}
+	
+	@RequestMapping(value = "/logout.admin")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login.admin";
+	}
+	
+	@RequestMapping(value = "/forgot.admin", method = RequestMethod.GET)
+	public String forgot() {
+		return "admin/adm_forgot";
+	}
+	
+	@RequestMapping(value = "/main.admin", method = RequestMethod.GET)
+	public String main(Model model) {
+		model.addAttribute("tfShowList", tfShowService.getEndTfShow());
+		model.addAttribute("tfOrderCountAdmin", tfOrderService.getOrderCountAdmin());
+		model.addAttribute("dailySales", dateCountService.getOrderCount("sum", null, 10));
+		model.addAttribute("countGenre", tfOrderService.getCountGenre("cnt"));
+		model.addAttribute("cancelCount", dateCountService.getOrderCount("count", "취소", 1));
+		model.addAttribute("refundSum", dateCountService.getOrderCount("sum", "환불", 1));
+		model.addAttribute("salesSum", dateCountService.getOrderCount("sum", null, 1));
+		model.addAttribute("questionList", questionService.getQuestionList());
+		return "admin/adm_main";
+	}
+	
+	@RequestMapping(value = "/userlist.admin", method = RequestMethod.GET)
+	public String userList(Model model) {
+		model.addAttribute("userList", tfUserService.getUserList());
+		return "admin/adm_user_list";
+	}
+	
+	@RequestMapping(value = "/usermanage.admin", method = RequestMethod.GET)
+	public String userManage(Model model) {
+		model.addAttribute("dormantUserList", tfUserService.getDormantUserList());
+		model.addAttribute("dormantedUserList", tfUserService.getDormantedUserList());
+		return "admin/adm_user_manage";
+	}
+	
+	@RequestMapping(value = "/usermanage.admin", method = RequestMethod.POST)
+	public String dormantUserManage(@RequestParam(required = false) List<String> dormantUserList) throws UserNotFoundException {
+		for (String userList : dormantUserList) {
+			tfUserService.modifyUserToDormant(userList);
+		}
+		return "redirect:/usermanage.admin";
+	}		
+	
+	@RequestMapping(value = "/show.admin", method = RequestMethod.GET)
+	public String show(Model model) {
+		model.addAttribute("showList", showXShowService.getSelectShowList());
+		model.addAttribute("concertList", showXShowService.getSelectConcerList());
+		model.addAttribute("musicalList", showXShowService.getSelectMusicalList());
+		model.addAttribute("playList", showXShowService.getSelectPlayList());
+		model.addAttribute("classicList", showXShowService.getSelectClassicList());
+		model.addAttribute("endShowList", showXShowService.getSelectEndShowList());
+		return "admin/adm_show_list";
+	}
+	
+	@RequestMapping(value = "/addShow.admin", method = RequestMethod.GET)
+	public String show() {
+		return "admin/adm_add_show";
+	}
+	
+	
+	@RequestMapping(value = "/deposit.admin", method = RequestMethod.GET)
+	public String deposit(Model model) {
+		model.addAttribute("unpaidOrderList", tfOrderService.getUnpaidOrderList());
+		return "admin/adm_deposit";
+	}
+
+	@RequestMapping(value = "/deposit.admin", method = RequestMethod.POST)
+	public String depositOrder(@RequestParam(required = false) List<String> depositOrderList) {
+		for (String depositlList : depositOrderList) {
+			tfOrderService.modifyDpState(depositlList);
+		}
+		return "redirect:/deposit.admin";
+	}
+	
+	@RequestMapping(value = "/depositCancel.admin", method = RequestMethod.GET)
+	public String depositCancel(Model model) {
+		model.addAttribute("longUnpaidOrderList", tfOrderService.getLongUnpaidOrderList());
+		return "admin/adm_deposit_cancel";
+	}
+
+	@RequestMapping(value = "/depositCancel.admin", method = RequestMethod.POST)
+	public String cancelOrder(@RequestParam(required = false) List<String> cancelOrderList) throws OrderNotFoundException {
+		for (String cancelList : cancelOrderList) {
+			tfOrderService.removeUnpaidOrder(cancelList);
+		}
+		return "redirect:/depositCancel.admin";
+	}	
+	
+	@RequestMapping(value = "/delivery.admin", method = RequestMethod.GET)
+	public String delivery(Model model) {
+		model.addAttribute("ShOrderList", tfOrderService.getShOrderList());
+		return "admin/adm_delivery";
+	}
+
+	@RequestMapping(value = "/delivery.admin", method = RequestMethod.POST)
+	public String modifyDelivery(@RequestParam(required = false) List<String> orderCodeList){
+		for (String orderCode : orderCodeList) {
+			//System.out.println(orderCode);
+			tfOrderService.modifyShState(orderCode);
+		}
+		return "redirect:/delivery.admin";
+	}
+	
+	@RequestMapping(value = "/ticketing.admin", method = RequestMethod.GET)
+	public String ticketing(Model model) {
+		model.addAttribute("ticketList", tfOrderService.getTicketingList());
+		return "admin/adm_ticketing";
+	}
+	
+	@RequestMapping(value = "/ticketing.admin", method = RequestMethod.POST)
+	public String confirmTicketing(@RequestParam(required = false) List<String> ticketingList){
+		for (String ticketList : ticketingList) {
+			//System.out.println(orderCode);
+			tfOrderService.modifyTicketing(ticketList);
+		}
+		return "redirect:/ticketing.admin";
+	}
+	
+	@RequestMapping(value = "/order.admin", method = RequestMethod.GET)
+	public String order(Model model) {
+		model.addAttribute("orderList", tfOrderService.getOrderList());
+		return "admin/adm_order_list";
+	}
+	
+	@RequestMapping(value = "/refund.admin", method = RequestMethod.GET)
+	public String refund(Model model) {
+		model.addAttribute("cancelList", refundService.getCancelOrderList());
+		model.addAttribute("refundList", refundService.getRefundList());
+		return "admin/adm_refund";
+	}
+	
+	@RequestMapping(value = "/refund.admin", method = RequestMethod.POST)
+	public String refundOrder(@RequestParam(required = false) List<String> refundList) throws OrderNotFoundException, RefundNotFoundException{
+		for (String refund : refundList) {
+			refundService.modifyRefundStateSuccess(refund);
+			tfOrderService.modifyStateRefund(refund);
+		}
+		return "redirect:/refund.admin";
+	}
+	
+	@RequestMapping(value = "/sttsshow.admin", method = RequestMethod.GET)
+	public String sttsShow(@RequestParam(defaultValue = "2020/01/01") String startDate, 
+			@RequestParam(defaultValue = "2020/05/01") String endDate, Model model) {
+		model.addAttribute("tfShowList", tfShowService.getTfShowList());
+		model.addAttribute("showOrder", tfOrderService.getShowOrder(startDate, endDate));
+		model.addAttribute("selectOne", tfOrderService.getShowSelectOne());
+		return "admin/adm_stts_show";
+	}
+	
+	@RequestMapping(value = "/showdate.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDetailFcltyHallRefund> sttsShowDate(@RequestParam String startDate, @RequestParam String endDate) {
+		List<OrderDetailFcltyHallRefund> orderShow=tfOrderService.getShowOrder(startDate, endDate);
+		return orderShow;
+	}
+
+	@RequestMapping(value = "/showchoice.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDShow> sttsShowChoice(@RequestParam String valt) {
+		List<OrderDShow> ods=tfOrderService.getShowOrderChoice(valt);
+		return ods;
+	}
+	
+	@RequestMapping(value = "/selecttwo.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDShow> sttsShowSelectTwo(@RequestParam String showCode) {
+		List<OrderDShow> ods=tfOrderService.getShowSelectTwo(showCode);
+		return ods;
+	}
+	
+	@RequestMapping(value = "/showseatdraw.admin/{showNum}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String[]> sttsShowSeatDraw(@PathVariable int showNum) throws NumberFormatException, ShowNumNotFoundException {
+		ShowXShow showInfo=showXShowService.getShowDetail(showNum);
+		String seats=showInfo.getShowDetail().getShowSeat();
+		Tf_utility uti = new Tf_utility();
+		uti.seatsTable(seats);
+		
+		String[] seatArray=seats.replace("\\n", "\n").split("\n");
+		
+		int sizeX = seatArray[0].length();
+		int sizeY = seatArray.length;
+		
+		List<String[]> list=new ArrayList<String[]>();
+		
+		for(int i=0; i<sizeY; i++){
+			String[] line = new String[sizeX];
+			for(int j=0; j<sizeX; j++) {
+				line[j]=seatArray[i].substring(j, j+1);
+			}
+			list.add(line);
+		}
+		return list;
+	}
+	
+	@RequestMapping(value = "/showseatinfo.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDetailFcltyHallRefund> sttsShowSeatInfo(@RequestParam int showNum) {
+		List<OrderDetailFcltyHallRefund> ods=tfOrderService.getShowSeat(showNum);
+		return ods;
+	}
+	
+	@RequestMapping(value = "/sttstheater.admin", method = RequestMethod.GET)
+	public String sttsTheater(@RequestParam(defaultValue = "2020/01/01") String startDate, 
+			@RequestParam(defaultValue = "2020/05/01") String endDate, 
+			@RequestParam(defaultValue = "2020/01/01") String startDate2, 
+			@RequestParam(defaultValue = "2020/05/01") String endDate2, Model model) {
+		model.addAttribute("fcltyList", fcltyXService.getFcltyList());
+		model.addAttribute("tfOrderFclty", tfOrderService.getOrderFclty(startDate, endDate));
+		model.addAttribute("tfRefundFclty", tfOrderService.getRefundFclty(startDate2, endDate2));
+		return "admin/adm_stts_theater";
+	}
+	
+	@RequestMapping(value = "/theaterdate.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDetailFcltyHallRefund> sttsTheaterDate(@RequestParam String startDate, @RequestParam String endDate,
+			@RequestParam int choice) {
+		List<OrderDetailFcltyHallRefund> orderFclty;
+		if(choice==1) {
+			orderFclty=tfOrderService.getOrderFclty(startDate, endDate);
+		} else {
+			orderFclty=tfOrderService.getRefundFclty(startDate, endDate);
+		}
+			
+		return orderFclty;
+	}
+	
+	@RequestMapping(value = "/theaterchoice.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public OrderDetailFcltyHallRefund sttsTheaterTChoice(@RequestParam String valt) {
+		OrderDetailFcltyHallRefund odfhr=tfOrderService.getOrderFcltyChoice(valt);
+		return odfhr;
+	}
+	
+	@RequestMapping(value = "/refundchoice.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public OrderDetailFcltyHallRefund sttsTheaterRChoice(@RequestParam int valt) {
+		OrderDetailFcltyHallRefund odfhr=tfOrderService.getRefundFcltyChoice(valt);
+		return odfhr;
+	}
+	
+	@RequestMapping(value = "/sttssales.admin", method = RequestMethod.GET)
+	public String sttsSales(Model model) {
+		model.addAttribute("salesDay", dateCountService.getSalesDay("day"));
+		model.addAttribute("salesDow", dateCountService.getSalesDay("dow"));
+		model.addAttribute("salesMon", dateCountService.getSalesDay("mon"));
+		model.addAttribute("sumGenre", dateCountService.getGenreSum("2020/01/01", "2020/05/01"));
+		model.addAttribute("sumFclty", dateCountService.getFcltySum("2020/01/01", "2020/05/01"));
+		return "admin/adm_stts_sales";
+	}
+	
+	@RequestMapping(value = "/sttsticket.admin", method = RequestMethod.GET)
+	public String sttsTicket(@RequestParam(defaultValue = "2020/01/01") String startDate, 
+			@RequestParam(defaultValue = "2020/05/01") String endDate, Model model) {
+		model.addAttribute("tfShowList", tfShowService.getTfShowList());
+		model.addAttribute("ticketing", tfOrderService.getTicketing(startDate, endDate));
+		return "admin/adm_stts_ticket";
+	}
+	
+	@RequestMapping(value = "/ticketdate.admin", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderDShow> sttsTicketDate(@RequestParam String startDate, @RequestParam String endDate) {
+		List<OrderDShow> ticketing=tfOrderService.getTicketing(startDate, endDate);
+		return ticketing;
+	}
+	
+	@RequestMapping(value = "/review.admin", method = RequestMethod.GET)
+	public String review(Model model) {
+		model.addAttribute("reviewSdList", reviewService.getReviewSdList());
+		return "admin/adm_review";
+	}
+	
+	@RequestMapping(value = "/reviewRemove.admin/{reviewNum}", method = RequestMethod.GET)
+	public String reviewRemove(@PathVariable int reviewNum, Model model) throws ReviewNotFoundExcpetion {
+		reviewService.modifyStateReview(reviewNum);
+		return "redirect:/review.admin";
+	}
+	
+	@RequestMapping("/question.admin")
+	public String question(Model model) {
+		model.addAttribute("questionList", questionService.getQuestionList());
+		return "admin/adm_question_oto";
+	}
+	
+	
+	@RequestMapping(value = "/questionreply.admin", method = RequestMethod.GET)
+	public String questionReply(@RequestParam int num, Model model, HttpSession session) throws QuestionNotFoundException {
+		TfUser tfUser=(TfUser)session.getAttribute("loginTfUser");
+		model.addAttribute("question", questionService.getQuestion(num));
+		return "admin/adm_question_oto_reply";
+	}
+	
+	@RequestMapping(value = "/questionreply.admin", method = RequestMethod.POST)
+	public String questionReply(@ModelAttribute Question question, 
+			HttpSession session) throws IllegalStateException, IOException, QuestionNotFoundException {
+		if(!question.getFile().isEmpty()) {
+			String uploadDirPath=context.getServletContext().getRealPath("/WEB-INF/upload");
+			
+			String origin=question.getFile().getOriginalFilename();
+			String upload=System.currentTimeMillis()+"";
+			
+			question.getFile().transferTo(new File(uploadDirPath, upload));
+			
+			question.setQuestionFile(origin);
+			question.setQuestionFileName(upload);
+		}
+		
+		questionService.modifyStateQuestion(question.getQuestionRef());
+		questionService.addQuestionAdmin(question);
+		return "redirect:/question.admin";
+	}
+	
+	@RequestMapping("/faqlist.admin")
+	public String faqList(Model model) {
+		model.addAttribute("faqCountList", faqService.getCountFaq());
+		model.addAttribute("faqCategoryOne", faqService.getCategoryFaqOne());
+		model.addAttribute("faqCategoryTwo", faqService.getCategoryFaqTwo());
+		model.addAttribute("faqCategoryThree", faqService.getCategoryFaqThree());
+		return "admin/adm_faq_list";
+	}
+	
+	@RequestMapping(value = "/faqadd.admin", method = RequestMethod.GET)
+	public String faqAdd() {
+		return "admin/adm_faq_add";
+	}
+	
+	@RequestMapping(value = "/faqadd.admin", method = RequestMethod.POST)
+	public String faqAdd(@ModelAttribute Faq faq) {
+		faqService.addFaq(faq);
+		return "redirect:/faqlist.admin";
+	}
+}

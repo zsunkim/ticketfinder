@@ -1,0 +1,379 @@
+package ticket.finder.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import ticket.finder.dto.Cs;
+import ticket.finder.dto.Faq;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.OrderRate;
+import ticket.finder.dto.OrderRefund;
+import ticket.finder.dto.Question;
+import ticket.finder.dto.Review;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.CsNotFoundException;
+import ticket.finder.exception.FcCodeNotFoundException;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.service.CsService;
+import ticket.finder.service.FaqService;
+import ticket.finder.service.FcltyXService;
+import ticket.finder.service.QuestionService;
+import ticket.finder.service.RefundService;
+import ticket.finder.service.ReviewService;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfUserService;
+import ticket.finder.util.Pager;
+
+@Controller
+public class RawController implements ApplicationContextAware {
+	@Autowired
+	private CsService csService;
+	
+	@Autowired
+	private FaqService faqService;
+	
+	@Autowired
+	private FcltyXService fcltyXService;
+	
+	@Autowired
+	private QuestionService questionService;
+	
+	@Autowired
+	private RefundService refundService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@Autowired
+	private WebApplicationContext context;
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		context=(WebApplicationContext)applicationContext;
+	}
+	
+	@RequestMapping(value = "/perform/{genre}", method = RequestMethod.GET)
+	public String perform(@PathVariable String genre, Model model) {
+		model.addAttribute("genreNewList", showXShowService.getGenreNew(genre));
+		model.addAttribute("sGenre", genre);
+		
+		model.addAttribute("randomArea", showXShowService.getRandomArea(genre));
+
+		
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("sGenre", genre);
+		map.put("date", "7");
+		
+		List<OrderRate> cntList=tfOrderService.getRankGenre(map);
+		
+		model.addAttribute("newList", showXShowService.getAreaNew(map)); // 신상품순
+		model.addAttribute("endList", showXShowService.getAreaEnd(map)); // 종료임박순
+		model.addAttribute("abcList", showXShowService.getAreaName(map));  // 상품명순
+		
+		// 주간 랭킹순
+		List<ShowXShow> showArea=new ArrayList<ShowXShow>();
+		ShowXShow showList=null;
+		for(OrderRate show:cntList) {
+			showList=showXShowService.getShowName(show.getsName());
+			showArea.add(showList);
+		}
+		model.addAttribute("rankList", showArea);
+		model.addAttribute("cnt", showXShowService.getAreaEnd(map).size());
+		
+		return "user/include/perform";
+	}
+	
+	/*
+	 * @RequestMapping(value = "/showlist", method = RequestMethod.GET)
+	 * 
+	 * @ResponseBody public List<ShowXShow> showlist(@RequestParam String
+	 * sGenre, @RequestParam String tab) { System.out.println("장르는 ~"+sGenre);
+	 * System.out.println("탭 ~"+tab); Map<String, String> map=new HashMap<String,
+	 * String>(); map.put("sGenre", sGenre); map.put("date", "7");
+	 * 
+	 * List<OrderRate> cntList=tfOrderService.getRankGenre(map); List<ShowXShow>
+	 * showArea=new ArrayList<ShowXShow>();
+	 * 
+	 * if(tab.equals("listTab02")) { showArea=showXShowService.getAreaNew(map); }
+	 * else if(tab.equals("listTab03")) { showArea=showXShowService.getAreaEnd(map);
+	 * } else if(tab.equals("listTab04")) {
+	 * showArea=showXShowService.getAreaName(map); } else { //랭킹순 - listTab01
+	 * ShowXShow showList=null; for(OrderRate show:cntList) {
+	 * showList=showXShowService.getShowName(show.getsName());
+	 * showArea.add(showList); } }
+	 * 
+	 * return showArea; }
+	 */
+	
+	@RequestMapping(value = "/perform_detail/{sCode}/{showArea}", method = RequestMethod.GET)
+	public String performDetail(@PathVariable String sCode, @PathVariable String showArea, Model model) throws FcCodeNotFoundException {
+		List<ShowXShow> show=showXShowService.getDaytimeList(sCode, showArea);
+		model.addAttribute("showInfo", show);
+		model.addAttribute("cnt", show.size());
+		model.addAttribute("fcltyList", fcltyXService.getFclty(show.get(0).getShowDetail().getShowFcCode()));
+		if(show.get(0).getTfShow().getsGenre().equals("musical") || show.get(0).getTfShow().getsGenre().equals("play")) {
+			model.addAttribute("reviewList", reviewService.getShowDetailReviewList(show.get(0).getShowDetail().getShowCode()));
+		}
+		return "user/include/perform_detail";
+	}
+	
+	
+	@RequestMapping(value = "/cs", method = RequestMethod.GET)
+	public String cs(Model model) {
+		return "user/include/cs";
+	}
+	
+	@RequestMapping(value = "/cs_list", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> csList(@RequestParam(defaultValue = "1") int pageNum) {
+		Map<String, String> map=new HashMap<String, String>();
+		int totalBoard=csService.getCsCount(map);
+		int pageSize=5;
+		int blockSize=5;
+		
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		Map<String, Object> pagerMap=new HashMap<String, Object>();
+		pagerMap.put("startRow", pager.getStartRow());
+		pagerMap.put("endRow", pager.getEndRow());
+		
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		returnMap.put("csBoardList", csService.getCsBoardList(pagerMap));
+		returnMap.put("pager",pager);		
+		returnMap.put("totalBoard",totalBoard);		
+		
+		return returnMap;
+	}
+	
+	@RequestMapping(value = "/csRe/{pageNum}/{csNum}/{rn}", method = RequestMethod.GET)
+	public String csInfo(@PathVariable int pageNum, @PathVariable int csNum, @PathVariable int rn, RedirectAttributes attributes) throws CsNotFoundException {
+		attributes.addFlashAttribute("csInfoList", csService.getCs(csNum));
+		attributes.addFlashAttribute("rn", rn);
+		attributes.addFlashAttribute("pageNum", pageNum);
+		
+		return "redirect:/csInfo";
+	}
+	
+	@RequestMapping(value = "/csInfo", method = RequestMethod.GET)
+	public String csInfo(Model model) throws CsNotFoundException {
+		return "user/include/csInfo";
+	}
+	
+	@RequestMapping(value = "/csCate", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> csCate(@RequestParam() String csCategory, @RequestParam(defaultValue = "1") int pageNum) {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("csCategory", csCategory);
+		int totalBoard=csService.getCsCount(map);
+		int pageSize=5;
+		int blockSize=5;
+		
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		Map<String, Object> pagerMap=new HashMap<String, Object>();
+		pagerMap.put("csCategory", csCategory);
+		pagerMap.put("startRow", pager.getStartRow());
+		pagerMap.put("endRow", pager.getEndRow());
+		
+		Map<String, Object> cateMap=new HashMap<String, Object>();
+		cateMap.put("csBoardList", csService.getCsBoardList(pagerMap));
+		cateMap.put("pager",pager);		
+		cateMap.put("totalBoard",totalBoard);		
+		
+		return cateMap;
+	}
+	
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	public String faq(Model model) {
+		return "user/include/faq";
+	}
+	
+	@RequestMapping(value = "/faq_list", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> faqList(@RequestParam(required = false) String faqCategory, @RequestParam(defaultValue = "1") int pageNum) {
+		int totalBoard;
+		System.out.println("faqCategory="+faqCategory);
+		if(faqCategory.equals("전체") || faqCategory=="전체") {
+			totalBoard=faqService.getFaqList().size();
+		} else {
+			totalBoard=faqService.getCategoryFaq(faqCategory).size();
+		}
+		System.out.println("totalBoard="+totalBoard);
+		int pageSize=5;
+		int blockSize=5;
+		
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		Map<String, Object> pagerMap=new HashMap<String, Object>();
+		pagerMap.put("faqCategory", faqCategory);
+		pagerMap.put("startRow", pager.getStartRow());
+		pagerMap.put("endRow", pager.getEndRow());
+		
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		returnMap.put("faqBoardList", faqService.getFaqBoardList(pagerMap));
+		returnMap.put("pager",pager);		
+		returnMap.put("totalBoard",totalBoard);		
+		
+		return returnMap;
+	}
+	
+	@RequestMapping(value = "/faq_search", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> faqSearch(@RequestParam(required = false) String faq, @RequestParam(defaultValue = "1") int pageNum) {
+		System.out.println("faq="+faq);
+		int totalBoard=faqService.getKeywordFaq(faq).size();
+		System.out.println("totalBoard="+totalBoard);
+		int pageSize=5;
+		int blockSize=5;
+		
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		Map<String, Object> pagerMap=new HashMap<String, Object>();
+		pagerMap.put("faq", faq);
+		pagerMap.put("startRow", pager.getStartRow());
+		pagerMap.put("endRow", pager.getEndRow());
+		
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		returnMap.put("faqKeywordList", faqService.getFaqBoardList(pagerMap));
+		returnMap.put("pager",pager);		
+		returnMap.put("totalBoard",totalBoard);		
+		
+		return returnMap;
+	}
+	
+	@RequestMapping(value = "/qna", method = RequestMethod.GET)
+	public String question(HttpSession session, Model model) {
+		String id=((TfUser)session.getAttribute("loginUserInfo")).getUserId();
+		model.addAttribute("qnaList", questionService.getUserQuestionIdList(id));
+		return "user/include/qna";
+	}
+	
+	@RequestMapping(value = "/qna_write", method = RequestMethod.GET)
+	public String qna(@ModelAttribute Question question, HttpSession session, Model model) throws OrderNotFoundException {
+		String id=((TfUser)session.getAttribute("loginUserInfo")).getUserId();
+		System.out.println("아이디="+id);
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("userId", id);
+		model.addAttribute("userid", id);
+		model.addAttribute("question", question);
+		return "user/include/qna_write";
+	}
+	
+	@RequestMapping(value = "/qna_write", method = RequestMethod.POST)
+	public String qnaInsert(@ModelAttribute("question") Question question, HttpSession session) throws IOException {
+		if(!question.getFile().isEmpty()) {
+			String uploadDirPath=context.getServletContext().getRealPath("/WEB-INF/upload");
+			
+			String origin=question.getFile().getOriginalFilename();
+			String upload=System.currentTimeMillis()+"";
+			
+			question.getFile().transferTo(new File(uploadDirPath, upload));
+			
+			question.setQuestionFile(origin);
+			question.setQuestionFileName(upload);
+		}
+		questionService.addQuestion(question);
+		return "redirect:/qna";
+	}
+	
+	@RequestMapping(value = "/qna_show_list", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OrderQShow> question(@RequestParam String userid) throws OrderNotFoundException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("userid", userid);
+		System.out.println("userid="+userid);
+		List<OrderQShow> showList=tfOrderService.getOrderQshow(map);
+		System.out.println("사이즈="+showList.size());
+		return showList;
+	}
+	
+	@RequestMapping(value = "/review_write/{sCode}", method = RequestMethod.GET)
+	public String reviewWrite(@PathVariable String sCode, HttpSession session, Model model, @ModelAttribute Review review) throws OrderNotFoundException {
+		String id=((TfUser)session.getAttribute("loginUserInfo")).getUserId();
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("id",id);
+		map.put("sCode",sCode);
+		if(tfOrderService.getReviewOrderList(map).isEmpty()) {
+			throw new OrderNotFoundException("관람 내역이 존재하지 않습니다.");
+		}
+		model.addAttribute("showOrder", tfOrderService.getReviewOrderList(map));
+		model.addAttribute("reviewViewDate", tfOrderService.getReviewOrderList(map).get(0).getShowDetail().getShowDaytime());
+		model.addAttribute("sCode", tfOrderService.getReviewOrderList(map).get(0).getShowDetail().getShowNum());
+		model.addAttribute("id", id);
+		return "user/include/review_write";
+	}
+	
+	@RequestMapping(value = "/review_write", method = RequestMethod.POST)
+	public String reviewInsert(@ModelAttribute("review") Review review, HttpSession session) throws OrderNotFoundException, ShowNumNotFoundException {
+		reviewService.addReview(review);
+		int showNum=review.getReviewShowCode();
+		System.out.println("공연번호="+showNum);
+		ShowXShow show=showXShowService.getShowDetail(showNum);
+		System.out.println(show.getTfShow());
+		String sCode=show.getTfShow().getsCode();
+		int showArea=show.getShowDetail().getShowArea();
+		System.out.println("코드="+sCode);
+		System.out.println("지역="+showArea);
+		return "redirect:/perform_detail/"+sCode+"/"+showArea;
+	}
+	
+	@RequestMapping(value = "/theater", method = RequestMethod.GET)
+	public String theater(Model model, String fcCode) throws FcCodeNotFoundException {
+		model.addAttribute("fcltyList", fcltyXService.getFcltyList());
+		if(fcCode==null || fcCode.equals("")) { 
+			fcCode="FC000001"; 
+		}
+		model.addAttribute("fclty", fcltyXService.getFclty(fcCode));
+		model.addAttribute("fcShowList", showXShowService.getFcltyShow(fcCode));
+		return "user/include/theater";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

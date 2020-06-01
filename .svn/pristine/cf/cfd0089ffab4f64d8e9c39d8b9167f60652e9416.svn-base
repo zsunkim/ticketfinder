@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="reviewMore">
+	<div id="section01">
+      <div class="cont">
+        <h2>나의 후기</h2>
+        <div class="monthWrapper">
+          <ul class="monthBtn">
+            <li class="on"><a href="#">6개월</a></li>
+            <li><a href="#">12개월</a></li>
+            <li><a href="#">24개월</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- section01 End -->
+
+    <div id="section02">
+      <div class="cont">
+        <div class="reviewBox">
+          <table>
+            <thead>
+              <tr>
+                <td>NO.</td>
+                <td>공연정보</td>
+                <td>후기내용</td>
+                <td>평점</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="reviewNo">1</td>
+                <td class="reviewShow">
+                  <img src="images/main/main_rank_musical01.jpg" alt="booking">
+                  <p class="showTit">뮤지컬 &lt;미드나잇&gt;</p>
+                  <p class="showDate">2020.02.11 ~ 2020.05.03</p>
+                  <p class="showPlace">대학로 아트원씨어터 2관</p>
+                </td>
+                <td class="reviewContent">
+                  <p>
+                    리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+                  </p>
+                </td>
+                <td class="reviewState">
+                  5점
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- ticketBox End -->
+        <div class="noReviewBox">
+          <p>후기 내역이 없습니다.</p>
+        </div>
+      </div>
+    </div><!-- section02 End -->
+
+    <div id="section03">
+      <div class="cont">
+        <div class="pageBtnBox">
+          <a href="#" class="firstBtn">&lt;&lt;</a>
+          <a href="#" class="prevBtn">&lt;</a>
+          <a href="#" class="selected">1</a>
+          <a href="#">2</a>
+          <a href="#" class="nextBtn">&gt;</a>
+          <a href="#" class="endBtn">&gt;&gt;</a>
+        </div>
+      </div>
+    </div><!-- section03 End -->
+</div>

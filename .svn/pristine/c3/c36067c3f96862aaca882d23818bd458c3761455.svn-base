@@ -1,0 +1,14 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+
+import ticket.finder.dto.Faq;
+
+public interface FaqMapper {
+	int insertFaq(Faq faq);
+	int updateFaq(Faq faq);
+	int deleteFaq(int faqNum);
+	Faq selectFaq(int faqNum);
+	List<Faq> selectCategoryFaq(String faqCategory);
+	List<Faq> selectFaqList();
+}

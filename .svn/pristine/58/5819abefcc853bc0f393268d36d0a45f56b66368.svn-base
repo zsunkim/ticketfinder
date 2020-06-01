@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.TfShowMapper">
+	<insert id="insertTfShow">
+		insert into tf_show values(#{sCode}, #{sName}, #{sSDate}, #{sEDate}, #{sRuntime}, #{sPrice}, #{sAge}, #{sPoster}, #{sGenre})
+	</insert>
+	
+	<update id="updateTfShow">
+		update tf_show
+		<set>
+			<if test="s_name!=null and s_name!=''">
+				s_name=#{sName}
+			</if>
+			<if test="s_s_date!=null and s_s_date!=''">
+				s_s_date=#{sSDate}
+			</if>
+			<if test="s_e_date!=null and s_e_date!=''">
+				s_e_date=#{sEDate}
+			</if>
+			<if test="s_runtime!=null and s_runtime!=''">
+				s_runtime=#{sRuntime}
+			</if>
+			<if test="s_price!=null and s_price!=''">
+				s_price=#{sPrice}
+			</if>
+			<if test="s_poster!=null and s_poster!=''">
+				s_poster=#{sPoster}
+			</if>
+			<if test="s_price!=null and s_price!=''">
+				s_price=#{sPrice}
+			</if>
+			<if test="s_genre!=null and s_genre!=''">
+				s_genre=#{sGenre}
+			</if>
+		</set>
+		where s_code=#{sCode}
+	</update>
+</mapper>

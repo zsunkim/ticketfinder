@@ -1,0 +1,54 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ticket.finder.dto.ShowDetail;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.mapper.ShowXShowMapper;
+
+@Repository
+public class ShowXShowDAOImpl implements ShowXShowDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public List<ShowDetail> selectSearch(String search) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectSearch(search);
+	}
+
+	@Override
+	public ShowXShow selectShowDetail(int showNum) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowDetail(showNum);
+	}
+
+	@Override
+	public List<ShowXShow> selectShowHot() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowHot();
+	}
+
+	@Override
+	public List<ShowXShow> selectRank(Map<String, Object> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectRank(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaNew(ShowXShow showxshow) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaNew(showxshow);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaEnd(ShowXShow showxshow) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaEnd(showxshow);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaName(ShowXShow showxshow) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaName(showxshow);
+	}
+
+}

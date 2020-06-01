@@ -1,0 +1,598 @@
+@charset "UTF-8";
+
+.reserve_right{
+	float:right;
+}
+/********** STEP 1 - 좌석선택 **********/
+#seat, #delivery, #delivery {position: relative; width: 950px;}
+
+#seat #section,
+#delivery #section{
+    width: 681px;
+    height: 550px;
+    float: left;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#seat{
+	background-color: #e2e2e2;
+}
+
+#seat .reserve_left {
+    height: 49px; 
+    border-bottom: 1px solid #ccc; 
+    background-color: #fff;
+}
+
+#seat .seat_tit {
+    position: relative; 
+    padding: 11px 0 0 28px; 
+    font-size: 16px; 
+    color: black; 
+    height: 38px; 
+    width: 655px; 
+    overflow: hidden;
+}
+
+#seat .reserve_top .seat_tit .tit_s {
+    font-weight: normal;
+    margin-left: 18px;
+    vertical-align: top;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 52%
+}
+
+#seat .reserve_top .sel {
+    position: absolute;
+    top: 9px;
+    right: 1px;
+    height: 31px;
+    padding: 5px 17px 0 0;
+}
+
+#seat .wrap_left{
+    position: relative;
+    float:left;
+    width: 70%;
+    height:500px;
+    max-height:625px;
+    overflow-x: hidden;
+  	overflow-y: scroll;
+  	padding:10px;
+  	box-sizing:border-box;
+}
+
+#seat .reserve_right {
+    position: relative; 
+    float: right; 
+    width: 30%;
+    padding: 14px 10px 14px 13px; 
+    box-sizing:border-box;
+    height: 500px;
+    background-color: #fafafa;
+}
+
+#seat .reserve_right img { height: 33px; padding-left: 15px;}
+
+#seat .seat_list {position: relative; padding-top: 14px;}
+
+#seat .select_tit {
+    padding-bottom: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    padding-left: 10px;
+}
+
+#seat .seat_info {padding-top: 25px;}
+
+#seat .reserve_right .seat_list .box_seat {
+    width: 240px;
+    border: 1px solid #eeeeee;
+    background-color: #fff;
+}
+
+#seat .reserve_right .seat_list .box_seat_area {
+    overflow-y: auto;
+    margin: 0 0 0 0;
+    padding-top: 9px;
+    height: 100px;
+}
+
+#seat .tb {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#seat .reserve_right .seat_list th.seat_color {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#seat .reserve_right .seat_list .box_seat_area th.seat_color em.seat_color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 10px 4px 0 10px;
+    text-indent: -9999px;
+}
+
+#seat .reserve_right .seat_list .box_seat_area td.seat_name {
+    text-align: left;
+}
+
+#seat .reserve_right .seat_list .box_seat_area td {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 7px 5px 6px;
+     box-sizing:border-box;
+    text-align: right;
+    vertical-align: top;
+    letter-spacing: 0
+}
+
+#seat .reserve_btn {
+    position: absolute; 
+    text-align: center;
+    bottom: 10px;
+    margin-left: 45px;
+}
+
+#seat .reserve_btn .btn1 {
+    display: inline-block;
+    position: relative;
+    line-height: 48px;
+    font-size: 14px;
+}
+
+#seat .reserve_btn .btn {
+    border: 1px solid #888888;
+    background: #888888;
+}
+
+#seat .reserve_btn .btn.on {
+    border: none;
+    background: #414ea9;
+}
+
+#seat .reserve_btn .btn.on a {
+    border: 1px solid #414ea9;
+    background: #414ea9;
+}
+/*
+#seat .reserve_btn .btn .btn1 {
+    width: 243px;
+    color: white;
+    border: 1px solid #414ea9;
+    background: #414ea9;
+}
+*/
+#seat .reserve_btn .btn.on a:hover {
+    border: 1px solid #414ea9;
+    background: #414ea9;
+}
+
+#seat .reserve_btn .btn .btn1 {
+    display: block;
+    width: 160px;
+    height: 48px;
+    text-decoration: none;
+    padding: 0 20px 0 20px;
+    border: 1px solid #414ea9;
+    background: #414ea9;
+    cursor: pointer;
+    color:#fff;
+}
+
+
+#seat #seats {
+	width: 800px;
+	margin: auto;
+}
+
+#seat .line {
+	width: 100%;
+	overflow: hidden;
+}
+
+#seat .seat {
+	margin: 1px;
+	float: left;
+	width: 30px;
+	height: 30px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+#seat .enable {
+	background: gray;
+}
+
+#seat .enable:hover {
+	background: black;
+}
+
+#seat .disable {
+	background: red;
+}
+
+#seat .booked {
+	background: #ccc;
+	cursor: default;
+}
+
+#seat .empty {
+	cursor: default;
+}
+
+#seat #stage{
+	margin-bottom: 40px;
+	font-size:25px;
+	text-align: center;
+	color:#a7a7a7;
+}
+
+#seat #stage span{
+	padding: 0 100px 5px;
+	border:1px solid #a7a7a7;
+}
+
+#seat #console{
+	margin-top: 40px;
+	font-size:25px;
+	text-align: center;
+	color:#a7a7a7;
+}
+
+#seat #console span{
+	padding: 0 100px 5px;
+	border:1px solid #a7a7a7;
+}
+
+/********** STEP 2 - 배송선택 **********/
+#delivery #section{
+    width: 70%;
+}
+
+#delivery .reserve_right{
+	width: 30%;
+}
+
+#delivery .book_tap{
+    overflow: hidden;
+    position: relative;
+    height: 50px;
+    width:100%;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+}
+
+li{list-style:none;}
+
+#delivery .book_tap li{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    height: 50px;
+    padding-top: 14px;
+    float:left;
+}
+
+#delivery .book_tap .step.on{
+    background-color: #414ea9;
+    color: white;
+}
+
+#delivery .deliver_box, #delivery .pay_box {margin: 20px;}
+
+#delivery .deliver_box h2,
+#delivery .pay_box h2 {
+    padding: 4px 4px 4px 12px;
+    border: 1px solid #dad9d9;
+    display: block;
+    height: 25px;
+    font-size: 18px;
+    background-color: #dad9d9;
+    color: black;
+}
+
+#delivery .deliver_box .sel_receipt,
+#delivery .pay_box .sel_receipt {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+#delivery .deliver_box .sel_receipt input, #delivery .pay_box .sel_receipt input {vertical-align: middle;}
+#delivery .deliver_box .sel_receipt label, #delivery .pay_box .sel_receipt label {margin-right: 13px; font-size: 13px;}
+
+#delivery .deliver_box .sel_receipt em,
+#delivery .pay_box .sel_receipt em {
+    font: bold 15px 돋움;
+    color: #000;
+    margin-right: 10px;
+    vertical-align: top;
+    margin-top: 10px;
+} 
+
+#delivery .deliver_box .sel_receipt span,
+#delivery .pay_box .sel_receipt span {
+    padding: 8px 10px 8px 20px;
+    width: 611px;
+    font-size: 11px;
+    letter-spacing: -1px;
+    display: inline-block;
+    background-color: #fdeeea;
+} 
+
+#delivery .deliver_box .user_info h4 {
+    border-bottom: 1px solid #e3e3e3;
+    font: bold 15px 돋움;
+    color: #000;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+#delivery .deliver_box .user_info ul {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 25px;
+}
+
+#delivery .deliver_box .user_info ul li {
+    margin-bottom: 5px;
+    vertical-align: text-top;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+#delivery .deliver_box .user_info ul li em {
+    width: 85px;
+    margin-top: 5px;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+#delivery input[type=text] {border: 1px solid #aaaaaa; padding: 2px;}
+
+#delivery .caution,
+#delivery .caution {
+    border: 1px solid #dddddd;
+    padding: 8px 7px 8px 8px;
+    background-color: #f7f7f8;
+    margin-bottom: 3px;
+    margin-top: 42px;
+}
+
+#delivery .caution h5 {
+    font: bold 12px 돋움;
+    margin-bottom: 8px;
+}
+
+#delivery .deliver_box ul li {
+    margin-bottom: 5px;
+    font-size: 11px;
+    vertical-align: text-top;
+}
+
+#delivery .caution {color: #645252;}
+
+#delivery .show_info,
+#delivery .show_info {
+    padding: 10px;
+    padding-bottom: 20px;
+    height: 88px;
+}
+
+#delivery .show_info img,
+#delivery .show_info img {
+    width: 79px;
+    height: 98px;
+    float: left;
+    margin-right: 15px;
+    margin-left: 0 !important;
+}
+
+#delivery .show_info span.title,
+#delivery .show_info span.title {
+    font: bold 12px 돋움;
+    margin-bottom: 10px;
+}
+
+#delivery .show_info span.date,
+#delivery .show_info span.date {
+    letter-spacing: -1px;
+    font-size: 11px;
+}
+
+#delivery .show_info span, #delivery .show_info span {display: block;}
+
+#delivery .reserve_right .my_seat,
+#delivery .reserve_right .my_seat {
+    padding: 10px 15px 5px 15px;
+    padding-bottom: 50px;
+    _padding-bottom: 30px;
+}
+
+#delivery .reserve_right .ticket_info h3,
+#delivery .reserve_right .my_seat h3,
+#delivery .reserve_right .ticket_info h3,
+#delivery .reserve_right .my_seat h3 {
+    margin-bottom: 10px;
+}
+
+#delivery .reserve_right .my_seat ul li,
+#delivery .reserve_right .my_seat ul li {
+    margin-bottom: 4px;
+    font-size: 11px;
+    height: 16px;
+}
+
+#delivery .my_seat ul li em,
+#delivery .my_seat ul li em {
+    float: left;
+    margin-right: 8px;
+    letter-spacing: -0.05em;
+    width: 30px;
+}
+
+#delivery .my_seat ul li div,
+#delivery .my_seat ul li div {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 60px;
+    width: 177px;
+    _width: 170px;
+    float: left;
+    line-height: 1.4em;
+}
+
+#delivery .my_seat ul li div span, #delivery .my_seat ul li div span { display: block;}
+
+#delivery .ticket_info, #delivery .ticket_info {padding: 10px 15px 5px 15px;}
+
+#delivery .ticket_info .ticket_pay, #delivery .ticket_info .ticket_pay {padding-bottom: 5px;}
+
+#delivery .ticket_pay ul li,
+#delivery .ticket_pay ul li {
+    margin-bottom: 4px;
+    font-size: 11px;
+    height: 13px;
+    *margin-bottom: 0;
+}
+
+#delivery .ticket_pay ul li em,
+#delivery .ticket_pay ul li em {
+    float: left;
+    margin-right: 8px;
+}
+
+#delivery .ticket_pay ul li span, #delivery .ticket_pay ul li span { float: right;}
+
+#delivery .t_result,
+#delivery .t_result {
+    border: 1px solid #dad9d9;
+    text-align: center;
+    background-color: #dad9d9;
+    color: black;
+    height: 28px;
+    padding-top: 5px;
+    margin-top: 25px;
+}
+
+#delivery .reserve_btn, #delivery .reserve_btn { margin-top: 40px;}
+
+#delivery .reserve_btn a, #delivery .reserve_btn a {cursor: pointer;}
+
+
+#delivery .reserve_btn .btn1, #delivery .reserve_btn .btn1 {
+    border: 1px solid #bebebe;
+    text-align: center;
+    background-color: #bebebe;
+    color: #000;
+    padding: 8px 30px;
+}
+
+#delivery .reserve_btn .btn2, #delivery .reserve_btn .btn2 {
+    border: 1px solid #414ea9;
+    text-align: center;
+    background-color: #414ea9;
+    color: white;
+    padding: 8px 30px;
+}
+
+#delivery .book_tap .step:first-child {border-right: 1px solid #ccc;}
+
+#delivery .caution.bgbrn {
+    border: none !important;
+    background: none !important;
+}
+
+#delivery .caution div.box {
+    padding: 4px 8px 2px;
+    border: 1px solid #dddddd;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+    width: 320px;
+    font: bold 12px 돋움;
+}
+
+#delivery .caution span.red { margin-left: 0 !important;}
+
+#delivery .boardListTypeB {
+    margin-top: 11px;
+    table-layout: fixed;
+    width: 650px;
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 11px;
+}
+
+#delivery .tb_w {width: 100%;}
+
+#delivery .boardListTypeB thead th {
+    height: 23px;
+    background: #f8f2f3;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #d3d3d3;
+    color: #666;
+}
+
+#delivery .tb_w tbody {
+    background: #fff;
+    text-align: center;
+}
+
+#delivery .boardListTypeB tbody td {
+    padding: 6px 0 4px 0;
+    line-height: 14px;
+    border-bottom: 1px solid #d3d3d3;
+    color: #888;
+}
+
+#delivery .tb_w .bl_p {
+    border-left: 1px solid #d3d3d3;
+    padding: 0 8px;
+}
+
+#delivery .alignLeft { text-align: left;}
+
+#delivery .chkbox {
+    vertical-align: middle;
+    text-align: center;
+}
+
+#delivery input[type=radio],input[type=checkbox] {
+    width: 13px;
+    height: 13px;
+    position: relative;
+    top: 2px;
+}
+
+#delivery .chkbox label {
+    font-size: 11px;
+    margin-left: 3px;
+}
+
+#delivery #bankSel {height: 25px;}
+
+
+
+
+
+
+
+
+

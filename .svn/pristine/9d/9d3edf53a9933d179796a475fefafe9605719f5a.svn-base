@@ -1,0 +1,24 @@
+package ticket.finder.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.TfShowDAO;
+import ticket.finder.dto.TfShow;
+
+@Service
+public class TfShowServiceImpl implements TfShowService {
+	@Autowired
+	private TfShowDAO tfShowDAO;
+
+	@Override
+	public void addTfShow(TfShow tfShow) {
+		tfShowDAO.insertTfShow(tfShow);
+	}
+
+	@Override
+	public void modifyTfShow(TfShow tfShow) {
+		tfShowDAO.updateTfShow(tfShow);
+	}
+
+}

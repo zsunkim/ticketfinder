@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/findPw.css">
+<title>Ticket-Finder</title>
+</head>
+<body id="findPw">
+<div id="section">
+    <div id="header">
+        <div id="headerArea">
+            <h1>
+                <img src="../images/logo.png">
+                <div class="finderBox">
+                    <a href="findId.html" class="on">아이디 찾기</a>
+                    <a href="#">비밀번호 찾기</a>
+                </div>
+            </h1>
+        </div>
+    </div>
+    <div class="cont">
+    <form action="" method="post">
+        <div class="findPwForm">
+            <div>
+                <div class="info_input">
+                    <div class="info_Box">
+                        <div>
+                            <input type="text" id="name" class="name" placeholder="이름">
+                        </div>
+                        <div>
+                            <input type="email" id="email" class="email" placeholder="이메일 주소">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wrap_btn">
+                <button type="submit" class="check_btn">확인</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+</body>
+</html>

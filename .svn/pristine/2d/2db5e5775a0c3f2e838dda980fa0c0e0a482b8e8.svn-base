@@ -1,0 +1,277 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - 주문관리</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ] -->
+     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/bootstrap.min.css" rel="stylesheet">
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/nifty.min.css" rel="stylesheet">
+    
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Table [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+
+    <!--X-editable [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/x-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="${pageContext.request.contextPath }/a_css/demo/nifty-demo.min.css" rel="stylesheet">
+
+
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath }/a_plugins/pace/pace.min.js"></script>
+</head>
+<body>
+	<div id="container" class="effect aside-float aside-bright mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">Ticket Finder</h1>
+
+					<!--Searchbox-->
+					<div class="searchbox">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..">
+							<span class="input-group-btn">
+								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					
+					
+					
+					<!--Custom Toolbar-->
+					<!--===================================================-->
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">주문관리</h3>
+						</div>
+						<div class="panel-body">
+							<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+								   data-url="data/bs-table-order.json"
+								   data-toolbar="#demo-delete-row"
+								   data-search="true"
+								   data-show-refresh="true"
+								   data-show-toggle="true"
+								   data-show-columns="true"
+								   data-sort-name="id"
+								   data-page-list="[5, 10, 20]"
+								   data-page-size="10"
+								   data-pagination="true" data-show-pagination-switch="true">
+								<thead>
+									<tr>
+										<th data-field="state" data-checkbox="true">ID</th>
+										<th data-field="orderNo" data-sortable="true" data-formatter="invoiceFormatter">주문번호</th>
+										<th data-field="name" data-sortable="true">주문자</th>
+										<th data-field="id" data-sortable="true" data-formatter="invoiceFormatter">아이디</th>
+										<th data-field="phone" data-sortable="true">전화번호</th>
+										<th data-field="showName" data-sortable="true">공연명</th>
+										<th data-field="viewDate" data-sortable="true" data-formatter="dateFormatter">관람날짜</th>
+										<th data-field="seat" data-sortable="true">선택좌석</th>
+										<th data-field="qty" data-sortable="true">매수</th>
+										<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">주문금액</th>
+										<th data-field="deposit" data-align="center" data-sortable="true" data-formatter="statusFormatter">결제상태</th>
+										<th data-field="payment" data-sortable="true">결제방법</th>
+										<th data-field="orderDate" data-sortable="true" data-formatter="dateFormatter">주문날짜</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<!--===================================================-->
+					
+
+					
+					
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+
+
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+
+		</div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 Ticket Finder</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+
+	
+	
+	<!-- SETTINGS - 삭제 -->
+	<!--===================================================-->
+	<!--===================================================-->
+	<!-- END SETTINGS -->
+
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/bootstrap.min.js"></script>
+
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fast-click/fastclick.min.js"></script>
+
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty.min.js"></script>
+
+
+	<!--Switchery [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/switchery/switchery.min.js"></script>
+
+
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+	<!--X-editable [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/x-editable/js/bootstrap-editable.min.js"></script>
+
+
+	<!--Bootstrap Table [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+
+	<!--Bootstrap Table Extension [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+
+
+	<!--Demo script [ DEMONSTRATION ]-->
+	<script src="${pageContext.request.contextPath }/a_js/demo/nifty-demo.min.js"></script>
+
+
+	<!--Bootstrap Table Sample [ SAMPLE ]-->
+	<script src="${pageContext.request.contextPath }/a_js/demo/tables-bs-table.js"></script>
+	
+	<script type="text/javascript">
+	$('#mainnav-menu').children().eq(4).addClass('active-sub').children().eq(1).addClass('in').children().eq(1).addClass('active-link');
+	</script>
+</body>
+</html>
+

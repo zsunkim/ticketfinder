@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.RefundMapper">
+	<resultMap type="OrderRefundShowDetail" id="orderRefundShowDetailResultMap">
+		<association property="tfOrder" javaType="TfOrder">
+			<id column="order_code" property="orderCode"/>
+			<result column="order_date" property="orderDate"/>
+			<result column="order_price" property="orderPrice"/>
+			<result column="order_seat" property="orderSeat"/>
+			<result column="order_show_num" property="orderShowNum"/>
+			<result column="order_grade" property="orderGrade"/>
+			<result column="order_fees" property="orderFees"/>
+			<result column="order_shipfees" property="orderShipfees"/>
+			<result column="order_receipt" property="orderReceipt"/>
+			<result column="order_user_id" property="orderUserId"/>
+			<result column="order_user_name" property="orderUserName"/>
+			<result column="order_payment" property="orderPayment"/>
+			<result column="order_qty" property="orderQty"/>
+			<result column="order_dp_state" property="orderDpState"/>
+			<result column="order_sh_state" property="orderShState"/>
+			<result column="order_shipping_num" property="orderShippingNum"/>
+			<result column="order_ticketing" property="orderTicketing"/>
+		</association>	
+		
+		<association property="refund" javaType="Refund">
+			<id column="refund_num" property="refundNum"/>
+			<result column="refund_order_code" property="refundOrderCode"/>
+			<result column="refund_date" property="refundDate"/>
+			<result column="refund_penalty" property="refundPenalty"/>
+			<result column="refund_pay" property="refundPay"/>
+			<result column="refund_state" property="refundState"/>
+			<result column="refund_user_id" property="refundUserId"/>
+		</association>
+		
+		<association property="showDetail" javaType="ShowDetail">
+			<id column="show_num" property="showNum"/>
+			<result column="show_code" property="showCode"/>
+			<result column="show_fc_code" property="showFcCode"/>
+			<result column="show_hall_name" property="showHallName"/>
+			<result column="show_name" property="showName"/>
+			<result column="show_cast" property="showCast"/>
+			<result column="show_state" property="showState"/>
+			<result column="show_daytime" property="showDaytime"/>
+			<result column="show_seat" property="showSeat"/>
+			<result column="show_detail1" property="showDetail1"/>
+			<result column="show_detail2" property="showDetail2"/>
+			<result column="show_detail3" property="showDetail3"/>
+			<result column="show_detail4" property="showDetail4"/>
+			<result column="show_area" property="showArea"/>
+			<result column="show_rate" property="showRate"/>
+		</association>
+	</resultMap>
+
+	<insert id="insertRefund">
+		<selectKey resultType="int" keyProperty="refundNum" order="BEFORE">select refund_seq.nextval from dual</selectKey>
+		insert into refund values(#{refundNum}, #{refundOrderCode}, sysdate, #{refundPenalty}, #{refundPay}, #{refundState}, #{refundUserId})
+	</insert>
+	
+	<update id="updateRefundState">
+		update set refund refund_state={#refundState} where refund_num=#{refundNum}
+	</update>
+	
+	<delete id="deleteRefund">
+		delete from refund where refund_num=#{refundNum}
+	</delete>
+	
+	<!-- 취소번호로 단일행 검색 -->
+	<select id="selectRefundByNum" resultType="Refund">
+		select * from refund where refund_num=#{refundNum}
+	</select>
+	
+	<!-- 주문코드로 단일행 검색 -->
+	<select id="selectRefundByOrder" resultType="Refund">
+		select * from refund where refund_order_code=#{orderCode}
+	</select>
+	
+	<!-- 취소날짜로 다중행 검색 -->
+	<select id="selectRefundByDate" resultType="Refund">
+		select * from refund where refund_date between #{startDate} and TO_DATE(#{endDate})+1 order by refund_date desc
+	</select>
+	
+	<!-- 취소 상태 혹은 이름으로 다중행 검색 -->
+	<select id="selectRefundByKeyword" resultType="Refund">
+		select * from refund
+			<trim prefix="where" prefixOverrides="and">
+				<if test="refund_state!=null and refund_state!=''">
+					refund_state=#{refundState}
+				</if>
+				
+				<if test="name!=null and name!=''">
+					and refund_user_id=#{refundUserId}
+				</if>
+			</trim>
+		order by refund_date desc
+	</select>
+	
+	<select id="selectUserRefund" resultType="Refund">
+		select * from (select rownum rn, r.* from 
+			(select * from refund where refund_user_id=#{refundUserId} order by refund_date desc ) r ) 
+				where rn between #{startRow} and #{endRow}
+	</select>
+	
+	
+	<!-- 환불요청 목록 검색 -->
+	<select id="selectRefundList" resultType="OrderRefundShowDetail" resultMap="orderRefundShowDetailResultMap">
+		select * from refund r join tf_order o on r.refund_order_code=o.order_code
+		join show_detail sd on o.order_show_num=sd.show_num 
+		where r.refund_state='환불요청' order by o.order_date desc
+	</select>
+	
+	
+	<!-- 주문 취소 요청목록 출력 -->
+	<select id="selectCancelOrderList" resultType="OrderRefundShowDetail" resultMap="orderRefundShowDetailResultMap">
+		select * from refund r join tf_order o on r.refund_order_code=o.order_code
+		join show_detail sd on o.order_show_num=sd.show_num order by r.refund_date desc
+	</select>
+</mapper>

@@ -1,0 +1,191 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/region.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<title>Ticket-Finder</title>
+</head>
+<body id="region">
+<div id="section">
+	<div class="cont">
+        <p class="mainTitle">지역별 공연</p>
+        <div class="region_tab">
+            <a href="#" class="tab1 on">전체</a>
+			<a href="#" class="tab2">서울</a>
+			<a href="#" class="tab3">경기/인천</a>
+			<a href="#" class="tab4">대전/충청도</a>
+			<a href="#" class="tab5">경상/대구/부산</a>
+			<a href="#" class="tab6">전라/광주</a>
+			<a href="#" class="tab7">제주</a>
+        </div>
+        <script type="text/javascript">
+            $('.tab1').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab1').addClass('on');
+            });
+             $('.tab2').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab2').addClass('on');
+            });
+        $('.tab3').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab3').addClass('on');
+            });
+        $('.tab4').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab4').addClass('on');
+            });
+            $('.tab5').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab5').addClass('on');
+            });
+             $('.tab6').click(function(){
+               $('.region_tab').find('a').removeClass('on');
+               $('.tab6').addClass('on');
+            });
+             $('.tab7').click(function(){
+                 $('.region_tab').find('a').removeClass('on');
+                 $('.tab7').addClass('on');
+              });
+        </script>
+
+        <div class="re_search">
+            <div class="re_search_top">
+                <!--<a href="">상세검색</a>-->
+                <div>
+                    <a class="on" style="display: none;">
+                        <span>주간랭킹순</span>
+                    </a>
+                    <a class="rankTab1 on">
+                        <span>신상품순</span>
+                    </a>
+                    <a class="rankTab2">
+                        <span>종료임박순</span>
+                    </a>
+                    <a class="rankTab3">
+                        <span>상품명순</span>
+                    </a>
+                </div>
+
+<!-- 
+                <div class="re_search_bottom">
+                    <div class="re_search_div">
+                        <dl>
+                            <dt>장르</dt>
+                            <dd>
+                                <div class="re_ch">
+                                    <input type="checkbox" id="genre1" value="1">
+                                    <label for="genre1"></label>
+                                </div>
+                                <span>뮤지컬</span>
+                                <div class="re_ch">
+                                    <input type="checkbox" id="genre2" value="1">
+                                    <label for="genre2"></label>
+                                </div>
+                                <span>연극</span>
+                                <div class="re_ch">
+                                    <input type="checkbox" id="genre3" value="1">
+                                    <label for="genre3"></label>
+                                </div>
+                                <span>콘서트</span>
+                                <div class="re_ch">
+                                    <input type="checkbox" id="genre4" value="1">
+                                    <label for="genre4"></label>
+                                </div>
+                                <span>클래식/무용</span>
+                                <div class="re_ch">
+                                    <input type="checkbox" id="genre5" value="1">
+                                    <label for="genre5"></label>
+                                </div>
+                                <span>전시</span>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>공연일::after</dt>
+                        </dl>
+                    </div>
+                </div>
+ -->
+            </div>
+        </div>
+        <script type="text/javascript">
+            $('.rankTab1').click(function(){
+               $('.re_search_top').find('a').removeClass('on');
+               $('.rankTab1').addClass('on');
+            });
+             $('.rankTab2').click(function(){
+               $('.re_search_top').find('a').removeClass('on');
+               $('.rankTab2').addClass('on');
+            });
+        $('.rankTab3').click(function(){
+               $('.re_search_top').find('a').removeClass('on');
+               $('.rankTab3').addClass('on');
+            });
+        </script>
+
+        <div class="re_comment">
+            현재 예매 가능한 공연은 총 <span>20개</span> 입니다.
+        </div>
+
+        <div class="region_list">
+            <div>
+                <a href="">
+                    <div class="list_big">
+                        <img src="images/ranking_1.jpg" alt="">
+                        <div class="list_small">
+                            <p class="list_tit1">아디오스 피아졸라, 라이브 탱고</p>
+                            <p class="list_tit2">2020.07.05 ~ 2020.07.05</p>
+                            <p class="list_tit2">예술의전달 콘서트홀</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="list_big">
+                        <img src="images/ranking_1.jpg" alt="">
+                        <div class="list_small">
+                            <p class="list_tit1">아디오스 피아졸라, 라이브 탱고</p>
+                            <p class="list_tit2">2020.07.05 ~ 2020.07.05</p>
+                            <p class="list_tit2">예술의전달 콘서트홀</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="list_big">
+                        <img src="images/ranking_1.jpg" alt="">
+                        <div class="list_small">
+                            <p class="list_tit1">아디오스 피아졸라, 라이브 탱고</p>
+                            <p class="list_tit2">2020.07.05 ~ 2020.07.05</p>
+                            <p class="list_tit2">예술의전달 콘서트홀</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="list_big">
+                        <img src="images/ranking_1.jpg" alt="">
+                        <div class="list_small">
+                            <p class="list_tit1">아디오스 피아졸라, 라이브 탱고</p>
+                            <p class="list_tit2">2020.07.05 ~ 2020.07.05</p>
+                            <p class="list_tit2">예술의전달 콘서트홀</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="list_big">
+                        <img src="images/ranking_1.jpg" alt="">
+                        <div class="list_small">
+                            <p class="list_tit1">아디오스 피아졸라, 라이브 탱고</p>
+                            <p class="list_tit2">2020.07.05 ~ 2020.07.05</p>
+                            <p class="list_tit2">예술의전달 콘서트홀</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <br><br><br><br><br>
+    </div>
+</div>
+</body>
+</html>

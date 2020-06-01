@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li, ol{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li, ol{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+
+#footer #wrap {
+    overflow: hidden;
+    min-height: 100%;
+    min-width: 990px;
+}
+
+#footer .nosubwrap #container {
+    margin-top: -193px;
+}
+
+#footer #container {
+    background: #f4f4f4;
+    position: relative;
+    zoom:1;min-height: 100%;
+    margin: -193px 0 -203px;
+}
+
+#footer .nosubwrap #container .inner {
+    padding: 243px 0 253px;
+}
+
+#footer .inner {
+    width: 990px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 약관 */
+#footer .front_tab {
+    overflow: hidden;
+}
+
+#footer .front_tab li {
+    float: left;
+    cursor: pointer;
+}
+
+#footer .front_tab a.on {
+    background-color: #414ea9;
+    color: #fff;
+}
+
+
+#footer .front_tab ul {
+    border: 1px solid #ccc;
+}
+
+#footer .front_tab li a {
+    border: 1px solid #ccc;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 40px;
+    font-size: 20px;
+    text-align: center;
+    width: 328px;
+    height: 43px;
+    padding-top: 16px;
+    background-color: #fff;
+}
+
+#footer .front_tit {
+    margin-left: 10px;
+    font-size: 23px;
+}
+
+
+#footer .front_area {
+    margin-top: 30px;
+    padding: 49px 39px 82px 34px;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    background: #fff;
+    line-height: 18px;
+}
+
+#footer .front_cont .front_area h4:first-child {
+    margin-top: 0;
+}
+
+#footer .front_cont .front_area h4 {
+    margin-top: 52px;
+    font-size: 14px;
+    color: #000;
+}
+
+#footer .front_cont .front_area h4+h5 {
+    margin-top: 19px;
+}
+
+#footer .front_cont .front_area h5 {
+    margin-top: 35px;
+    font-size: 12px;
+    color: #767676;
+}
+
+#footer .front_cont .front_area p {
+    margin-top: 19px;
+    color: #767676;
+}
+
+#footer .front_area .info_list {
+    margin-top: 19px;
+    color: #767676;
+    padding-left: 20px;
+    text-indent: -15px;
+    line-height: 22px;
+}
+
+
+#footer #wrap {
+    overflow: hidden;
+    min-height: 100%;
+    min-width: 990px;
+}
+
+#footer .nosubwrap #container {
+    margin-top: -193px;
+}
+
+#footer #container {
+    background: #f4f4f4;
+    position: relative;
+    zoom:1;min-height: 100%;
+    margin: -193px 0 -203px;
+}
+
+#footer .nosubwrap #container .inner {
+    padding: 243px 0 253px;
+}
+
+#footer .inner {
+    width: 990px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 약관 */
+#footer .front_tab {
+    overflow: hidden;
+}
+
+#footer .front_tab li {
+    float: left;
+}
+
+#footer .front_tab a.on {
+    background-color: #414ea9;
+    color: #fff;
+}
+
+
+#footer .front_tab ul {
+    border: 1px solid #ccc;
+}
+
+#footer .front_tab li a {
+    border: 1px solid #ccc;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 40px;
+    font-size: 20px;
+    text-align: center;
+    width: 328px;
+    height: 43px;
+    padding-top: 16px;
+    background-color: #fff;
+}
+
+#footer .front_tit {
+    margin-left: 10px;
+    font-size: 23px;
+}
+
+
+#footer .front_area {
+    margin-top: 30px;
+    padding: 49px 39px 82px 34px;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    background: #fff;
+    line-height: 18px;
+}
+
+#footer .front_cont .front_area h4:first-child {
+    margin-top: 0;
+}
+
+#footer .front_cont .front_area h4 {
+    margin-top: 52px;
+    font-size: 14px;
+    color: #000;
+}
+
+#footer .front_cont .front_area h4+h5 {
+    margin-top: 19px;
+}
+
+#footer .front_cont .front_area h5 {
+    margin-top: 35px;
+    font-size: 12px;
+    color: #767676;
+}
+
+#footer .front_cont .front_area p {
+    margin-top: 19px;
+    color: #767676;
+}
+
+#footer .front_area .info_list {
+    margin-top: 19px;
+    color: #767676;
+    padding-left: 20px;
+    text-indent: -15px;
+    line-height: 22px;
+}

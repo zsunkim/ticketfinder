@@ -1,0 +1,805 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+#join #section {width:100%}
+
+#join .cont {
+    background-color: #fff;
+    font-weight: 500;
+    width: 980px;
+    margin: 0 auto;
+  }
+
+
+  
+  .joinWrap {
+    margin-top: 30px;
+    position: relative;
+  }
+  
+  .joinWrap h2 {
+    padding-left: 10px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    font-weight: 300;
+    border-bottom: 2px solid #000;
+  }
+  
+  .joinWrap .conTitle {
+    font-size: 20px;
+    padding-left: 10px;
+    margin-bottom: 13px;
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+  
+  
+  .joinWrap .tableBox table {
+    width: 100%;
+    position: relative;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+  }
+  
+  .joinWrap .tableBox table th,
+  .joinWrap .tableBox table td {
+    text-align: left;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    word-break: break-word;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .joinWrap .tableBox table th {
+    padding: 20px 20px;
+    vertical-align: top;
+    background: #f4f6f9;
+    font-weight: 500;
+  }
+  
+  .joinWrap .tableBox table td {
+    vertical-align: middle;
+    padding: 10px 20px;
+    position: relative;
+  }
+  
+  #join input {
+      height: 27px;
+  }
+
+  .joinWrap .tableBox table td select {
+    height: 33px;
+    line-height: 33px;
+    width: 73px;
+    border: 1px solid #dfe5ed;
+  }
+  
+  .joinWrap .tableBox table td .phoneNumber .iText {
+    width: 70px;
+  }
+
+  .joinWrap .tableBox table td .phoneNumber .customSelect {
+    width: 80px;
+  }
+
+  .joinWrap .tableBox table td .mailArea {
+    margin-bottom: 5px;
+  }
+  
+  .joinWrap .tableBox table td .mailArea .iText {
+    width: 150px;
+  }
+  
+  .joinWrap .tableBox table td .mailArea .mailSelect {
+    width: 168px;
+  }
+  
+  .joinWrap .tableBox table td label {
+    font-weight: 300;
+  }
+  
+  .joinWrap .tableBox table td label i {
+    font-size: 12px;
+    font-weight: 300;
+    color: #666;
+  }
+  
+  .joinWrap .tableBox table td .infoLayerBox {
+    display: none;
+    position: absolute;
+    top: 46px;
+    left: 20px;
+    padding: 15px;
+    font-size: 12px;
+    color: #999;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+  }
+  
+  .joinWrap .tableBox table td .infoLayerBox .infoContent {
+    font-size: 12px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .tableBox table:after {
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background: #b6bdc7;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  
+  .joinWrap .tableBox .alertMessage {
+    color: #ef3f43;
+    font-size: 12px;
+    margin-left: 5px;
+    font-weight: 300;
+  }
+  
+  .joinWrap .tableBox .btnblackCheck {
+    display: inline-block;
+    padding: 0 15px;
+    height: 33px;
+    margin-left: 5px;
+    line-height: 33px;
+    font-weight: 300;
+    background: #333;
+    color: #fff;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+
+  #join .btnAddressWrap .btnblackCheck {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .joinWrap .addressWrapper {
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  
+  .joinWrap .addressWrapper .addrType {
+    float: left;
+    width: 63px;
+  }
+  
+  .joinWrap .addressWrapper .addressWrap {
+    float: left;
+  }
+  
+  .joinWrap .addressWrapper .addressWrap .zipcodeBox .iText {
+    width: 80px;
+    margin-bottom: 4px;
+  }
+  
+  .joinWrap .addressWrapper .addressWrap .addressBox .iText {
+    width: 250px;
+  }
+  
+  .joinWrap .birthWrap {
+    display: inline-block;
+  }
+  
+  .joinWrap .birthWrap .yearSelect {
+    width: 82px;
+  }
+  
+  .joinWrap .birthWrap .monthSelect,
+  .joinWrap .birthWrap .daySelect {
+    width: 75px;
+  }
+  
+  .joinWrap .birthWrap .birth_txt {
+    margin: 0 7px 0 4px;
+  }
+  
+  .joinWrap .genderWrap {
+    display: inline-block;
+  }
+  
+  .joinWrap .termsTitleWrap {
+    margin-bottom: 6px;
+    position: relative;
+  }
+  
+  .joinWrap .termsTitleWrap .subTitle {
+    font-size: 14px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .termsTitleWrap .subTitle i {
+    color: #ef3f43;
+    margin-left: -2.5px;
+  }
+  
+  .joinWrap .termsTitleWrap .iCheckbox {
+    vertical-align: -5px;
+  }
+  
+  .joinWrap .termsTitleWrap .iCheckbox label {
+    margin-right: 0;
+  }
+  
+  .joinWrap .termsTitleWrap .iCheckbox i {
+    color: #ef3f43;
+    margin-left: -2.5px;
+  }
+  
+  .joinWrap .termsTitleWrap .btnAllTerms {
+    font-weight: 300;
+    color: #999;
+    margin-left: 5px;
+    padding-right: 9px;
+    background: url("//openimage.interpark.com/.ui/join/icon_arrowGray.png") no-repeat right 7px;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .allTermsWrap {
+    display: inline-block;
+    float: right;
+  }
+  
+  .joinWrap .allTermsWrap .btnAllTerms {
+    font-weight: 300;
+    color: #999;
+    margin-left: 5px;
+    padding-right: 9px;
+    background: url("//openimage.interpark.com/.ui/join/icon_arrowGray.png") no-repeat right 7px;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+    vertical-align: -2px;
+  }
+  
+  .joinWrap .terms_serviceBox {
+    height: 118px;
+    margin-bottom: 26px;
+    border: 1px solid #bababa;
+    clear: both;
+  }
+  
+  .joinWrap .terms_serviceBox iframe {
+    height: 100%;
+    width: 100%;
+  }
+
+  
+  .joinWrap .joinData .iText {
+    width: 340px;
+  }
+  
+  .joinWrap .termsWrap {
+    padding-bottom: 38px;
+  }
+  
+  .joinWrap .termsWrap .conTitle {
+    margin: 43px 0 11px;
+  }
+  
+  .joinWrap .termsWrap .termsBtn {
+    margin: 47px 0 28px;
+  }
+  
+  .joinWrap .termsWrap .termsBtn .iCheckbox label {
+    font-size: 20px;
+    letter-spacing: -1px;
+  }
+  
+  .joinWrap .selectOptionWrap .optionTitle {
+    position: relative;
+  }
+  
+  .joinWrap .selectOptionWrap .optionTitle .btnLayer {
+    display: inline-block;
+    height: 20px;
+    font-weight: 300;
+    line-height: 20px;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 0 8px;
+    color: #fff;
+    background: #333;
+    vertical-align: 2px;
+  }
+  
+  .joinWrap .selectOptionWrap .optionTitle .btnLayer span {
+    background: url("//openimage.interpark.com/.ui/join/btn_moreLayer.png") no-repeat left center;
+    padding-left: 12px;
+  }
+  
+  .joinWrap .selectOptionWrap .optionTitle .btnLayer.btnHideLayer span {
+    background: url("//openimage.interpark.com/.ui/join/bnt_hideLayer.png") no-repeat left center;
+  }
+  /*
+  .joinWrap .selectOptionWrap .selectLayerWrap {
+    display: none;
+  }
+  */
+  .joinWrap .selectOptionWrap .selectLayerWrap.openLayer {
+    display: block;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .tableBox {
+    margin-bottom: 30px;
+  }
+  
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .terms_serviceBox {
+    margin-bottom: 20px;
+  }
+  
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .benefitChkWrap {
+    margin: 0 0 15px 10px;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .termsInfoList {
+    margin-left: 10px;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .termsInfoList li {
+    padding-left: 9px;
+    background: url("//openimage.interpark.com/.ui/join/icon_dashGray.png") no-repeat 0 8px;
+    color: #666;
+    font-size: 12px;
+    font-weight: 300;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .btnAddressWrap {
+    margin-top: 7px;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .genderWrap .radioGroup label {
+    margin-right: 10px;
+  }
+  
+  .joinWrap .selectOptionWrap .selectLayerWrap .alertMessage {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .joinWrap .termsTxt {
+    margin: 5px 0 20px 10px;
+    color: #666;
+    font-weight: 300;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .joinButton {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  .joinWrap .joinButton .join {
+    background: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 72px;
+  }
+  
+  .joinWrap .customSelect {
+    position: relative;
+    z-index: 4;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  /*
+  .joinWrap .customSelect select {
+    visibility: hidden;
+  }
+  */
+  .joinWrap .customSelect .includeLayer {
+    position: absolute;
+    top: 70px;
+    right: -205px;
+    z-index: 1;
+    display: none;
+    width: 266px;
+    padding: 15px;
+    border: 1px solid #333;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+  }
+  
+  .joinWrap .customSelect .includeLayer span {
+    display: block;
+    margin-bottom: 10px;
+    line-height: 16px;
+    font-size: 12px;
+  }
+  
+  .joinWrap .customSelect .newSelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 33px;
+    width: 100%;
+    line-height: 30px;
+    border: 1px solid #b6bdc7;
+    background: url("//openimage.interpark.com/.ui/search/shopping/arrow_select.png") no-repeat right center;
+    padding: 0 34px 0 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    letter-spacing: 0;
+    color: #202020;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .customSelect .options {
+    display: none;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    max-height: 250px;
+    overflow: hidden;
+    overflow-y: auto;
+    border: 1px solid #333;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    letter-spacing: 0;
+    background-color: #fff;
+  }
+  
+  .joinWrap .customSelect .options li {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    border-top: 1px solid #dfe5ed;
+    font-weight: 300;
+    font-size: 14px;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .joinWrap .customSelect .options li:hover {
+    background: #f4f6f9;
+  }
+  
+  .joinWrap .customSelect .options li:first-child {
+    border-top: none;
+  }
+  
+  .joinWrap .customSelect.active .newSelect {
+    background: url("//openimage.interpark.com/.ui/search/shopping/arrow_select_up.png") no-repeat right center;
+  }
+  
+  .joinWrap .customSelect.active .options {
+    display: block;
+  }
+  
+  .popupContent {
+    display: none;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+  }
+  
+  .popupContent.openLayer {
+    display: block;
+  }
+  
+  .popupContent .titleWrap {
+    background: #aaa;
+    font-size: 22px;
+    color: #fff;
+    height: 50px;
+    position: relative;
+  }
+  
+  .popupContent .titleWrap .title {
+    font-size: 22px;
+    margin-right: 50px;
+    padding-top: 6px;
+    text-align: center;
+    font-weight: 300;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .popupContent .titleWrap .closeBtn {
+    display: block;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-indent: -9999px;
+    background: url("//openimage.interpark.com/.ui/join/btn_popClose.png") no-repeat;
+  }
+  
+  .popupContent .contentWrap {
+    padding: 27px 20px;
+    box-sizing: border-box;
+    font-weight: 300;
+  }
+  
+  .popupContent .contentWrap .tabWrap .tabList {
+    overflow: hidden;
+  }
+  
+  .popupContent .contentWrap .tabWrap .tabList li {
+    float: left;
+    width: 50%;
+  }
+  
+  .popupContent .contentWrap .tabWrap .tabList li a {
+    display: block;
+    height: 43px;
+    color: #999;
+    font-size: 15px;
+    text-align: center;
+    line-height: 43px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-weight: 300;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .popupContent .contentWrap .tabWrap .tabList li:first-child a {
+    border-right: 0;
+  }
+  
+  .popupContent .contentWrap .tabWrap .tabList li.active a {
+    background: #fff;
+    color: #000;
+    border-bottom: 0;
+  }
+  
+  .popupContent .contentWrap .tabConWrap {
+    padding-top: 35px;
+    font-size: 14px;
+  }
+  
+  .popupContent .contentWrap .tabConWrap .tabContent {
+    display: none;
+  }
+  
+  .popupContent .contentWrap .tabConWrap .tabContent.active {
+    display: block;
+  }
+  
+  .popupContent .contentWrap .tabConWrap .infoTxt {
+    margin-top: 35px;
+    color: #999;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .popupContent .contentWrap .infoTb dt {
+    float: left;
+    width: 88px;
+    margin: 3px -88px 0 0;
+    font-weight: 300;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  .popupContent .contentWrap .infoTb dt .icon_bullet {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd {
+    margin-left: 88px;
+    margin-bottom: 20px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.phoneNumber .iText {
+    width: 61px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.phoneNumber .hypen {
+    margin: 0 3px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.confirmWrap .iText {
+    width: 253px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.email .iText {
+    width: 173px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.email .at {
+    margin: 0 5px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.email .disableText {
+    background: #f4f6f9;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.emailConfirm {
+    margin-left: 365px;
+  }
+  
+  .popupContent .contentWrap .infoTb dd.last {
+    margin-bottom: 0;
+  }
+  
+  .popupContent .contentWrap button {
+    display: inline-block;
+    font-size: 14px;
+    border: 1px solid #b6bdc7;
+    height: 31px;
+    min-width: 120px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 0;
+    text-align: center;
+    color: #000;
+    vertical-align: middle;
+    border-radius: 3px;
+  }
+  
+  .popupContent .contentWrap button.btnConfirm {
+    background: #333;
+    color: #fff;
+    border: none;
+  }
+  
+  .popupContent.idchkPopup {
+    width: 400px;
+  }
+  
+  .popupContent.idchkPopup .contentWrap {
+    text-align: center;
+  }
+  
+  .popupContent.idchkPopup .contentWrap .infoTxt {
+    font-size: 16px;
+    margin: 10px 0 30px;
+    background-color: #fff;
+    font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  
+  
+  .iframeTermsWrapper {
+    padding: 10px;
+    font-family: "Noto Sans KR", "NanumGothic", "Nanum Gothic", "Malgun Gothic", "Apple SD Gothic Neo", dotum, sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .iframeTermsWrapper .article {
+    margin-bottom: 30px;
+  }
+  
+  .iframeTermsWrapper .article .article_title {
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .iframeTermsWrapper .article .article_text {
+    color: #666;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+  
+  .iframeTermsWrapper .article .sub_title {
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin: 20px 0 10px;
+  }
+  
+  .iframeTermsWrapper .article .sections {
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+  }
+  
+  .iframeTermsWrapper .termsTable {
+    width: 100%;
+    position: relative;
+    table-layout: fixed;
+    border: 1px solid #dfe5ed;
+  }
+  
+  .iframeTermsWrapper .termsTable th,
+  .iframeTermsWrapper .termsTable td {
+    vertical-align: middle;
+    padding: 10px 20px;
+    line-height: 1.4;
+    border-bottom: 1px solid #dfe5ed;
+    border-right: 1px solid #dfe5ed;
+    word-break: break-word;
+    color: #000;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  
+  .iframeTermsWrapper .termsTable th.emphasis {
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #f4f6f9;
+  }
+  
+  .iframeTermsWrapper .termsTable td.emphasis {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .winPopWrapper .titleWrap {
+    background: #aaa;
+    color: #fff;
+    font-size: 22px;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+  }
+  
+  .winPopWrapper .titleWrap h1 {
+    font-weight: 500;
+    text-align: center;
+    margin-right: 50px;
+  }
+  
+  .winPopWrapper .titleWrap .btnPopClose {
+    display: block;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-indent: -9999px;
+    background: url("//openimage.interpark.com/.ui/join/btn_popClose.png") no-repeat;
+  }
+  
+  .winPopWrapper .popContent * {
+    font-weight: 300;
+    font-size: 12px;
+  }
+  
+  .winPopWrapper .popContent iframe {
+    width: 740px;
+    padding-left: 10px;
+    height: 745px;
+  }
+  

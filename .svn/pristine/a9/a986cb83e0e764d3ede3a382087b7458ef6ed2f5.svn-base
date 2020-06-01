@@ -1,0 +1,208 @@
+package ticket.finder.dto;
+
+public class ShowDetail {
+	private int showNum;
+	private String showCode;
+	private String showFcCode;
+	private String showHallName;
+	private String showName;
+	private String showSDate;
+	private String showEDate;
+	private String showCast;
+	private String showCrew;
+	private String showRuntime;
+	private String showAge;
+	private String showEntName;
+	private int showPrice;
+	private String showPoster;
+	private String showState;
+	private String showGenre;
+	private String showDaytime;
+	private String showSeat;
+	private String showDetail1;
+	private String showDetail2;
+	private String showDetail3;
+	private String showDetail4;
+	
+	public ShowDetail() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getShowNum() {
+		return showNum;
+	}
+
+	public void setShowNum(int showNum) {
+		this.showNum = showNum;
+	}
+
+	public String getShowCode() {
+		return showCode;
+	}
+
+	public void setShowCode(String showCode) {
+		this.showCode = showCode;
+	}
+
+	public String getShowFcCode() {
+		return showFcCode;
+	}
+
+	public void setShowFcCode(String showFcCode) {
+		this.showFcCode = showFcCode;
+	}
+
+	public String getShowHallName() {
+		return showHallName;
+	}
+
+	public void setShowHallName(String showHallName) {
+		this.showHallName = showHallName;
+	}
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
+
+	public String getShowSDate() {
+		return showSDate;
+	}
+
+	public void setShowSDate(String showSDate) {
+		this.showSDate = showSDate;
+	}
+
+	public String getShowEDate() {
+		return showEDate;
+	}
+
+	public void setShowEDate(String showEDate) {
+		this.showEDate = showEDate;
+	}
+
+	public String getShowCast() {
+		return showCast;
+	}
+
+	public void setShowCast(String showCast) {
+		this.showCast = showCast;
+	}
+
+	public String getShowCrew() {
+		return showCrew;
+	}
+
+	public void setShowCrew(String showCrew) {
+		this.showCrew = showCrew;
+	}
+
+	public String getShowRuntime() {
+		return showRuntime;
+	}
+
+	public void setShowRuntime(String showRuntime) {
+		this.showRuntime = showRuntime;
+	}
+
+	public String getShowAge() {
+		return showAge;
+	}
+
+	public void setShowAge(String showAge) {
+		this.showAge = showAge;
+	}
+
+	public String getShowEntName() {
+		return showEntName;
+	}
+
+	public void setShowEntName(String showEntName) {
+		this.showEntName = showEntName;
+	}
+
+	public int getShowPrice() {
+		return showPrice;
+	}
+
+	public void setShowPrice(int showPrice) {
+		this.showPrice = showPrice;
+	}
+
+	public String getShowPoster() {
+		return showPoster;
+	}
+
+	public void setShowPoster(String showPoster) {
+		this.showPoster = showPoster;
+	}
+
+	public String getShowState() {
+		return showState;
+	}
+
+	public void setShowState(String showState) {
+		this.showState = showState;
+	}
+
+	public String getShowGenre() {
+		return showGenre;
+	}
+
+	public void setShowGenre(String showGenre) {
+		this.showGenre = showGenre;
+	}
+
+	public String getShowDaytime() {
+		return showDaytime;
+	}
+
+	public void setShowDaytime(String showDaytime) {
+		this.showDaytime = showDaytime;
+	}
+
+	public String getShowSeat() {
+		return showSeat;
+	}
+
+	public void setShowSeat(String showSeat) {
+		this.showSeat = showSeat;
+	}
+
+	public String getShowDetail1() {
+		return showDetail1;
+	}
+
+	public void setShowDetail1(String showDetail1) {
+		this.showDetail1 = showDetail1;
+	}
+
+	public String getShowDetail2() {
+		return showDetail2;
+	}
+
+	public void setShowDetail2(String showDetail2) {
+		this.showDetail2 = showDetail2;
+	}
+
+	public String getShowDetail3() {
+		return showDetail3;
+	}
+
+	public void setShowDetail3(String showDetail3) {
+		this.showDetail3 = showDetail3;
+	}
+
+	public String getShowDetail4() {
+		return showDetail4;
+	}
+
+	public void setShowDetail4(String showDetail4) {
+		this.showDetail4 = showDetail4;
+	}
+	
+	
+}

@@ -1,0 +1,18 @@
+package ticket.finder.dao;
+
+import java.util.List;
+
+import ticket.finder.dto.TfUser;
+
+public interface TfUserDAO {
+	int insertUser(TfUser user);
+	int updateUser(TfUser user);
+	int dormantUser(String id);
+	int updateLastDate(String userId);
+	String selectFindIdUser(String name, String email);
+	TfUser selectUser(String id);
+	List<TfUser> selectUserList();
+	List<TfUser> dormantUserList();
+	List<TfUser> dormantedUserList();
+	int selectIdCheck(String userId);
+}

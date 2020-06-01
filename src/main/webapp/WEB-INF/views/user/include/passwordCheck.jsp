@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style type="text/css">
+.error {color: red;}
+</style>
+<div id="passwordCheck">
+	<div id="section">
+	    <div id="pwChkHeader">
+	        <div id="headerArea">
+	            <h1>비밀번호 재확인</h1>
+	        </div>
+	    </div>
+	    <div class="cont">
+	    <form action="pwCheck" method="post">
+	        <div class="passwordCheckForm">
+	            <div class="check_input">
+	                <div class="info_insert">
+	                	<input type="password" id="passwd" class="passwd" name="userPw" placeholder="비밀번호를 입력해주세요.">
+	                </div>
+	                <div id="passMsg" class="error">${message }</div>
+	            </div>
+	            <div class="wrap_btn">
+	                <button type="submit" class="check_btn" id="check_btn">확인</button>
+	            </div>
+	        </div>
+	    </form>
+	    </div>
+	</div>
+</div>

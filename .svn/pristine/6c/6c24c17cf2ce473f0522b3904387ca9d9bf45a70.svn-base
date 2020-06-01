@@ -1,0 +1,72 @@
+
+/*
+$("#name").on('blur', function() {
+	$("#nameMsg").text("이름을 입력해주세요.");
+	$("#name").focus();
+});
+		    
+$("#email").on('blur', function() {
+	$("#emailMsg").text("이메일을 입력해주세요.");
+	$("#email").focus();
+});
+	*/	    
+		    /* 
+		    $("#findId").submit(function() {
+		    	var authNum = ${authNum};
+		    	console.log(authNum);
+		    	if($("#num").val()!=authNum){
+		    		$("#numMsg").text("인증번호가 일치하지 않습니다.");
+		    		$("#num").focus();
+		    		return false;		
+		    	}
+		    	return true;
+		    });
+		    */
+		    
+			//var email = document.getElementById("input").value;
+			//var email = $(".email").attr('value');
+			//var email = $("#email").val();
+			//console.log(email);
+		    
+		    
+			$("#numBtn").click(function() {
+				$("#name")
+				
+				
+				var email = $("#email").val();
+				//alert(email);
+				find(email);
+			});
+			 
+			
+		    function find(email) {
+		    	$.ajax({
+		    		type:"GET",
+		    		url:"email?email="+email,
+		    		dataType:"json",
+		    		success:function(data) {
+		    			console.log(data);
+		    			
+		    			if($("#num").val()!=data) {
+		    				$("#numMsg").empty();
+		    				$("#numMsg").text("인증번호가 일치하지 않습니다.");
+		    			}
+		    			
+		    			/*
+		    			$("#findId").submit(function() {
+		    		    	var authNum = ${authNum};
+		    		    	console.log(authNum);
+		    		    	if($("#num").val()!=authNum){
+		    		    		$("#numMsg").text("인증번호가 일치하지 않습니다.");
+		    		    		$("#num").focus();
+		    		    		return false;		
+		    		    	}
+		    		    	return true;
+		    		    });
+		    			*/
+		    		}, 
+		    		error:function(xhr) {
+		    			alert("응답요류 = "+xhr.status);
+		    		}
+		    	   });
+		    }

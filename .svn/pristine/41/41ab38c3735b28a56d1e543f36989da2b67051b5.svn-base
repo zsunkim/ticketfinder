@@ -1,0 +1,16 @@
+package ticket.finder.service;
+
+import java.util.List;
+
+import ticket.finder.dto.Faq;
+import ticket.finder.exception.FaqNotFoundException;
+
+public interface FaqService {
+	void addFaq(Faq faq);
+	void modifyFaq(Faq faq) throws FaqNotFoundException;
+	void removeFaq(int faqNum) throws FaqNotFoundException;
+	Faq getFaq(int faqNum) throws FaqNotFoundException;
+	List<Faq> getCategoryFaq(String faqCategory);
+	List<Faq> getKeywordFaq(String faq);
+	List<Faq> getFaqList();
+}

@@ -1,0 +1,162 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<div id="bookDetail">
+	<div id="section01">
+    <div class="cont">
+      <img src="${userShow.tfShow.sPoster}" alt="image">
+      <p class="showTit">${userShow.tfShow.sGenre} &lt;${userShow.tfShow.sName}&gt;</p>
+      <dl>
+        <dt>예매번호</dt>
+		<dd>${userOrder.orderCode }</dd>
+		<dt>관람일</dt>
+		<dd>${showList[s.current].showDetail.showDaytime}</dd>
+		<dt>매수</dt>
+		<dd>${userOrder.orderQty}매</dd>
+		<c:choose>
+			<c:when test="${userOrder.orderDpState eq '취소'}">
+				<dt>취소일</dt>
+				<dd>${userRefund.refundDate}</dd>
+			</c:when>
+			
+			<c:otherwise>
+				<dt>예매일</dt>
+				<dd>${fn:substring(userOrder.orderDate,0,10)}</dd>
+			</c:otherwise>
+		</c:choose>
+      </dl>
+      <dl>
+        <dt>공연장</dt>
+        <dd>${userShow.showDetail.showHallName}</dd>
+        <dt>예매자</dt>
+        <dd>${userOrder.orderUserName}</dd>
+        <dt>상태</dt>
+        <dd>${userOrder.orderDpState}(${userOrder.orderPayment})</dd>
+        <dt>취소버튼!</dt>
+        <dd>취소버튼!</dd>
+      </dl>
+    </div>
+  </div><!-- section01 End -->
+
+  <div id="section02">
+    <div class="cont">
+      <h2>티켓 수령 방법</h2>
+      <dl>
+        <dt>수령방법</dt>
+        <dd>배송 | 최대 4~5일 이내</dd>
+        <dt>받으시 분</dt>
+        <dd>${userOrder.orderUserName}</dd>
+        <dt>휴대폰 번호</dt>
+        <dd>${loginUserInfo.userTel}</dd>
+        <dt>주소</dt>
+        <dd>${loginUserInfo.userAddr1} ${loginUserInfo.userAddr2}</dd>
+        <dt>송장번호</dt>
+        <c:choose>
+			<c:when test="${fn:length(userOrder.orderShippingNum) > 0}}">
+				<dd>${userOrder.orderShippingNum}</dd>
+			</c:when>
+			
+			<c:otherwise>
+				<dd>티켓 발송 전입니다. 티켓 발송 이후에 확인 가능합니다.</dd>
+			</c:otherwise>
+		</c:choose>
+      </dl>
+    </div>
+  </div><!-- section02 End -->
+
+  <div id="section03">
+    <div class="cont">
+      <h2>구매 및 결제 내역</h2>
+      <dl>
+        <dt>
+          <span class="left">티켓금액</span>
+          <span class="right price"><fmt:formatNumber value="${userOrder.orderPrice}" type="number"/></span>
+        </dt>
+        <dd>
+          <div class="left fee">
+            <span class="left symbol">+</span>
+            <span class="left">예매 수수료</span>
+            <span class="right price"><fmt:formatNumber value="${userOrder.orderFees}" type="number"/></span>
+          </div>
+          <div class="left fee">
+            <span class="left symbol">+</span>
+            <span class="left">배송료</span>
+            <span class="right price"><fmt:formatNumber value="${userOrder.orderShipFees}" type="number"/></span>
+          </div>
+          <div class="right">
+            <span class="left symbol">=</span>
+            <span class="left sum">총 구매 금액</span>
+            <span class="right price sum"><fmt:formatNumber value="${userOrder.orderPrice}+${userOrder.orderFees}+${userOrder.orderShipFees}" type="number"/></span>
+          </div>
+        </dd>
+        <dt>결제방법</dt>
+        <dd>${userOrder.orderPayment}</dd>
+        <dt>결제상태</dt>
+        <dd>${userOrder.orderDpState}</dd>
+      </dl>
+    </div>
+  </div><!-- section03 End -->
+
+<c:if test="${userOrder.orderDpState eq '취소'}">
+  <div id="section04">
+    <div class="cont">
+      <h2>환불 내역</h2>
+      <dl>
+        <dt>취소 위약금</dt>
+        <dd><fmt:formatNumber value="${userRefund.refundPenalty}" type="number"/>원</dd>
+        <dt>환불금액</dt>
+        <dd><fmt:formatNumber value="${userRefund.refundPay}" type="number"/>원</dd>
+        <dt>환불 방법</dt>
+        <dd>${userOrder.orderPayment} 취소</dd>
+      </dl>
+    </div>
+  </div><!-- section04 End -->
+</c:if>
+
+  <div id="section05">
+    <div class="cont">
+      <h2>좌석 정보(1매)</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>좌석등급</td>
+            <td>좌석번호</td>
+            <td>금액</td>
+            <td>상태</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${userOrder.orderGrade}</td>
+            <td>${userOrder.orderSeat}</td>
+            <td><fmt:formatNumber value="${userOrder.orderPrice}+${userOrder.orderFees}+${userOrder.orderShipFees}" type="number"/></td>
+            <td>${userOrder.orderTicketing}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="info">*예매일 이후 취소 시 예매 수수료는 환불되지 않습니다.</p>
+    </div>
+  </div><!-- section05 End -->
+
+  <div id="section06">
+    <div class="cont">
+      <h2>환불 정책</h2>
+      <div class="box">
+        <ul>
+          <li>취소마감시간 이후 또는 관람일 당일 예매하신 건에 대해서는 취소/변경/환불이 불가합니다.</li>
+          <li>예매수수료는 예매 당일 밤 12시 이전까지 취소 시 환불 가능합니다.</li>
+          <li>배송이 시작된 경우 취소마감시간이전까지 멜론티켓 고객센터로 티켓을 반환해주셔야 환불이 가능하며, 도착한 일자 기준으로 취소수수료가 부과됩니다. <br>
+            (* 단, 반환된 티켓의 배송료는 환불되지 않으며 일괄배송 상품의 경우 취소에 대한 자세한 문의는 고객센터로 문의해 주시기 바랍니다.)</li>
+          <li>지역 및 배송서비스 사정에 따라 배송사가 변경될 수 있으며, 배송일이 추가적으로 소요될 수 있습니다. (CJ대한통운, 우체국 외 1개 업체)</li>
+          <li>일괄배송의 경우 공연 별로 배송일자가 상이하며 지정된 배송일자 기준으로 배송이 시작됩니다.<br>
+            (* 지정된 배송일자는 상세정보 및 예매공지사항에서 확인할 수 있습니다.)</li>
+          <li>예매취소 시점과 결제 시 사용하신 신용카드사의 환불 처리기준에 따라 취소금액의 환급방법과 환급일은 다소 차이가 있을 수 있습니다.</li>
+          <li>신용카드 할부결제로 구매하신 티켓 수량의 일부를 취소하실 경우, 신용카드사의 사정에 따라 혜택(무이자 할부 등)의 적용 여부가 달라질 수 있음을 유의하시기 바랍니다.</li>
+          <li>기타 문의사항은 이용안내를 참조하시거나 고객센터 1899-0042 혹은 1:1문의를 이용하시기 바랍니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- section06 End -->
+</div>

@@ -1,0 +1,325 @@
+	<div id="section01">
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<a>
+						<img src="img/slide1.jpg">
+						<p class='slideTitle'>렉스 오렌지 카운티 내한공연</p>
+						<p class='slideDetail'>2020.07.25 ~ 2020.07.26 세종대학교 대양홀</p>
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a>
+						<img src="img/slide2.jpg">
+						<p class='slideTitle'>태사자 콘서트</p>
+						<p class='slideDetail'>2020.07.25 ~ 2020.07.26 세종대학교 대양홀</p>
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a>
+						<img src="img/slide3.jpg">
+						<p class='slideTitle'>GREENPLUGGED SEOUL</p>
+						<p class='slideDetail'>2020.07.25 ~ 2020.07.26 세종대학교 대양홀</p>
+					</a>
+				</div>
+			</div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		  </div>
+	</div>
+	<div id="section02">
+		<p class="title">Focus on</p>
+		<div class="focusImg">
+			<a href="perform_detail.html"><img src="img/focuson1.jpg"></a>
+			<a href="perform_detail.html"><img src="img/focuson2.jpg"></a>
+			<a href="perform_detail.html"><img src="img/focuson3.jpg"></a>
+		</div>
+	</div>
+	<div id="section03">
+		<p class="title">What's hot</p>
+		<div class="hotList">
+			<a>
+				<div class="hotWrap">
+					<img src="img/hot1.jpg">
+					<div class="hotTxtWrap">
+						<p class="hotTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="hotTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="hotTxt2">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="hotWrap">
+					<img src="img/hot1.jpg">
+					<div class="hotTxtWrap">
+						<p class="hotTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="hotTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="hotTxt2">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="hotWrap">
+					<img src="img/hot1.jpg">
+					<div class="hotTxtWrap">
+						<p class="hotTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="hotTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="hotTxt2">YES24 LIVE HALL(구,악스홀)</p>
+						<p class="hotCircle">단독</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="hotWrap">
+					<img src="img/hot1.jpg">
+					<div class="hotTxtWrap">
+						<p class="hotTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="hotTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="hotTxt2">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="hotWrap">
+					<img src="img/hot1.jpg">
+					<div class="hotTxtWrap">
+						<p class="hotTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="hotTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="hotTxt2">YES24 LIVE HALL(구,악스홀)</p>
+						<p class="hotCircle">단독</p>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div id="section04">
+		<div class="rankWrap">
+			<div class="rank">
+				<p class="rankTitle">
+					WEEKLY RANKING
+					<a><img src="img/more.png"></a>
+				</p>
+				<ul class="rankList">
+					<li class="on">
+						<a>
+							<div class="rankDetail">
+								<div class="rankNum">1위</div>
+								<div class="rankImg"><img src="img/rank1.jpg" class="on"></div>
+								<div class="rankTxt">
+									<p class="txt1">리어외전</p>
+									<p class="txt2">2020.04.11 ~ 2020.04.19</p>
+									<p class="txt3">대학로예술극장 대극장</p>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a>
+							<div class="rankDetail">
+								<div class="rankNum">2위</div>
+								<div class="rankImg"><img src="img/rank1.jpg"></div>
+								<div class="rankTxt">
+									<p class="txt1">리어외전</p>
+									<p class="txt2">2020.04.11 ~ 2020.04.19</p>
+									<p class="txt3">대학로예술극장 대극장</p>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a>
+							<div class="rankDetail">
+								<div class="rankNum">3위</div>
+								<div class="rankImg"><img src="img/rank1.jpg"></div>
+								<div class="rankTxt">
+									<p class="txt1">리어외전</p>
+									<p class="txt2">2020.04.11 ~ 2020.04.19</p>
+									<p class="txt3">대학로예술극장 대극장</p>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a>
+							<div class="rankDetail">
+								<div class="rankNum">4위</div>
+								<div class="rankImg"><img src="img/rank1.jpg"></div>
+								<div class="rankTxt">
+									<p class="txt1">리어외전</p>
+									<p class="txt2">2020.04.11 ~ 2020.04.19</p>
+									<p class="txt3">대학로예술극장 대극장</p>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a>
+							<div class="rankDetail">
+								<div class="rankNum">5위</div>
+								<div class="rankImg"><img src="img/rank1.jpg"></div>
+								<div class="rankTxt">
+									<p class="txt1">리어외전</p>
+									<p class="txt2">2020.04.11 ~ 2020.04.19</p>
+									<p class="txt3">대학로예술극장 대극장</p>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<script type="text/javascript">
+			$('li').mouseover(function(){
+				$('ul').children('li').removeClass('on');
+				$(this).addClass('on');
+				$(this).find('img').addClass('on');
+			});
+			$('li').mouseleave(function(){
+				$(this).removeClass('on');
+				$(this).find('img').removeClass('on');
+				$('li:first').addClass('on');
+				$('li:first').find('img').addClass('on');
+			});
+			</script>
+			<div class="recomCont">
+				<div class="recomTitle">지역별 추천</div>
+				<div class="recomList">
+					<a>
+						<div class="recomItem">
+							<img src="img/listItem1.jpg">
+							<div class="recomItemTxt">
+								<p class="recomItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+								<p class="recomItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+								<p class="recomItemCircle">서울</p>
+							</div>
+						</div>
+					</a>
+					<a>
+						<div class="recomItem">
+							<img src="img/listItem1.jpg">
+							<div class="recomItemTxt">
+								<p class="recomItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+								<p class="recomItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+								<p class="recomItemCircle">광주</p>
+							</div>
+						</div>
+					</a>
+					<a>
+						<div class="recomItem">
+							<img src="img/listItem1.jpg">
+							<div class="recomItemTxt">
+								<p class="recomItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+								<p class="recomItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+								<p class="recomItemCircle">부산</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="section05">
+		<p class="listTitle"></p>
+		<div class="listTab">
+			<span class="listTab1"><a class="on">주간랭킹순</a></span>
+			<span class="listTab2"><a>신상품순</a></span>
+			<span class="listTab3"><a>종료임박순</a></span>
+			<span class="listTab4"><a>상품명순</a></span>
+		</div>
+		<script type="text/javascript">
+			$('.listTab1').click(function(){
+			   $('.listTab').find('a').removeClass('on');
+			   $('.listTab1').children('a').addClass('on');
+		   });
+		   $('.listTab2').click(function(){
+				$('.listTab').find('a').removeClass('on');
+			   $('.listTab2').children('a').addClass('on');
+		   });
+		   $('.listTab3').click(function(){
+				$('.listTab').find('a').removeClass('on');
+			   $('.listTab3').children('a').addClass('on');
+		   });
+		   $('.listTab4').click(function(){
+				$('.listTab').find('a').removeClass('on');
+			   $('.listTab4').children('a').addClass('on');
+		   });
+		   </script>
+		<p class="listTxt">현재 예매 가능한 공연은 개입니다.</p>
+		<div class="list">
+			<a>
+				<div class="listItem">
+					<img src="img/listItem1.jpg">
+					<div class="listItemTxt">
+						<p class="listItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="listItemTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="listItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+						<p class="listItemCircle">단독</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="listItem">
+					<img src="img/listItem1.jpg">
+					<div class="listItemTxt">
+						<p class="listItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="listItemTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="listItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="listItem">
+					<img src="img/listItem1.jpg">
+					<div class="listItemTxt">
+						<p class="listItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="listItemTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="listItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+						<p class="listItemCircle">단독</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="listItem">
+					<img src="img/listItem1.jpg">
+					<div class="listItemTxt">
+						<p class="listItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="listItemTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="listItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="listItem">
+					<img src="img/listItem1.jpg">
+					<div class="listItemTxt">
+						<p class="listItemTxt1">루엘 내한공연 [2020 Free Time World Tour in Seoul]</p>
+						<p class="listItemTxt2">2020.09.18 ~ 2020.09.18</p>
+						<p class="listItemTxt3">YES24 LIVE HALL(구,악스홀)</p>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- Swiper JS -->
+	<script src="js/swiper.min.js"></script>
+
+	<!-- Initialize Swiper -->
+	<script>
+	  var swiper = new Swiper('.swiper-container', {
+		slidesPerView: 3,
+		//spaceBetween: 30,
+		slidesPerView: 'auto',
+		slidesPerGroup: 1,
+		loop: true,
+		centeredSlides: true,
+		loopFillGroupWithBlank: true,
+	  //   pagination: {
+	  //     el: '.swiper-pagination',
+	  //     clickable: true,
+	  //   },
+		navigation: {
+		  nextEl: '.swiper-button-next',
+		  prevEl: '.swiper-button-prev',
+		},
+	  });
+	</script>

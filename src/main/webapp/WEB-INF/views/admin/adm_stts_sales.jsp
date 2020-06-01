@@ -1,0 +1,492 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - Admin</title>
+
+
+	<!--STYLESHEET-->
+	<!--=================================================-->
+
+	<!--Open Sans Font [ OPTIONAL ] -->
+ 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+	<!--Bootstrap Stylesheet [ REQUIRED ]-->
+	<link href="${pageContext.request.contextPath }/a_css/bootstrap.min.css" rel="stylesheet">
+
+
+	<!--Nifty Stylesheet [ REQUIRED ]-->
+	<link href="${pageContext.request.contextPath }/a_css/nifty.min.css" rel="stylesheet">
+
+
+	<!--Font Awesome [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--FooTable [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/fooTable/css/footable.core.css" rel="stylesheet">	
+
+	<!--Morris.js [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/morris-js/morris.min.css" rel="stylesheet">
+
+	<!--SCRIPT-->
+	<!--=================================================-->
+
+	<!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath }/a_plugins/pace/pace.min.js"></script>
+    
+    <style type="text/css">
+    	.tab-base .nav-tabs>li:not(.active)>a{background-color:rgba(189,189,189,0.35);opacity:.7;-webkit-transition:opacity,0.3s;transition:opacity,0.3s}
+    	.nav-tabs.sec>li.active>a{background-color:rgba(249, 162, 153, 0.35);}
+    	.tab-base .tab-content{box-shadow:0 0 0 rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+	<div id="container" class="effect aside-float aside-bright mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">매출 집계</h1>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+
+				<!--Breadcrumb-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<ol class="breadcrumb">
+					<li><a href="${pageContext.request.contextPath }/main.admin">홈</a></li>
+					<li><a href="${pageContext.request.contextPath }/sttsshow.admin">통계 및 매출</a></li>
+					<li class="active">매출 집계</li>
+				</ol>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End breadcrumb-->
+
+
+		
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					<div class="row">
+					
+						<div class="col-lg-12">
+						
+							<!--Default Tabs (Left Aligned)-->
+							<!--===================================================-->
+							<div class="tab-base">
+					
+								<!--Nav Tabs-->
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a data-toggle="tab" href="#lft-tab-1">날짜별</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-2">장르별</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-3">극장별</a>
+									</li>
+								</ul>
+					
+								<!--Tabs Content-->
+								<div class="tab-content">
+									<div id="lft-tab-1" class="tab-pane fade active in">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+								
+											<!--Nav tabs-->
+											<ul class="nav nav-tabs tabs-right sec">
+												<li class="active"><a data-toggle="tab" href="#ico-rgt-tab-1" id="tab-day">일별</a></li>
+												<li><a data-toggle="tab" href="#ico-rgt-tab-2" id="tab-dow">요일별</a></li>
+												<li><a data-toggle="tab" href="#ico-rgt-tab-3" id="tab-mon">월별</a></li>
+											</ul>
+								
+								
+											<!--Tabs Content-->
+											<div class="tab-content">
+												<div id="ico-rgt-tab-1" class="tab-pane fade active in">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="panel">
+																<div class="panel-heading">
+																	<h3 class="panel-title">매출액</h3>
+																	<h5 class="text-right text-thin">단위 : 천원</h5>
+																</div>
+																<div class="panel-body">
+													
+																	<!--Morris Line Chart placeholder-->
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+																	<div id="morris-line-day" style="height:212px"></div>
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+													
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="ico-rgt-tab-2" class="tab-pane fade">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="panel">
+																<div class="panel-heading">
+																	<h3 class="panel-title">매출액</h3>
+																	<h5 class="text-right text-thin">단위 : 천원</h5>
+																</div>
+																<div class="panel-body">
+													
+																	<!--Morris Line Chart placeholder-->
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+																	<div id="morris-line-dow" style="height:212px"></div>
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+													
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="ico-rgt-tab-3" class="tab-pane fade">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="panel">
+																<div class="panel-heading">
+																	<h3 class="panel-title">매출액</h3>
+																	<h5 class="text-right text-thin">단위 : 천원</h5>
+																</div>
+																<div class="panel-body">
+													
+																	<!--Morris Line Chart placeholder-->
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+																	<div id="morris-line-mon" style="height:212px"></div>
+																	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+													
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+									
+									<div id="lft-tab-2" class="tab-pane fade">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="panel">
+													<div class="panel-heading">
+														<h3 class="panel-title">매출액</h3>
+														<h5 class="text-right text-thin">단위 : 천원</h5>
+													</div>
+													<div class="panel-body">
+										
+														<!--Morris Bar Chart placeholder -->
+														<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+														<div id="morris-bar-genre" style="height:212px"></div>
+														<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+										
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div id="lft-tab-3" class="tab-pane fade">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="panel">
+													<div class="panel-heading">
+														<h3 class="panel-title">매출액</h3>
+														<h5 class="text-right text-thin">단위 : 천원</h5>
+													</div>
+													<div class="panel-body">
+										
+														<!--Morris Bar Chart placeholder -->
+														<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+														<div id="morris-bar-theater" style="height:212px"></div>
+														<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+										
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								
+								
+								
+								
+							</div>
+							<!--===================================================-->
+							<!--End Default Tabs (Left Aligned)-->
+							
+							
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제함-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+
+		</div>
+
+		
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v1.0.0</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 TicketFinder</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+
+	
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+	<!--jQuery [ REQUIRED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/jquery-2.1.1.min.js"></script>
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/bootstrap.min.js"></script>
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fast-click/fastclick.min.js"></script>
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty.min.js"></script>
+	
+	<!--FooTable [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fooTable/dist/footable.all.min.js"></script>
+	
+	<!--Morris.js [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/morris-js/raphael-js/raphael.min.js"></script>
+	<script src="${pageContext.request.contextPath }/a_plugins/morris-js/morris.min.js"></script>
+	
+	<script type="text/javascript">
+	$(window).on('load', function() {
+		$('#mainnav-menu').children().eq(5).addClass('active-sub').children().eq(1).addClass('in').children().eq(3).addClass('active-link');
+		
+		//날짜별 - 일별
+		var day_data = [
+			<c:forEach var="sday" items="${salesDay}">
+				{"elapsed": "${sday.oDate}", "value": "${sday.count}"},
+			</c:forEach>
+		];
+		Morris.Line({
+			element: 'morris-line-day',
+			data: day_data,
+			xkey: 'elapsed',
+			ykeys: ['value'],
+			labels: ['매출액'],
+			gridEnabled: false,
+			gridLineColor: 'transparent',
+			lineColors: ['#045d97'],
+			lineWidth: 2,
+			parseTime: false,
+			resize:true,
+			hideHover: 'auto'
+		});
+		
+		//날짜별 - 요일별
+		var dow_data = [
+			<c:forEach var="sdow" items="${salesDow}">
+				{"elapsed": "${fn:substring(sdow.oDate,9,12)}", "value": "${sdow.count}"},
+			</c:forEach>
+		];
+		Morris.Line({
+			element: 'morris-line-dow',
+			data: dow_data,
+			xkey: 'elapsed',
+			ykeys: ['value'],
+			labels: ['매출액'],
+			gridEnabled: false,
+			gridLineColor: 'transparent',
+			lineColors: ['#045d97'],
+			lineWidth: 2,
+			parseTime: false,
+			resize:true,
+			hideHover: 'auto'
+		});
+		
+		//날짜별 - 월별
+		var mon_data = [
+			<c:forEach var="smon" items="${salesMon}">
+				{"elapsed": "${smon.oDate}", "value": "${smon.count}"},
+			</c:forEach>
+		];
+		Morris.Line({
+			element: 'morris-line-mon',
+			data: mon_data,
+			xkey: 'elapsed',
+			ykeys: ['value'],
+			labels: ['매출액'],
+			gridEnabled: false,
+			gridLineColor: 'transparent',
+			lineColors: ['#045d97'],
+			lineWidth: 2,
+			parseTime: false,
+			resize:true,
+			hideHover: 'auto'
+		});
+		
+		
+		var concert=0;
+		var musical=0;
+		var classic=0;
+		var play=0;
+		
+		<c:forEach var="sg" items="${sumGenre}">
+			<c:if test="${sg.oDate eq 'concert'}">
+				concert=Number.parseInt("${sg.count}");
+			</c:if>
+			<c:if test="${sg.oDate eq 'musical'}">
+				musical=Number.parseInt("${sg.count}");
+			</c:if>
+			<c:if test="${sg.oDate eq 'classic'}">
+				classic=Number.parseInt("${sg.count}");
+			</c:if>
+			<c:if test="${sg.oDate eq 'play'}">
+				play=Number.parseInt("${sg.count}");
+			</c:if>
+		</c:forEach>
+		
+		Morris.Bar({
+			element: 'morris-bar-genre',
+			data: [
+				{ y: '콘서트', a: concert },
+				{ y: '뮤지컬', a: musical },
+				{ y: '연극', a: play },
+				{ y: '클래식', a: classic }
+			],
+			xkey: 'y',
+			ykeys: ['a'],
+			labels: ['매출액'],
+			gridEnabled: true,
+			gridLineColor: '#bdbdbd',
+			barColors: ['#177bbb'],
+			resize:true,
+			hideHover: 'auto',
+			//horizontal:true
+			barSizeRatio: 0.35
+		});
+		
+		Morris.Bar({
+			element: 'morris-bar-theater',
+			data: [
+				<c:forEach var="sf" items="${sumFclty}">
+					{y: "${sf.oDate}", a: Number.parseInt("${sf.count}")},
+				</c:forEach>
+			],
+			xkey: 'y',
+			ykeys: ['a'],
+			labels: ['공연시설'],
+			gridEnabled: true,
+			gridLineColor: '#bdbdbd',
+			barColors: ['#177bbb'],
+			resize:true,
+			hideHover: 'auto',
+			//horizontal:true
+			barSizeRatio: 0.25
+		});
+		
+		$('.nav-tabs li a').click(function() {
+			$(window).trigger('resize');
+		});
+	});
+	
+	</script>
+</body>
+</html>

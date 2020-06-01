@@ -1,0 +1,21 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.OrderRefundShowDetail;
+import ticket.finder.dto.Refund;
+import ticket.finder.exception.RefundNotFoundException;
+
+public interface RefundService {
+	void addRefund(Refund refund);
+	void modifyRefund(String refundState, int refundNum) throws RefundNotFoundException;
+	void removeRefund(int refundNum) throws RefundNotFoundException;
+	Refund getRefundByNum(int refundNum) throws RefundNotFoundException;
+	Refund getRefundByOrder(String orderCode);
+	List<Refund> getRefundByDate(String startDate, String endDate) throws RefundNotFoundException;
+	List<Refund> getRefundByKeyword(Map<String, Object> map) throws RefundNotFoundException;
+	List<Refund> getUserRefund(Map<String, Object> map) throws RefundNotFoundException;
+	List<OrderRefundShowDetail> getRefundList();
+	List<OrderRefundShowDetail> getCancelOrderList();
+}

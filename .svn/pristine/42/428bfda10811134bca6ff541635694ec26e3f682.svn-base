@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.FaqMapper">
+	<insert id="insertFaq">
+		<selectKey resultType="int" keyProperty="faq_num" order="BEFORE">
+			select faq_seq.nextval from dual
+		</selectKey> 
+		insert into faq values(#{faqNum}, #{faqTitle}, #{faqContents}, #{faqCategory}, 0)
+	</insert>
+	
+	<update id="updateFaq">
+		update faq
+		<set>
+			<if test="faq_title!=null and faq_title!=''">
+				faq_title=#{faqTitle},
+			</if>
+			<if test="faq_contents!=null and faq_contents!=''">
+				faq_contents=#{faqContents},
+			</if>
+			<if test="faq_category!=null and faq_category!=''">
+				faq_category=#{faqCategory}, 
+			</if>
+			<if test="faq_count!=null and faq_count!=''">
+				faq_count=faq_count+1
+			</if>
+		</set>
+		where faq_num=#{faqNum}
+	</update>
+	
+	<delete id="deleteFaq">
+		delete from faq where faq_num=#{faqNum}
+	</delete>
+	
+	<select id="selectFaq" resultType="Faq">
+		select * from faq where faq_num=#{faqNum}
+	</select>
+	
+	<select id="selectCategoryFaq" resultType="Faq">
+		select * from faq where faq_category=#{faqCategory}
+	</select>
+	
+	<select id="selectFaqList" resultType="Faq">
+		select * from faq order by faq_count desc
+	</select>
+</mapper>

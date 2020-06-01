@@ -1,0 +1,14 @@
+package ticket.finder.dao;
+
+import java.util.List;
+
+import ticket.finder.dto.Cs;
+
+public interface CsDAO {
+	int insertCs(Cs cs);
+	int deleteCs(int csNum);
+	int updateCs(Cs cs);
+	Cs selectCs(int csNum);
+	List<Cs> selectCategoryCs(String csCategory);
+	List<Cs> selectCsList();
+}

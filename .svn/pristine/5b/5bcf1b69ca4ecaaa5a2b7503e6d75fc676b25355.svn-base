@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+div#qna {
+	margin-top: 150px;
+}
+
+div#qna>div#section {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+div#qna>div#section>p.qnaTitle {
+    text-align: center;
+    margin: 50px 0;
+    width: 100%;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+div#qna div.qnaCont {
+    width: 100%;
+    height: 900px;
+}
+
+div#qna div.qnaCont>div.qnaList {
+    margin: 16px 30px 35px 30px;
+    height: 700px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+div#qna div.qnaCont>div.qnaList>div.qnaGroupList,div.qnaTitle,div.qnaPlay {
+    height: 50px;
+    width: 100%;
+}
+
+div#qna div.qnaCont>div.qnaList>div.qnaContent {
+    height: 420px;
+    width: 100%;
+}
+
+div#qna div.qnaCont>div.qnaList>div.qnaFile {
+    height: 100px;
+    width: 100%;
+}
+
+div#qna div.qnaCont>div.qnaList div.left {
+    width: 120px;
+    color: black;
+    margin-left: 30px;
+}
+
+div#qna div.qnaCont>div.qnaList div:not(.left) {
+    color: #666;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaGroupRBtn,div.qnaPlayList,div.qnaFileCont {
+    float: left;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaGroupRBtn {
+    display: flex;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaGroupRBtn>div {
+    margin-right: 10px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaGroupRBtn input {
+    margin-right: 2px;
+    vertical-align: middle;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaTitleInput>input {
+    width: 800px;
+    line-height: 20px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaContentInput>textarea {
+    width: 800px;
+    height: 400px;
+    resize: none;
+    font-family: sans-serif, serif, "나눔고딕";
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaFileCont>div.qnaFileBtn {
+    border: 1px solid #666;
+    width: 80px;
+    text-align: center;
+    line-height: 22px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 14px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaFileCont>div.qnaFileInfo {
+    color: #333;
+    font-size: 12px;
+    display: inline-block;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaFileCont>div.qnaFileList {
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    height: 50px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList {
+    display: flex;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div.qnaPlayListItem>input {
+    width: 250px;
+    line-height: 20px;
+    cursor: default;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div.qnaPlayListBtn {
+    width: 120px;
+    height: 25px;
+    background-color: #000;
+    color: #ccc;
+    line-height: 22px;
+    text-align: center;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal {
+	display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal>div.modalCont {
+	background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal>div.modalCont>.close {
+	color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal>div.modalCont>.close:hover,.close:focus {
+	color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalBar {
+    margin-top: 30px;
+    border-bottom: 1px solid #888;
+    width: 90%;
+    margin: 0 auto;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalBar>div {
+    display: inline-block;
+    text-align: center;
+    font-size: 15px;
+    height: 40px;
+    line-height: 40px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalBar>div.Txt1,div.Txt3{
+    width: 14%;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalBar>div.Txt2{
+    width: 48%;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalBar>div.Txt4{
+    width: 20%;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList {
+    border-bottom: 1px solid #ddd;
+    width: 90%;
+    margin: 0 auto;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList>div {
+    display: inline-block;
+    font-size: 15px;
+    height: 50px;
+    line-height: 50px;
+    color: #666;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList>div.Txt1,div.Txt3{
+    width: 14%;
+    text-align: center;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList>div.Txt2{
+    width: 48%;
+    /* overflow: hidden; */
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList>div.Txt4{
+    width: 20%;
+    text-align: center;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal div.modalList>div.Txt4 span{
+    display: inline-block;
+    margin-left: 10px;
+    border: 1px solid #dadada;
+    line-height: 22px;
+    padding: 3px;
+    font-size: 16px;
+    color: #333333;
+    width: 50px;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal>div.modalCont>div.BtnCont {
+    width: 90%;
+    margin: 0 auto;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div#myModal>div.modalCont>div.BtnCont>div.closeBtn {
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div.qnaPlayListNone>input {
+    vertical-align: middle;
+}
+
+div#qna div.qnaCont>div.qnaList div.qnaPlayList>div.qnaPlayListNone>span {
+    font-size: 14px;
+}
+
+div#qna div.qnaCont>div.qnaBtnCont {
+	margin: 40px 450px;
+    text-align: center;
+    display: flex;
+}
+
+div#qna div.qnaCont div.qnaCancelBtn, div.qnaSaveBtn {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    line-height: 28px;
+}
+
+div#qna div.qnaCont div.qnaCancelBtn {
+    border: 1px solid #ddd;
+}
+
+div#qna div.qnaCont div.qnaSaveBtn {
+    margin-left: 5px;
+    background-color: #ec7d2c;
+    border: 1px solid #ec7d2c;
+    color: #fff;
+}
+

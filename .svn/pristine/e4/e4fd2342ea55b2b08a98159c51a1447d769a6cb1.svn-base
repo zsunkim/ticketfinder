@@ -1,0 +1,37 @@
+package ticket.finder.service;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.DateCountDAO;
+import ticket.finder.dto.DateCount;
+
+@Service
+public class DateCountServiceImpl implements DateCountService {
+	@Autowired
+	private DateCountDAO dateCountDAO;
+	
+	@Override
+	public List<DateCount> getOrderCount(@Param("param1") String param1, @Param("param2") String param2, @Param("period") int period) {
+		return dateCountDAO.selectOrderCount(param1, param2, period);
+	}
+
+	@Override
+	public List<DateCount> getSalesDay(String param1) {
+		return dateCountDAO.selectSalesDay(param1);
+	}
+
+	@Override
+	public List<DateCount> getGenreSum(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+		return dateCountDAO.selectGenreSum(startDate, endDate);
+	}
+
+	@Override
+	public List<DateCount> getFcltySum(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+		return dateCountDAO.selectFcltySum(startDate, endDate);
+	}
+
+}

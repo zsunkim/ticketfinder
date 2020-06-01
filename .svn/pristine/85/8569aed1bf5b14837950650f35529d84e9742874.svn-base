@@ -1,0 +1,263 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="rank">
+	<div id="section">
+		<div class="cont">
+			<p class="mainTitle">랭킹</p>
+			<div class="rank_tab">
+				<a href="#" class="tab1 on">전체</a>
+				<a href="#" class="tab2">뮤지컬</a>
+				<a href="#" class="tab3">연극</a>
+				<a href="#" class="tab4">콘서트</a>
+				<a href="#" class="tab5">클래식/무용</a>
+				<a href="#" class="tab6">전시</a>
+			</div>
+			<script type="text/javascript">
+	            $('.tab1').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab1').addClass('on');
+	            });
+	             $('.tab2').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab2').addClass('on');
+	            });
+	        $('.tab3').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab3').addClass('on');
+	            });
+	        $('.tab4').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab4').addClass('on');
+	            });
+	            $('.tab5').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab5').addClass('on');
+	            });
+	             $('.tab6').click(function(){
+	               $('.rank_tab').find('a').removeClass('on');
+	               $('.tab6').addClass('on');
+	            });
+	        </script>
+			
+			<div class="rank_category">
+				<div class="rank_cate">
+					<a href="#" class="day on">일간</a>
+					<a href="#" class="week">주간</a>
+					<a href="#" class="month">월간</a>
+				</div>
+				<!-- 현재시간 출력 -->
+				<p class="rank_date">
+					<img src="images/ico-rank.png">
+					<span>2020년 04월 01일(수) 18:20</span>
+				</p>
+			</div>
+			<script type="text/javascript">
+	            $('.day').click(function(){
+	               $('.rank_cate').find('a').removeClass('on');
+	               $('.day').addClass('on');
+	            });
+	             $('.week').click(function(){
+	               $('.rank_cate').find('a').removeClass('on');
+	               $('.week').addClass('on');
+	            });
+	       		$('.month').click(function(){
+	               $('.rank_cate').find('a').removeClass('on');
+	               $('.month').addClass('on');
+	            });
+				$('.year').click(function(){
+	               $('.rank_cate').find('a').removeClass('on');
+	               $('.year').addClass('on');
+	            });
+	        </script>
+			
+			<div class="rank_best">
+				<div>
+					<a href="">
+						<img src="images/ranking_1.jpg">
+						<p class="rlb_tit">뮤지컬 <미드나잇 : 앤틀러스></p>
+						<p class="rlb_sub_tit">
+							2020.02.11 ~ 2020.05.03
+							<br>
+							대학로 아트윈씨어터 2관
+						</p>
+						<p class="rankNo">
+							<span>1위</span>
+						</p>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="images/ranking_2.jpg">
+						<p class="rlb_tit">뮤지컬 드라큘라 (Dracula : The Musical)</p>
+						<p class="rlb_sub_tit">
+							2020.02.11 ~ 2020.05.03
+							<br>
+							대학로 아트윈씨어터 2관
+						</p>
+						<p class="rankNo">
+							<span>2위</span>
+						</p>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="images/ranking_3.jpg">
+						<p class="rlb_tit">뮤지컬 <라흐마니노프></p>
+						<p class="rlb_sub_tit">
+							2020.02.11 ~ 2020.05.03
+							<br>
+							대학로 아트윈씨어터 2관
+						</p><p class="rankNo">
+							<span>3위</span>
+						</p>
+					</a>
+				</div>
+			</div>
+			
+			<div class="rank_list">
+				<div>
+					<!-- 랭킹순위 -->
+					<div class="flu">
+						<p>
+							<span>4위</span>
+						</p>
+					</div>
+					<!-- 이미지 -->
+					<div>
+						<a href="">
+							<img src="images/ranking_4.jpg">
+						</a>
+					</div>
+					<!-- 타이틀 -->
+					<div>
+						<p class="rank_tit">
+							<a href="">버스크음악극 <432Hz></a>
+						</p>
+					</div>
+					<!-- 공연기간 -->
+					<div>
+						<p>2020.02.21 ~ 2020.04.05</p>
+					</div>
+					<!-- 장소 -->
+					<div>
+						<p>대학로 TOM 2관</p>
+					</div>
+				</div>
+				<div>
+					<!-- 랭킹순위 -->
+					<div class="flu">
+						<p>
+							<span>5위</span>
+						</p>
+					</div>
+					<!-- 이미지 -->
+					<div>
+						<a href="">
+							<img src="images/ranking_5.jpg">
+						</a>
+					</div>
+					<!-- 타이틀 -->
+					<div>
+						<p class="rank_tit">
+							<a href="">뮤지컬<레베카></a>
+						</p>
+					</div>
+					<!-- 공연기간 -->
+					<div>
+						<p>2020.02.21 ~ 2020.04.05</p>
+					</div>
+					<!-- 장소 -->
+					<div>
+						<p>대학로 TOM 2관</p>
+					</div>
+				</div>
+				<div>
+					<!-- 랭킹순위 -->
+					<div class="flu">
+						<p>
+							<span>6위</span>
+						</p>
+					</div>
+					<!-- 이미지 -->
+					<div>
+						<a href="">
+							<img src="images/ranking_4.jpg">
+						</a>
+					</div>
+					<!-- 타이틀 -->
+					<div>
+						<p class="rank_tit">
+							<a href="">버스크음악극 <432Hz></a>
+						</p>
+					</div>
+					<!-- 공연기간 -->
+					<div>
+						<p>2020.02.21 ~ 2020.04.05</p>
+					</div>
+					<!-- 장소 -->
+					<div>
+						<p>대학로 TOM 2관</p>
+					</div>
+				</div>
+				<div>
+					<!-- 랭킹순위 -->
+					<div class="flu">
+						<p>
+							<span>7위</span>
+						</p>
+					</div>
+					<!-- 이미지 -->
+					<div>
+						<a href="">
+							<img src="images/ranking_4.jpg">
+						</a>
+					</div>
+					<!-- 타이틀 -->
+					<div>
+						<p class="rank_tit">
+							<a href="">버스크음악극 <432Hz></a>
+						</p>
+					</div>
+					<!-- 공연기간 -->
+					<div>
+						<p>2020.02.21 ~ 2020.04.05</p>
+					</div>
+					<!-- 장소 -->
+					<div>
+						<p>대학로 TOM 2관</p>
+					</div>
+				</div>
+				<div>
+					<!-- 랭킹순위 -->
+					<div class="flu">
+						<p>
+							<span>8위</span>
+						</p>
+					</div>
+					<!-- 이미지 -->
+					<div>
+						<a href="">
+							<img src="images/ranking_4.jpg">
+						</a>
+					</div>
+					<!-- 타이틀 -->
+					<div>
+						<p class="rank_tit">
+							<a href="">버스크음악극 <432Hz></a>
+						</p>
+					</div>
+					<!-- 공연기간 -->
+					<div>
+						<p>2020.02.21 ~ 2020.04.05</p>
+					</div>
+					<!-- 장소 -->
+					<div>
+						<p>대학로 TOM 2관</p>
+					</div>
+				</div>
+	
+			</div>
+	
+		</div>
+	</div>
+</div>

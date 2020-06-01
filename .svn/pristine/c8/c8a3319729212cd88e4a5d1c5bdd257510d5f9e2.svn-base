@@ -1,0 +1,7 @@
+package ticket.finder.mapper;
+
+import ticket.finder.dto.DateCount;
+
+public interface DateCountMapper {
+	DateCount selectOrderCount(String param1, String param2, int period);
+}

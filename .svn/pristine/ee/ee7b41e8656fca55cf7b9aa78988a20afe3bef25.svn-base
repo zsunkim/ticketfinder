@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.QuestionMapper">
+	<!-- 사용자 문의 입력 -->
+	<insert id="insertQuestion">
+		<selectKey resultType="int" keyProperty="questionNum" order="BEFORE">
+			select question_seq.nextval from dual
+		</selectKey>
+		insert into question values(#{questionNum}, #{questionUserId}, #{questionTitle}, #{questionContents}, sysdate, #{questionCategory}, 
+		#{questionState}, #{questionNum}, #{questionStep}, #{questionFile}, #{questionShow})
+	</insert>
+	
+	<!-- 관리자 답글 입력 -->
+	<insert id="insertQuestionAdmin">
+		<selectKey resultType="int" keyProperty="questionNum" order="BEFORE">
+			select question_seq.nextval from dual
+		</selectKey>
+		insert into question values(#{questionNum}, #{questionUserId}, #{questionTitle}, #{questionContents}, sysdate, #{questionCategory}, 
+		#{questionState}, #{questionRef}, #{questionStep}, #{questionFile}, #{questionShow})
+	</insert>
+	
+	<!-- 관리자가 답글을 입력한 경우 '완료'로 상태 변경 -->
+	<update id="updateStateQuestion">
+		update question set question_state=#{questionState} where question_num=#{questionNum}
+	</update>
+	
+	<!-- 글 번호로 작성한 문의 또는 답변 검색 - 단일행 -->
+	<select id="selectQuestion" resultType="Question">
+		select * from question where question_num=#{questionNum}
+	</select>
+	
+	<!-- 답글만 출력 - 단일행 -->
+	<select id="selectRefQuestion" resultType="Question">
+		select * from question where question_ref=#{questionRef} and question_user_id!=#{questionUserId}
+	</select>
+	
+	<!-- 원글만 출력 - 다중행 -->
+	<select id="selectIdQuestion" resultType="Question">
+		select * from question where question_user_id=#{questionUserId} order by question_date desc
+	</select>
+	
+	<!-- 원글 정보와 답글내용 같은 행에 출력(모든 아이디) - 다중행 -->
+	<select id="selectQuestionList" resultType="QuestionRe">
+		<!-- select * from question order by question_ref desc, question_step asc -->
+		select q.question_num, q.question_user_id, q.question_title, q.question_contents, q.question_date,
+		q.question_category, q.question_state, q.question_ref, q.question_step, q.question_file, q.question_show,
+		qr.question_ref question_ref_re, qr.question_contents question_contents_re from question q full join
+		(select question_ref, question_contents from question where question_step=1 order by question_ref desc, question_step asc) qr
+		on q.question_ref=qr.question_ref
+		where question_step=0 order by q.question_ref desc
+	</select>
+	
+	<!-- 사용자가 작성한 글과 답변 출력 -->
+	<select id="selectUserQuestionIdList" resultType="QuestionRe">
+		select q.question_num, q.question_user_id, q.question_title, q.question_contents, q.question_date,
+		q.question_category, q.question_state, q.question_ref, q.question_step, q.question_file, q.question_show,
+		qr.question_ref question_ref_re, qr.question_contents question_contents_re from question q full join
+		(select question_ref, question_contents from question where question_step=1 order by question_ref desc, question_step asc) qr
+		on q.question_ref=qr.question_ref
+		where question_step=0 and question_user_id=#{questionUserId} order by q.question_ref desc
+	</select>
+	
+	<!-- 사용자가 작성한 글만 목록 출력 - 다중행 -->
+	<select id="selectUserQuestionList" resultType="Question">
+		<if test="startRn!=null and startRn!=''">
+			select * from ( select rownum rn, user_qna.* from ( 
+		</if> 
+		select * from question where question_user_id = #{questionUserId} order by question_date desc
+		<if test="startRn!=null and startRn!=''">
+			) user_qna ) where rn between #{startRn} and #{endRn}
+		</if>
+	</select>
+	
+	<!-- 사용자가 작성한 글 갯수 검색 - 단일행 -->
+	<select id="selectQuestionCount" resultType="int">
+		select count(*) from question where question_user_id = #{questionUserId}
+	</select>
+</mapper>

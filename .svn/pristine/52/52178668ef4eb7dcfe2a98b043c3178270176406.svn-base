@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.RefundMapper">
+	<insert id="insertRefund">
+		<selectKey resultType="int" keyProperty="refundNum" order="BEFORE">select refund_seq.nextval from dual</selectKey>
+		insert into refund values(#{refundNum}, #{refundOrderCode}, sysdate, #{refundPenalty}, #{refundPay}, #{refundState}, #{refundUserId})
+	</insert>
+	
+	<update id="updateRefundState">
+		update set refund refund_state={#refundState} where refund_num=#{refund_num}
+	</update>
+	
+	<delete id="deleteRefund">
+		delete from refund where refund_num=#{refundNum}
+	</delete>
+	
+	<!-- 취소번호로 단일행 검색 -->
+	<select id="selectRefundByNum" resultType="Refund">
+		select * from refund where refund_num=#{refundNum}
+	</select>
+	
+	<!-- 취소날짜로 다중행 검색 -->
+	<select id="selectRefundByDate" resultType="Refund">
+		select * from refund where refund_date between #{startDate} and TO_DATE(#{endDate})+1 order by refund_date desc
+	</select>
+	
+	<!-- 취소 상태 혹은 이름으로 다중행 검색 -->
+	<select id="selectRefundByKeyword" resultType="Refund">
+		select * from refund
+			<trim prefix="where" prefixOverrides="and">
+				<if test="refund_state!=null and refund_state!=''">
+					hewon_id=#{hewonId}
+				</if>
+				
+				<if test="name!=null and name!=''">
+					and refund_user_id=#{refundUserId}
+				</if>
+			</trim>
+		order by refund_date desc
+	</select>
+	
+	<select id="selectUserRefund" resultType="Refund">
+		select * from (select rownum rn, r.* from 
+			(select * from refund where refund_user_id=#{refundUserId} order by refund_date desc ) r ) 
+				where rn between #{startRow} and #{endRow}
+	</select>
+	
+	
+	<!-- 모든 목록 검색 -->
+	<select id="selectRefundList" resultType="Refund">
+		select * from refund order by refund_date desc
+	</select>
+</mapper>

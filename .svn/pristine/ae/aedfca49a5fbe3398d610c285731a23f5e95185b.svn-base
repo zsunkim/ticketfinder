@@ -1,0 +1,274 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="join">
+	<div id="section">
+		<div class="cont">
+			<div class="joinWrap">
+				<h2>회원가입</h2>
+				<form method="post" id="joinForm" name="joinForm" action="join">
+				<div class="tableBox">
+				<table>
+					<colgroup>
+						<col style="width: 240px;"/>
+						<col style="width: *"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="row">아이디</th>
+							<td>
+								<input type="text" name="userId" id="id" placeholder="영문, 숫자로만 6~20자"/>
+								<a type="button" class="idCheckBtn" id="idCheckBtn" value="N">중복확인</a>
+								<p id="idMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">비밀번호</th>
+							<td>
+	                            <input type="password" name="userPw" id="passwd"/>
+	                            <span class="alertMessage">*영문, 숫자를 조합하여 6~12자까지 설정해 주세요.</span>
+	                            <p id="passwdMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">비밀번호 확인</th>
+							<td>
+	                            <input type="password" id="repass"/>
+	                            <span class="alertMessage">*비밀번호 재입력</span>
+								<p id="repassMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">이름</th>
+							<td>
+								<input type="text" name="userName" id="name"/>
+								<p id="nameMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">전화번호</th>
+							<td>
+								<div class="phoneNumber">
+									<input type="text" id="phone" name="userTel" maxlength="11" placeholder="- 제외한 번호만 입력">
+								</div>
+								<p id="phoneMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">이메일</th>
+							<td>
+								<div class="mailArea">
+									<input type="text" id="email" name="userEmail" placeholder="이메일을 입력해주세요."/>
+								</div>
+								<p id="emailMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">기본배송지</th>
+							<td>
+								<div class="postWrap">
+									<span>우편번호</span>
+									<div class="postCont">
+		                                <div class="zipcodeBox">
+											<input type="text" id="post" name="userPost" class="iText" title="우편 번호를 입력해주세요" readonly/>
+											<a class="postBtn">주소찾기</a>
+										</div>
+		                                <div class="addressBox">
+		                                    <input type="text" id="add1" name="userAddr1" class="iText" placeholder="주소를 입력해주세요" readonly/>
+	                                        <input type="text" id="add2" class="userAddr2" placeholder="상세주소를 입력해주세요"/>
+	                                    </div>
+										<p id="postMsg" class="error"></p>
+		                            </div>
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">생년월일</th>
+							<td>
+	                            <div class="birthWrap">
+									<div class="select birthYear">
+										<select name="year" id="year">
+											<option selected="selected">년도</option>
+										</select>
+	                                </div>
+									<div class="select birthMonth">
+										<select name="month" id="month">
+											<option selected="selected">월</option>
+										</select>
+	                                </div>
+									<div class="select birthDate">
+										<select name="date" id="date">
+											<option selected="selected">일</option>
+										</select>
+	                                </div>
+	                            </div>
+								<p id="birthMsg" class="error"></p>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">성별</th>
+							<td>
+								<div class="genderWrap">
+	                                <div class="radioGroup">
+	                                    <input type="radio" id="male" name="userGender" class="iRadio" value="male">
+	                                    <label>남</label>
+	                                    <input type="radio" id="female" name="userGender" class="iRadio" value="female">
+	                                    <label>여</label>
+	                                </div>
+	                            </div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+	
+				<!-- 약관 동의 -->
+				<div class="termsWrap">
+					<div class="termsBtn">
+						<div class="iCheckbox">
+							<input id="termsAllChk" type="checkbox">
+							<label for="termsAllChk">약관 전체동의</label>
+						</div>
+					</div>
+					<div class="termsTitleWrap">
+						<div class="iCheckbox agreeChkWrap">
+							<input type="checkBox" id="agreeChk1" name="checkBox">
+							<label for="agreeChk1">이용약관 (필수)</label>
+						</div>
+					</div>
+					<div class="terms_serviceBox">
+						<iframe src="${pageContext.request.contextPath}/service1"></iframe>
+					</div>
+					<div class="termsTitleWrap">
+						<div class="iCheckbox agreeChkWrap">
+							<input type="checkBox" id="agreeChk3" name="checkBox">
+							<label for="agreeChk3">개인정보 수집 동의서 (필수)</label>
+						</div>
+					</div>
+					<div class="terms_serviceBox">
+						<iframe src="${pageContext.request.contextPath}/privacypolicy1"></iframe>
+					</div>
+				</div>
+				<p id="joinMsg" class="error"></p>					
+				<div class="joinButton">
+					<button type="submit" class="join_btn">회원가입</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/join.js"></script>
+<script type="text/javascript">
+$("#joinForm").submit(function() {
+	
+	if($("#id").val()=="") {
+		$("#idMsg").text("아이디를 입력해주세요.");
+		$("#id").focus();
+		return false;
+	}
+	//아이디 중복 검사
+	var idCheck=$("#idCheckBtn").val();
+	if(idCheck=="N"){
+		$("#idMsg").text("아이디 중복확인을 해주세요.");		
+		return false;
+	}
+	
+	var idReg =/^[a-zA-Z0-9]{5,19}$/g;
+	if(!idReg.test($("#id").val())) {
+		$("#idMsg").text("아이디를 형식에 맞게 입력해주세요.");
+		$("#id").focus();
+		return false;
+	}
+	
+	if($("#passwd").val()=="") {
+		$("#passwdMsg").text("비밀번호를 입력해 주세요.");
+		$("#passwd").focus();
+		return false;
+	}
+	var passwdReg=/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$/g;
+	if(!passwdReg.test($("#passwd").val())) {
+		$("#passwdMsg").text("비밀번호를 형식에 맞게 입력해 주세요.");
+		$("#passwd").focus();
+		return false;
+	}
+	
+	if($("#passwd").val()!=$("#repass").val()){
+		$("#repassMsg").text("입력한 비밀번호가 다릅니다.");
+		$("#repass").focus();
+		return false;		
+	}
+
+	if($("#name").val()=="") {
+		$("#nameMsg").text("이름을 입력해 주세요.");
+		$("#name").focus();
+		return false;
+	}
+	var nameReg=/^[가-힣]{2,10}$/g;
+	if(!nameReg.test($("#name").val())) {
+		$("#nameMsg").text("이름을 형식에 맞게 입력해 주세요.");
+		$("#name").focus();
+		return false;
+	}
+	
+	if($("#phone").val()=="") {
+		$("#phoneMsg").text("전화번호를 입력해 주세요.");
+		$("#phone").focus();
+		return false;
+	}
+	var phoneReg=/^[0-9]{10,11}$/g;
+	if(!phoneReg.test($("#phone").val())) {
+		$("#phoneMsg").text("전화번호를 형식에 맞게 입력해 주세요.");
+		$("#phone").focus();
+		return false;
+	}
+
+	if($("#email").val()=="") {
+		$("#emailMsg").text("이메일을 입력해 주세요.");
+		$("#email").focus();
+		return false;
+	}
+	var emailReg=/^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+(\.[-a-zA-Z0-9]+)+)*$/g;
+	if(!emailReg.test($("#email").val())) {
+		$("#emailMsg").text("이메일을 형식에 맞게 입력해 주세요.");
+		$("#email").focus();
+		return false;
+	}
+	
+	if($("#post").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	if($("#add1").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	if($("#add2").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	
+	//생일 유효성 검사
+	var y=year.value;
+	var m=month.value;
+	var d=date.value;
+	if(!Number.isInteger(Number(y)) || !Number.isInteger(Number(m)) || !Number.isInteger(Number(d))){
+		$("#birthMsg").text("생년월일을 입력해 주세요.");
+		$("#year").focus();
+		console.log(Number.isInteger(y)+", "+Number.isInteger(m)+", "+Number.isInteger(d));
+		return false;
+	}
+	
+	if($("input:checkbox[name=checkBox]").is(":checked")==false) {
+		$("#joinMsg").text("약관에 동의를 해주세요.");
+		return false;
+	}
+	
+	return true;
+});
+</script>
+</div>

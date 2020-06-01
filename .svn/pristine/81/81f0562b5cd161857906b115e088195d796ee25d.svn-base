@@ -1,0 +1,219 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ticket Finder 결제화면</title>
+	<%-- jQuery 라이브러리 및 Fontawesome 라이브러리 --%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<%-- 공통 CSS 및 JS 파일 --%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/book.css"/>
+	
+	<%-- 파비콘 link 태그 --%>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/common/favicon.ico" type="image/x-icon">
+<style>
+  	*{margin:0; padding:0;}
+</style>
+</head>
+<body id="seat">
+	<div id="section1">
+        <div class="reserve_left">
+            <div class="reserve_top">
+                <h3 class="seat_tit">좌석선택 <span class="tit_s txt_prod_name">${showInfo.tfShow.sGenre } &lt;${showInfo.showDetail.showName}&gt;</span>
+                    <span class="sel">
+                        ${fn:substring(showInfo.showDetail.showDaytime,0,16)}
+                    </span>
+                </h3>
+            </div>
+        </div> 
+    </div>
+    <!-- 좌석영역 -->
+    <div class="wrap_left">
+    	<p id="stage"><span>무 대</span></p>
+    	<div id="wrapper">
+		</div>
+		<p id="console"><span>콘 솔</span></p>
+	</div>
+    
+    <div class="reserve_right">
+        <img src="${pageContext.request.contextPath}/images/common/logo2.png">
+        <!-- 좌석등급/잔여석 -->
+        <div class="seat_list">
+            <h3 class="select_tit">좌석등급</h3>
+            <div class="box_seat">
+                <div class="box_seat_area">
+                <table class="tb">
+                    <colgroup>
+                        <col style="width: 26px;">
+                        <col>
+                        <col style="width: 65px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <tbody id="seatGrade">
+                        <tr>
+                            <th class="seat_color">
+                                <em class="seat_color seat_R" style="background-color: #9076FF;"></em>
+                            </th>
+                            <td class="seat_name">R석</td>
+                            <td class="price"><fmt:formatNumber value="${showInfo.tfShow.sPrice}" type="number"/>원</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seat_list">
+            <h3 class="select_tit">선택좌석</h3>
+            <div class="box_seat">
+                <div class="box_seat_area">
+                <table class="tb">
+                    <colgroup>
+                        <col style="width: 26px;">
+                        <col />
+                        <col style="width: 65px;">
+                        <col style="width: 60px;">
+                    </colgroup>
+                    <tbody id="selectedSeats">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reserve_btn">
+        	<form action="${pageContext.request.contextPath}/delivery.do/${showNum}" method="post" id="seat_info">
+        		<div id="seatName"></div>
+        		<div id="seatNum"></div>
+            	<span class="btn on">
+                	<button type="submit" class="btn1">좌석선택완료</button>
+  	     		</span>
+        	</form>
+        </div>
+    </div>
+	<script>
+	//$.getJSON('seatInfo.json', function(data) {
+	$.getJSON('${pageContext.request.contextPath}/seatJson.do/${showNum}', function(data) {
+		//data 파라미터에 저장된 좌석 정보를 Y축, X축으로 each()문을 돌려서
+		//좌석값에 따라(0, 1, 2) 적정한 스타일 시트를 적용한다.
+		console.log(data);
+		$.each(data, function(indexY, line) {
+			var $line = $('<div></div>').addClass('line');
+			$.each(line, function(indexX, seat) {
+				var $output = $('<div></div>', {
+					'class' : 'seat',
+					'data-y' : indexY,
+					'data-x' : indexX
+				}).appendTo($line);
+
+				if (seat == 1) { //좌석값이 '1'이면 'enable' 스타일을 적용하고 'click' 이벤트에 'onClickSeat()' 함수 적용
+					$output.addClass('enable') //.on('click', onClickSeat);
+				} else if (seat == 2) { //좌석값이 '2' 이면 'disable' 스타일을 적용
+					$output.addClass('booked');
+				}else if(seat == 0){
+					$output.addClass('empty');
+				}
+			});
+			$line.appendTo('#wrapper'); //완성된 라인을 원하는 위치에 붙인다.
+		});
+		
+		var w=$("#wrapper").width();
+		init(w);
+	});
+
+	$(document).on("click", ".seat", function(){
+		var y=$(this).attr("data-y");
+		var x=$(this).attr("data-x");
+		
+		if($(this).hasClass('booked') || $(this).hasClass('empty')){
+			return false;
+		}else if($(this).hasClass('enable')){
+			
+			if($("[name='seatNum']").length > 4){
+				alert("좌석은 최대 5석까지만 선택 가능합니다.");
+				return false;
+			}
+			
+			$(this).toggleClass("disable");
+			$(this).toggleClass("enable");
+			modifySeatInfo(y, x, true);
+			return false;
+		}else{
+			$(this).toggleClass("enable");
+			$(this).toggleClass("disable");
+			modifySeatInfo(y, x, false);
+			return false;
+		}
+	});
+	
+	function modifySeatInfo(y, x, state){
+		//선택 좌석 열을 구하기 위한 배열 생성
+		var arr=[];
+		for(var i=65; i<=90; i++){
+			var charY=String.fromCharCode(i);
+			arr.push(charY);
+		}
+		
+		var row=arr[y];
+		
+		if(state==true){
+			addSeatInfo(y, x, row);
+		}else{
+			removeSeatInfo(y, x);
+		}
+	}
+	
+	function addSeatInfo(y, x, row){
+		var seatinfo=y+(1+Number(x));
+    	var html="<tr value='"+seatinfo+"'>";
+    	html+="<th class='seat_color'>";
+    	html+="<em class='seat_color seat_R' style='background-color: #9076FF;'></em>";
+    	html+="</th><td class='seat_name'>"+row+"열 "+(1+Number(x))+"석"+"</td>";
+    	html+="<td class='price'><fmt:formatNumber value='${showInfo.tfShow.sPrice}' type='number'/>원</td>";
+		
+		
+		//$("#seatNum").append("<p value='"+seatinfo+"'>"+row+"열 "+(1+Number(x))+"석"+"</p>");
+		$("#selectedSeats").append(html);
+		$("#seatName").append("<input type='hidden' name='seatName' class='"+y+(1+Number(x))+"' value='"+row+"열 "+(1+Number(x))+"석'>");
+		$("#seatNum").append("<input type='hidden' name='seatNum' class='"+y+(1+Number(x))+"' value='"+y+"-"+x+"'>");
+	}
+	
+	function removeSeatInfo(y, x){
+		$("[value='"+y+(1+Number(x))+"']").remove();
+		$("[class='"+y+(1+Number(x))+"']").remove();
+	}
+	
+	function init(width){
+		//var w=Math.floor((width/$(".line:first-child>div").length)-2);
+		var w=Math.floor((width/$(".line:first-child>div").length)-2);
+		var h=w;
+
+		$(".seat").css({"width":w, "height":h});
+	}
+	
+	$(".btn1").click(function(){
+		if($("[name='seatNum']").length==0){
+			alert("좌석을 선택해주세요.");
+			return false;
+		}
+	});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

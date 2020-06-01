@@ -1,0 +1,39 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import ticket.finder.dto.Dual;
+import ticket.finder.dto.OrderDFclty;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.TfOrder;
+
+public interface TfOrderMapper {
+	int insertOrder(TfOrder order);
+	int updateOrder(TfOrder order);
+	int updateStateRefund(String orderCode);
+	int deleteUnpaidOrder(String orderCode);
+	TfOrder selectOrder(String orderCode);
+	TfOrder selectMyOrder(String userId);
+	List<TfOrder> selectUserOrderList(Map<String, String> map);
+	List<TfOrder> selectDateOrder(String startDate, String endDate);
+	List<TfOrder> selectRankOrder(Map<String, Object> map);
+	List<TfOrder> selectOrderList();
+	List<TfOrder> selectUnpaidOrderList();
+	List<TfOrder> selectLongUnpaidOrderList();
+	List<TfOrder> selectShOrderList();
+	List<TfOrder> selectTicketingList();
+	int updateDpState(String orderCode);
+	int updateShState(String orderCode);
+	int updateTicketing(String orderCode);
+	int selectOrderCount(String userId);
+	OrderQShow selectOrderQshow(String code);
+	List<OrderDShow> selectRankGenre(Map<String, String> map);
+	Dual selectOrderCountAdmin();
+	List<Map<String, Object>> selectCountGenre(int period);
+	List<OrderDShow> selectTicketing(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDFclty> selectOrderFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+}

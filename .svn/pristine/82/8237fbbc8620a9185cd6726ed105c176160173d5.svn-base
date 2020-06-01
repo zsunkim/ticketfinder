@@ -1,0 +1,14 @@
+package ticket.finder.exception;
+
+//공연 정보 검색 시  공연코드가 존재하지 않을 경우 발생되는 예외클래스
+public class SCodeNotFoundException extends Exception{
+	private static final long serialVersionUID = 1L;
+	
+	public SCodeNotFoundException() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public SCodeNotFoundException(String message) {
+		super(message);
+	}
+}

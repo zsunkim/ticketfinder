@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                   랭킹 페이지
+----------------------------------------------*/
+#rank #section {width:100%;}
+
+#rank .cont {width:1200px; margin: 0 auto;}
+
+#rank .mainTitle {
+	text-align:center;
+	font-size:45px;
+	padding: 90px 0 60px 0;
+}
+
+#rank .rank_tab {
+	width:1200px; 
+    margin:0 auto 60px auto;
+    margin-bottom:60px;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+#rank .rank_tab a {
+	display:inline-block;
+    box-sizing:border-box;
+    border:1px solid #ddd; 
+    width: 20%;
+    text-align:center; 
+    font-size:16px;
+    height: 70px;
+    line-height: 70px;
+    color: #333;
+}
+
+#rank .rank_tab a.on {
+    background: #ec7d2c;
+    border-color: #ec7d2c;
+    color: #fff;
+    font-weight: bold;
+}
+
+#rank .rank_category {
+	width:1200px; 
+	margin:0 auto; 
+	position:relative; 
+	height:61px; 
+	border-bottom:2px solid #333;
+}
+
+#rank .rank_cate {
+	margin-left: 20px;
+}
+
+#rank .rank_cate > a {
+	display:inline-block;
+	font-size:14px; 
+	margin-right:30px;
+	line-height:50px; 
+	position:relative;
+}
+
+#rank .rank_cate > a.on {
+    color: #333;
+    padding-right: 12px;
+    border-top: 3px solid #ec7d2c;
+    padding-right: 12px;
+}
+
+#rank .rank_cate > a.on:after {
+    content: "↓";
+    display: block;
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #000;
+    width: 12px;
+    height: 55px;
+    font-weight: normal;
+    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
+}
+
+#rank .rank_cate > a:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 15px;
+    background: #ddd;
+    position: absolute;
+    top: 20px;
+    left: -15px;
+}
+
+#rank .rank_date {
+	position:absolute;
+	left:50%;
+	font-size:25px;
+	color:#ec7d2c; 
+	padding:8px 0 15px 44px; 
+	font-weight:bold;
+	bottom: 0;
+	transform: translate(-50%, 0);
+}
+
+#rank .rank_date span {
+	margin-left: 10px;
+}
+
+#rank .rank_best {
+	width:1200px; 
+	margin: 0 auto; 
+	text-align:center;
+	background:#f6f6f6;
+	font-size: 0;
+}
+
+#rank .rank_best > div:nth-child(1) a {
+	animation: bg 10s ease infinite;
+	background: linear-gradient(45deg, #d6f2c9, #d7cbe0, #facae1, #eed1af, #cbf0f3);
+	background-size: 600% 600%;
+	height: 470px;
+}
+
+#rank .rank_best > div:nth-child(1) a .rankNo {
+	width: 70px;
+	height: 90px;
+	top: 52px;
+	left: 58px;
+	background-size: 100% auto;
+	background-image: url(images/rank/icon-best1.png);
+}
+
+#rank .rank_best > div:nth-child(1) a .rankNo span {
+    padding: 21px 0 13px 0;
+}
+
+#rank .rank_best > div a .rankNo span {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px 0 13px 0;
+    position: relative;
+}
+
+#rank .rank_best > div:nth-child(1) a .rankNo span:nth-child(1):after {
+    left: 29px;
+}
+
+#rank .rank_best > div a .rankNo span:nth-child(1):after {
+    content: "";
+    display: block;
+    width: 13px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.5;
+    position: absolute;
+    left: 21px;
+    bottom: 7px;
+}
+
+#rank .rank_best > div a .rankNo {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    width: 55px;
+    height: 71px;
+    background-image: url(images/rank/icon-best2.png);
+}
+
+#rank .rank_best > div {
+	display:inline-block;
+	box-sizing:border-box; 
+	border:1px solid #ddd;
+	height: 600px;
+	width: 400px;
+}
+
+#rank .rank_best > div > a {
+	display:block; 
+	width:260px; 
+	position:relative; 
+	padding:60px 69px 70px 70px;
+}
+
+#rank .rank_best img {
+	display: block;
+	width: 100%;
+	height: 364px;
+	margin-bottom: 22px;
+	overflow: hidden;
+}
+
+#rank .rlb_tit {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 700;
+	color: #333;
+	height: 48px;
+	overflow: hidden;
+	margin: 0 -25px 12px -25px;
+}
+
+#rank .rlb_sub_tit {
+	font-size: 13px;
+	color: #999;
+	height: 60px;
+	border-bottom: 1px solid #eee;
+	line-height: 18px;
+}
+
+#rank .rank_list {
+	width:1200px; 
+	margin:0 auto;
+	border-bottom:2px solid #333;
+	margin-bottom: 200px;
+}
+
+#rank .rank_list > div {
+	border-top:1px solid #ddd;
+	overflow: hidden;
+	height: 152px;
+}
+
+#rank .rank_list .flu {
+	width: 120px;
+	text-align: center;
+	margin-top: 65px;
+}
+
+#rank .rank_list > div > div {
+	float: left;
+}
+
+#rank .rank_list .flu p {
+	font-weight: 700;
+}
+
+#rank .rank_list > div > div:nth-child(2) img {
+	width: 80px;
+	height: auto;
+	margin-top: 20px;
+}
+
+#rank .rank_list > div > div:nth-child(3) {
+	width: 460px;
+	height: 112px;
+	margin: 20px 0 0 40px;
+	position: relative;
+	padding-right: 100px;
+}
+
+#rank .rank_list > div > div:nth-child(3) .rank_tit {
+	margin: 50px 0 16px 0;
+}
+
+#rank .rank_list > div > div:nth-child(3) .rank_tit a {
+	font-size: 16px;
+	line-height: 24px;
+	color: #333;
+}
+
+#rank .rank_list > div > div:nth-child(4) {
+	width: 220px;
+	font-size: 13px;
+	line-height: 24px;
+	color: #999;
+	text-align: center;
+	padding-top: 58px;
+}
+
+#rank .rank_list > div > div:nth-child(5) {
+	width: 100px;
+	font-size: 13px;
+	line-height: 24px;
+	color: #999;
+	text-align: center;
+	padding-top: 58px;
+	padding-left: 20px;
+}
+
+
+

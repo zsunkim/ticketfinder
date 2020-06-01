@@ -1,0 +1,738 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - 공연 목록</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ] -->
+     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="${pageContext.request.contextPath }/a_css/nifty.min.css" rel="stylesheet">
+
+    
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/switchery/switchery.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Table [ OPTIONAL ]-->
+    <%-- <link href="${pageContext.request.contextPath }/a_plugins/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath }/a_plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet"> --%>
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="${pageContext.request.contextPath }/a_css/demo/nifty-demo.min.css" rel="stylesheet">
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="${pageContext.request.contextPath }/a_plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath }/a_plugins/pace/pace.min.js"></script>
+</head>
+<body>
+	<div id="container" class="effect mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">공연 관리</h1>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+				
+				
+				<!--Breadcrumb-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<ol class="breadcrumb">
+					<li><a href="${pageContext.request.contextPath }/main.admin">홈</a></li>
+					<li class="active">공연 관리</li>
+				</ol>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End breadcrumb-->
+				
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					<div class="row">
+					
+						<div class="col-lg-12">
+						
+							<!--Default Tabs (Left Aligned)-->
+							<!--===================================================-->
+							<div class="tab-base">
+					
+								<!--Nav Tabs-->
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a data-toggle="tab" href="#lft-tab-1">전체</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-2">콘서트</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-3">뮤지컬</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-4">연극</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-5">클래식</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-6">종료된 공연</a>
+									</li>
+								</ul>
+					
+								<!--Tabs Content-->
+								<div class="tab-content">
+								
+									<div id="lft-tab-1" class="tab-pane fade active in">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">전체 공연 목록</h3>
+												</div>
+												<div class="panel-body">
+													<table id="test111" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>장르</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="showinfo" items="${showList }">
+														  	<c:set var = "genre" value = "${showinfo.tfShow.sGenre }"/>
+															<tr>
+														      <c:choose>
+														         <c:when test = "${genre=='concert'}"><td>콘서트</td></c:when>
+														         <c:when test = "${genre=='musical'}"><td>뮤지컬</td></c:when>
+														         <c:when test = "${genre=='play'}"><td>연극</td></c:when>
+														         <c:when test = "${genre=='classic'}"><td>클래식</td></c:when>
+														      </c:choose>
+																<td>${showinfo.showDetail.showName }</td>
+																<td>${showinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(showinfo.tfShow.sSDate, 0, 10) }~${fn:substring(showinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${showinfo.showDetail.showRate }%</td>
+																<td>${showinfo.tfShow.sRuntime }</td>
+																<td>${showinfo.tfShow.sAge }</td>
+																<td>${showinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${showinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${showinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+									
+									<div id="lft-tab-2" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+										
+										
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 콘서트</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-dt-selection2" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>공연번호</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="concertinfo" items="${concertList }">
+															<tr>
+																<td>${concertinfo.showDetail.showNum }</td>
+																<td>${concertinfo.showDetail.showName }</td>
+																<td>${concertinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(concertinfo.tfShow.sSDate, 0, 10) }~${fn:substring(concertinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${concertinfo.showDetail.showRate }%</td>
+																<td>${concertinfo.tfShow.sRuntime }</td>
+																<td>${concertinfo.tfShow.sAge }</td>
+																<td>${concertinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${concertinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${concertinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>
+									
+									<div id="lft-tab-3" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+										
+										
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 뮤지컬</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-dt-selection3" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>공연번호</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="musicalinfo" items="${musicalList }">
+															<tr>
+																<td>${musicalinfo.showDetail.showNum }</td>
+																<td>${musicalinfo.showDetail.showName }</td>
+																<td>${musicalinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(musicalinfo.tfShow.sSDate, 0, 10) }~${fn:substring(musicalinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${musicalinfo.showDetail.showRate }%</td>
+																<td>${musicalinfo.tfShow.sRuntime }</td>
+																<td>${musicalinfo.tfShow.sAge }</td>
+																<td>${musicalinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${musicalinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${musicalinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>
+									
+									<div id="lft-tab-4" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+										
+										
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 연극</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-dt-selection4" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>공연번호</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="playinfo" items="${playList }">
+															<tr>
+																<td>${playinfo.showDetail.showNum }</td>
+																<td>${playinfo.showDetail.showName }</td>
+																<td>${playinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(playinfo.tfShow.sSDate, 0, 10) }~${fn:substring(playinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${playinfo.showDetail.showRate }%</td>
+																<td>${playinfo.tfShow.sRuntime }</td>
+																<td>${playinfo.tfShow.sAge }</td>
+																<td>${playinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${playinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${playinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>
+									
+									<div id="lft-tab-5" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+										
+										
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 클래식</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-dt-selection5" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>공연번호</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="classicinfo" items="${classicList }">
+															<tr>
+																<td>${classicinfo.showDetail.showNum }</td>
+																<td>${classicinfo.showDetail.showName }</td>
+																<td>${classicinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(classicinfo.tfShow.sSDate, 0, 10) }~${fn:substring(classicinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${classicinfo.showDetail.showRate }%</td>
+																<td>${classicinfo.tfShow.sRuntime }</td>
+																<td>${classicinfo.tfShow.sAge }</td>
+																<td>${classicinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${classicinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${classicinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>
+									
+									<div id="lft-tab-6" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+										
+										
+											<!-- Row selection (single row) -->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">종료된 공연 목록</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-dt-selection6" class="table table-striped table-bordered" cellspacing="0" width="100%">
+														<thead>
+															<tr>
+																<th>장르</th>
+																<th>공연번호</th>
+																<th>공연명</th>
+																<th>공연장</th>
+																<th>공연기간</th>
+																<th>좌석점유율</th>
+																<th>런타임</th>
+																<th>관람연령</th>
+																<th>공연상태</th>
+																<th>티켓가격</th>
+																<th>출연진</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach var="endShowinfo" items="${endShowList }">
+															<tr>
+																<td>
+																  <c:set var = "genre" value = "${endShowinfo.tfShow.sGenre }"/>
+															      <c:choose>
+															         <c:when test = "${genre=='concert'}">
+															            ${genre='콘서트' }
+															         </c:when>
+															         <c:when test = "${genre=='musical'}">
+															            ${genre='뮤지컬' }
+															         </c:when>
+															         <c:when test = "${genre=='play'}">
+															            ${genre='연극' }
+															         </c:when>
+															         <c:when test = "${genre=='classic'}">
+															            ${genre='클래식' }
+															         </c:when>
+															      </c:choose>
+																</td>
+																<td>${endShowinfo.showDetail.showNum }</td>
+																<td>${endShowinfo.showDetail.showName }</td>
+																<td>${endShowinfo.showDetail.showHallName }</td>
+																<td>${fn:substring(endShowinfo.tfShow.sSDate, 0, 10) }~${fn:substring(endShowinfo.tfShow.sEDate, 0, 10) }</td>
+																<td>${endShowinfo.showDetail.showRate }%</td>
+																<td>${endShowinfo.tfShow.sRuntime }</td>
+																<td>${endShowinfo.tfShow.sAge }</td>
+																<td>${endShowinfo.showDetail.showState }</td>
+																<td><fmt:formatNumber value="${endShowinfo.tfShow.sPrice }" pattern="#,###"/>원</td>
+																<td>${endShowinfo.showDetail.showCast }</td>
+															</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											<!-- End Row selection (single row) -->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>
+								</div>
+								<!-- tab-content 종료 -->
+							</div>
+							<!--===================================================-->
+							<!--End Default Tabs (Left Aligned)-->
+						</div>
+					</div>					
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+		</div>
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 TicketFinder</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/bootstrap.min.js"></script>
+
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/fast-click/fastclick.min.js"></script>
+
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="${pageContext.request.contextPath }/a_js/nifty.min.js"></script>
+
+
+	<!--Switchery [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/switchery/switchery.min.js"></script>
+
+
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+	<!--DataTables [ OPTIONAL ]-->
+	<script src="${pageContext.request.contextPath }/a_plugins/datatables/media/js/jquery.dataTables.js"></script>
+	<script src="${pageContext.request.contextPath }/a_plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath }/a_plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+
+
+	<!--Demo script [ DEMONSTRATION ]-->
+	<script src="${pageContext.request.contextPath }/a_js/demo/nifty-demo.min.js"></script>
+
+
+	<!--DataTables Sample [ SAMPLE ]-->
+	<script src="${pageContext.request.contextPath }/a_js/demo/tables-datatables.js"></script>
+
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#mainnav-menu').children().eq(2).addClass('active-link');
+
+		/* $('#mainnav-menu').children().eq(2).addClass('active-link'); */
+		
+		
+		var test111 = $('#test111').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+
+		$('#test111').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				test111.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+		var rowSelection2 = $('#demo-dt-selection2').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+	
+		$('#demo-dt-selection2').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				rowSelection2.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+		var rowSelection3 = $('#demo-dt-selection3').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+	
+		$('#demo-dt-selection3').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				rowSelection3.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+		var rowSelection4 = $('#demo-dt-selection4').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+	
+		$('#demo-dt-selection4').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				rowSelection4.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+		var rowSelection5 = $('#demo-dt-selection5').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+	
+		$('#demo-dt-selection5').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				rowSelection5.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+		var rowSelection6 = $('#demo-dt-selection6').DataTable({
+			"responsive": true,
+			"language": {
+				"paginate": {
+				  "previous": '<i class="fa fa-angle-left"></i>',
+				  "next": '<i class="fa fa-angle-right"></i>'
+				}
+			}
+		});
+	
+		$('#demo-dt-selection6').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				rowSelection2.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		} );
+		
+	});
+	</script>
+</body>
+</html>
+

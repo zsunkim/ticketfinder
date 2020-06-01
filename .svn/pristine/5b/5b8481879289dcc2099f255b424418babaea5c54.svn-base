@@ -1,0 +1,11 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+
+import ticket.finder.dto.ShowDetail;
+
+public interface ShowDetailMapper {
+	int insertShowDetail(ShowDetail showDetail);
+	int updateShowDetail(int showNum);
+	List<ShowDetail> selectSearch(String search);
+}

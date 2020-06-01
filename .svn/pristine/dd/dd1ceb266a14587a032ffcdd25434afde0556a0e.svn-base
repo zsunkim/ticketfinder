@@ -1,0 +1,134 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="delivery">
+	<div id="section">
+        <div>
+            <ul class="book_tap">
+                <li class="step">
+                    <span>좌석선택</span>
+                </li>
+                <li class="step on">
+                    <span>배송선택</span>
+                </li>
+                <li class="step">
+                    <span>결제</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="deliver_box">
+            <form method="POST">
+                <div>
+                    <h2>수령방법</h2>
+                    <div class="sel_receipt">
+                        <em>수령방법선택</em>
+                        <span>
+                            <input type="radio" id="site" name="receipt" value="site">
+                            <label>현장수령</label>
+                            <input type="radio" id="deliver" name="receipt" value="deliver">
+                            <label>배송 (2,500원)</label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="user_info">
+                    <!-- 현장수령 -->
+                    <h4>주문자 정보</h4>
+                    <ul>
+                        <li>
+                            <em>이름</em>
+                            <input type="text" class="name" id="name" style="width: 110px;" maxlength="50" value="${userinfo.userName }">
+                        </li>
+                        <li>
+                            <em>연락처</em>
+                            <input type="text" class="phone" id="phone" style="width: 40px;" maxlength="3" value="${userinfo.userTel }">
+                        </li>
+                        <li>
+                            <em>e-mail</em>
+                            <input type="text" class="email" id="email" style="width: 178px;" maxlength="100" value="${userinfo.userEmail }">
+                        </li>
+                    </ul>
+                </div>
+                 <!-- 주의사항 -->
+                <div class="caution" id="step04_DeliveryCaution" style="display: block;">
+                    <h5>주의사항</h5>
+                    <ul>
+                        <li>1)<span class="red"> 배송 선택 시 티켓 수령자의 배송지 정보를 정확히 입력해주시기 바랍니다.</span></li>
+                        <li>2)<span class="red"> 티켓은 유가증권으로 본인에게 직접 전달해야하며, 분실된 티켓은 재발권 되지 않습니다.</span></li>
+                        <li>3)<span class="red"> 일괄배송의 경우 정해진 날짜에 티켓 배송이 시작되며, 주소 수정은 일괄배송일 2일 전까지 가능합니다.</span></li>
+                        <li>4)<span class="red"> 예매 티켓 배송은 예매완료일, 혹은 일괄배송일로부터 4~5일(영업일 기준) 이내 수령 가능합니다.</span> </li>
+                        <li>5) 긴급연락처는 공연 취소와 같은 유사 시 안내 받으실 연락처이므로 정확히 입력해주시기 바랍니다.</li>
+                        <li>6) 이메일 정보 미 입력 시 예매 관련 안내 메일을 받을 수 없으니 이메일 받기를 원하시는 경우 마이페이지에서<br />&nbsp;&nbsp;&nbsp;회원정보를 수정해주시기 바랍니다.</li>
+                    </ul>
+                </div>
+                 <!-- //주의사항 -->
+            </form>
+        </div>
+    </div>
+
+    <div class="reserve_right">
+        <div class="show_info">
+            <img src="${pageContext.request.contextPath}/images/ranking_1.jpg">
+            <span class="title">뮤지컬 <미드나잇 : 앤틀러스></span>
+            <span class="date">2020.02.00 ~ 2020.05.13</span>
+            <span class="date">대학로 아트윈씨어터 2관</span>
+        </div>
+        <div class="my_seat">
+            <h3>선택내역</h3>
+            <ul>
+                <li>
+                    <em>날짜</em>
+                    <span>2020.14.18 (토)</span>
+                </li>
+                <li>
+                    <em>시간</em>
+                    <span>[2회] 18시 30분</span>
+                </li>
+                <li>
+                    <em>매수</em>
+                    <span>1매</span>
+                </li>
+                <li>
+                    <em>좌석</em>
+                    <div>
+                        <span>시야제한석 1층 J열 001번</span>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="ticket_info">
+            <h3>결제내역</h3>
+            <div class="ticket_pay">
+                <ul>
+                    <li class="t_price">
+                        <em>티켓금액</em>
+                        <span>20,000원</span>
+                    </li>
+                    <li class="t_charge">
+                        <em>예매수수료</em>
+                        <span>1,000원</span>
+                    </li>
+                    <li class="t_deli">
+                        <em>배송료</em>
+                        <span>2,800원</span>
+                    </li>
+                    <li class="t_plus">
+                        <em>총 금액</em>
+                        <span>21,000원</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="t_result">
+            <span>총 결제금액</span>
+            <span>21,000원</span>
+        </div>
+        
+
+        <div class="reserve_btn">
+                <a class="btn1">이전</a>
+                <a class="btn2">좌석선택완료</a>
+        </div>
+    </div>
+</div>

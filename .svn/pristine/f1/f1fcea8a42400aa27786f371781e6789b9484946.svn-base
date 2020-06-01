@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="findId">
+	<div id="section">
+	    <div id="findIdHeader">
+	        <div id="headerArea">
+	            <h1>
+	                <img src="images/common/logo2.png">
+	                <div class="finderBox">
+	                    <a href="#">아이디 찾기</a>
+	                    <a href="${pageContext.request.contextPath}/findPw" class="on">비밀번호 찾기</a>
+	                </div>
+	            </h1>
+	        </div>
+	    </div>
+	    <div class="cont">
+	    <!-- <form method="post" id="findId" action="findId"> -->
+	        <div class="findIdForm">
+	            <div>
+	                <div class="info_input">
+	                    <div class="info_Box">
+	                        <div class="authNum"></div>
+	                        <div class="userId"></div>
+	                        <div>
+	                            <input type="text" id="name" class="name" name="userName" placeholder="이름">
+	                        </div>
+           					<p id="nameMsg" class="error"></p>					
+	                        <div>
+	                            <span>
+	                            	<input type="text" id="email" class="email" name="userEmail" placeholder="이메일을 입력해주세요.">
+	                            </span>
+	                            <span>
+	                            	<a type="button" class="numBtn" id="numBtn">인증번호 요청</a>
+	                            </span>
+	                        </div>
+           					<p id="emailMsg" class="error"></p>					
+	                        <div>
+	                            <input type="text" id="num" class="num" placeholder="인증번호 (6자리)">
+	                            <%-- <input type="hidden" id="num" class="num" value="${authNum }"> --%>
+	                        </div>
+           					<p id="numMsg" class="error"></p>					
+	                    </div>
+	                </div>
+	            </div>
+	            
+	            <div class="wrap_btn">
+	                <button type="button" class="check_btn" id="check_btn">확인</button>
+	            </div>
+	        </div>
+	    <!-- </form> -->
+	    </div>
+	    <script src="${pageContext.request.contextPath}/js/findId.js"></script>
+	</div>
+</div>
+

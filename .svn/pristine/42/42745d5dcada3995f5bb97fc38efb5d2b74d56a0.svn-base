@@ -1,0 +1,35 @@
+package ticket.finder.dto;
+
+public class OrderDFclty {
+	private TfOrder tfOrder;
+	private ShowDetail showDetail;
+	private Fclty fclty;
+	
+	public OrderDFclty() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public TfOrder getTfOrder() {
+		return tfOrder;
+	}
+
+	public void setTfOrder(TfOrder tfOrder) {
+		this.tfOrder = tfOrder;
+	}
+
+	public ShowDetail getShowDetail() {
+		return showDetail;
+	}
+
+	public void setShowDetail(ShowDetail showDetail) {
+		this.showDetail = showDetail;
+	}
+
+	public Fclty getFclty() {
+		return fclty;
+	}
+
+	public void setFclty(Fclty fclty) {
+		this.fclty = fclty;
+	}
+}

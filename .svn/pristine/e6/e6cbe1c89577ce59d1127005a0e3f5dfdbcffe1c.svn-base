@@ -1,0 +1,7 @@
+package ticket.finder.service;
+
+import ticket.finder.dto.Refund;
+
+public interface RefundService {
+	void addRefund(Refund refund);
+}

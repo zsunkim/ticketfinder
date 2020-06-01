@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.CsMapper">
+	<insert id="insertCs">
+		<selectKey resultType="int" keyProperty="cs_num" order="BEFORE">
+			select cs_seq.nextval from dual
+		</selectKey>
+		insert into cs values(#{csNum},#{csTitle}, #{csContents}, #{csCategory}, #{csCount}, sysdate)
+	</insert>
+	
+	<delete id="deleteCs">
+		delete from cs where cs_num=#{csNum}
+	</delete>
+	
+	<update id="updateCs">
+		update cs set cs_title=#{csTitle}, cs_contents=#{csContents}, cs_date=sysdate where cs_num=#{csNum}
+	</update>
+	
+	<select id="selectCs" resultType="Cs">
+		select * from cs where cs_num=#{csNum}
+	</select>
+	
+	<select id="selectCsCount" resultType="int">
+		select count(*) from cs
+	</select>
+	
+	<select id="selectCategoryCs" resultType="Cs">
+		select * from cs where cs_category=#{csCategory} order by cs_num desc
+	</select>
+	
+	<select id="selectCsList" resultType="Cs">
+		select * from cs order by cs_num desc
+	</select>
+	
+	<select id="selectCsBoardList" resultType="Cs">
+		select * from (select rownum rn, board.* from (select * from cs order by cs_num desc) board order by rn desc) where rn between #{startRow} and #{endRow}
+	</select>
+</mapper>

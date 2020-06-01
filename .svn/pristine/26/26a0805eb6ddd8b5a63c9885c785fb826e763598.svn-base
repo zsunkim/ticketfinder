@@ -1,0 +1,11 @@
+package ticket.finder.dao;
+
+import java.util.List;
+
+import ticket.finder.dto.ShowDetail;
+
+public interface ShowDetailDAO {
+	int insertShowDetail(ShowDetail showDetail);
+	int updateShowDetail(int showNum);
+	List<ShowDetail> selectSearch(String search);
+}

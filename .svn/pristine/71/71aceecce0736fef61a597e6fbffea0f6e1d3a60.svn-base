@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                  	로그인
+----------------------------------------------*/
+
+#login #section {width:100%}
+
+#login #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#login #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#login #header {
+    position: relative;
+    width: 550px;
+    margin: 0 auto;
+    padding: 68px 0 68px;
+    z-index: 20;
+    text-align: center
+}
+/*
+#login #header #headerArea {
+    font-size: 0;
+    line-height: 0
+}
+*/
+#login #header #headerArea {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    width: 200px;
+    height: 56px;
+    text-align: center;
+    margin: 30px 0 0 70px;
+}
+
+#login #header #headerArea img {
+    width: 400px;
+}
+
+#login .cont {
+    width: 550px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#login .loginForm {
+    position: relative;
+    width: auto !important;
+    margin:0 auto; 
+}
+
+#login .login_input {
+    width: 390px;
+    margin: 0 auto;
+    padding: 29px 0 23px 0;
+}
+
+#login .login_insert {
+    float: none;
+    width: 390px;
+}
+
+#login .login_input input {
+    width: 366px;
+    height:49px; 
+    line-height:49px; 
+    border: 1px solid #ccc; 
+    font-size:14px; 
+    box-shadow: none; 
+    padding:0 11px; 
+    color: #333;
+    border-bottom: 0;
+    margin: 10px 0;
+}
+
+#login .login_input .id,
+#login .login_input .passwd {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+#login .save {
+    overflow: hidden;
+}
+
+/*
+#login .check {
+    float: left;
+    margin-top: 18px;
+    position: relative;
+    overflow: hidden;
+    height: 18px;
+}
+
+#login .check #saveId {
+    margin: 2px 1px;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+}
+
+#login .label {
+    float: left;
+    height: 18px;
+    color: #606060;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 18px;
+}
+
+#login .label .icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    background-position: -200px 0;
+}
+
+#login .label .icon {
+    display: inline-block;
+    zoom: 1;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: top;
+    background-image: url(/sysimage/yesUI/bgYUI.png?ver=200206a);
+}
+*/
+
+
+
+
+#login .login_info {
+    float: left;; 
+    margin-right: -3px;
+    margin-top: 13px;
+    font-size: 12px;
+}
+
+#login .login_info a {
+    display: inline-block; 
+    padding: 5px 2px; 
+    color: #767676;
+}
+
+#login .login_info a.lnk {
+    padding-left: 0;
+}
+
+#login .login_info .bar {
+    color: #ebebeb;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+#login .wrap_btn {
+    float: none;
+    width: 390px;
+    margin-top: 19px;
+    padding-bottom: 15px;
+    margin: 0 auto;
+}
+
+#login .login_btn {
+    display: block;
+    width: 100%;
+    padding: 17px 0 21px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 18px;
+    background: #445da5;
+    color: white;
+}
+

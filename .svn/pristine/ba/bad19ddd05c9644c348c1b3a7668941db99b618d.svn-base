@@ -1,0 +1,55 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <div id="section">
+        <p class="qnaTitle">1:1 문의하기</p>
+        <div class="qnaCont">
+            <div class="qnaList">
+                <div class="qnaGroup">
+                    <div class="qnaGroupName left">분류</div>
+                    <div class="qnaGroupRBtn">
+                        <div><label><input type="radio" name="qnaRBtn">예매/결제</label></div>
+                        <div><label><input type="radio" name="qnaRBtn">취소/환불</label></div>
+                        <div><label><input type="radio" name="qnaRBtn">회원 정보</label></div>
+                        <div><label><input type="radio" name="qnaRBtn">기타</label></div>
+                    </div>
+                </div>
+                <div class="qnaTitle">
+                    <div class="qnaTitleName left">제목</div>
+                    <div class="qnaTitleInput">
+                        <input>
+                    </div>
+                </div>
+                <div class="qnaContent">
+                    <div class="qnaContentName left">내용</div>
+                    <div class="qnaContentInput">
+                        <textarea></textarea>
+                    </div>
+                </div>
+                <div class="qnaFile">
+                    <div class="qnaFileName left">첨부파일</div>
+                    <div class="qnaFileCont">
+                        <div class="qnaFileBtn">파일 선택</div>
+                        <div class="qnaFileInfo">*사진 파일만 첨부 가능. 첨부 파일은 총 10MB까지 업로드 가능</div>
+                        <div class="qnaFileList"></div>
+                    </div>
+                </div>
+                <div class="qnaPlay">
+                    <div class="qnaPlayName left">예매공연</div>
+                    <div class="qnaPlayList">
+                        <div class="qnaPlayListItem">
+                            <input readonly>
+                        </div>
+                        <div class="qnaPlayListBtn">예매 공연 검색</div>
+                        <div class="qnaPlayListNone">
+                            <input type="checkbox">
+                            <span>선택할 공연 없음</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="qnaBtnCont">
+                <div class="qnaCancelBtn">취소</div>
+                <div class="qnaSaveBtn">문의하기</div>
+            </div>
+        </div>
+    </div>

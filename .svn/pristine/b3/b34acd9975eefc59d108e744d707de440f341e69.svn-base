@@ -1,0 +1,8 @@
+package ticket.finder.mapper;
+
+import ticket.finder.dto.TfShow;
+
+public interface TfShowMapper {
+	int insertTfShow(TfShow tfShow);
+	int updateTfShow(TfShow tfShow);
+}

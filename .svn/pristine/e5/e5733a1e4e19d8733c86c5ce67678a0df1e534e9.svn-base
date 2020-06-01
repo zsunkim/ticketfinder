@@ -1,0 +1,280 @@
+/*----------------------------------------------
+          bookDetail - common style
+----------------------------------------------*/
+#bookMore>div{
+  /* margin-bottom: 50px; */
+}
+
+#bookMore .cont{
+  width: 1100px;
+}
+
+/*----------------------------------------------
+          bookDetail - section01 style
+----------------------------------------------*/
+#bookMore #section01{
+  margin-top: 50px;
+}
+
+#bookMore #section01 .tapWrapper{
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+#bookMore #section01 .tapWrapper .tapBtn{
+  margin: 0 auto;
+  position: relative;
+  height: 42px;
+  display: inline-block;
+  margin-left: 50%;
+  transform: translateX(-215px);
+}
+
+#bookMore #section01 .tapWrapper .tapBtn button{
+  width: 230px;
+  height: 42px;
+  outline: none;
+  z-index: 0;
+  color: #666;
+  font-size: 18px;
+  background: #fff;
+  border:1px solid #000;
+  border-radius: 20px;
+  position: absolute;
+  cursor: pointer;
+  border:1px solid #ccc;
+}
+
+#bookMore #section01 .tapWrapper .tapBtn button:hover{
+  color:#000;
+}
+
+#bookMore #section01 .tapWrapper .tapBtn button.checkBtn{
+  top: 0;
+  left:0;
+}
+
+#bookMore #section01 .tapWrapper .tapBtn button.cancleBtn{
+  top:0;
+  left:200px;
+}
+
+#bookMore #section01 .tapWrapper .tapBtn button.selected{
+  border:1px solid #000;
+  color:#000;
+  z-index: 2;
+}
+
+#bookMore #section01 .monthWrapper{
+  width: 100%;
+  float:left;
+  margin-bottom: 20px;
+}
+
+#bookMore #section01 .monthWrapper .monthBtn{
+  float:right;
+}
+
+#bookMore #section01 .monthWrapper .monthBtn li{
+  float:left;
+}
+
+#bookMore #section01 .monthWrapper .monthBtn li a{
+  display: inline-block;
+  width: 70px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #dadada;
+  color: #555;
+}
+
+#bookMore #section01 .monthWrapper .monthBtn li.on a{
+  background: #666;
+  color:#fff;
+}
+
+/*----------------------------------------------
+          bookDetail - section02 style
+----------------------------------------------*/
+#bookMore #section02 .ticketBox table{
+  border-top: 1px solid #e9e9e9;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#bookMore #section02 .ticketBox table tr td:first-child,
+#bookMore #section02 .ticketBox table tr td:last-child{
+  width: 15%;
+  text-align: center;
+}
+
+#bookMore #section02 .ticketBox table tr td:nth-child(2){
+  width: 40%;
+}
+
+#bookMore #section02 .ticketBox table tr td:nth-child(3){
+  width: 30%;
+}
+
+#bookMore #section02 .ticketBox table tr{
+  border-bottom: 1px solid #e9e9e9;
+}
+
+#bookMore #section02 .ticketBox table thead td{
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  line-height: 50px;
+}
+
+#bookMore #section02 .ticketBox table tbody td{
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+
+#bookMore #section02 .ticketBox table td.bookDate{
+  font-size: 16px;
+  color:#999;
+}
+
+#bookMore #section02 .ticketBox table td.bookShow img{
+  width: 120px;
+  float:left;
+  margin-right: 30PX;
+}
+
+#bookMore #section02 .ticketBox table td.bookShow p{
+  float: left;
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#bookMore #section02 .ticketBox table td.bookShow .showTit{
+  margin-top: 15px;
+  margin-bottom: 75px;
+  font-size: 18px;
+}
+
+#bookMore #section02 .ticketBox table td.bookShow .showDate,
+#bookMore #section02 .ticketBox table td.bookShow .showPlace{
+  color:#999;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#bookMore #section02 .ticketBox table td.bookDetail dl{
+  width: 100%;
+}
+
+#bookMore #section02 .ticketBox table td.bookDetail dl dt,
+#bookMore #section02 .ticketBox table td.bookDetail dl dd{
+  float: left;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color:#999;
+}
+
+#bookMore #section02 .ticketBox table td.bookDetail dl dt{
+  width: 30%;
+}
+
+#bookMore #section02 .ticketBox table td.bookDetail dl dd{
+  width: 70%;
+}
+
+#bookMore #section02 .ticketBox table td.bookState p{
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+#bookMore #section02 .ticketBox table td.bookState a{
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  color: #666;
+  height: 18px;
+  padding: 8px 12px 8px;
+}
+
+#bookMore #section02 .ticketBox table td.bookState a:hover{
+  border: 1px solid #000;
+  color:#000;
+}
+
+#bookMore #section02 .noTicketBox{
+  border:1px solid #e9e9e9;
+}
+
+#bookMore #section02 .noTicketBox p{
+  line-height: 250px;
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+
+/*----------------------------------------------
+          bookDetail - section03 style
+----------------------------------------------*/
+#bookMore #section03 {
+  margin: 25px 0;
+}
+
+#bookMore #section03 .pageBtnBox{
+  display: inline-block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+#bookMore #section03 .pageBtnBox a{
+  font-size: 16px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+#bookMore #section03 .pageBtnBox a.selected{
+  color:#2cb935;
+  font-weight: bold;
+}
+
+#bookMore #section03 .pageBtnBox a[class*="Btn"]{
+  width: 32px;
+  font-size: 13px;
+  letter-spacing: -1px;
+  text-align: center;
+  color:#888;
+  margin: 0;
+  border-radius: 15px;
+  border:1px solid #ccc;
+}
+
+#bookMore #section03 .pageBtnBox a[class*="Btn"]:hover{
+  color: #000;
+  border: 1px solid #000;
+}
+
+/*----------------------------------------------
+          bookDetail - section04 style
+----------------------------------------------*/
+#bookMore #section04 .info{
+  width: 100%;
+  padding: 20px;
+}
+
+#bookMore #section04 .info p{
+  margin-bottom: 20px;
+}
+
+#bookMore #section04 .info ul li{
+  font-size: 13px;
+  line-height: 18px;
+  color: #888;
+  margin-bottom: 7px;
+  padding: 0 0 0 13px;
+  background: url("../images/common/dot.png") no-repeat 0 7px;
+}

@@ -1,0 +1,99 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
+<div id="rank">
+	<div id="section">
+		<div class="cont">
+			<p class="mainTitle">랭킹</p>
+			<div class="rank_tab">
+				<a href="#" class="tab1 on" value="">전체</a>
+				<a href="#" class="tab2" value="musical">뮤지컬</a>
+				<a href="#" class="tab3" value="play">연극</a>
+				<a href="#" class="tab4" value="concert">콘서트</a>
+				<a href="#" class="tab5" value="classic">클래식</a>
+			</div>
+			
+			<div class="rank_category">
+				<div class="rank_cate">
+					<a href="#" class="day" value="1">일간</a>
+					<a href="#" class="week" value="7">주간</a>
+					<a href="#" class="month on" value="30">월간</a>
+				</div>
+				<!-- 현재시간 출력 -->
+				<p class="rank_date">
+					<img src="images/rank/ico-rank.png">
+					<span><%= sf.format(nowTime) %></span>
+				</p>
+			</div>
+			<div class="rank_empty"></div>
+			<!-- 랭킹 (1위~3위) -->
+			<div class="rank_best">
+			<c:forEach var="i" begin="0" end="2" step="1">
+				<div>
+					<a href="${pageContext.request.contextPath}/perform/${rankList[i].tfShow.sCode}">
+						<img src="${rankList[i].tfShow.sPoster }">
+						<p class="rlb_tit">${rankList[i].showDetail.showName }</p>
+						<p class="rlb_sub_tit">
+							${fn:substring(rankList[i].tfShow.sSDate,0,10) } ~ ${fn:substring(rankList[i].tfShow.sEDate,0,10) }
+							<br>
+							${rankList[i].showDetail.showHallName}
+						</p>
+						<p class="rankNo">
+							<span>${i+1}위</span>
+						</p>
+					</a>
+				</div>
+			</c:forEach>
+			</div>
+			
+			<!-- 랭킹 리스트(4위~10위) -->
+			<div class="rank_list">
+			<c:choose>
+			<c:when test="${fn:length(rankList) > 2}">
+			<c:forEach var="i" begin="3" end="${fn:length(rankList)-1 }" step="1">	
+				<div>
+				<c:choose>
+					<c:when test="${!empty(i) }">
+						<div class="flu">
+							<p><span>${i+1}위</span></p>
+						</div>
+						<div>
+							<a href="${pageContext.request.contextPath}/perform/${rankList[i].tfShow.sCode}">
+								<img src="${rankList[i].tfShow.sPoster }">
+							</a>
+						</div>
+						<div>
+							<p class="rank_tit">
+								<a href="${pageContext.request.contextPath}/perform/${rankList[i].tfShow.sCode}">
+									${rankList[i].showDetail.showName }
+								</a>
+							</p>
+						</div>
+						<div>
+							<p>${fn:substring(rankList[i].tfShow.sSDate,0,10) } ~ ${fn:substring(rankList[i].tfShow.sEDate,0,10) }</p>
+						</div>
+						<div>
+							<p>${rankList[i].showDetail.showHallName}</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div>-</div>
+					</c:otherwise>
+				</c:choose>
+				</div>					
+			</c:forEach>
+			</c:when>
+			</c:choose>
+			</div>
+			<!-- 랭킹 리스트 끝 -->
+	
+		</div>
+	</div>
+</div><script src="${pageContext.request.contextPath}/js/rank.js"></script>

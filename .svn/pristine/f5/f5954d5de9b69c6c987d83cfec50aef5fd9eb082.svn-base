@@ -1,0 +1,72 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.RefundDAO;
+import ticket.finder.dto.Refund;
+import ticket.finder.exception.RefundNotFoundException;
+
+@Service
+public class RefundServiceImpl implements RefundService {
+	@Autowired
+	private RefundDAO refundDAO;
+
+	@Override
+	public void addRefund(Refund refund) {
+		refundDAO.insertRefund(refund);
+	}
+
+	@Override
+	public void modifyRefund(String refundState, int refundNum) throws RefundNotFoundException {
+		if(refundDAO.selectRefundByNum(refundNum)==null) {
+			throw new RefundNotFoundException("존재하지 않는 취소정보입니다.");
+		}
+		refundDAO.updateRefundState(refundState, refundNum);
+	}
+
+	@Override
+	public void removeRefund(int refundNum) throws RefundNotFoundException {
+		if(refundDAO.selectRefundByNum(refundNum)==null) {
+			throw new RefundNotFoundException("존재하지 않는 취소정보입니다.");
+		}
+		refundDAO.deleteRefund(refundNum);
+	}
+
+	@Override
+	public Refund getRefundByNum(int refundNum) throws RefundNotFoundException {
+		if(refundDAO.selectRefundByNum(refundNum)==null) {
+			throw new RefundNotFoundException("존재하지 않는 취소정보입니다.");
+		}
+		return refundDAO.selectRefundByNum(refundNum);
+	}
+	
+	@Override
+	public Refund getRefundByOrder(String orderCode) {
+		return refundDAO.selectRefundByOrder(orderCode);
+	}
+
+	@Override
+	public List<Refund> getRefundByDate(String startDate, String endDate) throws RefundNotFoundException {
+		return refundDAO.selectRefundByDate(startDate, endDate);
+	}
+
+	@Override
+	public List<Refund> getRefundByKeyword(Map<String, Object> map) throws RefundNotFoundException {
+		return refundDAO.selectRefundByKeyword(map);
+	}
+
+	@Override
+	public List<Refund> getUserRefund(Map<String, Object> map) throws RefundNotFoundException {
+		return refundDAO.selectUserRefund(map);
+	}
+
+	@Override
+	public List<Refund> getRefundList() {
+		return refundDAO.selectRefundList();
+	}
+
+}

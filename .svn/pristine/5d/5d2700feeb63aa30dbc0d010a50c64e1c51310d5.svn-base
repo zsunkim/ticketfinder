@@ -1,0 +1,17 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.Refund;
+
+public interface RefundMapper {
+	int insertRefund(Refund refund);
+	int updateRefundState(String refundState, int refundNum);
+	int deleteRefund(int refundNum);
+	Refund selectRefundByNum(int refundNum);
+	List<Refund> selectRefundByDate(String startDate, String endDate);
+	List<Refund> selectRefundByKeyword(Map<String, Object> map);
+	List<Refund> selectUserRefund(Map<String, Object> map);
+	List<Refund> selectRefundList();
+}

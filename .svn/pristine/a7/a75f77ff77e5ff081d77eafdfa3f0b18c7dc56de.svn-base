@@ -1,0 +1,216 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.TfOrderDAO;
+import ticket.finder.dao.TfUserDAO;
+import ticket.finder.dto.Dual;
+import ticket.finder.dto.OrderDetailFcltyHallRefund;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.OrderRate;
+import ticket.finder.dto.OrderRefund;
+import ticket.finder.dto.TfOrder;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.SameOrderCodeException;
+
+@Service
+public class TfOrderServiceImpl implements TfOrderService {
+	@Autowired
+	private TfOrderDAO tfOrderDAO;
+	
+	@Autowired
+	private TfUserDAO tfUserDAO;
+
+	@Override
+	public void addOrder(TfOrder order) throws SameOrderCodeException {
+		if(tfOrderDAO.selectOrder(order.getOrderCode())!=null) {
+			throw new SameOrderCodeException(order, "잘못 된 주문번호입니다.");
+		}
+		
+		tfOrderDAO.insertOrder(order);
+	}
+
+	@Override
+	public void modifyOrder(TfOrder order) throws OrderNotFoundException {
+		if(tfOrderDAO.selectOrder(order.getOrderCode())==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		
+		tfOrderDAO.updateOrder(order);
+
+	}
+
+	@Override
+	public void modifyStateRefund(String code) throws OrderNotFoundException {
+		if(tfOrderDAO.selectOrder(code)==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		
+		tfOrderDAO.updateStateRefund(code);
+	}
+
+	@Override
+	public void removeUnpaidOrder(String code) throws OrderNotFoundException {
+		if(tfOrderDAO.selectOrder(code)==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		
+		tfOrderDAO.deleteUnpaidOrder(code);
+	}
+
+	@Override
+	public TfOrder getOrder(String code) throws OrderNotFoundException {
+		if(tfOrderDAO.selectOrder(code)==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		return tfOrderDAO.selectOrder(code);
+	}
+	
+	@Override
+	public TfOrder getMyOrder(String id) throws OrderNotFoundException {
+		if(tfUserDAO.selectUser(id)==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		return tfOrderDAO.selectMyOrder(id);
+	}
+
+	@Override
+	public List<OrderRefund> getUserOrderList(Map<String, String> map) throws OrderNotFoundException {
+		if(tfUserDAO.selectUser((String)map.get("userId"))==null) {
+			throw new OrderNotFoundException("해당 주문정보를 찾을 수 없습니다.");
+		}
+		return tfOrderDAO.selectUserOrderList(map);
+	}
+	
+	@Override
+	public List<TfOrder> getDateOrder(String startDate, String endDate) {
+		return tfOrderDAO.selectDateOrder(startDate, endDate);
+	}
+
+	@Override
+	public List<TfOrder> getRankOrder(Map<String, Object> map) {
+		return tfOrderDAO.selectRankOrder(map);
+	}
+
+	@Override
+	public List<TfOrder> getOrderList() {
+		return tfOrderDAO.selectOrderList();
+	}
+
+	@Override
+	public List<TfOrder> getUnpaidOrderList() {
+		return tfOrderDAO.selectUnpaidOrderList();
+	}
+	
+	@Override
+	public List<TfOrder> getLongUnpaidOrderList() {
+		return tfOrderDAO.selectLongUnpaidOrderList();
+	}
+
+	@Override
+	public List<TfOrder> getShOrderList() {
+		return tfOrderDAO.selectShOrderList();
+	}
+
+	@Override
+	public List<TfOrder> getTicketingList() {
+		return tfOrderDAO.selectTicketingList();
+	}
+
+
+	@Override
+	public int getOrderCount(String id) {
+		return tfOrderDAO.selectOrderCount(id);
+	}
+
+	@Override
+	public List<OrderQShow> getOrderQshow(Map<String, String> map) {
+		return tfOrderDAO.selectOrderQshow(map);
+	}
+
+	@Override
+	public List<OrderRate> getRankGenre(Map<String, String> map) {
+		return tfOrderDAO.selectRankGenre(map);
+	}
+
+	@Override
+	public void modifyDpState(String orderCode) {
+		tfOrderDAO.updateDpState(orderCode);
+	}
+
+	@Override
+	public void modifyShState(String orderCode) {
+		tfOrderDAO.updateShState(orderCode);
+	}
+
+	@Override
+	public void modifyTicketing(String orderCode) {
+		tfOrderDAO.updateTicketing(orderCode);
+	}
+
+	@Override
+	public Dual getOrderCountAdmin() {
+		return tfOrderDAO.selectOrderCountAdmin();
+	}
+
+	@Override
+	public List<Map<String, Object>> getCountGenre(int period) {
+		return tfOrderDAO.selectCountGenre(period);
+	}
+
+	@Override
+	public List<OrderDShow> getTicketing(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+		return tfOrderDAO.selectTicketing(startDate, endDate);
+	}
+
+	@Override
+	public List<OrderDetailFcltyHallRefund> getOrderFclty(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+		return tfOrderDAO.selectOrderFclty(startDate, endDate);
+	}
+
+	@Override
+	public OrderDetailFcltyHallRefund getOrderFcltyChoice(String orderCode) {
+		return tfOrderDAO.selectOrderFcltyChoice(orderCode);
+	}
+
+	@Override
+	public List<OrderDetailFcltyHallRefund> getRefundFclty(String startDate, String endDate) {
+		return tfOrderDAO.selectRefundFclty(startDate, endDate);
+	}
+
+	@Override
+	public OrderDetailFcltyHallRefund getRefundFcltyChoice(int refundNum) {
+		return tfOrderDAO.selectRefundFcltyChoice(refundNum);
+	}
+
+	@Override
+	public List<OrderDetailFcltyHallRefund> getShowOrder(String startDate, String endDate) {
+		return tfOrderDAO.selectShowOrder(startDate, endDate);
+	}
+	@Override
+	public List<OrderDShow> getShowOrderChoice(String showName) {
+		return tfOrderDAO.selectShowOrderChoice(showName);
+	}
+
+	@Override
+	public List<OrderDShow> getShowSelectOne() {
+		return tfOrderDAO.selectShowSelectOne();
+	}
+
+	@Override
+	public List<OrderDShow> getShowSelectTwo(String showCode) {
+		return tfOrderDAO.selectShowSelectTwo(showCode);
+	}
+
+	@Override
+	public List<OrderDetailFcltyHallRefund> getShowSeat(String showCode, int showNum) {
+		return tfOrderDAO.selectShowSeat(showCode, showNum);
+	}
+
+}

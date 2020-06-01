@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+#passwordCheck #section {width: 1200px; height: 100%; margin: 0 auto;}
+
+#passwordCheck #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#passwordCheck #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#passwordCheck #header {
+    position: relative;
+    width: 550px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 100px;
+}
+
+#passwordCheck #headerArea h1 {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+    width: 300px;
+    height: 56px;
+    text-align: center;
+}
+
+#passwordCheck .cont {
+    width: 550px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#passwordCheck .passwordCheckForm {
+    position: relative;
+    width: auto !important;
+    margin:0 auto; 
+}
+
+#passwordCheck .check_input {
+    width: 390px;
+    margin: 0 auto;
+    padding: 29px 0 23px 0;
+}
+
+#passwordCheck .info_insert {
+    float: none;
+    width: 390px;
+}
+
+#passwordCheck .check_input input {
+    width: 366px;
+    height:49px; 
+    line-height:49px; 
+    border: 1px solid #ccc; 
+    font-size:14px; 
+    box-shadow: none; 
+    padding:0 11px; 
+    color: #333;
+    border-bottom: 0;
+    margin: 10px 0;
+}
+
+#passwordCheck .check_input .id,
+#passwordCheck .check_input .passwd {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+#passwordCheck .wrap_btn {
+    float: none;
+    width: 390px;
+    margin-top: 19px;
+    padding-bottom: 15px;
+    margin: 0 auto;
+}
+
+#passwordCheck .check_btn {
+    display: block;
+    width: 100%;
+    padding: 17px 0 21px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 18px;
+    background: #445da5;
+    color: white;
+}
+
+
+
+

@@ -1,0 +1,7 @@
+package ticket.finder.service;
+
+import ticket.finder.dto.DateCount;
+
+public interface DateCountService {
+	DateCount getOrderCount(String param1, String param2, int period);
+}

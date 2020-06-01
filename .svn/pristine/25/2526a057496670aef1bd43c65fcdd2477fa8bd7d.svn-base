@@ -1,0 +1,18 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.ShowXShow;
+
+public interface ShowXShowMapper {
+	int insertShow(ShowXShow showxshow);
+	int updateShow(int showNum);
+	ShowXShow selectShowDetail(int showNum);
+	List<ShowXShow> selectShowHot();
+	List<ShowXShow> selectRank(Map<String, Object> map);
+	List<ShowXShow> selectAreaNew(int showArea);
+	List<ShowXShow> selectAreaEnd(int showArea);
+	List<ShowXShow> selectAreaName(int showArea);
+	List<ShowXShow> selectSearch(String search);
+}

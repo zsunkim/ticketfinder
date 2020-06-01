@@ -1,0 +1,17 @@
+package ticket.finder.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.Question;
+
+public interface QuestionMapper {
+	int insertQuestion(Question question);
+	int updateStateQuestion(String questionState, int questionNum);
+	Question selectQuestion(int questionNum);
+	List<Question> selectRefQuestion(int questionRef, String questionUserId);
+	List<Question> selectIdQuestion(String questionUserId);
+	List<Question> selectQuestionList();
+	List<Question> selectUserQuestionList(Map<String, Object> map);
+	int selectQuestionCount(String questionUserId);	
+}

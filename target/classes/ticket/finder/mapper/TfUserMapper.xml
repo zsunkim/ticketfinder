@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.TfUserMapper">
+	<insert id="insertUser">
+		insert into tf_user values(#{userId}, #{userPw}, #{userName}, #{userAddr1}, #{userAddr2}, #{userGender}, #{userBirth}, #{userEmail}, 
+		#{userTel}, sysdate, #{userState}, sysdate, #{userPost})
+	</insert>
+	
+	<update id="updateUser">
+		update tf_user
+		<set>
+			<if test="userPw!=null and userPw!=''">
+				user_pw=#{userPw},
+			</if>
+			<if test="userName!=null and userName!=''">
+				user_name=#{userName},
+			</if>
+			<if test="userAddr1!=null and userAddr1!=''">
+				user_addr1=#{userAddr1},
+			</if>
+			<if test="userAddr2!=null and userAddr2!=''">
+				user_addr2=#{userAddr2},
+			</if>
+			<if test="userGender!=null and userGender!=''">
+				user_gender=#{userGender},
+			</if>
+			<if test="userBirth!=null and userBirth!=''">
+				user_birth=#{userBirth},
+			</if>
+			<if test="userEmail!=null and userEmail!=''">
+				user_email=#{userEmail},
+			</if>
+			<if test="userTel!=null and userTel!=''">
+				user_tel=#{userTel}
+			</if>
+			<if test="userPost!=null and userPost!=''">
+				user_post=#{userPost}
+			</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+	<!-- 휴면회원 전환 -->
+	<update id="dormantUser">
+		update tf_user set user_state='휴면' where user_id=#{userId}
+	</update>
+	
+	<update id="updateLastDate">
+		update tf_user set user_last_date=sysdate where user_id=#{userId}
+	</update>
+	
+	<select id="selectFindIdUser" resultType="String">
+		select user_id from tf_user where user_name=#{userName} and user_email=#{userEmail}
+	</select>
+	
+	<select id="selectUser" resultType="TfUser">
+		select * from tf_user where user_id=#{userId}
+	</select>
+	
+	<select id="selectUserList" resultType="TfUser">
+		select * from tf_user where user_state='활동' order by user_last_date desc
+	</select>
+	
+	<!-- 휴면전환대상 회원목록 조회 -->
+	<select id="dormantUserList" resultType="TfUser">
+		select * from tf_user where user_last_date between to_date(sysdate)-9999 and to_date(sysdate)-365 and user_state='활동' 
+	</select>
+	
+	<!-- 휴면회원 조회 -->
+	<select id="dormantedUserList" resultType="TfUser">
+		select * from tf_user where user_state='휴면' order by user_last_date desc
+	</select>
+	
+	<select id="selectIdCheck" resultType="int">
+		select count(*) from tf_user where user_id=#{userId}
+	</select>
+	
+</mapper>

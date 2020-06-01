@@ -1,0 +1,8 @@
+package ticket.finder.mapper;
+
+import ticket.finder.dto.ShowDetail;
+
+public interface ShowDetailMapper {
+	int insertShowDetail(ShowDetail showDetail);
+	int updateShowDetail(ShowDetail showDetail);
+}

@@ -1,0 +1,91 @@
+package ticket.finder.dto;
+
+public class Question {
+	private int QuestionNum;
+	private String QuestionUserId;
+	private String QuestionTitle;
+	private String QuestionContents;
+	private String QuestionDate;
+	private String QuestionCategory;
+	private String QuestionState;
+	private int QuestionRef;
+	private int QuestionStep;	
+	
+	public Question() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getQuestionNum() {
+		return QuestionNum;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		QuestionNum = questionNum;
+	}
+
+	public String getQuestionUserId() {
+		return QuestionUserId;
+	}
+
+	public void setQuestionUserId(String questionUserId) {
+		QuestionUserId = questionUserId;
+	}
+
+	public String getQuestionTitle() {
+		return QuestionTitle;
+	}
+
+	public void setQuestionTitle(String questionTitle) {
+		QuestionTitle = questionTitle;
+	}
+
+	public String getQuestionContents() {
+		return QuestionContents;
+	}
+
+	public void setQuestionContents(String questionContents) {
+		QuestionContents = questionContents;
+	}
+
+	public String getQuestionDate() {
+		return QuestionDate;
+	}
+
+	public void setQuestionDate(String questionDate) {
+		QuestionDate = questionDate;
+	}
+
+	public String getQuestionCategory() {
+		return QuestionCategory;
+	}
+
+	public void setQuestionCategory(String questionCategory) {
+		QuestionCategory = questionCategory;
+	}
+
+	public String getQuestionState() {
+		return QuestionState;
+	}
+
+	public void setQuestionState(String questionState) {
+		QuestionState = questionState;
+	}
+
+	public int getQuestionRef() {
+		return QuestionRef;
+	}
+
+	public void setQuestionRef(int questionRef) {
+		QuestionRef = questionRef;
+	}
+
+	public int getQuestionStep() {
+		return QuestionStep;
+	}
+
+	public void setQuestionStep(int questionStep) {
+		QuestionStep = questionStep;
+	}
+	
+	
+}

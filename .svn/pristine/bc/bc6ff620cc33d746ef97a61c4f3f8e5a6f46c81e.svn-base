@@ -1,0 +1,16 @@
+package ticket.finder.dao;
+
+import java.util.List;
+
+import ticket.finder.dto.Fclty;
+import ticket.finder.dto.FcltyHall;
+
+public interface FcltyXDAO {
+	int insertHall(FcltyHall fcltyHall);
+	int insertFclty(Fclty fclty);
+	int updateHall(FcltyHall fcltyHall);
+	int updateFclty(Fclty fclty);
+	FcltyHall selectHall(String hallCode);
+	Fclty selectFclty(String fcCode);
+	List<Fclty> selectFcltyXList();
+}

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.TfOrderMapper">
+	<insert id="insertOrder">
+		insert into tf_order values(#{orderCode}, sysdate, #{orderViewDate}, #{orderEpi}, #{orderPrice}, #{orderSeat}, 
+		#{orderShowCode}, #{orderFcCode}, #{orderHallCode}, #{orderGrade}, #{orderFees}, #{orderShipfees}, #{orderReceipt}, 
+		#{orderUserId}, #{orderUserName}, #{orderPayment}, #{orderQty}, #{orderDpState}, null, #{orderShippingNum}, #{orderShowName}, 
+		#{orderTicketing})
+	</insert>
+	
+	<update id="updateOrder">
+		update tf_order
+		<set>
+			<if test="order_view_date!=null and order_view_date!=''">
+				order_view_date=#{orderViewDate}
+			</if> 
+			<if test="order_epi!=null and order_epi!=''">
+				order_epi=#{orderEpi}
+			</if> 
+			<if test="order_price!=null and order_price!=''">
+				order_price=#{orderPrice}
+			</if> 
+			<if test="order_seat!=null and order_seat!=''">
+				order_seat=#{orderSeat}
+			</if> 
+			<if test="order_show_code!=null and order_show_code!=''">
+				order_show_code=#{orderShowCode}
+			</if> 
+			<if test="order_fc_code!=null and order_fc_code!=''">
+				order_fc_code=#{orderFcCode}
+			</if> 
+			<if test="order_hall_code!=null and order_hall_code!=''">
+				order_hall_code=#{orderHallCode}
+			</if> 
+			<if test="order_grade!=null and order_grade!=''">
+				order_grade=#{orderGrade}
+			</if> 
+			<if test="order_fees!=null and order_fees!=''">
+				order_fees=#{orderFees}
+			</if> 
+			<if test="order_shipfees!=null and order_shipfees!=''">
+				order_shipfees=#{orderShipfees}
+			</if> 
+			<if test="order_receipt!=null and order_receipt!=''">
+				order_receipt=#{orderReceipt}
+			</if> 
+			<if test="order_user_id!=null and order_user_id!=''">
+				order_user_id=#{orderUserId}
+			</if> 
+			<if test="order_user_name!=null and order_user_name!=''">
+				order_user_name=#{orderUserName}
+			</if> 
+			<if test="order_payment!=null and order_payment!=''">
+				order_payment=#{orderPayment}
+			</if> 
+			<if test="order_qty!=null and order_qty!=''">
+				order_qty=#{orderQty}
+			</if> 
+			<if test="order_dp_state!=null and order_dp_state!=''">
+				order_dp_state=#{orderDpState}
+			</if> 
+			<if test="order_sh_state!=null and order_sh_state!=''">
+				order_sh_state=#{orderShState}
+			</if> 
+			<if test="order_shipping_num!=null and order_shipping_num!=''">
+				order_shipping_num=#{orderShippingNum}
+			</if> 
+			<if test="order_show_name!=null and order_show_name!=''">
+				order_show_name=#{orderShowName}
+			</if> 
+		</set>
+		where order_code=#{orderCode}
+	</update>
+	
+	<!-- 취소신청 → 취소완료(미입금주문일시 바로 취소상태로 변경) 환불신청 → 환불완료 -->
+	<update id="updateStateRefund">
+		update tf_order set order_dp_state='환불' where order_code=#{orderCode}
+	</update>
+
+	<!-- 미입금 주문 취소 -->
+	<delete id="deleteUnpaidOrder">
+		delete from tf_order where order_code=#{orderCode}
+	</delete>
+	
+	<!-- 주문 조회 -->
+	<select id="selectOrder" resultType="TfOrder">
+		select * from tf_order where order_code=#{orderCode}
+	</select>
+	
+	<!-- 내 주문내역 조회 -->
+	<select id="selectMyOrder" resultType="TfOrder">
+		select * from tf_order where order_code = #{orderCode} and order_user_id = #{userId}
+	</select>
+	
+	<!-- 내 주문내역 조회 - 동적SQL로 검색날짜 유무에 따라 where절 다르게 -->
+	<select id="selectUserOrderAll" resultType="TfOrder">
+		select * from (select rownum rn, user_order.* (select * from tf_order where order_user_id = #{userId} 
+        and order_date between #{startDate} and TO_DATE(#{startDate})-{#period} order by order_date desc) user_order) 
+        where rn between #{startRn} and #{endRn}
+	</select>
+	
+	<!-- 날짜 범위 주문 조회 -->
+	<select id="selectDateOrder" resultType="TfOrder">
+		select * from tf_order where order_date between #{startDate} and TO_DATE(#{endDate})+1 order by order_date
+	</select>
+	
+	<!-- 예매건수 20위 랭킹 -->
+	<select id="selectRankOrder" resultType="TfOrder">
+		<![CDATA[
+			select * from (select rownum rn, osc.* from (select order_show_num, count(*) from tf_order where order_date 
+			between to_date(#{startDate}, 'yyyy/mm/dd') and to_date(#{endDate}, 'yyyy/mm/dd') 
+			group by order_show_num order by count(*) desc) 
+			osc) where rn<=20
+		]]>
+	</select>
+	
+	<!-- 모든 주문 조회 -->
+	<select id="selectOrderList" resultType="TfOrder">
+		select * from tf_order order by order_date desc
+	</select>
+	
+	<!-- 미입금 주문 조회 -->
+	<select id="selectUnpaidOrderList" resultType="TfOrder">
+		select * from tf_order where order_dp_state='미입금' order by order_date desc
+	</select>
+	
+	<!-- 미발송 주문 조회 -->
+	<select id="selectShOrderList" resultType="TfOrder">
+		select * from tf_order where order_sh_state='미발송' and order_dp_state='입금' order by order_date desc
+	</select>
+	
+	<!-- 미발권 주문 조회 -->
+	<select id="selectTicketingList" resultType="TfOrder">
+		select * from tf_order where order_ticketing='미발권' and order_dp_state='입금' order by order_date desc
+	</select>
+	
+	<!-- 주문 취소 요청목록 출력 -->
+	<select id="selectCancelOrderList" resultType="TfOrder">
+		select * from tf_order where order_state='취소' order by order_date desc
+	</select>
+	
+	<!-- 예매 건수 검색 -->
+	<select id="selectOrderCount" resultType="int">
+		select count(*) from tf_order where order_user_id = #{userId}
+	</select>
+	
+	<!-- 1:1 문의 출력시 선택했던 예매공연 내용 출력 -->
+	<select id="selectOrderQshow" resultType="OrderQShow">
+		select o.order_code, o.order_date, o.order_dp_state, o.order_ticketing, s.s_name, s.s_poster, 
+		sd.show_daytime from tf_order o join show_detail sd on sd.show_num=o.order_show_num 
+		where o.order_code=#{code} join tf_show s on s.s_code=sd.show_code
+	</select>
+</mapper>

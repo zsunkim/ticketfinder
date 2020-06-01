@@ -1,0 +1,25 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.TfOrder;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.SameOrderCodeException;
+
+public interface TfOrderService {
+	void addOrder(TfOrder order) throws SameOrderCodeException;
+	void modifyOrder(TfOrder order) throws OrderNotFoundException;
+	void modifyStateRefund(String code) throws OrderNotFoundException;
+	void removeUnpaidOrder(String code) throws OrderNotFoundException;
+	TfOrder getOrder(String code) throws OrderNotFoundException;
+	List<TfOrder> getUserOrderAll(Map<String, Object> map) throws OrderNotFoundException;
+	TfOrder getMyOrder(String id) throws OrderNotFoundException;
+	List<TfOrder> getRankOrder(Map<String, Object> map) throws OrderNotFoundException;
+	List<TfOrder> getOrderList(Map<String, Object> map) throws OrderNotFoundException;
+	List<TfOrder> getUnpaidOrderList();
+	List<TfOrder> getShOrderList();
+	List<TfOrder> getTicketingList();
+	List<TfOrder> getCancleOrderList();
+	int getOrderCount(String id);
+}

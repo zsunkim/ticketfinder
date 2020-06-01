@@ -1,0 +1,9 @@
+package ticket.finder.service;
+
+import ticket.finder.dto.TfShow;
+
+public interface TfShowService {
+	void addTfShow(TfShow tfShow);
+	void modifyTfShow(TfShow tfShow);
+
+}

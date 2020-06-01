@@ -1,0 +1,11 @@
+package ticket.finder.service;
+
+import java.util.List;
+
+import ticket.finder.dto.ShowDetail;
+
+public interface ShowDetailService {
+	void addShowDetail(ShowDetail showDetail);
+	void modifyShowDetail(int showNum);
+	List<ShowDetail> getSearch(String search);
+}

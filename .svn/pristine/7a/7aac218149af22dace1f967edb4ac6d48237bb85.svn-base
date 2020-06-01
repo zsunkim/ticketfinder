@@ -1,0 +1,86 @@
+
+
+/* 
+if($("#num").val()!=data) {
+	$("#numMsg").empty();
+	$("#numMsg").text("인증번호가 일치하지 않습니다.");
+}
+$("#findId").submit(function() {
+	var authNum = ${authNum};
+	console.log(authNum);
+	if($("#num").val()!=authNum){
+		$("#numMsg").text("인증번호가 일치하지 않습니다.");
+		$("#num").focus();
+		return false;		
+	}
+	return true;
+});
+*/
+
+
+
+
+//이메일 입력 후 인증번호 받기 버튼 클릭 시
+$("#numBtn").click(function() {
+	var email = $("#email").val();
+	alert("이메일을 확인해주세요.");
+	//alert(email);
+	find(email);
+});
+ 
+
+function find(email) {
+	$.ajax({
+		type:"GET",
+		url:"email?email="+email,
+		dataType:"json",
+		success:function(data) {
+			console.log(data);
+			
+			var html="<input type='hidden' id='authnum' class='authnum' name='authnum' value='"+data+"'>";
+			$(".authNum").append(html);
+			
+		}, 
+		error:function(xhr) {
+			alert("응답요류 = "+xhr.status);
+		}
+	   });
+}
+
+
+//인증번호 입력 후 버튼 클릭 시
+$("#check_btn").click(function() {
+	result();
+});
+
+function result() {
+	var userName = $("#name").val();
+	var userEmail = $("#email").val();
+	var authnum;
+	authnum = $("#authnum").val();	
+	alert("authnum="+authnum);
+	
+	$.ajax({
+		type:"get",
+		url:"findId1?userName="+userName+"&userEmail="+userEmail,
+		dataType:"html",
+		/*data:{"userName":userName,"userEmail":userEmail},*/
+		success:function(data) {
+			console.log(data);
+			alert("성공,"+data);
+			
+			//var html="<input type='hidden' id='id' class='id' name='userId' value='"+data+"'>";
+			//$(".userId").append(html);
+			//location.href="${pageContext.request.contextPath}/user/inclue/id?data="+data;
+		}, 
+		error:function(request,status,error){
+	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+	    }
+	   });
+}
+
+
+
+
+
+

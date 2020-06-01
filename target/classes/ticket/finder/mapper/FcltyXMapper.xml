@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.FcltyXMapper">
+	
+	<resultMap type="Fclty" id="FcltyMap">
+		<id column="fc_code" property="fcCode"/>
+		<result column="fc_name" property="fcName"/>
+		<result column="fc_addr" property="fcAddr"/>
+		<result column="fc_seat_cnt" property="fcSeatCnt"/>
+		<result column="fc_hall_cnt" property="fcHallCnt"/>
+		<result column="fc_la" property="fcLa"/>
+		<result column="fc_lo" property="fcLo"/>
+		<result column="fc_tel" property="fcTel"/>
+		<result column="fc_url" property="fcUrl"/>
+		<result column="fc_img" property="fcImg"/>
+	</resultMap>
+	
+	<resultMap type="FcltyHall" id="FcltyHallMap">
+		<id column="hall_code" property="hallCode"/>
+		<result column="hall_fc_name" property="hallFcName"/>
+		<result column="hall_name" property="hallName"/>
+		<result column="hall_seat_cnt" property="hallSeatCnt"/>
+	</resultMap>
+	
+	<resultMap type="FcltyX" id="FcltyXMap">
+		<association property="fclty" javaType="Fclty" resultMap="FcltyMap"/>
+		<association property="fcltyhall" javaType="FcltyHall" resultMap="FcltyHallMap"/>
+	</resultMap>
+	
+	<select id="selectHall" resultType="FcltyHall">
+		select * from fclty_hall where hall_code=#{hallCode}
+	</select>
+	
+	<select id="selectFcltyList" resultType="Fclty">
+		select * from fclty
+	</select>
+	
+	<select id="selectFclty" resultType="Fclty">
+		select * from fclty where fc_code=#{fcCode}
+	</select>
+	
+	<select id="selectFcltyXList" resultMap="FcltyXMap">
+		select * from fclty_hall fh join fclty fc on fc.fc_name=fh.hall_fc_name order by fc_code
+	</select>
+</mapper>

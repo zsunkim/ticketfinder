@@ -1,0 +1,129 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ticket.finder.dto.ShowDetail;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.mapper.ShowXShowMapper;
+
+@Repository
+public class ShowXShowDAOImpl implements ShowXShowDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public List<ShowXShow> selectSearch(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectSearch(map);
+	}
+
+	@Override
+	public ShowXShow selectShowDetail(int showNum) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowDetail(showNum);
+	}
+	
+	@Override
+	public List<ShowXShow> selectShowDetailByCode(String showCode) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowDetailByCode(showCode);
+	}
+
+	@Override
+	public List<ShowXShow> selectShowHot() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowHot();
+	}
+	
+	@Override
+	public List<ShowXShow> selectHotGenre(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectHotGenre(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectRank(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectRank(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaNew(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaNew(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaEnd(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaEnd(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectAreaName(Map<String, String> map) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectAreaName(map);
+	}
+
+	@Override
+	public List<ShowXShow> selectFcltyShow(String fcCode) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectFcltyShow(fcCode);
+	}
+
+	@Override
+	public List<ShowXShow> selectShowList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowList();
+	}
+
+	@Override
+	public List<ShowXShow> selectConcerList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectConcerList();
+	}
+
+	@Override
+	public List<ShowXShow> selectMusicalList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectMusicalList();
+	}
+
+	@Override
+	public List<ShowXShow> selectPlayList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectPlayList();
+	}
+
+	@Override
+	public List<ShowXShow> selectClassicList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectClassicList();
+	}
+
+	@Override
+	public List<ShowXShow> selectEndShowList() {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectEndShowList();
+	}
+
+	@Override
+	public List<ShowXShow> selectGenreList(String sGenre) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectGenreList(sGenre);
+	}
+
+	@Override
+	public List<ShowXShow> selectGenreYear(String sGenre) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectGenreYear(sGenre);
+	}
+
+	@Override
+	public List<ShowXShow> selectDaytimeList(String sCode, String showArea) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectDaytimeList(sCode, showArea);
+	}
+
+	@Override
+	public List<ShowXShow> selectGenreNew(String sGenre) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectGenreNew(sGenre);
+	}
+
+	@Override
+	public List<ShowXShow> selectRandomArea(String sGenre) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectRandomArea(sGenre);
+	}
+
+	@Override
+	public ShowXShow selectShowName(String showName) {
+		return sqlSession.getMapper(ShowXShowMapper.class).selectShowName(showName);
+	}
+
+}

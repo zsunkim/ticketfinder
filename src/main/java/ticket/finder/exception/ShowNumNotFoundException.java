@@ -1,0 +1,16 @@
+package ticket.finder.exception;
+
+
+//공연상세 정보 검색 시  공연상세번호가 존재하지 않을 경우 발생되는 예외클래스
+public class ShowNumNotFoundException extends Exception{
+	private static final long serialVersionUID = 1L;
+	
+	public ShowNumNotFoundException() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ShowNumNotFoundException(String message) {
+		super(message);
+	}
+	
+}

@@ -1,0 +1,191 @@
+package ticket.finder.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.LoginAuthFailException;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.exception.UserIdExistsException;
+import ticket.finder.exception.UserNotFoundException;
+import ticket.finder.exception.WrongJoinException;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfUserService;
+
+@Controller
+public class SunController {
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@RequestMapping(value = "/service", method = RequestMethod.GET)
+	public String service() {
+		return "user/include/service";
+	}
+	@RequestMapping(value = "/privacypolicy", method = RequestMethod.GET)
+	public String privacypolicy() {
+		return "user/include/privacypolicy";
+	}
+	@RequestMapping(value = "/youth", method = RequestMethod.GET)
+	public String youth() {
+		return "user/include/youth";
+	}
+	/*
+	@RequestMapping(value = "/service1", method = RequestMethod.GET)
+	public String service1() {
+		return "user/terms/service";
+	}
+	@RequestMapping(value = "/privacypolicy1", method = RequestMethod.GET)
+	public String privacypolicy1() {
+		return "user/terms/privacypolicy";
+	}
+	*/
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute TfUser tfUser, HttpSession session) throws LoginAuthFailException, UserNotFoundException {
+		tfUserService.loginAuth(tfUser);
+		
+		session.setAttribute("loginUserInfo", tfUserService.getUser(tfUser.getUserId()));
+		if(session.getAttribute("URI")!=null) {
+			String URI=(String)session.getAttribute("URI");
+			session.removeAttribute("URI");
+			return "redirect:"+URI;
+		}
+		return "user/include/";
+	}
+	
+	
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "user/include/join";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(@ModelAttribute TfUser tfUser) throws UserIdExistsException, WrongJoinException {
+		
+		int result = tfUserService.getIdCheck(tfUser.getUserId());
+		if(result==1) {
+			//System.out.println("아이디 중복");
+			return "user/include/join";			
+		} else if(result==0) {
+			//System.out.println("아이디 사용 가능");
+			tfUserService.addUser(tfUser);
+		}
+		
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(String userId) {
+		return tfUserService.getIdCheck(userId);
+		
+	}
+	
+	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
+	public String userinfo() {
+		return "user/include/userInfo";
+	}
+	
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+	public String userinfo(@ModelAttribute TfUser tfUser, Model model) throws UserNotFoundException {
+		model.addAttribute("userinfo", tfUserService.getUser(tfUser.getUserId()));
+		return "user/include/userInfo";
+	}
+	
+	@RequestMapping(value = "/rank", method = RequestMethod.GET)
+	public String rank(Model model) {
+		//랭킹 출력(장르:전체)
+		Map<String, String> ranking1 = new HashMap<String, String>();
+		ranking1.put("startDate", new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		List<OrderDShow> rankList1 =tfOrderService.getRankGenre(ranking1);
+		model.addAttribute("rankList1", rankList1);
+		
+		int count=0;
+		for(OrderDShow cnt:rankList1) {
+			count+=cnt.getCount();
+		}
+		
+		System.out.println("count="+count);
+		
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getRn2());
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getTfShow().getsName());
+		
+		List<ShowXShow> list = new ArrayList<ShowXShow>();
+		for(OrderDShow show:rankList1) {
+			try {
+				ShowXShow showList = showXShowService.getShowDetail(show.getShowDetail().getShowNum());
+				list.add(showList);
+			} catch (ShowNumNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("왜죠?");
+			}
+		}
+		model.addAttribute("rankList", list);
+				
+		
+		return "user/include/rank";
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/region", method = RequestMethod.GET)
+	public String region(@RequestParam int showArea, Model model) {
+		//지역별 신상품순 - 전체
+		List<ShowXShow> areaList1 = showXShowService.getAreaNew(showArea);
+		model.addAttribute("areaList1", areaList1);
+		
+		//지역별 종료임박순 - 전체
+		List<ShowXShow> areaList2 = showXShowService.getAreaEnd(showArea);
+		model.addAttribute("areaList2", areaList2);
+		
+		//지역별 상품명순 - 전체
+		List<ShowXShow> areaList3 = showXShowService.getAreaName(showArea);
+		model.addAttribute("areaList3", areaList3);
+		
+		
+		return "user/include/region";
+	}
+	
+	
+
+}

@@ -1,0 +1,208 @@
+package ticket.finder.dto;
+
+public class Order {
+	private String orderCode;
+	private String orderDate;
+	private String orderViewDate;
+	private String orderEpi;
+	private int orderPrice;
+	private String orderSeat;
+	private String orderShowCode;
+	private String orderFcCode;
+	private String orderHallCode;
+	private String orderGrade;
+	private int orderFees;
+	private int orderShipFees;
+	private String orderReceipt;
+	private String orderUserId;
+	private String orderUserName;
+	private String orderPayment;
+	private int orderQty;
+	private String orderDpState;
+	private String orderShState;
+	private String orderShippingNum;
+	private String orderShowName;
+	private String orderTicketing;
+	
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getOrderCode() {
+		return orderCode;
+	}
+
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getOrderViewDate() {
+		return orderViewDate;
+	}
+
+	public void setOrderViewDate(String orderViewDate) {
+		this.orderViewDate = orderViewDate;
+	}
+
+	public String getOrderEpi() {
+		return orderEpi;
+	}
+
+	public void setOrderEpi(String orderEpi) {
+		this.orderEpi = orderEpi;
+	}
+
+	public int getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(int orderPrice) {
+		this.orderPrice = orderPrice;
+	}
+
+	public String getOrderSeat() {
+		return orderSeat;
+	}
+
+	public void setOrderSeat(String orderSeat) {
+		this.orderSeat = orderSeat;
+	}
+
+	public String getOrderShowCode() {
+		return orderShowCode;
+	}
+
+	public void setOrderShowCode(String orderShowCode) {
+		this.orderShowCode = orderShowCode;
+	}
+
+	public String getOrderFcCode() {
+		return orderFcCode;
+	}
+
+	public void setOrderFcCode(String orderFcCode) {
+		this.orderFcCode = orderFcCode;
+	}
+
+	public String getOrderHallCode() {
+		return orderHallCode;
+	}
+
+	public void setOrderHallCode(String orderHallCode) {
+		this.orderHallCode = orderHallCode;
+	}
+
+	public String getOrderGrade() {
+		return orderGrade;
+	}
+
+	public void setOrderGrade(String orderGrade) {
+		this.orderGrade = orderGrade;
+	}
+
+	public int getOrderFees() {
+		return orderFees;
+	}
+
+	public void setOrderFees(int orderFees) {
+		this.orderFees = orderFees;
+	}
+
+	public int getOrderShipFees() {
+		return orderShipFees;
+	}
+
+	public void setOrderShipFees(int orderShipFees) {
+		this.orderShipFees = orderShipFees;
+	}
+
+	public String getOrderReceipt() {
+		return orderReceipt;
+	}
+
+	public void setOrderReceipt(String orderReceipt) {
+		this.orderReceipt = orderReceipt;
+	}
+
+	public String getOrderUserId() {
+		return orderUserId;
+	}
+
+	public void setOrderUserId(String orderUserId) {
+		this.orderUserId = orderUserId;
+	}
+
+	public String getOrderUserName() {
+		return orderUserName;
+	}
+
+	public void setOrderUserName(String orderUserName) {
+		this.orderUserName = orderUserName;
+	}
+
+	public String getOrderPayment() {
+		return orderPayment;
+	}
+
+	public void setOrderPayment(String orderPayment) {
+		this.orderPayment = orderPayment;
+	}
+
+	public int getOrderQty() {
+		return orderQty;
+	}
+
+	public void setOrderQty(int orderQty) {
+		this.orderQty = orderQty;
+	}
+
+	public String getOrderDpState() {
+		return orderDpState;
+	}
+
+	public void setOrderDpState(String orderDpState) {
+		this.orderDpState = orderDpState;
+	}
+
+	public String getOrderShState() {
+		return orderShState;
+	}
+
+	public void setOrderShState(String orderShState) {
+		this.orderShState = orderShState;
+	}
+
+	public String getOrderShippingNum() {
+		return orderShippingNum;
+	}
+
+	public void setOrderShippingNum(String orderShippingNum) {
+		this.orderShippingNum = orderShippingNum;
+	}
+
+	public String getOrderShowName() {
+		return orderShowName;
+	}
+
+	public void setOrderShowName(String orderShowName) {
+		this.orderShowName = orderShowName;
+	}
+
+	public String getOrderTicketing() {
+		return orderTicketing;
+	}
+
+	public void setOrderTicketing(String orderTicketing) {
+		this.orderTicketing = orderTicketing;
+	}
+	
+	
+}

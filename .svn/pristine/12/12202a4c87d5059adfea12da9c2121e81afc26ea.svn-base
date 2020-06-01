@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.TfUserMapper">
+	<insert id="insertUser">
+		insert into tf_user values(#{userId}, #{userPw}, #{userName}, #{userAddr1}, #{userAddr2}, #{userGender}, #{userBirth}, #{userEmail}, 
+		#{userTel}, sysdate, #{userState}, sysdate)
+	</insert>
+	
+	<update id="updateUser">
+		update tf_user
+		<set>
+			<if test="user_pw!=null and user_pw!=''">
+				user_pw=#{userPw},
+			</if>
+			<if test="user_name!=null and user_name!=''">
+				user_name=#{userName},
+			</if>
+			<if test="user_addr1!=null and user_addr1!=''">
+				user_addr1=#{userAddr1},
+			</if>
+			<if test="user_addr2!=null and user_addr2!=''">
+				user_addr2=#{userAddr2},
+			</if>
+			<if test="user_addr3!=null and user_addr3!=''">
+				user_addr3=#{userAddr3},
+			</if>
+			<if test="user_gender!=null and user_gender!=''">
+				user_gender=#{userGender},
+			</if>
+			<if test="user_birth!=null and user_birth!=''">
+				user_birth=#{userBirth},
+			</if>
+			<if test="user_email!=null and user_email!=''">
+				user_email=#{userEmail},
+			</if>
+			<if test="user_tel!=null and user_tel!=''">
+				user_tel=#{userTel}
+			</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+	<!-- 휴면회원 전환 -->
+	<update id="dormantUser">
+		update tf_user set user_state='휴면' where user_id=#{userId}
+	</update>
+	
+	<select id="selectFindIdUser" resultType="String">
+		select user_id from tf_user where user_name=#{userName} and user_email=#{userEmail}
+	</select>
+	
+	<select id="selectUser" resultType="TfUser">
+		select * from tf_user where user_id=#{userId}
+	</select>
+	
+	<select id="selectUserList" resultType="TfUser">
+		select * from tf_user order by user_join_date desc
+	</select>
+	
+	<!-- 휴면전환대상 회원목록 조회 -->
+	<select id="dormantUserList" resultType="TfUser">
+		select * from tf_user where user_last_date between to_date(sysdate)-9999 and to_date(sysdate)-365;
+	</select>
+	
+</mapper>

@@ -1,0 +1,163 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="join">
+	<div id="section">
+		<div class="cont">
+			<div class="joinWrap">
+				<h2>회원가입</h2>
+				<form method="post" id="joinForm" name="join">
+				<div class="tableBox">
+				<table>
+					<colgroup>
+						<col style="width: 240px;"/>
+						<col style="width: *"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="row">아이디</th>
+							<td>
+								<input type="text" name="id" id="id" placeholder="영문, 숫자로만 6~20자"/>
+								<button type="button" class="idCheckBtn" id="idCheckBtn" onclick="idCheck();" value="N">중복확인</button>
+								<p id="idMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">비밀번호</th>
+							<td>
+	                            <input type="password" name="passwd" id="passwd"/>
+	                            <span class="alertMessage">*영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+	                            <p id="passwdMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">비밀번호 확인</th>
+							<td>
+	                            <input type="password" name="repass" id="repass"/>
+	                            <span class="alertMessage">*비밀번호 재입력</span>
+								<p id="repassMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">이름</th>
+							<td>
+								<input type="text" name="name" id="name"/>
+								<p id="nameMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">전화번호</th>
+							<td>
+								<div class="phoneNumber">
+									<input type="text" id="phone" name="phone" maxlength="11" placeholder="- 제외한 번호만 입력">
+								</div>
+								<p id="phoneMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">이메일</th>
+							<td>
+								<div class="mailArea">
+									<input type="text" name="email" placeholder="이메일을 입력해주세요."/>
+								</div>
+								<p id="emailMsg" class="error"></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">기본배송지</th>
+							<td>
+								<div class="postWrap">
+									<span>우편번호</span>
+									<div class="postCont">
+		                                <div class="zipcodeBox">
+											<input type="text" id="post" class="iText" title="우편 번호를 입력해주세요" readonly/>
+											<a class="postBtn">주소찾기</a>
+										</div>
+		                                <div class="addressBox">
+		                                    <input type="text" id="add1" name="houseZipAddrDoro" class="iText" placeholder="주소를 입력해주세요" readonly/>
+	                                        <input type="text" id="add2" class="iText" placeholder="상세주소를 입력해주세요"/>
+	                                    </div>
+		                            </div>
+								</div>
+								<p id="postMsg" class="error"></p>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">생년월일</th>
+							<td>
+	                            <div class="birthWrap">
+									<div class="select birthYear">
+										<select name="year" id="year">
+											<option selected="selected">년도</option>
+										</select>
+	                                </div>
+									<div class="select birthMonth">
+										<select name="month" id="month">
+											<option selected="selected">월</option>
+										</select>
+	                                </div>
+									<div class="select birthDate">
+										<select name="date" id="date">
+											<option selected="selected">일</option>
+										</select>
+	                                </div>
+	                            </div>
+								<p id="birthMsg" class="error"></p>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">성별</th>
+							<td>
+								<div class="genderWrap">
+	                                <div class="radioGroup">
+	                                    <input type="radio" id="male" name="gender" class="iRadio" value="male">
+	                                    <label>남</label>
+	                                    <input type="radio" id="female" name="gender" class="iRadio" value="female">
+	                                    <label>여</label>
+	                                </div>
+	                            </div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+	
+				<!-- 약관 동의 -->
+				<div class="termsWrap">
+					<div class="termsBtn">
+						<div class="iCheckbox">
+							<input id="termsAllChk" type="checkbox">
+							<label for="termsAllChk">약관 전체동의</label>
+						</div>
+					</div>
+					<div class="termsTitleWrap">
+						<div class="iCheckbox agreeChkWrap">
+							<input type="checkBox" id="agreeChk1" name="checkBox">
+							<label for="agreeChk1">이용약관 (필수)</label>
+						</div>
+					</div>
+					<div class="terms_serviceBox">
+						<iframe src="./service"></iframe>
+					</div>
+					<div class="termsTitleWrap">
+						<div class="iCheckbox agreeChkWrap">
+							<input type="checkBox" id="agreeChk3" name="checkBox">
+							<label for="agreeChk3">개인정보 수집 동의서 (필수)</label>
+						</div>
+					</div>
+					<div class="terms_serviceBox">
+						<iframe src="./privacypolicy"></iframe>
+					</div>
+				</div>
+				<div class="joinButton">
+					<button type="button" class="join_btn">회원가입</button>
+					<p id="joinMsg" class="error"></p>					
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/join.js"></script>
+</div>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.QuestionMapper">
+	<insert id="insertQuestion">
+		<selectKey resultType="int" keyProperty="questionNum" order="BEFORE">
+			select question_seq.nextval from dual
+		</selectKey>
+		insert into question values(#{questionNum}, #{questionUserId}, #{questionTitle}, #{questionContents}, sysdate, #{questionCategory}, 
+		#{questionState}, #{questionRef}, #{questionStep}, #{questionFile}, #{questionShow})
+	</insert>
+	
+	<update id="updateStateQuestion">
+		update question set question_state=#{questionState} where question_num=#{questionNum}
+	</update>
+	
+	<select id="selectQuestion" resultType="Question">
+		select * from question where question_num=#{questionNum}
+	</select>
+	
+	<select id="selectRefQuestion" resultType="Question">
+		select * from question where question_ref=#{questionRef} and question_user_id!=#{questionUserId}
+	</select>
+	
+	<select id="selectIdQuestion" resultType="Question">
+		select * from question where question_user_id=#{questionUserId} order by question_date desc
+	</select>
+	
+	<select id="selectQuestionList" resultType="QuestionRe">
+		<!-- select * from question order by question_ref desc, question_step asc -->
+		select q.question_num, q.question_user_id, q.question_title, q.question_contents, q.question_date,
+		q.question_category, q.question_state, q.question_ref, q.question_step, q.question_file, q.question_show,
+		qr.question_ref question_ref_re, qr.question_contents question_contents_re from question q full join
+		(select question_ref, question_contents from question where question_step=1 order by question_ref desc, question_step asc) qr
+		on q.question_ref=qr.question_ref
+		where question_step=0 order by q.question_ref desc
+	</select>
+	
+	<select id="selectUserQuestionList" resultType="Question">
+		<if test="startRn!=null and startRn!=''">
+			select * from ( select rownum rn, user_qna.* from ( 
+		</if> 
+		select * from question where question_user_id = #{questionUserId} order by question_date desc
+		<if test="startRn!=null and startRn!=''">
+			) user_qna ) where rn between #{startRn} and #{endRn}
+		</if>
+	</select>
+	
+	<select id="selectQuestionCount" resultType="int">
+		select count(*) from question where question_user_id = #{questionUserId}
+	</select>
+</mapper>

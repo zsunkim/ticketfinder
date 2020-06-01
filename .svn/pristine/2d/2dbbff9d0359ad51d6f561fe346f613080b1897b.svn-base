@@ -1,0 +1,450 @@
+package ticket.finder.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ticket.finder.dto.Question;
+import ticket.finder.dto.Refund;
+import ticket.finder.dto.Review;
+import ticket.finder.dto.ReviewShowInfo;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfOrder;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.LoginAuthFailException;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.exception.UserIdExistsException;
+import ticket.finder.exception.UserNotFoundException;
+import ticket.finder.exception.WrongJoinException;
+import ticket.finder.service.CsService;
+import ticket.finder.service.FaqService;
+import ticket.finder.service.FcltyXService;
+import ticket.finder.service.QuestionService;
+import ticket.finder.service.RefundService;
+import ticket.finder.service.ReviewService;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfUserService;
+import ticket.finder.util.Pager;
+
+@Controller
+public class UserController {
+	@Autowired
+	private CsService csService;
+	
+	@Autowired
+	private FaqService faqService;
+	
+	@Autowired
+	private FcltyXService fcltyXService;
+	
+	@Autowired
+	private QuestionService questionService;
+	
+	@Autowired
+	private RefundService refundService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	public String index(@ModelAttribute TfUser tfUser, HttpSession session, Model model) {
+		TfUser loginUserInfo = (TfUser)session.getAttribute("loginUserInfo");
+		model.addAttribute("loginUserInfo", loginUserInfo);
+		
+		List<ShowXShow> whatshot = showXShowService.getShowHot();
+		model.addAttribute("whatshot", whatshot);
+		
+		Map<String, String> hotGenre1 = new HashMap<String, String>();
+		hotGenre1.put("genre1", "musical");
+		hotGenre1.put("genre2", "play");
+		List<ShowXShow> hotGenreList1 = showXShowService.getHotGenre(hotGenre1);
+		model.addAttribute("hotGenreList1", hotGenreList1);
+		
+		Map<String, String> hotGenre2 = new HashMap<String, String>();
+		hotGenre2.put("genre1", "concert");
+		hotGenre2.put("genre2", "classic");
+		List<ShowXShow> hotGenreList2 = showXShowService.getHotGenre(hotGenre2);
+		model.addAttribute("hotGenreList2", hotGenreList2);
+		
+		return "user/include/main";
+	}
+	
+	@RequestMapping(value = "/rankTop3", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> rankTop3(@RequestParam String genre) {
+		Map<String, String> selectedGenre = new HashMap<String, String>();
+		selectedGenre.put("genre1", genre);
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("returnMap", showXShowService.getHotGenre(selectedGenre));
+		
+		return returnMap;
+	}
+
+	/*
+	@RequestMapping(value = "/perform/{genre}", method = RequestMethod.GET)
+	public String perform(@PathVariable String genre) {
+		return "user/include/perform";
+	}
+	@RequestMapping(value = "/perform_detail", method = RequestMethod.GET)
+	public String performDetail() {
+		return "user/include/perform_detail";
+	}
+	 */
+	
+	/*
+	@RequestMapping(value = "/rank", method = RequestMethod.GET)
+	public String rank(Model model) {
+		Map<String, Object> ranking = new HashMap<String, Object>();
+		ranking.put("rankOne", 1);
+		ranking.put("rankTwo", 10);
+		List<ShowXShow> rankList = showXShowService.getRank(ranking);
+		model.addAttribute("rankList", rankList);
+		
+		
+		return "user/include/rank";
+	}
+	
+	@RequestMapping(value = "/region", method = RequestMethod.GET)
+	public String region(Model model) {
+		Map<String, Object> area = new HashMap<String, Object>();
+		area.put("sGenre", "musical");
+		area.put("showArea", 11);
+		List<ShowXShow> areaList = showXShowService.getAreaNew(area);
+		model.addAttribute("areaList", areaList);
+		
+		return "user/include/region";
+	}
+	*/
+	
+	/*
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute TfUser tfUser, HttpSession session) throws LoginAuthFailException, UserNotFoundException {
+		tfUserService.loginAuth(tfUser);
+		
+		session.setAttribute("loginUserInfo", tfUserService.getUser(tfUser.getUserId()));
+		if(session.getAttribute("URI")!=null) {
+			String URI=(String)session.getAttribute("URI");
+			session.removeAttribute("URI");
+			return "redirect:"+URI;
+		}
+		return "user/include/login";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "user/include/join";
+	}
+	*/
+	
+	/*
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(@ModelAttribute TfUser tfUser) throws UserIdExistsException, WrongJoinException {
+		
+		int result = tfUserService.getIdCheck(tfUser.getUserId());
+		if(result==1) {
+			System.out.println("아이디 중복");
+			return "user/include/join";			
+		} else if(result==0) {
+			System.out.println("아이디 사용 가능");
+			tfUserService.addUser(tfUser);
+		}
+		
+		tfUserService.addUser(tfUser);
+		return "user/include/login";
+	}
+	*/
+	
+	/*
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(String userId) {
+		return tfUserService.getIdCheck(userId);
+	}
+	*/
+	
+	/*
+	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
+	public String userinfo() {
+		return "user/include/userInfo";
+	}
+	
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+	public String userinfo(@ModelAttribute TfUser tfUser, Model model) throws UserNotFoundException {
+		model.addAttribute("userinfo", tfUserService.getUser(tfUser.getUserId()));
+		return "user/include/userInfo";
+	}
+	*/
+	
+	@RequestMapping(value = "/myticket", method = RequestMethod.GET)
+	public String myticket(HttpSession session, Model model) throws OrderNotFoundException, ShowNumNotFoundException {
+		//인증정보 전달
+		TfUser loginUserInfo = (TfUser)session.getAttribute("loginUserInfo");
+		String loginUserId = loginUserInfo.getUserId();
+		
+		//주문정보 전달
+		Map<String, String> orderKeywordMap = new HashMap<String, String>();
+		orderKeywordMap.put("userId", loginUserId);
+		orderKeywordMap.put("startRn", "1");
+		orderKeywordMap.put("endRn", "3");
+		
+		List<TfOrder> orderList = tfOrderService.getUserOrderList(orderKeywordMap);
+		model.addAttribute("orderList", orderList);
+		
+		int orderCount = tfOrderService.getOrderCount(loginUserId);
+		model.addAttribute("orderCount", orderCount);
+		
+		//주문에 대한 공연 정보 전달
+		List<ShowXShow> showList=new ArrayList<ShowXShow>();
+		for(TfOrder order:orderList) {
+			ShowXShow show=showXShowService.getShowDetail(order.getOrderShowNum());
+			showList.add(show);
+		}
+		model.addAttribute("showList", showList);
+		
+		//후기정보 전달
+		Map<String, String> reviewKeywordMap = new HashMap<String, String>();
+		reviewKeywordMap.put("reviewUserId", loginUserId);
+		reviewKeywordMap.put("startRn", "1");
+		reviewKeywordMap.put("endRn", "3");
+		
+		List<ReviewShowInfo> reviewShowList = reviewService.getUserReviewList(reviewKeywordMap);
+		model.addAttribute("reviewShowList", reviewShowList);
+		
+		int reviewCount = reviewService.getReviewCount(loginUserId);
+		model.addAttribute("reviewCount", reviewCount);
+		
+		//후기에 대한 공연 정보 전달
+		/*
+		List<ShowXShow> reviewShowList=new ArrayList<ShowXShow>();
+		for(Review review:reviewList) {
+			ShowXShow show=showXShowService.getShowDetail(review.getReviewShowCode());
+			reviewShowList.add(show);
+		}
+		model.addAttribute("reviewShowList", reviewShowList);
+		*/
+		
+		//문의 정보 전달
+		Map<String, String> qnaKeywordMap = new HashMap<String, String>();
+		qnaKeywordMap.put("questionUserId", loginUserId);
+		qnaKeywordMap.put("startRn", "1");
+		qnaKeywordMap.put("endRn", "3");
+		
+		List<Question> qnaList = questionService.getUserQuestionList(qnaKeywordMap);
+		model.addAttribute("qnaList", qnaList);
+		
+		int qnaCount = questionService.getQuestionCount(loginUserId);
+		model.addAttribute("qnaCount", qnaCount);
+		
+		return "user/include/myPage";
+	}
+	
+	/*
+	@RequestMapping(value = "/cs", method = RequestMethod.GET)
+	public String cs() {
+		return "user/include/cs";
+	}
+	
+	@RequestMapping(value = "/cs_info", method = RequestMethod.GET)
+	public String csInfo() {
+		return "user/include/csInfo";
+	}
+	*/
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search() {
+		return "user/include/search";
+	}
+	
+	@RequestMapping(value = "/book_detail/{orderCode}", method = RequestMethod.GET)
+	public String bookDetail(@PathVariable String orderCode, Model model) throws OrderNotFoundException, ShowNumNotFoundException {
+		TfOrder userOrder=tfOrderService.getOrder(orderCode);
+		ShowXShow userShow=showXShowService.getShowDetail(userOrder.getOrderShowNum());
+		if(userOrder.getOrderShState().equals("취소")) {
+			Refund userRefund=refundService.getRefundByOrder(userOrder.getOrderCode());
+			model.addAttribute("userRefund", userRefund);
+		}
+		
+		model.addAttribute("userOrder", userOrder);
+		model.addAttribute("userShow", userShow);
+		
+		return "user/include/bookDetail";
+	}
+	
+	@RequestMapping(value = "/book_more", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> bookMore(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "6") int month
+			,String state, HttpSession session) throws OrderNotFoundException, ShowNumNotFoundException {
+		//회원인증정보
+		TfUser loginUserInfo = (TfUser)session.getAttribute("loginUserInfo");
+		String userId = loginUserInfo.getUserId();
+		
+		//회원 예매 개수 반환
+		int totalBoard=tfOrderService.getOrderCount(userId);
+		int pageSize=5; //페이지에 출력될 게시글의 개수
+		int blockSize=5; //페이지 블럭에 출력될 페이지의 개수
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		//Service 클래스의 메소드를 호출하기 위해 매개변수에 전달될 Map 객체 생성
+		Map<String, String> pagerMap=new HashMap<String, String>();
+		pagerMap.put("userId", userId);
+		pagerMap.put("period", ""+(month*4*30));
+		pagerMap.put("startRn", ""+pager.getStartRow());
+		pagerMap.put("endRn", ""+pager.getEndRow());
+		if(state.equals("0")) {
+			pagerMap.put("state", "취소");
+		}
+		
+		//요청 처리 메소드의 반환값으로 사용될 Map 객체 생성
+		// => 응답결과를 Map객체의 엔트리(Entry)로 저장하여 반환 - Entry >> JSON(JS 객체)
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		List<TfOrder> userOrderList = tfOrderService.getUserOrderList(pagerMap);
+		returnMap.put("userOrderList", userOrderList); //주문정보 리스트
+		returnMap.put("pager", pager); //페이징 정보 맵
+		
+		//주문에 대한 공연 정보
+		List<ShowXShow> userShowList=new ArrayList<ShowXShow>();
+		for(TfOrder order:userOrderList) {
+			ShowXShow show=showXShowService.getShowDetail(order.getOrderShowNum());
+			userShowList.add(show);
+		}
+		returnMap.put("userShowList", userShowList);
+		
+		//return "user/include/bookMore";
+		return returnMap;
+	}
+	
+	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
+	public String findId() {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/find_id", method = RequestMethod.POST)
+	public String findId(String name, String email) {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
+	public String findPw() {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
+	public String findPw(String name, String email) {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/modify_pw", method = RequestMethod.GET)
+	public String modifyPW() {
+		return "user/include/modifyPW";
+	}
+	
+	@RequestMapping(value = "/pw_check", method = RequestMethod.GET)
+	public String pwCheck() {
+		return "user/include/passwordCheck";
+	}
+	
+	/*
+	@RequestMapping(value = "/privacypolicy", method = RequestMethod.GET)
+	public String privacypolicy() {
+		return "user/include/terms/privacypolicy";
+	}
+	*/
+	/*
+	@RequestMapping(value = "/qna", method = RequestMethod.GET)
+	public String qna() {
+		return "user/include/qna";
+	}
+	
+	@RequestMapping(value = "/review_write", method = RequestMethod.GET)
+	public String reviewWrite() {
+		return "user/include/review_write";
+	}
+	*/
+	
+	@RequestMapping(value = "/review_more", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> reviewMore(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "6") int month
+			,HttpSession session) {
+		//회원인증정보
+		TfUser loginUserInfo = (TfUser)session.getAttribute("loginUserInfo");
+		String userId = loginUserInfo.getUserId();
+		
+		//회원 예매 개수 반환
+		int totalBoard=reviewService.getReviewCount(userId);
+		int pageSize=5; //페이지에 출력될 게시글의 개수
+		int blockSize=5; //페이지 블럭에 출력될 페이지의 개수
+		Pager pager=new Pager(pageNum, totalBoard, pageSize, blockSize);
+		
+		//Service 클래스의 메소드를 호출하기 위해 매개변수에 전달될 Map 객체 생성
+		Map<String, String> pagerMap=new HashMap<String, String>();
+		pagerMap.put("userId", userId);
+		pagerMap.put("period", ""+(month*4*30));
+		pagerMap.put("startRn", ""+pager.getStartRow());
+		pagerMap.put("endRn", ""+pager.getEndRow());
+		
+		//요청 처리 메소드의 반환값으로 사용될 Map 객체 생성
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		List<ReviewShowInfo> userReviewList = reviewService.getUserReviewList(pagerMap);
+		returnMap.put("userReviewList", userReviewList); //주문정보 리스트
+		returnMap.put("pager", pager); //페이징 정보 맵
+		
+		return returnMap;
+	}
+	/*
+	@RequestMapping(value = "/service", method = RequestMethod.GET)
+	public String service() {
+		return "user/include/terms/service";
+	}
+	
+	@RequestMapping(value = "/terms", method = RequestMethod.GET)
+	public String terms() {
+		return "user/include/terms";
+	}
+	*/
+	/*
+	@RequestMapping(value = "/theater", method = RequestMethod.GET)
+	public String theater() {
+		return "user/include/theater";
+	}
+	*/
+	
+	@RequestMapping(value = "/user_info", method = RequestMethod.GET)
+	public String userInfo() {
+		return "user/include/userInfo";
+	}
+}

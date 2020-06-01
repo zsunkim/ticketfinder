@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.FcltyXMapper">
+	<insert id="insertHall">
+		insert into fclty_hall values(#{hallCode}, #{hallFcName}, #{hallName}, #{hallSeatCnt})
+	</insert>
+	
+	<insert id="insertFclty">
+		insert into fclty values(#{fcCode}, #{fcName}, #{fcAddr}, #{fcSeatCnt}, #{fcHallCnt}, #{fcLa}, #{fcLo}, #{fcTel}, #{fcUrl})
+	</insert>
+	
+	<update id="updateHall">
+		update fclty_hall
+		<set>
+			<if test="hall_fc_name!=null and hall_fc_name!=''">
+				hall_fc_name=#{hallFcName}
+			</if>
+			<if test="hall_name!=null and hall_name!=''">
+				hall_name=#{hallName}
+			</if>
+			<if test="hall_seat_cnt!=null and hall_seat_cnt!=''">
+				hall_seat_cnt=#{hallSeatCnt}
+			</if>
+		</set>
+		where hall_code=#{hallCode}
+	</update>
+	
+	<update id="updateFclty">
+		update fclty
+		<set>
+			<if test="fc_name!=null and fc_name!=''">
+				fc_name=#{fcName}
+			</if>
+			<if test="hall_addr!=null and hall_addr!=''">
+				hall_addr=#{hallAddr}
+			</if>
+			<if test="fc_seat_cnt!=null and fc_seat_cnt!=''">
+				fc_seat_cnt=#{fcSeatCnt}
+			</if>
+			<if test="fc_hall_cnt!=null and fc_hall_cnt!=''">
+				fc_hall_cnt=#{fcHallCnt}
+			</if>
+			<if test="fc_la!=null and fc_la!=''">
+				fc_la=#{fcLa}
+			</if>
+			<if test="fc_lo!=null and fc_lo!=''">
+				fc_lo=#{fcLo}
+			</if>
+			<if test="fc_tel!=null and fc_tel!=''">
+				fc_tel=#{fcTel}
+			</if>
+			<if test="fc_url!=null and fc_url!=''">
+				fc_url=#{fcUrl}
+			</if>
+		</set>
+		where fc_code=#{fcCode}
+	</update>
+	
+	<select id="selectHall" resultType="FcltyHall">
+		select * from fclty_hall where hall_code=#{hallCode}
+	</select>
+	
+	<select id="selectFclty" resultType="Fclty">
+		select * from fclty where fc_code=#{fcCode}
+	</select>
+	
+	<select id="selectFcltyXList" resultType="FcltyX">
+		select * from fclty_hall fh join fclty fc on fc.fc_name=fh.hall_fc_name order by fc_code
+	</select>
+
+</mapper>

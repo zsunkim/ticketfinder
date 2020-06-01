@@ -1,0 +1,496 @@
+@charset "UTF-8";
+
+div#pd {
+    margin-top: 150px;
+}
+
+div#pd>div#section01 {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+div#pd div.pdTitle {
+	margin-top: 16px;
+    position: relative;
+    border-bottom: 2px solid #333;
+}
+
+div#pd div.pdTitle>p.pdTitleName {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo {
+    display: flex;
+    margin: 10px 0;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>span {
+    line-height: 40px;
+    font-size: 15px;
+    color: #666;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>span:first-child {
+    margin-right: 10px;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>span:nth-child(2) {
+    margin-right: 10px;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>span:nth-child(3) {
+    margin-right: 10px;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>span>img {
+    vertical-align: -7px;
+    width: 18px;
+    height: 21px;
+}
+
+div#pd div.pdTitle>div.pdTitleInfo>div.pdTitleLink {
+    height: 40px;
+    position: absolute;
+    left: 1150px;
+}
+
+div#pd div.pdInfoCont {
+    width: 1200px;
+    padding-bottom: 100px;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+div#pd div.pdInfoCont>div.pdInfoImg {
+	float: left;
+    width: 400px;
+    height: 570px;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList {
+	float: right;
+	width: 701px;
+	height: 570px;
+	border-bottom: 1px solid black;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo {
+	position: relative;
+	padding-left: 1px;
+	margin-top: 20px;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo>div {
+	margin-bottom: 30px;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo span.pdInfoTitle {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo div.pdInfoDayTime {
+	display: inline-grid;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo div.pdInfoDayTime>span {
+	margin-bottom: 5px;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo div.pdInfoDayTime>span:last-child {
+	margin-bottom: 0;
+}
+
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo>div.pdInfoPrice {
+    display: flex;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo div.pdInfoPriceTxt {
+    display: inline-block;
+}
+
+div#pd div.pdInfoCont>div.pdInfoList>div.pdInfo div.pdInfoPriceTxt>p {
+    margin-bottom: 10px;
+}
+
+div#pd>div#section02 {
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+div#pd div.pdBook {
+    width: 700px;
+    float:left;
+    position: relative;
+}
+
+div#pd div.pdBook>div.pdBookTitle {
+    position: relative;
+    width: 660px;
+    margin: 0;
+    margin-left: 40px;
+    border-bottom: 2px solid black;
+    height: 45px;
+    line-height: 30px;
+}
+
+div#pd div.pdBook>div.pdBookTitle>p.Txt1 {
+    font-size: 18px;
+    color: #333;
+    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
+    font-weight: bold;
+}
+
+div#pd div.pdBook>div.pdBookWrap {
+    width: 560px;
+    height: fit-content;
+    margin: 26px auto 27px auto;
+    display: flex;
+}
+
+div#pd div.pdBook div.pdBookDate {
+    width: 300px;
+    float: left;
+    border-right: 1px solid #ddd;
+}
+
+div#pd div.pdBook div.pdBookTime {
+    height: 233px;
+    width: 260px;
+    float: left;
+    text-align: center;
+}
+
+
+div#pd div.pdBook div.pdBookTime>.box {
+    width: 180px;
+    margin: 30px 0 0 50px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    background-color: #ec7d2c;
+}
+
+div#pd div.pdBookSeat {
+    height: 331px;
+    width: 500px;
+    float: right;
+    position: relative;
+}
+
+div#pd div.pdBookSeat>p.pdSeatTitle {
+    margin: 0 auto;
+    height: 45px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    width: 440px;
+    border-bottom: 2px solid black;
+}
+
+div#pd div.pdBookSeat>div.pdSeatList {
+    height: 233px;
+    width: 440px;
+    margin: 0 auto;
+    margin-top : 25px;
+    border: 1px solid #ddd;
+}
+
+div#pd div.pdBookSeat>div.pdSeatList span {
+    display: inline;
+    color: #ec7d2c;
+    padding-left: 7px;
+}
+
+div#pd div.pdBookSeat>div.pdSeatList>p.pdSeat {
+    margin: 50px 0 0 30px;
+}
+
+div#pd>div#section02 a {
+    cursor: pointer;
+}
+
+div#pd>div#section02>div.pdBookBtnCont a {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+}
+
+div#pd>div#section02>div.pdBookBtnCont a:hover {
+    color: black;
+}
+
+div#pd>div#section02>div.pdBookBtnCont {
+    clear: both;
+    margin: 0 auto;
+    height: 100px;
+}
+
+div#pd>div#section02>div.pdBookBtnCont span {
+    display: inline-block;
+    margin: 0 auto;
+    margin-left: 550px;
+    margin-top: 50px;
+    vertical-align: -14px;
+    width: 120px;
+    height: 40px;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid;
+}
+    
+div#pd>div#section03 {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+div#pd div.pdTab {
+    display: flex;
+    padding: 0;
+    border-bottom: 2px solid black;
+}
+
+div#pd div.pdTab>div {
+    width: 175px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+div#pd div.pdTab>div>a {
+	display: inline-block;
+    color: #888;
+    cursor: pointer;
+}
+
+div#pd div.pdTab>div>a.on {
+    display: inline-block;
+    color: #333;
+    font-weight: bold;
+    margin: 0 -5px;
+}
+
+div#pd div.pdTab>div>a.on::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #ec7d2c;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3;
+}
+
+div#pd div.pdTab>div>a.on::before {
+    width: 90px;
+    margin: 0 40px;
+}
+
+div#pd div.pdTab>div>a.on::after {
+    content: "↓";
+    display: inline;
+    color: #333;
+    margin-left: 3px;
+}
+
+div#pd div.pdTab>div::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 15px;
+    background: #ddd;
+    position: absolute;
+    right: 0;
+    top: 22px;
+}
+
+div#pd div.pdTab>div:nth-child(4)::after {
+    display: none;
+}
+
+div#pd>div#section03>div.pdDetail>div:not(.on) {
+    display: none;
+}
+
+div#pd div.pdDetail {
+	border-bottom: 2px solid black;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+div#pd div.pdDetail>div.pdDInfo {
+	margin-bottom: 50px;
+}
+
+div#pd div.pdDetail>div.pdDInfo>img {
+    vertical-align: bottom;
+}
+
+div#pd div.pdDetail>div.pdDInfo>img:last-child {
+    margin-bottom:70px;
+}
+
+div#pd>div#section03 div.pdDCancel>div {
+    width: 100%;
+    display: flex;
+    text-align: left;
+}
+
+div#pd>div#section03 div.pdDCancel>div.pdDCancel1 {
+    margin-top: 100px;
+}
+
+div#pd div.pdDetail>div.pdDCancel div.pdDCancelTitle {
+    width: 240px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
+}
+
+div#pd div.pdDetail>div.pdDCancel div.pdDCancelTxt {
+    font-size: 14px;
+    line-height: 28px;
+    color: #555;
+    padding: 0 0 85px 3px;
+    letter-spacing: -0.03em;
+}
+
+div#pd div.pdDetail div.theaterTitle {
+        text-align: center;
+    font-size: 30px;
+    margin-top: 100px;
+    font-weight: bold;
+    background: url(../img/theaterIcon.png)no-repeat 490px 7px;
+    letter-spacing: -0.06em;
+    margin-bottom: 40px;
+    line-height: 35px;
+}
+
+div#pd div.pdDetail>div.pdDReview {
+    text-align: left;
+}
+
+div#pd div.pdDetail>div.pdDReview>div.pdDReviewCautionCont {
+    padding: 14px 0 14px 48px;
+    position: relative;
+}
+
+div#pd div.pdDetail>div.pdDReview div.pdDReviewCaution>p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    margin: 0;
+}
+
+div#pd div.pdDetail>div.pdDReview div.pdDReviewCaution>p.cautionTxt1 {
+    color: #ed4037 !important;
+}
+
+div#pd div.pdDetail>div.pdDReview div.pdDReviewCaution>a {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 17px;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList {
+	border-top: 1px solid #888;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList>li.review {
+	min-height: 105px;
+    padding: 19px 0;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewInfo {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewInfo>span {
+    margin-right: 4px;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewInfo>span.reviewInfoTxt {
+    top: 19px;
+    height: 20px;
+    line-height: 20px;
+    color: #333;
+    font-size: 13px;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewInfo>span.reviewInfoTxt1 {
+    top: 18px;
+    font-size: 12px;
+    color: #888;
+    margin-right: 15px;
+}
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewInfo>span>img {
+    margin-right: 2px;
+}
+
+
+div#pd div.pdDetail>div.pdDReview>ul.reviewList div.reviewTxt {
+    font-size: 13px;
+    line-height: 22px;
+    color: #666;
+}
+
+div#pd div.pdDetail>div.pdDReview>div.reviewPageNum {
+    padding: 50px 0;
+    display: block;
+}
+
+div#pd div.pdDetail>div.pdDReview>div.reviewPageNum div.reviewPageBtnBox{
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+div#pd div.pdDetail>div.pdDReview>div.reviewPageNum div.reviewPageBtnBox a{
+    font-size: 16px;
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px;
+}
+
+div#pd div.pdDetail>div.pdDReview>div.reviewPageNum div.reviewPageBtnBox a.selected{
+    color:#ec7d2c;
+    font-weight: bold;
+}
+
+div#pd div.pdDetail>div.pdDReview>div.reviewPageNum div.reviewPageBtnBox a[class*="Btn"]{
+    width: 32px;
+    font-size: 13px;
+    letter-spacing: -1px;
+    text-align: center;
+    color:#888;
+    margin: 0;
+    border-radius: 15px;
+    border:1px solid #ccc;
+    }
+
+    div#pd div.pdDetail>div.pdDReview>div.reviewPageNum div.reviewPageBtnBox a[class*="Btn"]:hover{
+    color: #000;
+    border: 1px solid #000;
+}
+
+
+

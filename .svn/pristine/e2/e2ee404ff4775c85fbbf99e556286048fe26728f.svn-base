@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.ShowXShowMapper">
+	<resultMap type="ShowXShow" id="showXshowResultMap">
+		<association property="showDetail" javaType="ShowDetail">
+			<id column="show_num" property="showNum"/>
+			<result column="show_code" property="showCode"/>
+			<result column="show_fc_code" property="showFcCode"/>
+			<result column="show_hall_name" property="showHallName"/>
+			<result column="show_name" property="showName"/>
+			<result column="show_cast" property="showCast"/>
+			<result column="show_state" property="showState"/>
+			<result column="show_daytime" property="showDaytime"/>
+			<result column="show_seat" property="showSeat"/>
+			<result column="show_detail1" property="showDetail1"/>
+			<result column="show_detail2" property="showDetail2"/>
+			<result column="show_detail3" property="showDetail3"/>
+			<result column="show_detail4" property="showDetail4"/>
+			<result column="show_area" property="showArea"/>
+			<result column="show_rate" property="showRate"/>
+		</association>
+		
+		<association property="tfShow" javaType="TfShow">
+			<id column="s_code" property="sCode"/>
+			<result column="s_name" property="sName"/>
+			<result column="s_s_date" property="sSDate"/>
+			<result column="s_e_date" property="sEDate"/>
+			<result column="s_runtime" property="sRuntime"/>
+			<result column="s_price" property="sPrice"/>
+			<result column="s_age" property="sAge"/>
+			<result column="s_poster" property="sPoster"/>
+			<result column="s_genre" property="sGenre"/>
+		</association>
+	</resultMap>
+
+	<!-- 검색한 단어가 들어가는 지역, 카테고리, 제목, 출연배우명의 공연 출력 -->
+	<select id="selectSearch" resultType="ShowDetail" resultMap="showXshowResultMap">
+		select * from show_detail where show_area like '%#{search}%' or show_code like '%#{search}%' or show_name like '%#{search}%' or show_cast like '%#{search}%';
+	</select>
+
+	<!-- 공연상세정보 출력 -->
+	<select id="selectShowDetail" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select s.s_name, s.s_s_date, s.s_e_date, sd.show_cast, s.s_runtime, s.s_age, s.s_price, s.s_poster, to_char(sd.show_daytime, 'yyyy"년 "mm"월 "dd"일 "day hh24"시 "mi"분"'), 
+		sd.show_detail1, sd.show_detail2, sd.show_detail3, sd.show_detail4 from tf_show s join show_detail sd on s.s_code=sd.show_code and sd.show_num=#{showNum}
+	</select>
+
+	<!-- what's hot 검색 -->
+	<select id="selectShowHot" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select distinct s.*, sd.show_hall_name from tf_show s join show_detail sd on s.s_code=sd.show_code where s_s_date between sysdate and sysdate+14 order by s_s_date desc
+	</select>
+	
+	<!-- 메인 하단 장르별 인기 -->
+	<select id="selectHotGenre" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select * from ( select distinct s.*, sd.show_hall_name from tf_show s inner join show_detail sd on s.s_code=sd.show_code 
+			where s_s_date between sysdate and sysdate+20 order by s_s_date desc )
+			<trim prefix="where" prefixOverrides="or">
+				<if test="genre1!=null and genre1!=''">
+					s_genre=#{genre1}
+				</if>
+				
+				<if test="genre2!=null and genre2!=''">
+					or s_genre=#{genre2}
+				</if>
+			</trim>
+	</select>
+	
+	<!-- 장르별, 일간주간월간 별 예매율 순위 출력 -->
+	<select id="selectRank" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select * from (select rownum rn, rank.* from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code where s_genre=#{sGenre} 
+		and s_s_date between sysdate and #{choiceDate} order by show_rate desc) rank) where rn between #{rankOne} and #{rankTwo}
+	</select>
+	
+	<!-- 지역별 신상품순 검색 -->
+	<select id="selectAreaNew" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code 
+		<if test="s_genre!=null and s_genre!=''">
+			where s_genre=#{sGenre}
+		</if>
+		order by s.s_e_date desc) where show_area=#{showArea}
+	</select>
+	
+	<!-- 지역별 종료임박순 검색 -->
+	<select id="selectAreaEnd" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code 
+		<if test="s_genre!=null and s_genre!=''">
+			where s_genre=#{sGenre}
+		</if>
+		order by s.s_e_date asc) where show_area=#{showArea}
+	</select>
+	
+	<!-- 지역별 상품명순 검색 -->
+	<select id="selectAreaName" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select * from (select * from tf_show s join show_detail sd on s.s_code=sd.show_code 
+		<if test="s_genre!=null and s_genre!=''">
+			where s_genre=#{sGenre}
+		</if>
+		order by show_name) where show_area=#{showArea}
+	</select>
+	
+	<!-- 공연시설별 공연 목록 -->
+	<select id="selectFcltyShow" resultType="ShowXShow" resultMap="showXshowResultMap">
+		select distinct s.s_name, s.s_s_date, s.s_e_date, s.s_poster, sd.show_hall_name from tf_show s 
+		join show_detail sd on s.s_code=sd.show_code where s.s_e_date between sysdate-7 and sysdate+31
+		and sd.show_fc_code=#{fcCode} order by sd.show_hall_name desc, s_s_date
+	</select>
+</mapper>

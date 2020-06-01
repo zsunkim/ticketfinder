@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.ShowDetailMapper">
+	<insert id="insertShowDetail">
+		<selectKey resultType="int" keyColumn="show_num" order="BEFORE">
+			select show_detail_seq.nextval from dual
+		</selectKey>
+		insert into show_detail values(#{showNum},#{showCode},#{showFcCode},#{showHallName},#{showName},#{showCast},
+		#{showState},to_date(#{showDaytime}, 'yyyy/mm/dd hh24:mi'),#{showSeat},#{showDatail1},#{showDatail2},#{showDatail3},
+		#{showDatail4},#{showCasting},#{showArea},#{showRate})
+	</insert>
+	
+	<update id="updateShowDetail">
+		update from show_detail
+		<set>
+			<if test="show_code!=null and show_code!=''">
+				show_code=#{showCode},	
+			</if>
+			<if test="show_fc_code!=null and show_fc_code!=''">
+				show_fc_code=#{showFcCode},
+			</if>
+			<if test="show_hall_name!=null and show_hall_name!=''">
+				show_hall_name=#{showHallName},
+			</if>
+			<if test="show_name!=null and show_name!=''">
+				show_name=#{showName},
+			</if>
+			<if test="show_cast!=null and show_cast!=''">
+				show_cast=#{showCast},
+			</if>
+			<if test="show_state!=null and show_state!=''">
+				show_state=#{showState},
+			</if>
+			<if test="show_daytime!=null and show_daytime!=''">
+				show_daytime=to_date(#{showDaytime}, 'yyyy/mm/dd hh24:mi'),
+			</if>
+			<if test="show_seat!=null and show_seat!=''">
+				show_seat=#{showSeat}, 
+			</if>
+			<if test="show_detail1!=null and show_detail1!=''">
+				show_detail1=#{showDetail1},
+			</if>
+			<if test="show_detail2!=null and show_detail2!=''">
+				show_detail2=#{showDetail2},
+			</if>
+			<if test="show_detail3!=null and show_detail3!=''">
+				show_detail3=#{showDetail3},
+			</if>
+			<if test="show_detail4!=null and show_detail4!=''">
+				show_detail4=#{showDetail4},
+			</if>
+			<if test="show_casting!=null and show_casting!=''">
+				show_casting=#{show_casting}, 
+			</if>
+			<if test="show_area!=null and show_area!=''">
+				show_area=#{show_area}, 
+			</if>
+			<if test="show_rate!=null and show_rate!=''">
+				show_rate=#{show_rate}
+			</if>
+		</set>
+		where show_num=#{showNum}
+	</update>
+	
+</mapper>

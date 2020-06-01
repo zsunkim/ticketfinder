@@ -1,0 +1,51 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import ticket.finder.dto.Dual;
+import ticket.finder.dto.OrderDetailFcltyHallRefund;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.OrderRate;
+import ticket.finder.dto.OrderRefund;
+import ticket.finder.dto.TfOrder;
+import ticket.finder.exception.OrderNotFoundException;
+import ticket.finder.exception.SameOrderCodeException;
+
+public interface TfOrderService {
+	void addOrder(TfOrder order) throws SameOrderCodeException;
+	void modifyOrder(TfOrder order) throws OrderNotFoundException;
+	void modifyStateRefund(String code) throws OrderNotFoundException;
+	void removeUnpaidOrder(String code) throws OrderNotFoundException;
+	TfOrder getOrder(String code) throws OrderNotFoundException;
+	TfOrder getMyOrder(String id) throws OrderNotFoundException;
+	List<OrderRefund> getUserOrderList(Map<String, String> map) throws OrderNotFoundException;
+	List<TfOrder> getDateOrder(String startDate, String endDate);
+	List<TfOrder> getRankOrder(Map<String, Object> map);
+	List<TfOrder> getOrderList();
+	List<TfOrder> getUnpaidOrderList();
+	List<TfOrder> getLongUnpaidOrderList();
+	List<TfOrder> getShOrderList();
+	List<TfOrder> getTicketingList();
+	void modifyDpState(String orderCode);
+	void modifyShState(String orderCode);
+	void modifyTicketing(String orderCode);
+	int getOrderCount(String id);
+	List<OrderQShow> getOrderQshow(Map<String, String> map);
+	List<OrderRate> getRankGenre(Map<String, String> map);
+	Dual getOrderCountAdmin();
+	List<Map<String, Object>> getCountGenre(int period);
+	List<OrderDShow> getTicketing(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDetailFcltyHallRefund> getOrderFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	OrderDetailFcltyHallRefund getOrderFcltyChoice(String orderCode);
+	List<OrderDetailFcltyHallRefund> getRefundFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	OrderDetailFcltyHallRefund getRefundFcltyChoice(int refundNum);
+	List<OrderDetailFcltyHallRefund> getShowOrder(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDShow> getShowOrderChoice(String showName);
+	List<OrderDShow> getShowSelectOne();
+	List<OrderDShow> getShowSelectTwo(String showCode);
+	List<OrderDetailFcltyHallRefund> getShowSeat(int showNum);
+}

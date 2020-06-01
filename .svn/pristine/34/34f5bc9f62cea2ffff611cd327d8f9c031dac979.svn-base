@@ -1,0 +1,114 @@
+package ticket.finder.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.velocity.tools.config.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfOrder;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfUserService;
+
+@Controller
+public class SunController {
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@RequestMapping(value = "/rank", method = RequestMethod.GET)
+	public String rank(Model model) {
+		//랭킹 출력(장르:전체)
+		Map<String, String> ranking1 = new HashMap<String, String>();
+		ranking1.put("startDate", new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		List<OrderDShow> rankList1 =tfOrderService.getRankGenre(ranking1);
+		model.addAttribute("rankList1", rankList1);
+		
+		int count=0;
+		for(OrderDShow cnt:rankList1) {
+			count+=cnt.getCount();
+		}
+		
+		System.out.println("count="+count);
+		
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getRn2());
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getTfShow().getsName());
+		
+		List<ShowXShow> list = new ArrayList<ShowXShow>();
+		for(OrderDShow show:rankList1) {
+			try {
+				ShowXShow showList = showXShowService.getShowDetail(show.getShowDetail().getShowNum());
+				list.add(showList);
+			} catch (ShowNumNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("왜죠?");
+			}
+		}
+		model.addAttribute("rankList", list);
+				
+		
+		return "user/include/rank";
+	}
+	
+	@RequestMapping(value = "/region", method = RequestMethod.GET)
+	public String region(Model model) {
+		//지역별 신상품순 - 전체
+		Map<String, String> area1 = new HashMap<String, String>();
+		area1.put("showArea", "11");
+		List<ShowXShow> areaList1 = showXShowService.getAreaNew(area1);
+		model.addAttribute("areaList1", areaList1);
+		
+		//지역별 신상품순 - 경기/인천
+		Map<String, String> area2 = new HashMap<String, String>();
+		area2.put("showArea", "41");
+		List<ShowXShow> areaList2 = showXShowService.getAreaNew(area2);
+		model.addAttribute("areaList2", areaList2);
+		
+		//지역별 신상품순 - 대전/충청
+		Map<String, String> area3 = new HashMap<String, String>();
+		area3.put("showArea", "43");
+		List<ShowXShow> areaList3 = showXShowService.getAreaNew(area3);
+		model.addAttribute("areaList3", areaList3);
+		
+		//지역별 신상품순 - 경상/대구/부산
+		Map<String, String> area4 = new HashMap<String, String>();
+		area4.put("showArea", "26");
+		List<ShowXShow> areaList4 = showXShowService.getAreaNew(area4);
+		model.addAttribute("areaList4", areaList4);
+		
+		//지역별 신상품순 - 전라/광주
+		Map<String, String> area5 = new HashMap<String, String>();
+		area5.put("showArea", "29");
+		List<ShowXShow> areaList5 = showXShowService.getAreaNew(area5);
+		model.addAttribute("areaList5", areaList5);
+		
+		//지역별 신상품순 - 제주
+		Map<String, String> area6 = new HashMap<String, String>();
+		area6.put("showArea", "50");
+		List<ShowXShow> areaList6 = showXShowService.getAreaNew(area6);
+		model.addAttribute("areaList6", areaList6);
+		
+		
+		
+		return "user/include/region";
+	}
+
+}

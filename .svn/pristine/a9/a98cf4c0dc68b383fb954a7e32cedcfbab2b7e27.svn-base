@@ -1,0 +1,19 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import ticket.finder.dto.Question;
+import ticket.finder.dto.QuestionRe;
+import ticket.finder.exception.QuestionNotFoundException;
+
+public interface QuestionService {
+	void addQuestion(Question question);
+	void modifyStateQuestion(String questionState, int questionNum) throws QuestionNotFoundException;
+	Question getQuestion(int questionNum) throws QuestionNotFoundException;
+	List<Question> getRefQuestion(int questionRef, String questionUserId);
+	List<Question> getIdQuestion(String questionUserId);
+	List<QuestionRe> getQuestionList();
+	List<Question> getUserQuestionList(Map<String, String> map);
+	int getQuestionCount(String questionUserId);	
+}

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.ReviewMapper">
+	<resultMap type="Review" id="reviewResultMap">
+		<id column="review_num" property="reviewNum"/>
+		<result column="review_show_code" property="reviewShowCode"/>
+		<result column="review_user_id" property="reviewUserId"/>
+		<result column="review_grade" property="reviewGrade"/>
+		<result column="review_contents" property="reviewContents"/>
+		<result column="review_date" property="reviewDate"/>
+		<result column="review_view_date" property="reviewViewDate"/>
+		<result column="review_state" property="reviewState"/>
+	</resultMap>
+	
+	<resultMap type="ShowDetail" id="showDetailResultMap">
+		<id column="show_num" property="showNum"/>
+		<result column="show_code" property="showCode"/>
+		<result column="show_fc_code" property="showFcCode"/>
+		<result column="show_hall_name" property="showHallName"/>
+		<result column="show_name" property="showName"/>
+		<result column="show_cast" property="showCast"/>
+		<result column="show_state" property="showState"/>
+		<result column="show_daytime" property="showDaytime"/>
+		<result column="show_seat" property="showSeat"/>
+		<result column="show_detail1" property="showDetail1"/>
+		<result column="show_detail2" property="showDetail2"/>
+		<result column="show_detail3" property="showDetail3"/>
+		<result column="show_detail4" property="showDetail4"/>
+		<result column="show_area" property="showArea"/>
+		<result column="show_rate" property="showRate"/>
+	</resultMap>
+
+	<resultMap type="ReviewSd" id="reviewSdResultMap">
+		<association property="review" javaType="Review" resultMap="reviewResultMap"/>		
+		<association property="showDetail" javaType="ShowDetail" resultMap="showDetailResultMap"/>
+	</resultMap>
+	
+	<resultMap type="ReviewShowInfo" id="reviewShowInfoResultMap">
+		<association property="review" javaType="Review" resultMap="reviewResultMap"/>		
+		<association property="showDetail" javaType="ShowDetail" resultMap="showDetailResultMap"/>
+		
+		<association property="tfShow" javaType="TfShow">
+			<id column="s_code" property="sCode"/>
+			<result column="s_name" property="sName"/>
+			<result column="s_s_date" property="sSDate"/>
+			<result column="s_e_date" property="sEDate"/>
+			<result column="s_runtime" property="sRuntime"/>
+			<result column="s_price" property="sPrice"/>
+			<result column="s_age" property="sAge"/>
+			<result column="s_poster" property="sPoster"/>
+			<result column="s_genre" property="sGenre"/>
+		</association>
+	</resultMap>
+	
+	<insert id="insertReview">
+		<selectKey resultType="int" keyProperty="review_num" order="BEFORE">
+			select review_seq.nextval from dual
+		</selectKey>
+		insert into review values(#{reviewNum}, #{reviewShowCode}, #{reviewUserId}, #{reviewGrade}, #{reviewContents}, sysdate, #{reviewViewDate}, null)
+	</insert>
+
+	<update id="updateStateReview">
+		update review set review_state='삭제' where review_num=#{reviewNum}
+	</update>
+	
+	<select id="selectReview" resultType="Review">
+		select * from review where review_num=#{reviewNum}
+	</select>
+	
+	<select id="selectIdReview" resultType="Review">
+		select * from review where review_user_id=#{reviewUserId}
+	</select>
+	
+	<select id="selectReviewList" resultType="Review">
+		select * from review where review_state is null order by review_num desc
+	</select>
+	
+	<select id="selectReviewCount" resultType="int">
+		select count(*) from review where review_user_id = #{reviewUserId}
+	</select>
+	
+	<!--  
+	<select id="selectUserReviewList" resultType="Review">
+		<if test="startRn!=null and startRn!=''">
+			select * from ( select rownum rn, user_review.* from(
+		</if> 
+		
+		select * from review where review_user_id = #{reviewUserId}
+		
+		<if test="period!=null and period!=''">
+			and review_date between TO_DATE(sysdate-{#period},'yyyymmdd') and sysdate
+		</if>
+		
+		order by review_date desc
+		
+		<if test="startRn!=null and startRn!=''">
+			) user_review ) where review_state is null and rn between #{startRn} and #{endRn}
+		</if>
+	</select>-->
+	
+	<!-- 유저 ID, 시작행, 종료행(필수)과 검색기간(선택)을 전달받아 리뷰 정보와 검색 정보를 반환하는 SQL -->
+	<select id="selectUserReviewList" resultType="ReviewShowInfo" resultMap="reviewShowInfoResultMap">
+		select * from ( select rownum rn, showReview.* from 
+			( select * from ( select * from review ) r
+        	join ( select s.s_name, s.s_s_date, s.s_e_date, sd.show_cast, s.s_runtime, s.s_age, s.s_price, s.s_poster, 
+        		sd.show_daytime, sd.show_num, sd.show_detail1, sd.show_detail2, sd.show_detail3, sd.show_detail4 
+        		from tf_show s join show_detail sd on s.s_code=sd.show_code) sxs
+        	on review_show_code=sxs.show_num where review_user_id=#{userId} 
+        	
+        	<if test="period!=null and period!=''">
+				and review_date between to_char(sysdate-#{period},'yyyymmdd') and sysdate 
+			</if>
+
+        	order by review_date) showReview ) 
+        	
+        	where review_state is null and rn between #{startRn} and #{endRn}
+	</select>
+	
+	<select id="selectShowReviewList" resultType="Review">
+		select review_user_id, review_grade, review_contents, review_view_date from review where review_state is null and review_show_code=#{reviewShowCode} 
+		order by review_num desc
+	</select>
+	
+	<select id="selectReviewSdList" resultType="ReviewSd" resultMap="reviewSdResultMap">
+		select r.*, sd.show_name from review r join show_detail sd on r.review_show_code=sd.show_num where r.review_state is null
+	</select>
+</mapper>

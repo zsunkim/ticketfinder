@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ticket Finder</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/style.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head>
+<body>
+	<div id="header">
+		<tiles:insertAttribute name="header"/>
+	</div>
+	
+	<div id="content">
+		<tiles:insertAttribute name="content"/>
+	</div>
+	
+	<div id="footer">
+		<tiles:insertAttribute name="footer"/>
+	</div>
+	
+	<a href="#" class="moveTopBtn">
+		<img src="images/common/topBtn.png" alt="move top button">
+	</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

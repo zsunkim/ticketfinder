@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.ReviewMapper">
+	<insert id="insertReview">
+		<selectKey resultType="int" keyProperty="review_num" order="BEFORE">
+			select review_seq.nextval from dual
+		</selectKey>
+		insert into review values(#{reviewNum}, #{reviewShowCode}, #{reviewUserId}, #{reviewGrade}, #{reviewContents}, sysdate, #{reviewViewDate}, null)
+	</insert>
+
+	<update id="updateStateReview">
+		update review set review_state='삭제' where review_num=#{reviewNum}
+	</update>
+	
+	<select id="selectReview" resultType="Review">
+		select * from review where review_num=#{reviewNum}
+	</select>
+	
+	<select id="selectIdReview" resultType="Review">
+		select * from review where review_user_id=#{reviewUserId}
+	</select>
+	
+	<select id="selectReviewList" resultType="Review">
+		select * from review where review_state!='삭제' order by review_num desc
+	</select>
+	
+	<select id="selectReviewCount" resultType="Review">
+		select count(*) from review where review_user_id = #{reviewUserId}
+	</select>
+	
+	<select id="selectUserReviewList" resultType="Review">
+		select * from ( select rownum rn, user_review.*
+        ( select * from review where review_user_id = #{reviewUserId} 
+    	and review_date between #{startDate} and #{endDate} by review_date desc ) user_review )
+            where review_state!='삭제' rn between #{start} and #{end}
+	</select>
+	
+	<select id="selectShowReviewList" resultType="Review">
+		select review_user_id, review_grade, review_contents, review_view_date from review where review_state!='삭제' and review_show_code=#{reviewShowCode} 
+		order by review_num desc
+	</select>
+</mapper>

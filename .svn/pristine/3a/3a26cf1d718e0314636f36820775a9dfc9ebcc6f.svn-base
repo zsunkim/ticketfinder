@@ -1,0 +1,174 @@
+package ticket.finder.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import ticket.finder.dto.TfUser;
+
+@Controller
+public class UserController {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index() {
+		return "user/include/main";
+	}
+	
+	@RequestMapping(value = "/perform/{genre}", method = RequestMethod.GET)
+	public String perform(@PathVariable String genre) {
+		return "user/include/perform";
+	}
+	
+	@RequestMapping(value = "/perform_detail", method = RequestMethod.GET)
+	public String performDetail() {
+		return "user/include/perform_detail";
+	}
+	
+	@RequestMapping(value = "/rank", method = RequestMethod.GET)
+	public String rank() {
+		return "user/include/rank";
+	}
+	
+	@RequestMapping(value = "/region", method = RequestMethod.GET)
+	public String region() {
+		return "user/include/region";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute TfUser tfUser) {
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
+		return "/";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "user/include/join";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(@ModelAttribute TfUser tfUser) {
+		return "user/include/join";
+	}
+	
+	@RequestMapping(value = "/myticket", method = RequestMethod.GET)
+	public String myticket() {
+		return "user/include/myPage";
+	}
+	
+	@RequestMapping(value = "/cs", method = RequestMethod.GET)
+	public String cs() {
+		return "user/include/cs";
+	}
+	
+	@RequestMapping(value = "/cs_info", method = RequestMethod.GET)
+	public String csInfo() {
+		return "user/include/csInfo";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search() {
+		return "user/include/search";
+	}
+	
+	@RequestMapping(value = "/book_detail", method = RequestMethod.GET)
+	public String bookDetail() {
+		return "user/include/bookDetail";
+	}
+	
+	@RequestMapping(value = "/book_more", method = RequestMethod.GET)
+	public String bookMore() {
+		return "user/include/bookMore";
+	}
+	
+	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
+	public String findId() {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/find_id", method = RequestMethod.POST)
+	public String findId(String name, String email) {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
+	public String findPw() {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
+	public String findPw(String name, String email) {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/modify_pw", method = RequestMethod.GET)
+	public String modifyPW() {
+		return "user/include/modifyPW";
+	}
+	
+	@RequestMapping(value = "/pw_check", method = RequestMethod.GET)
+	public String pwCheck() {
+		return "user/include/passwordCheck";
+	}
+	
+	@RequestMapping(value = "/privacypolicy", method = RequestMethod.GET)
+	public String privacypolicy() {
+		return "user/include/privacypolicy";
+	}
+	
+	@RequestMapping(value = "/qna", method = RequestMethod.GET)
+	public String qna() {
+		return "user/include/qna";
+	}
+	
+	@RequestMapping(value = "/review_write", method = RequestMethod.GET)
+	public String reviewWrite() {
+		return "user/include/review_write";
+	}
+	
+	@RequestMapping(value = "/review_more", method = RequestMethod.GET)
+	public String reviewMore() {
+		return "user/include/reviewMore";
+	}
+	
+	@RequestMapping(value = "/service", method = RequestMethod.GET)
+	public String service() {
+		return "user/include/service";
+	}
+	
+	@RequestMapping(value = "/terms", method = RequestMethod.GET)
+	public String terms() {
+		return "user/include/terms";
+	}
+	
+	@RequestMapping(value = "/theater", method = RequestMethod.GET)
+	public String theater() {
+		return "user/include/theater";
+	}
+	
+	@RequestMapping(value = "/user_info", method = RequestMethod.GET)
+	public String userInfo() {
+		return "user/include/userInfo";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

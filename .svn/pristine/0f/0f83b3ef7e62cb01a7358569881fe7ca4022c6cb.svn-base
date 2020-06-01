@@ -1,0 +1,266 @@
+package ticket.finder.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.dto.TfUser;
+import ticket.finder.exception.LoginAuthFailException;
+import ticket.finder.exception.ShowNumNotFoundException;
+import ticket.finder.exception.UserIdExistsException;
+import ticket.finder.exception.UserNotFoundException;
+import ticket.finder.exception.WrongJoinException;
+import ticket.finder.service.ShowXShowService;
+import ticket.finder.service.TfOrderService;
+import ticket.finder.service.TfUserService;
+
+@Controller
+public class SunController {
+	@Autowired
+	private TfUserService tfUserService;
+	
+	@Autowired
+	private TfOrderService tfOrderService;
+	
+	@Autowired
+	private ShowXShowService showXShowService;
+	
+	@RequestMapping(value = "/service", method = RequestMethod.GET)
+	public String service() {
+		return "user/include/service";
+	}
+	@RequestMapping(value = "/privacypolicy", method = RequestMethod.GET)
+	public String privacypolicy() {
+		return "user/include/privacypolicy";
+	}
+	@RequestMapping(value = "/youth", method = RequestMethod.GET)
+	public String youth() {
+		return "user/include/youth";
+	}
+	
+	@RequestMapping(value = "/service1", method = RequestMethod.GET)
+	public String service1() {
+		return "user/include/terms/service";
+	}
+	@RequestMapping(value = "/privacypolicy1", method = RequestMethod.GET)
+	public String privacypolicy1() {
+		return "user/include/terms/privacypolicy";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute TfUser tfUser, HttpSession session) throws LoginAuthFailException, UserNotFoundException {
+		tfUserService.loginAuth(tfUser);
+		
+		session.setAttribute("loginUserInfo", tfUserService.getUser(tfUser.getUserId()));
+		if(session.getAttribute("URI")!=null) {
+			String URI=(String)session.getAttribute("URI");
+			session.removeAttribute("URI");
+			return "redirect:"+URI;
+		}
+		return "user/include/main";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "user/include/join";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(@ModelAttribute TfUser tfUser, @RequestParam(required = false) String year, @RequestParam(required = false) String month, @RequestParam(required = false) String date) throws UserIdExistsException, WrongJoinException {
+		
+		String userBirth=year+"년 "+month+"월 "+date+"일";
+		tfUser.setUserBirth(userBirth);
+		
+		int result = tfUserService.getIdCheck(tfUser.getUserId());
+		if(result==1) {
+			//System.out.println("아이디 중복");
+			return "user/include/join";			
+		} else if(result==0) {
+			//System.out.println("아이디 사용 가능");
+			tfUserService.addUser(tfUser);
+		}
+		
+		return "user/include/login";
+	}
+	
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(String userId) {
+		return tfUserService.getIdCheck(userId);
+	}
+	
+	@RequestMapping(value = "/findId", method = RequestMethod.GET)
+	public String findId() {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public String findId(String name, String email) {
+		return "user/include/findId";
+	}
+	
+	@RequestMapping(value = "/findPw", method = RequestMethod.GET)
+	public String findPw() {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/findPw", method = RequestMethod.POST)
+	public String findPw(String name, String email) {
+		return "user/include/findPw";
+	}
+	
+	@RequestMapping(value = "/modifyPw", method = RequestMethod.GET)
+	public String modifyPW() {
+		return "user/include/modifyPw";
+	}
+	
+	@RequestMapping(value = "/modifyPw", method = RequestMethod.POST)
+	public String modifyPW(String userId, String userEmail) {
+		return "user/include/modifyPw";
+	}
+	
+	@RequestMapping(value = "/pwCheck", method = RequestMethod.GET)
+	public String pwCheck() {
+		return "user/include/passwordCheck";
+	}
+	
+	
+	
+	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
+	public String userinfo() {
+		return "user/include/userInfo";
+	}
+	
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+	public String userinfo(@ModelAttribute TfUser tfUser, Model model) throws UserNotFoundException {
+		model.addAttribute("userinfo", tfUserService.getUser(tfUser.getUserId()));
+		return "user/include/userInfo";
+	}
+	
+	
+	//랭킹
+	@RequestMapping(value = "/rank", method = RequestMethod.GET)
+	public String rank(Model model) {
+		//랭킹 출력(장르:전체)
+		Map<String, String> ranking1 = new HashMap<String, String>();
+		//ranking1.put("startDate", new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		ranking1.put("startDate", "sysdate-30");
+		List<OrderDShow> rankList1 =tfOrderService.getRankGenre(ranking1);
+		model.addAttribute("rankList1", rankList1);
+		
+		int count=0;
+		for(OrderDShow cnt:rankList1) {
+			count+=cnt.getCount();
+		}
+		
+		System.out.println("count="+count);
+		
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getRn2());
+		System.out.println("rankList1.get(2).getRn2()="+rankList1.get(2).getTfShow().getsName());
+		
+		List<ShowXShow> list = new ArrayList<ShowXShow>();
+		for(OrderDShow show:rankList1) {
+			try {
+				ShowXShow showList = showXShowService.getShowDetail(show.getShowDetail().getShowNum());
+				list.add(showList);
+			} catch (ShowNumNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("왜죠?");
+			}
+		}
+		model.addAttribute("rankList", list);
+				
+		
+		return "user/include/rank";
+	}
+	
+	
+	
+	
+	//지역별 클릭시
+	@RequestMapping(value = "/region", method = RequestMethod.GET)
+	public String region(Model model) {
+		//지역별 신상품순 - 전체
+		Map<String, String> map = new HashMap<String, String>();
+		List<ShowXShow> areaList1 = showXShowService.getAreaNew(map);
+		model.addAttribute("areaList1", areaList1);
+		
+		return "user/include/region";
+	}
+	
+	//신상품순
+	@ResponseBody
+	@RequestMapping(value = "/region1", method = RequestMethod.GET)
+	public Map<String, Object> region1(@RequestParam String showArea, Model model) {
+		//지역별 신상품순 - 전체
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("showArea", showArea);
+		
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("areaList", showXShowService.getAreaNew(map));
+		
+		return map1;
+	}
+	
+	//종료임박순
+	@ResponseBody
+	@RequestMapping(value = "/region2", method = RequestMethod.GET)
+	public Map<String, Object> region2(@RequestParam String showArea, Model model) {
+		//지역별 신상품순 - 전체
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("showArea", showArea);
+		
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("areaList", showXShowService.getAreaEnd(map));
+		
+		return map1;
+	}
+	
+	//상품명순
+	@ResponseBody
+	@RequestMapping(value = "/region3", method = RequestMethod.GET)
+	public Map<String, Object> region3(@RequestParam String showArea, Model model) {
+		//지역별 신상품순 - 전체
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("showArea", showArea);
+		
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("areaList", showXShowService.getAreaName(map));
+		
+		return map1;
+	}
+	
+	
+	
+	
+
+}

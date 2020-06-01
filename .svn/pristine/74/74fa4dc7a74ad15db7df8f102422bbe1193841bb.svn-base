@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- log4jdbc-log4j2-jdbc4 라이브러리에서 제공되는 DriverSpy 클래스 -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@182.237.126.17:1521:xe"/>
+		<property name="username" value="ticket1"/>
+		<property name="password" value="finder1"/>
+	</bean>
+	
+	<!-- SqlsessionFactory 관련 클래스를 Spring Bean으로 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+		<property name="configLocation" value="/WEB-INF/spring/mybatis-config.xml"/>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="ticket.finder.dto"></property>
+		<property name="mapperLocations">
+			<list>
+				<!-- * 기호를 이용하여 XML Mapper 파일 등록 -->
+				<value>classpath:ticket/finder/mapper/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Sqlsession 관련 클래스를 Spring Bean으로 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession" destroy-method="clearCache">
+		<!-- 생성자를 이용하여 Spring Bean 생성시 SqlSessionFactory 관련 Spring Bean 인젝션 처리 -->
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- TransactionManager 관련 클래스를 Spring Bean으로 등록 -->
+	<!-- => BeanName을 반드시 transactionManager로 설정 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+		<!-- dataSource 필드에 DataSource 관련 Spring Bean을 인젝션 처리 -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven/>
+	
+	<!-- 이메일을 전송하는 기능을 제공하는 JavaMailSenderImpl 클래스를 Spring Bean으로 등록 - id는 부모 인터페이스명으로 선언 -->
+	<!-- => SMTP 서비스를 제공하는 서버 정보를 JavaMailSenderImpl 클래스의 필드값으로 전달하여 저장 -->
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="javaMailSender">
+		<property name="host" value="smtp.gmail.com"/> 
+		<property name="port" value="587"/> 
+		<property name="username" value="jisun124918"/> 
+		<property name="password" value="nury1551"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

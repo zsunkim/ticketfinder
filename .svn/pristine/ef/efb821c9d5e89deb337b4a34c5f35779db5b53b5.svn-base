@@ -1,0 +1,132 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div id="userInfo">
+	<div id="section">
+		<div class="cont">
+			<div class="infoWrap">
+				<h2>회원정보</h2>
+				<form method="post" id="modifyForm">
+				<div class="tableBox">
+				<table>
+					<colgroup>
+						<col style="width: 240px;"/>
+						<col style="width: *"/>
+					</colgroup>
+	                <tbody>
+	                    <tr>
+							<th scope="row">아이디</th>
+							<td>
+	                            <span id="id">${userinfo.userId }</span>
+							</td>
+	                    </tr>
+	                    <tr>
+							<th scope="row">이름</th>
+							<td>
+								<span id="name">${userinfo.userName }</span>
+							</td>
+	                    </tr>
+	                    <tr>
+							<th scope="row">성별</th>
+							<td>
+								<span id="gender">${userinfo.userGender }</span>
+							</td>
+	                    </tr>
+	                    
+						<tr>
+							<th scope="row">비밀번호</th>
+							<td>
+	                            <a href="${pageContext.request.contextPath}/user/include/modifyPw" class="pwModigyBtn">비밀번호 변경</a>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">생년월일</th>
+							<td>
+	                            <div class="birthWrap">
+									<span>${userinfo.userBirth }</span>
+	                            </div>
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">기본배송지</th>
+							<td>
+								<div class="postWrap">
+									<div class="postCont">
+		                                <div class="zipcodeBox">
+											<input type="text" class="iText" id="userPost" value="${userinfo.userPost }" readonly/>
+											<a class="postBtn">주소찾기</a>
+										</div>
+		                                <div class="addressBox">
+		                                    <input type="text" name="userAddr1" class="iText" value="${userinfo.userAddr1 }" readonly/>
+	                                        <input type="text" class="userAddr2" value="${userinfo.userAddr2 }" />
+	                                    </div>
+		                            </div>
+								</div>
+								<p id="postMsg" class="error"></p>
+	                        </td>
+	                    </tr>
+	
+						<tr>
+							<th scope="row">전화번호</th>
+							<td>
+								<div class="phoneNumber">
+									<input type="text" class="iText" name="userTel" maxlength="11" value="${userinfo.userTel }">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">이메일</th>
+							<td>
+								<div class="mailArea">
+									<input type="text" name="userEmail" value="${userinfo.userEmail }"/>
+								</div>
+								<p id="emailMsg" class="error"></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+				<div class="modifyButton">
+					<button type="submit" class="modify_btn">회원정보 수정</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/join.js"></script>
+<script type="text/javascript">
+$("#modifyForm").submit(function() {
+
+	if($("#email").val()=="") {
+		$("#emailMsg").text("이메일을 입력해 주세요.");
+		$("#email").focus();
+		return false;
+	}
+	var emailReg=/^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+(\.[-a-zA-Z0-9]+)+)*$/g;
+	if(!emailReg.test($("#email").val())) {
+		$("#emailMsg").text("이메일을 형식에 맞게 입력해 주세요.");
+		$("#email").focus();
+		return false;
+	}
+	
+	if($("#post").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	if($("#add1").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	if($("#add2").val()=="") {
+		$("#postMsg").text("주소를 입력해 주세요.");
+		$("#post").focus();
+		return false;
+	}
+	
+	return true;
+});
+</script>
+</div>

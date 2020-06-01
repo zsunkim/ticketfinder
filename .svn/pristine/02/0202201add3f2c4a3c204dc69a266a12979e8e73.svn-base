@@ -1,0 +1,49 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import ticket.finder.dto.Dual;
+import ticket.finder.dto.OrderDetailFcltyHallRefund;
+import ticket.finder.dto.OrderDShow;
+import ticket.finder.dto.OrderQShow;
+import ticket.finder.dto.OrderRate;
+import ticket.finder.dto.OrderRefund;
+import ticket.finder.dto.TfOrder;
+
+public interface TfOrderDAO {
+	int insertOrder(TfOrder order);
+	int updateOrder(TfOrder order);
+	int updateStateRefund(String code);
+	int deleteUnpaidOrder(String code);
+	TfOrder selectOrder(String code);
+	TfOrder selectMyOrder(String id);
+	List<OrderRefund> selectUserOrderList(Map<String, String> map);
+	List<TfOrder> selectDateOrder(String startDate, String endDate);
+	List<TfOrder> selectRankOrder(Map<String, Object> map);
+	List<TfOrder> selectOrderList();
+	List<TfOrder> selectUnpaidOrderList();
+	List<TfOrder> selectLongUnpaidOrderList();
+	List<TfOrder> selectShOrderList();
+	List<TfOrder> selectTicketingList();
+	int updateDpState(String orderCode);
+	int updateShState(String orderCode);
+	int updateTicketing(String orderCode);
+	int selectOrderCount(String id);
+	List<OrderQShow> selectOrderQshow(Map<String, String> map);
+	List<OrderRate> selectRankGenre(Map<String, String> map);
+	Dual selectOrderCountAdmin();
+	List<Map<String, Object>> selectCountGenre(int period);
+	List<OrderDShow> selectTicketing(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDetailFcltyHallRefund> selectOrderFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	OrderDetailFcltyHallRefund selectOrderFcltyChoice(String orderCode);
+	List<OrderDetailFcltyHallRefund> selectRefundFclty(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	OrderDetailFcltyHallRefund selectRefundFcltyChoice(int refundNum);
+	List<OrderDetailFcltyHallRefund> selectShowOrder(@Param("startDate") String startDate, @Param("endDate") String endDate);
+	List<OrderDShow> selectShowOrderChoice(String showName);
+	List<OrderDShow> selectShowSelectOne();
+	List<OrderDShow> selectShowSelectTwo(String showCode);
+	List<OrderDetailFcltyHallRefund> selectShowSeat(int showNum);
+}

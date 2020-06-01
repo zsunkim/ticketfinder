@@ -1,0 +1,58 @@
+package ticket.finder.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ticket.finder.dto.Question;
+import ticket.finder.dto.QuestionRe;
+import ticket.finder.mapper.QuestionMapper;
+
+@Repository
+public class QuestionDAOImpl implements QuestionDAO {
+	@Autowired
+	private SqlSession sqlSession;
+
+	@Override
+	public int insertQuestion(Question question) {
+		return sqlSession.getMapper(QuestionMapper.class).insertQuestion(question);
+	}
+
+	@Override
+	public int updateStateQuestion(String questionState, int questionNum) {
+		return sqlSession.getMapper(QuestionMapper.class).updateStateQuestion(questionState, questionNum);
+	}
+
+	@Override
+	public Question selectQuestion(int questionNum) {
+		return sqlSession.getMapper(QuestionMapper.class).selectQuestion(questionNum);
+	}
+
+	@Override
+	public List<Question> selectRefQuestion(int questionRef, String questionUserId) {
+		return sqlSession.getMapper(QuestionMapper.class).selectRefQuestion(questionRef, questionUserId);
+	}
+
+	@Override
+	public List<Question> selectIdQuestion(String questionUserId) {
+		return sqlSession.getMapper(QuestionMapper.class).selectIdQuestion(questionUserId);
+	}
+
+	@Override
+	public List<QuestionRe> selectQuestionList() {
+		return sqlSession.getMapper(QuestionMapper.class).selectQuestionList();
+	}
+
+	@Override
+	public List<Question> selectUserQuestionList(Map<String, String> map) {
+		return sqlSession.getMapper(QuestionMapper.class).selectUserQuestionList(map);
+	}
+
+	@Override
+	public int selectQuestionCount(String questionUserId) {
+		return sqlSession.getMapper(QuestionMapper.class).selectQuestionCount(questionUserId);
+	}
+}

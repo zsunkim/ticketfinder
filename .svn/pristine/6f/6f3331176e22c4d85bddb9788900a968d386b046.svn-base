@@ -1,0 +1,53 @@
+package ticket.finder.dto;
+
+public class OrderDShow {
+	private TfOrder tfOrder;
+	private TfShow tfShow;
+	private ShowDetail showDetail;
+	private int count;
+	private int rn2;
+	
+	public OrderDShow() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public TfOrder getTfOrder() {
+		return tfOrder;
+	}
+
+	public void setTfOrder(TfOrder tfOrder) {
+		this.tfOrder = tfOrder;
+	}
+
+	public TfShow getTfShow() {
+		return tfShow;
+	}
+
+	public void setTfShow(TfShow tfShow) {
+		this.tfShow = tfShow;
+	}
+
+	public ShowDetail getShowDetail() {
+		return showDetail;
+	}
+
+	public void setShowDetail(ShowDetail showDetail) {
+		this.showDetail = showDetail;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getRn2() {
+		return rn2;
+	}
+
+	public void setRn2(int rn2) {
+		this.rn2 = rn2;
+	}
+}

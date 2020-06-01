@@ -1,0 +1,196 @@
+
+//======== 클래스에 on 주기 ======== 
+$('.region_tab a').click(function(){
+   $('.region_tab a').removeClass('on');
+   $(this).addClass('on');
+});
+
+
+//======== 지역TAB 클릭 시 ======== 
+$('.region_tab > a').click(function(){
+	$(".region_list div").remove();
+	var showArea=$(this).attr("value");
+	//console.log(showArea);
+	areaInfo(showArea);
+	return false;
+}); 
+
+function areaInfo(showArea) {
+	$.ajax({
+		type:"get",
+		url:"region1?showArea="+showArea,
+		dataType:"json",
+		success:function(data) {
+			//console.log(data);
+			//console.log(data.areaList.length);
+			
+			$(".re_comment").html("현재 예매 가능한 공연은 총 <span>"+data.areaList.length+"개</span> 입니다.");
+			
+			var html="<div>";
+			$(data.areaList).each(function() {
+				//console.log(this.tfShow.sCode);
+				html+="<a href='${pageContext.request.contextPath}/perform/"+this.tfShow.sCode+"'>";
+				html+="<div class='list_big'>";
+				html+="<img src='"+this.tfShow.sPoster+"'>";
+				html+="<div class='list_small'>";
+				html+="<p class='list_tit1'>"+this.tfShow.sName+"</p>";
+				html+="<p class='list_tit2'>"+this.tfShow.sSDate.substring(0,10)
+				+" ~ "+this.tfShow.sEDate.substring(0,10)+"</p>";
+				html+="<p class='list_tit2'>"+this.showDetail.showHallName+"</p>";
+				html+="</div>";
+				html+="</div>";
+				html+="</a>";
+			});
+			html+="</div>";
+			$(".region_list").append(html);
+		}, 
+		error:function(xhr) {
+			alert("응답요류 = "+xhr.status);
+		}
+	   });
+}
+
+
+
+//======== 클래스에 on 주기 ======== 
+$('.re_search_top > div > a').click(function(){
+   $('.re_search_top a').removeClass('on');
+   $(this).addClass('on');
+});
+
+
+//======== 신상품순 ======== 
+$('.rankTab1').click(function(){
+	$(".region_list div").remove();
+	var showArea=$(".region_tab").find("a.on").attr("value");
+	//console.log(showArea);
+	areaInfo1(showArea);
+	return false;
+});
+
+function areaInfo1(showArea) {
+	$.ajax({
+		type:"get",
+		url:"region1?showArea="+showArea,
+		dataType:"json",
+		success:function(data) {
+			//console.log(data);
+			
+			$(".re_comment").html("현재 예매 가능한 공연은 총 <span>"+data.areaList.length+"개</span> 입니다.");
+			
+			var html="<div>";
+			$(data.areaList).each(function() {
+				//console.log(this.tfShow.sCode);
+				html+="<a href='${pageContext.request.contextPath}/perform/"+this.tfShow.sCode+"'>";
+				html+="<div class='list_big'>";
+				html+="<img src='"+this.tfShow.sPoster+"'>";
+				html+="<div class='list_small'>";
+				html+="<p class='list_tit1'>"+this.tfShow.sName+"</p>";
+				html+="<p class='list_tit2'>"+this.tfShow.sSDate.substring(0,10)
+				+" ~ "+this.tfShow.sEDate.substring(0,10)+"</p>";
+				html+="<p class='list_tit2'>"+this.showDetail.showHallName+"</p>";
+				html+="</div>";
+				html+="</div>";
+				html+="</a>";
+			});
+			html+="</div>";
+			$(".region_list").append(html);
+		}, 
+		error:function(xhr) {
+			alert("응답요류 = "+xhr.status);
+		}
+	});
+}
+
+
+
+
+
+//======== 종료임박순 ======== 
+$('.rankTab2').click(function(){
+	$(".region_list div").remove();
+	var showArea=$(".region_tab").find("a.on").attr("value");
+	//console.log(showArea);
+	areaInfo2(showArea);
+	return false;
+});
+
+function areaInfo2(showArea) {
+	$.ajax({
+		type:"get",
+		url:"region2?showArea="+showArea,
+		dataType:"json",
+		success:function(data) {
+			//console.log(data);
+			
+			$(".re_comment").html("현재 예매 가능한 공연은 총 <span>"+data.areaList.length+"개</span> 입니다.");
+			
+			var html="<div>";
+			$(data.areaList).each(function() {
+				//console.log(this.tfShow.sCode);
+				html+="<a href='${pageContext.request.contextPath}/perform/"+this.tfShow.sCode+"'>";
+				html+="<div class='list_big'>";
+				html+="<img src='"+this.tfShow.sPoster+"'>";
+				html+="<div class='list_small'>";
+				html+="<p class='list_tit1'>"+this.tfShow.sName+"</p>";
+				html+="<p class='list_tit2'>"+this.tfShow.sSDate.substring(0,10)
+				+" ~ "+this.tfShow.sEDate.substring(0,10)+"</p>";
+				html+="<p class='list_tit2'>"+this.showDetail.showHallName+"</p>";
+				html+="</div>";
+				html+="</div>";
+				html+="</a>";
+			});
+			html+="</div>";
+			$(".region_list").append(html);
+		}, 
+		error:function(xhr) {
+			alert("응답요류 = "+xhr.status);
+		}
+	   });
+}
+
+
+
+//======== 상품명순 ======== 
+$('.rankTab3').click(function(){
+	$(".region_list div").remove();
+	var showArea=$(".region_tab").find("a.on").attr("value");
+	//console.log(showArea);
+	areaInfo3(showArea);
+	return false;
+});
+
+function areaInfo3(showArea) {
+	$.ajax({
+		type:"get",
+		url:"region3?showArea="+showArea,
+		dataType:"json",
+		success:function(data) {
+			console.log(data);
+			
+			var html="<div>";
+			$(data.areaList).each(function() {
+				//console.log(this.tfShow.sCode);
+				html+="<a href='${pageContext.request.contextPath}/perform/"+this.tfShow.sCode+"'>";
+				html+="<div class='list_big'>";
+				html+="<img src='"+this.tfShow.sPoster+"'>";
+				html+="<div class='list_small'>";
+				html+="<p class='list_tit1'>"+this.tfShow.sName+"</p>";
+				html+="<p class='list_tit2'>"+this.tfShow.sSDate.substring(0,10)
+				+" ~ "+this.tfShow.sEDate.substring(0,10)+"</p>";
+				html+="<p class='list_tit2'>"+this.showDetail.showHallName+"</p>";
+				html+="</div>";
+				html+="</div>";
+				html+="</a>";
+			});
+			html+="</div>";
+			$(".region_list").append(html);
+		}, 
+		error:function(xhr) {
+			alert("응답요류 = "+xhr.status);
+		}
+	});
+}
+
+
+

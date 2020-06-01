@@ -1,0 +1,223 @@
+@charset "UTF-8"; 
+
+div#theater {
+    width: 100%;
+    height: 100%;
+}
+
+div#theater>div#section01 {
+    width: 100%;
+    min-width: 1300px;
+}
+
+div#theater p.theaterTitle {
+    text-align: center;
+    padding: 150px 0 60px 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+div#theater .swiper-container {
+    width: 100%;
+    max-width: 1920px;
+    min-width: 1300px;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 200px;
+    position: relative;
+}
+
+div#theater .swiper-container .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  height: fit-content;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 200px;
+  margin: 0 10px;
+  height: 200px;
+  -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+div#theater .swiper-container>.swiper-button-next {
+    top: 50%;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+div#theater .swiper-container>.swiper-button-prev {
+    top: 50%;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+div#theater .swiper-container .swiper-slide>a {
+  width: 200px;
+  height: 200px;
+}
+
+div#theater .swiper-container .swiper-slide img {
+    width: inherit;
+    vertical-align: middle;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+div#theater .swiper-container .swiper-slide span {
+    position: absolute;
+    top: 45%;
+    text-align: center;
+    margin: 0 auto;
+    width: inherit;
+    display: block;
+    color: #252525;
+    font-weight: bold;
+}
+
+div#theater .swiper-container .swiper-slide a:hover img{
+  transform: scale(1.2);
+opacity: 0.8;
+transition: all 0.4s;
+}
+
+div#theater .swiper-container .swiper-slide a:hover span{
+  color: #fdfdfd;
+}
+
+
+
+div#theater>div#section02 {
+    min-width: 1300px;
+}
+
+div#theater>div#section02>p.theaterDetailTitle {
+    text-align: center;
+    padding: 50px 0 30px 0;
+    border-top: 1px solid gray;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+div#theater>div#section02>div.theaterInfo {
+    margin: 30px 0 50px 0;
+    width: 100%;
+}
+
+div#theater>div#section02 div.theaterTab {
+    height: 70px;
+    text-align: center;
+}
+
+div#theater>div#section02 div.theaterTab>span {
+    line-height: 70px;
+}
+
+div#theater>div#section02 div.theaterPlaylist {
+    width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 200px;
+    margin-top: 50px;
+}
+
+div#theater>div#section02 div.theaterPlaylist>a {
+    cursor: pointer;
+    display: inline-block;
+    width: 216px;
+    height: 305px;
+    margin: 0 auto;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    vertical-align: top;
+    position: relative;
+    text-decoration: none;
+}
+
+div#theater>div#section02 div.theaterPlaylist div.theaterPlay {
+    width: 216px;
+    display: inline-block;
+    height: inherit;
+}
+
+div#theater>div#section02 div.theaterPlaylist div.theaterPlay>img {
+    width: 100%;
+    height: inherit;
+}
+
+div#theater>div#section02 div.theaterTab>span {
+    cursor: pointer;
+}
+
+div#theater>div#section02 div.theaterTab>span.on {
+    font-weight: bold;
+}
+
+div#theater>div#section02 div.theaterDetail>div:not(.on) {
+    display: none;
+}
+
+div#theater>div#section02 div.theaterDetail>div.on {
+    display: block;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterPlay div.theaterPlayTxt {
+    display: none;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterPlay div.theaterPlayTxt.on {
+    width: 216px;
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    left: 0;
+    top: 0;
+     height: 305px;
+    display: table;
+    transition: all 0.3s;
+    z-index: 3;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterPlay div.theaterPlayTxt.on>p:first-child {
+    margin-top: 100px;
+    font-size: 18px;
+    line-height: 25px;
+    color: #fff;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterPlay div.theaterPlayTxt.on>p:last-child {
+    font-size: 13px;
+    line-height: 20px;
+    color: #fff;
+    margin: 15px 0;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterDInfo {
+	display: flex;
+    height: 100px;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterDInfo>div {
+    width: 50%;
+    line-height: 100px;
+}
+
+div#theater>div#section02 div.theaterDetail div.theaterDInfo a:hover {
+    border-bottom: 1px solid black;
+}

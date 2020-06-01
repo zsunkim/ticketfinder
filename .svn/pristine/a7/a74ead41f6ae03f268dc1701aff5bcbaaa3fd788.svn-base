@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div class="nav_left">
+	<h1>
+		<a href="#">
+			<img src="logo2.png" alt="logo">
+		</a>
+	</h1>
+</div>
+
+<div class="nav_center">
+	<ul>
+		<li><a href="#">콘서트<span></span></a></li>
+		<li><a href="#">뮤지컬<span></span></a></li>
+		<li><a href="#">연극<span></span></a></li>
+		<li><a href="#">클래식<span></span></a></li>
+		<li><a href="#">아동/가족<span></span></a></li>
+		<li><a href="#">랭킹<span></span></a></li>
+		<li><a href="#">지역<span></span></a></li>
+	</ul>
+</div>
+
+<div class="nav_right">
+	<ul>
+		<li>
+			<a href="#">
+				<i class="fas fa-sign-in-alt"></i>
+				<span>로그인</span>
+			</a>
+		</li>
+	
+	    <li>
+	        <a href="#">
+			<i class="fas fa-user-plus"></i>
+				<span>회원가입</span>
+			</a>
+		</li>
+	
+		<li>
+		<a href="#">
+			<i class="fas fa-ticket-alt"></i>
+			<span>My티켓</span>
+		</a>
+		</li>
+	
+		<li>
+	            <a href="#">
+	              <i class="fas fa-headset"></i>
+	              <span>고객센터</span>
+	            </a>
+		</li>
+
+		<li>
+			<a href="#" class="searchBtn">
+				<i class="fas fa-search"></i>
+				<span>검색</span>
+			</a>
+			<div class="searchBox">
+				<input type="text" name="search">
+				<span class="noShowBtn"></span>
+			</div>
+		</li>
+	</ul>
+</div>

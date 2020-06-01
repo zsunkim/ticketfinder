@@ -1,0 +1,306 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+#join #section {width:100%}
+
+#join .cont {
+	background-color: #fff;
+    font-weight: 500;
+    width: 980px;
+    margin: 0 auto;
+}
+
+#join .error {
+    color: red;
+    font-size: 12px;
+}
+
+#join .joinWrap {
+    margin-top: 30px;
+    position: relative;
+}
+  
+#join .joinWrap h2 {
+    padding-left: 10px;
+    margin-bottom: 24px;
+    font-size: 32px;
+    font-weight: 300;
+    border-bottom: 2px solid #000;
+}
+
+#join .joinWrap .tableBox table {
+    width: 100%;
+    position: relative;
+    table-layout: fixed;
+    border-top: 1px solid #b6bdc7;
+}
+
+#join .joinWrap .tableBox table th,
+#join .joinWrap .tableBox table td {
+  text-align: left;
+  line-height: 1.4;
+  border-bottom: 1px solid #dfe5ed;
+  word-break: break-word;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#join .joinWrap .tableBox table th {
+  padding: 20px 20px;
+  vertical-align: top;
+  background: #f4f6f9;
+  font-weight: 500;
+}
+
+#join .joinWrap .tableBox table td {
+  vertical-align: middle;
+  padding: 10px 20px;
+  position: relative;
+}
+
+#join .joinWrap .tableBox .idCheckBtn,
+#join .joinWrap .tableBox .postBtn {
+  display: inline-block;
+  padding: 0 15px 5px 15px;
+  line-height: 33px;
+  font-weight: 300;
+  background: #333;
+  color: #fff;
+  border-radius: 2px;
+  vertical-align: middle;
+  height: 26px;
+}
+
+#join input {
+    height: 25px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+}
+
+#join .joinWrap .postWrap span {
+    float: left;
+    width: 63px;
+  }
+  
+#join  .joinWrap .postWrap .postCont {
+    float: left;
+  }
+  
+#join  .joinWrap .postWrap .postCont .zipcodeBox .iText {
+  width: 80px;
+  margin-bottom: 4px;
+}
+
+#join  .joinWrap .postWrap .postCont .zipcodeBox {
+  margin-bottom: 10px;
+}
+  
+#join  .joinWrap .postWrap .postCont .addressBox .iText {
+  width: 250px;
+  padding-left: 10px;
+}
+
+#join .joinWrap .tableBox .alertMessage {
+  color: #ef3f43;
+  font-size: 12px;
+  margin-left: 5px;
+  font-weight: 300;
+}
+
+#join .joinWrap .birthWrap {
+    display: inline-block;
+}
+  
+#join .joinWrap .birthWrap .birthYear,
+#join .joinWrap .birthWrap .birthMonth,
+#join .joinWrap .birthWrap .birthDate {
+  width: 80px;
+}
+
+#join .joinWrap .birthWrap .birthYear select {
+  width: 70px;
+}
+
+
+#join .joinWrap .birthWrap .birthMonth select,
+#join .joinWrap .birthWrap .birthDate select {
+  width: 50px;
+}
+  
+#join .joinWrap .birthWrap span {
+  margin: 0 7px 0 4px;
+}
+
+#join .joinWrap .select {
+  position: relative;
+  z-index: 4;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#join .joinWrap .tableBox table td .birthWrap select {
+  line-height: 33px;
+  border: 1px solid #dfe5ed;
+  height: 30px;
+  width: 75px;
+}
+
+#join .radioGroup input {
+  vertical-align: middle;
+}
+
+/***************************************약관동의***************************8*/
+#join .joinWrap .termsTitleWrap {
+  margin-bottom: 6px;
+  position: relative;
+}
+
+#join .joinWrap .termsTitleWrap .subTitle {
+  font-size: 14px;
+  background-color: #fff;
+  font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#join .joinWrap .termsTitleWrap .subTitle i {
+  color: #ef3f43;
+  margin-left: -2.5px;
+}
+
+#join .joinWrap .termsTitleWrap .iCheckbox {
+  vertical-align: -5px;
+}
+
+#join .joinWrap .termsTitleWrap .iCheckbox label {
+  margin-right: 0;
+}
+
+#join .joinWrap .termsTitleWrap .iCheckbox i {
+  color: #ef3f43;
+  margin-left: -2.5px;
+}
+
+#join .joinWrap .termsTitleWrap .termsBtn {
+  font-weight: 300;
+  color: #999;
+  margin-left: 5px;
+  padding-right: 9px;
+  background: url("//openimage.interpark.com/.ui/join/icon_arrowGray.png") no-repeat right 7px;
+  font-size: 14px;
+  background-color: #fff;
+  font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#join .joinWrap .termsWrap {
+  display: inline-block;
+  float: left;
+}
+
+#join .joinWrap .termsWrap .termsBtn {
+  font-weight: 300;
+  color: #999;
+  margin-left: 5px;
+  padding-right: 9px;
+  background: url("//openimage.interpark.com/.ui/join/icon_arrowGray.png") no-repeat right 7px;
+  font-size: 14px;
+  background-color: #fff;
+  font-family: "Noto Sans KR", -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  vertical-align: -2px;
+}
+
+#join .joinWrap .termsWrap input {
+  vertical-align: middle;
+}
+
+#join .joinWrap .terms_serviceBox {
+  height: 118px;
+  margin-bottom: 26px;
+  border: 1px solid #bababa;
+  clear: both;
+  width: 1000px;
+}
+
+#join .joinWrap .terms_serviceBox iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+#join .joinWrap .termsWrap {
+  padding-bottom: 38px;
+}
+
+#join .joinWrap .termsWrap .conTitle {
+  margin: 43px 0 11px;
+}
+
+#join .joinWrap .termsWrap .termsBtn {
+  margin: 47px 0 28px;
+}
+
+#join .joinWrap .termsWrap .termsBtn .iCheckbox label {
+  font-size: 20px;
+  letter-spacing: -1px;
+}
+
+#join .joinWrap .joinButton {
+  text-align: center;
+  margin: 50px 0;
+}
+
+#join .joinWrap .joinButton .join_btn {
+  background: #414ea9;
+  color: #fff;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 72px;
+  cursor: pointer;
+  border: none;
+}
+
+#join .joinWrap .tableBox table td .mailArea select {
+  height: 28px;
+  line-height: 33px;
+  width: 105px;
+  border: 1px solid #dfe5ed;
+}
+
+#join .joinWrap .tableBox table td .phoneNumber select {
+  height: 28px;
+  line-height: 33px;
+  width: 75px;
+  border: 1px solid #dfe5ed;
+}
+
+#join .phoneNumber input {
+  width: 65px;
+}
+
+#join .joinWrap .tableBox table td .mailArea {
+  margin-bottom: 5px;
+}
+
+#join .joinWrap .tableBox table td .mailArea input {
+  width: 100px;
+}
+
+#join .joinWrap .tableBox table td .mailArea .mailSelect {
+  width: 168px;
+}
+
+
+

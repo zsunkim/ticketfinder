@@ -1,0 +1,176 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="theater">
+	<div id="section01">
+		<p class="theaterTitle">공연장 목록</p>
+	<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<c:forEach var="fclty" items="${fcltyList }">
+				<div class="swiper-slide" id="${fclty.fcCode }">
+					<a><img src="${pageContext.request.contextPath}/images/theater/${fclty.fcImg }"><span>${fclty.fcName }</span></a>
+				</div>
+				</c:forEach>
+			</div>
+			<div class="swiper-button-next" style="background: url(${pageContext.request.contextPath}/images/theater/slideNext.png) no-repeat;"></div>
+			<div class="swiper-button-prev" style="background: url(${pageContext.request.contextPath}/images/theater/slidePrev.png) no-repeat;"></div>
+		  </div>
+		  
+		<!-- Swiper JS -->
+		<script src="${pageContext.request.contextPath}/lib/swiper.min.js"></script>
+	
+		<!-- Initialize Swiper -->
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+			slidesPerView: 3,
+			slidesPerView: 'auto',
+			slidesPerGroup: 1,
+			loop: true,
+			centeredSlides: true,
+			loopFillGroupWithBlank: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			});
+		</script>	
+	</div>
+	<div id="section02">
+			<p class="theaterDetailTitle">${fcltyList[0].fcName}</p>
+		<div class="theaterInfo">
+			<div class="theaterTab">
+				<span class="tab1 on">예매 가능 공연</span>
+				|
+				<span class="tab2">약도</span>
+			</div>
+			<div class="theaterDetail">
+				<div class="theaterPlaylist on">
+					<a><div class="theaterPlay">
+						<img src="${pageContext.request.contextPath}/images/theater/listItem1.jpg">
+						<div class="theaterPlayTxt">
+							<p>썸머클래식 Summer Classics</p>
+							<p>2020.08.12 ~ 2020.08.13</p>
+						</div>
+					</div></a>
+					<a><div class="theaterPlay">
+						<img src="${pageContext.request.contextPath}/images/theater/listItem1.jpg">
+						<div class="theaterPlayTxt">
+							<p>썸머클래식 Summer Classics</p>
+							<p>2020.08.12 ~ 2020.08.13</p>
+						</div>
+					</div></a>
+					<a><div class="theaterPlay">
+						<img src="${pageContext.request.contextPath}/images/theater/listItem1.jpg">
+						<div class="theaterPlayTxt">
+							<p>썸머클래식 Summer Classics</p>
+							<p>2020.08.12 ~ 2020.08.13</p>
+						</div>
+					</div></a>
+					<a><div class="theaterPlay">
+						<img src="${pageContext.request.contextPath}/images/theater/listItem1.jpg">
+						<div class="theaterPlayTxt">
+							<p>썸머클래식 Summer Classics</p>
+							<p>2020.08.12 ~ 2020.08.13</p>
+						</div>
+					</div></a>
+					<a><div class="theaterPlay">
+						<img src="${pageContext.request.contextPath}/images/theater/listItem1.jpg">
+						<div class="theaterPlayTxt">
+							<p>썸머클래식 Summer Classics</p>
+							<p>2020.08.12 ~ 2020.08.13</p>
+						</div>
+					</div></a>
+				</div>
+				<div class="theaterMap">
+					<div id="map" style="height: 400px; margin: 0 auto;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$('.tab1').click(function(){
+		$('.theaterMap').removeClass('on');
+		$('.theaterPlaylist').addClass('on');
+		$('.tab2').removeClass('on');
+		$('.tab1').addClass('on');
+	});
+	$('.tab2').click(function(){
+		$('.theaterPlaylist').removeClass('on');
+		$('.theaterMap').addClass('on');
+		$('.tab1').removeClass('on');
+		$('.tab2').addClass('on');
+	});
+	
+	$('.theaterPlaylist').children('a').mouseenter(function() {
+		$(this).find('.theaterPlayTxt').addClass('on');
+	});
+	
+	$(".theaterPlaylist").children('a').mouseleave(function(){
+		$(this).find('.theaterPlayTxt').removeClass('on');
+	}); 
+
+	var codes=[];
+	
+	<c:forEach var="fclty" items="${fcltyList }">
+	codes.push('${fclty.fcCode}');
+	</c:forEach>
+	
+	$('.swiper-slide').click(function() {
+		var fcCode=$(this).attr('id');
+		$.ajax({
+			url: 'theater',
+			type: 'post',
+			data: { code : fcCode },
+			success: function(data) {
+				console.log('성공');
+			},
+			error: function(xhr) {
+				alert("에러코드 = "+xhr.status);
+			}
+		});
+		alert('${fcShowList[0].tfShow.sName }');
+		
+		
+	});
+	
+	</script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c3adfbd4c9359122e113ffbf3da9318"></script>
+	<script type="text/javascript">
+	/* new kakao.maps.disableHD(); */
+	var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+		mapOption = { 
+			center: new kakao.maps.LatLng(37.479133, 127.011585), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+		};
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(37.479133, 127.011585); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+		position: markerPosition
+	});
+	
+	var center = new kakao.maps.LatLng(37.479133, 127.011585);
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+	// marker.setMap(null); 
+	
+	//setTimeout(function(){ map.relayout(); }, 1000);
+	var position = map.getCenter();
+	
+	$('.tab2').click(function() {
+		$(window).trigger('resize');
+	setTimeout(function(){ 
+		map.relayout();
+		map.setCenter(center);
+	}, 0);
+	});
+	</script>
+</div>

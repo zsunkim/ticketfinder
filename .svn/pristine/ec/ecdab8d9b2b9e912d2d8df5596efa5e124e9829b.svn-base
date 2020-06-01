@@ -1,0 +1,562 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TicketFinder - 회원목록</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ] -->
+     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="css/nifty.min.css" rel="stylesheet">
+
+    
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+
+    <!--Bootstrap Table [ OPTIONAL ]-->
+    <link href="plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+
+    <!--X-editable [ OPTIONAL ]-->
+    <link href="plugins/x-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="css/demo/nifty-demo.min.css" rel="stylesheet">
+
+
+
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="plugins/pace/pace.min.js"></script>
+</head>
+<body>
+	<div id="container" class="effect mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<%@include file="adm_header.jsp" %>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+				
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">Ticket Finder</h1>
+
+					<!--Searchbox-->
+					<div class="searchbox">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search..">
+							<span class="input-group-btn">
+								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					<div class="row">
+					
+						<div class="col-lg-12">
+						
+							<!--Default Tabs (Left Aligned)-->
+							<!--===================================================-->
+							<div class="tab-base">
+					
+								<!--Nav Tabs-->
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a data-toggle="tab" href="#lft-tab-1">전체</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-2">콘서트</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-3">뮤지컬</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-4">연극</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-5">클래식</a>
+									</li>
+									<li>
+										<a data-toggle="tab" href="#lft-tab-6">전시</a>
+									</li>
+								</ul>
+					
+								<!--Tabs Content-->
+								<div class="tab-content">
+									<div id="lft-tab-1" class="tab-pane fade active in">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">전체 공연 목록</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+									
+									<div id="lft-tab-2" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 콘서트</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+
+									
+									<div id="lft-tab-3" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 뮤지컬</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+
+									<div id="lft-tab-4" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 연극</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+											
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+										
+									</div>
+									
+									<div id="lft-tab-5" class="tab-pane fade">
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 클래식</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>	
+									<div id="lft-tab-6" class="tab-pane fade">
+									
+										<!--Icon Tabs (Left Aligned)-->
+										<!--===================================================-->
+										<div class="tab-base">
+	
+											<!--Custom Toolbar-->
+											<!--===================================================-->
+											<div class="panel">
+												<div class="panel-heading">
+													<h3 class="panel-title">공연 목록 - 전시</h3>
+												</div>
+												<div class="panel-body">
+													<table id="demo-custom-toolbar" class="demo-add-niftycheck" data-toggle="table"
+														   data-url="data/bs-table-show.json"
+														   data-toolbar="#demo-delete-row"
+														   data-search="true"
+														   data-show-refresh="true"
+														   data-show-toggle="true"
+														   data-show-columns="true"
+														   data-sort-name="id"
+														   data-page-list="[5, 10, 20]"
+														   data-page-size="10"
+														   data-pagination="true" data-show-pagination-switch="true">
+														<thead>
+															<tr>
+																<th data-field="state" data-checkbox="true">ID</th>
+																<th data-field="showId" data-sortable="true" data-formatter="invoiceFormatter">공연상세번호</th>
+																<th data-field="fcltyName" data-sortable="true">공연장소</th>
+																<th data-field="showTDate" data-sortable="true" data-formatter="dateFormatter">공연기간</th>
+																<th data-field="runtime" data-sortable="true">런타임</th>
+																<th data-field="age" data-sortable="true">관람연령</th>
+																<th data-field="showState" data-align="center" data-sortable="true" data-formatter="statusFormatter">공연상태</th>
+																<th data-field="price" data-align="center" data-sortable="true" data-sorter="priceSorter">티켓가격</th>
+																<th data-field="cast" data-sortable="true">출연진</th>
+																<th data-field="genre" data-sortable="true">장르</th>
+																<th data-field="crew" data-sortable="true">제작진</th>
+																<th data-field="entName" data-sortable="true">기획제작사</th>
+															</tr>
+														</thead>
+													</table>
+												</div>
+											</div>
+											<!--===================================================-->
+										</div>
+										<!--===================================================-->
+										<!--End Icon Tabs (Left Aligned)-->
+									</div>																	
+								</div>
+							</div>
+							<!--===================================================-->
+							<!--End Default Tabs (Left Aligned)-->
+						</div>
+					</div>					
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+			
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<%@include file="adm_nav.jsp" %>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+			
+			<!--ASIDE 삭제-->
+			<!--===================================================-->
+			<!--===================================================-->
+			<!--END ASIDE-->
+		</div>
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 TicketFinder</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+	
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="js/bootstrap.min.js"></script>
+
+
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="plugins/fast-click/fastclick.min.js"></script>
+
+	
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="js/nifty.min.js"></script>
+
+
+	<!--Switchery [ OPTIONAL ]-->
+	<script src="plugins/switchery/switchery.min.js"></script>
+
+
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+	<!--X-editable [ OPTIONAL ]-->
+	<script src="plugins/x-editable/js/bootstrap-editable.min.js"></script>
+
+
+	<!--Bootstrap Table [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+
+	<!--Bootstrap Table Extension [ OPTIONAL ]-->
+	<script src="plugins/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+
+
+	<!--Demo script [ DEMONSTRATION ]-->
+	<script src="js/demo/nifty-demo.min.js"></script>
+
+
+	<!--Bootstrap Table Sample [ SAMPLE ]-->
+	<script src="js/demo/tables-bs-table.js"></script>
+	
+		<!--FooTable [ OPTIONAL ]-->
+	<script src="plugins/fooTable/dist/footable.all.min.js"></script>
+	
+	<!--Morris.js [ OPTIONAL ]-->
+	<script src="plugins/morris-js/morris.min.js"></script>
+	<script src="plugins/morris-js/raphael-js/raphael.min.js"></script>
+	
+</body>
+</html>
+

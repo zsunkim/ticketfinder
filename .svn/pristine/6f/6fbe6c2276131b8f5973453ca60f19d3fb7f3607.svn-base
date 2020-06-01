@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticket.finder.mapper.DateCountMapper">
+	<select id="selectOrderCount" resultType="DateCount">
+		select trunc(order_date) o_date,
+		<if test="param1=='count'">
+			count(*) count
+		</if>
+		<if test="param1=='sum'">
+			sum(order_price) count
+		</if>
+		from tf_order where order_date between to_char(sysdate
+		<if test="period!=0">
+			-${period}
+		</if>
+		, 'yyyymmdd') and sysdate 
+		<if test="param2!='' and param2!=null">
+			and order_dp_state=#{state}
+		</if>
+		group by trunc(order_date) order by trunc(order_date) desc
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+/*----------------------------------------------
+                    reset
+----------------------------------------------*/
+*{margin: 0; padding: 0;}
+body{font-size: 16px; font-family: sans-serif, serif, "나눔고딕";}
+a{color:#000; text-decoration: none;}
+ul, li{list-style: none;}
+
+/*----------------------------------------------
+                    common style
+----------------------------------------------*/
+div[class*="left"]{float:left;}
+div[class*="right"]{float:right;}
+
+
+#findPw #section {width:100%; margin: 0 auto;}
+
+#findPw #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#findPw #header {
+    text-align:center; 
+    height: 100px;
+}
+
+#findPw #header {
+    position: relative;
+    width: 550px;
+    margin: 0 auto;
+    padding: 68px 0 38px;
+    z-index: 20;
+    text-align: center
+}
+
+#findPw #header #headerArea h1 img {
+    width: 130px;
+    text-align: center;
+}
+
+#findPw #header #headerArea h1 .finderBox a{
+    text-align: center;
+    font-size: 20px;
+}
+
+#findPw #header #headerArea h1 .finderBox a:first-child::after{
+    content:"";
+    margin-left:10px;
+    border-right: 1px solid #ccc;
+}
+
+#findPw #header #headerArea h1 .finderBox .on {
+    font-weight: lighter;
+}
+
+#findPw .cont {
+    width: 550px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#findPw .findPwForm {
+    position: relative;
+    width: auto !important;
+    margin:0 auto; 
+}
+
+#findPw .info_input {
+    width: 390px;
+    margin: 0 auto;
+    padding: 29px 0 23px 0;
+}
+
+#findPw .info_Box {
+    float: none;
+    width: 390px;
+}
+
+#findPw .info_Box input {
+    margin: 10px 0;
+}
+
+#findPw .info_input .info_Box .name,
+#findPw .info_input .info_Box .email {
+    width: 366px;
+    height:49px; 
+    line-height:49px; 
+    border: 1px solid #ccc; 
+    font-size:14px; 
+    box-shadow: none; 
+    padding:0 11px; 
+    color: #333;
+    border-bottom: 0;
+}
+
+
+#findPw .info_input .info_Box .name,
+#findPw .info_input .info_Box .email {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+#findPw .info_Box span {
+    display: inline-block;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+#findPw .wrap_btn {
+    float: none;
+    width: 390px;
+    margin-top: 19px;
+    padding-bottom: 15px;
+    margin: 0 auto;
+}
+
+#findPw .check_btn {
+    display: block;
+    width: 100%;
+    padding: 17px 0 21px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 18px;
+    background: #445da5;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+#findPw .numBtn {
+    display: block;
+    width: 90px;
+    /*padding: 17px 0 21px;*/
+    text-align: center;
+    line-height: 22px;
+    font-size: 13px;
+    background: #445da5;
+    color: white;
+    
+}
+

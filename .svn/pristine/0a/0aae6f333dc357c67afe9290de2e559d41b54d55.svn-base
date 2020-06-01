@@ -1,0 +1,8 @@
+package ticket.finder.dao;
+
+import ticket.finder.dto.TfShow;
+
+public interface TfShowDAO {
+	int insertTfShow(TfShow tfShow);
+	int updateTfShow(TfShow tfShow);
+}

@@ -1,0 +1,62 @@
+package ticket.finder.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ticket.finder.dao.ShowXShowDAO;
+import ticket.finder.dto.ShowDetail;
+import ticket.finder.dto.ShowXShow;
+import ticket.finder.exception.ShowNumNotFoundException;
+
+@Service
+public class ShowXShowServiceImpl implements ShowXShowService {
+	@Autowired
+	private ShowXShowDAO showXShowDAO;
+	
+	public ShowXShowServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<ShowDetail> addSearch(String search) {
+		return showXShowDAO.selectSearch(search);
+	}
+
+	@Override
+	public ShowXShow addShowDetail(int showNum) throws ShowNumNotFoundException {
+		ShowXShow show = showXShowDAO.selectShowDetail(showNum);
+		if(show==null) {
+			throw new ShowNumNotFoundException("입력하신 공연번호에 맞는 공연이 없습니다.");
+		}
+		return show;
+	}
+
+	@Override
+	public List<ShowXShow> addShowHot() {
+		return showXShowDAO.selectShowHot();
+	}
+
+	@Override
+	public List<ShowXShow> addRank(Map<String, Object> map) {
+		return showXShowDAO.selectRank(map);
+	}
+
+	@Override
+	public List<ShowXShow> addAreaNew(ShowXShow showxshow) {
+		return showXShowDAO.selectAreaNew(showxshow);
+	}
+
+	@Override
+	public List<ShowXShow> addAreaEnd(ShowXShow showxshow) {
+		return showXShowDAO.selectAreaEnd(showxshow);
+	}
+
+	@Override
+	public List<ShowXShow> addAreaName(ShowXShow showxshow) {
+		return showXShowDAO.selectAreaName(showxshow);
+	}
+	
+}

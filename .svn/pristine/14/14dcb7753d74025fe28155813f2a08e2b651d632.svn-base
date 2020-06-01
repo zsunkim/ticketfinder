@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ticket-Finder</title>
+<link rel="stylesheet" href="css/search.css">
+</head>
+<body id="search">
+    <div id="section1">
+        <div class="search_top">
+            <p><span>뮤지컬</span>에 대한 검색 결과입니다.</p>
+            <div class="searchBox">
+                <input type="text" id="srchText">
+                <a href="" class="searchBtn1"></a>
+                <a href="#" class="searchBtn2" id="srchReBtn">결과 내 재검색</a>
+            </div>
+        </div>
+    </div>
+    <div id="section2">
+        <div>
+            <div class="search_list">
+                <div class="search_header">
+                    <div style="display: none;"><p>공연명</p></div>
+                    <div><p>공연명</p></div>
+                    <div><p>공연날짜</p></div>
+                    <div><p>공연장</p></div>
+                </div>
+                <div class="srch_list_result">
+                    <div>
+                        <a href="">
+                            <img src="images/ranking_1.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="title">
+                            <a href="">미드나잇 <앤틀러스></a>
+                        </p>
+                    </div>
+                    <div>2020.06.18 ~ 2020.07.19</div>
+                    <div>국립과천과학관 어울림홀</div>
+                </div>
+                <div class="srch_list_result">
+                    <div>
+                        <a href="">
+                            <img src="images/ranking_1.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="title">
+                            <a href="">미드나잇 <앤틀러스></a>
+                        </p>
+                    </div>
+                    <div>2020.06.18 ~ 2020.07.19</div>
+                    <div>국립과천과학관 어울림홀</div>
+                </div>
+                <div class="srch_list_result">
+                    <div>
+                        <a href="">
+                            <img src="images/ranking_1.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="title">
+                            <a href="">미드나잇 <앤틀러스></a>
+                        </p>
+                    </div>
+                    <div>2020.06.18 ~ 2020.07.19</div>
+                    <div>국립과천과학관 어울림홀</div>
+                </div>
+                <div class="srch_list_result">
+                    <div>
+                        <a href="">
+                            <img src="images/ranking_1.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="title">
+                            <a href="">미드나잇 <앤틀러스></a>
+                        </p>
+                    </div>
+                    <div>2020.06.18 ~ 2020.07.19</div>
+                    <div>국립과천과학관 어울림홀</div>
+                </div>
+                <div class="srch_list_result">
+                    <div>
+                        <a href="">
+                            <img src="images/ranking_1.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="title">
+                            <a href="">미드나잇 <앤틀러스></a>
+                        </p>
+                    </div>
+                    <div>2020.06.18 ~ 2020.07.19</div>
+                    <div>국립과천과학관 어울림홀</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
