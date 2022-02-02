@@ -37,7 +37,7 @@ Apache Tomcat 9.0.6
 
 ![image](https://user-images.githubusercontent.com/66250890/152121682-e3b073ed-bb6d-44d0-b48a-309704b5c861.png)
 
-## 랭킹페이지
+### 랭킹페이지
 - 장르별 판매 순위 출력 
 - 공연 포스터 클릭 시 해당 공연 상세페이지 이동
 - 장르 TAB 클릭 시 장르별 판매 순위 변경
