@@ -33,6 +33,8 @@ Apache Tomcat 9.0.6
 - 장르별 주간 랭킹 출력 
 - 지역을 나눠서 3가지 공연 랜덤 출력
 - 장르별 주간랭킹순, 신상품순, 종료임박순, 상품명순 선택 출력
+
+
 ![image](https://user-images.githubusercontent.com/66250890/152121682-e3b073ed-bb6d-44d0-b48a-309704b5c861.png)
 
 ## 랭킹페이지
