@@ -2,25 +2,36 @@
 Spring MVC Web Project
 
 
-# 설명
+## 설명
 
 현재 운영되고 있는 티켓 예매 사이트를 모방하여 만든 티켓 예매 사이트.
 
 Spring Framework 와 다양한 기술을 활용하여 웹 사이트 구축.
 
 
-# 개발환경
-HTML5 & CSS3 & JavaScript & JQuery
+## 개발환경
+Java, JSP, Spring Framework
 
-Spring F/W, Mybatis, AJAX, webpack
+Mybatis, AJAX, webpack
+
+HTML5 & CSS3 & JavaScript & JQuery
 
 Oracle SQL Developer
 
 Apache Tomcat 9.0.6
 
+## 담당업무
+- 디자인 
+- 데이터베이스 설계
+- 기능구현 (로그인, 로그아웃, 회원가입, 회원정보수정, 아이디/비밀번호 찾기, 검색기능 구현, 장르별 랭킹 순위 출력페이지, 지역별 공연 목록 출력페이지, 이용약관 페이지, 결제창)
 
 
-# 프로젝트 내용
+## 데이터 베이스
+![티켓파인더 PPT pptx](https://user-images.githubusercontent.com/66250890/100743406-98602380-341f-11eb-892f-7f8b54e41d92.png)
+
+
+
+## 프로젝트 내용
 ### 메인페이지
 - 로그인 상태와 권한에 따라 다른 메뉴 출력, 검색 기능
 - 상단 배너 : 좌우 화살표 및 하단 포스터 선책으로 매너 이동 - 전체 장르 중 최신 인기 공연 출력
@@ -75,7 +86,3 @@ Apache Tomcat 9.0.6
 
 ![image](https://user-images.githubusercontent.com/66250890/152122443-dd0f134a-1cf8-4187-843a-c0923b2185b1.png)
 
-
-
-# 데이터 베이스
-![티켓파인더 PPT pptx](https://user-images.githubusercontent.com/66250890/100743406-98602380-341f-11eb-892f-7f8b54e41d92.png)
